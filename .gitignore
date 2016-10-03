@@ -1,7 +1,6 @@
 *.aux
 *.bbl
 *.blg
-*.fdb_latexmk
 *.fls
 *.las
 *.lof
@@ -15,5 +14,5 @@
 *.toc
 *.vrb
 *.pdf
+.texpadtmp
 /arquivos
-/.textpadtmp
