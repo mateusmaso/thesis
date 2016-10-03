@@ -2,17 +2,9 @@
 
 Estudo sobre o uso da linguagem GraphQL na composição de dados através de serviços baseados em JSON.
 
-## GraphQLJay + GraphQLJayHyperSchema
-
-Ferramenta criada para ajudar a resolver o problema de acoplamento entre clientes e serviços de dados.
-
 ## Descrição
 
 Este projeto tem como objetivo melhorar a comunicação entre clientes e serviços na busca por dados em formato JSON, evitando problemas de acoplamento causados pelo acesso direto à API. Para isso, foi desenvolvido uma ferramenta GraphQL responsável por compor dados sob demanda baseando-se na disponibilidade dos serviços oferecidos e no menor caminho de acesso possível.
-
-## Statement
-
-Clientes não deveriam estar realizando requisições diretas às APIs de serviços web uma vez que isso causa acoplamento.
 
 ## Calendário
 
