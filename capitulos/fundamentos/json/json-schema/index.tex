@@ -6,13 +6,13 @@ Por ser uma linguagem de simples uso, para representar um esquema basta construi
   Imagens, videos, audio digital.
 } e a navegação de dados através de hyperlinks são apenas disponibilizadas no formato JSON Hyper-Schema, uma variação da linguagem de especificação. \cite{Jackson2016}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-schema.json}
   \caption{Exemplo de JSON Schema para Figura 3}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-hyper-schema.json}
   \caption{Exemplo de JSON Hyper-Schema para Figura 3}
@@ -22,7 +22,7 @@ Com base nos esquemas especificados pelas figuras 5 e 6, ambos asseguram que, da
 
 Para validar objetos complexos em JSON, propriedades podem ser aninhadas e também representadas por subesquemas. Contudo, para evitar duplicação de estruturas, a linguagem oferece um poderoso sistema de composição e referenciamento de definições através da chave “\$ref“ e “definitions” vista a seguir na figura 7. \cite{Droettboom2015}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-hyper-schema-\$ref.json}
   \caption{Exemplo de JSON Hyper-Schema para Figura 4 usando referenciamento}

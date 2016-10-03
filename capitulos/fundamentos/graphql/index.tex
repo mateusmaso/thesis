@@ -1,34 +1,36 @@
 \section{GraphQL}
 
-GraphQL é uma linguagem de consulta de dados e interpretador para APIs. Foi desenvolvida pela Facebook em 2012 mas sua especificação apenas publicada em 2015. Tem com objetivo fornecer uma descrição completa e compreensível dos dados disponíveis em APIs. Além disso, dá aos clientes o poder de trabalhar apenas com as estrutura de dados que precisam, torna mais fácil evoluir APIs ao longo do tempo e permite o desenvolvimento de ferramentas em cima de sua linguagem. \cite{GraphQL2016}
+GraphQL é uma linguagem de consulta de dados e interpretador de consultas para APIs. Foi desenvolvida pelo Facebook em 2012 mas sua especificação apenas publicada em 2015. Tem com objetivo fornecer uma descrição completa e compreensível de dados disponíveis em interfaces de aplicação. Além disso, permite que clientes façam consultas para busca exata de dados que desejam trabalhar. \cite{GraphQL2016}
 
-Importante ressaltar que GraphQL não está preso a algum banco de dados especifico ou mecanismo de armazenamento. Ao invés, é utilizado para consultar código já existente ou estruturas de dados. Para criar um esquema, é preciso definir os tipos de estruturas, seus campos de acesso e funções para mapear e retornar dados reais em código. \cite{GraphQL2016}
+Importante ressaltar que GraphQL não é uma linguagem para banco de dados, por mais que possa ser utilizado para esta finalidade. Ao invés, sua linguagem e interpretador trabalham com a idéia de mapeamento de campos e tipos de dados em aplicações, fornecendo uma interface unificada e amigável para desenvolvimento de produtos, além de uma plataforma poderosa para a construção de ferramentas. \cite{GraphQL2016}
 
-Por ser uma especificação, GraphQL possui implementações em diversas linguagens de programação e atualmente é usado em diversos contextos, sendo eles para comunicação entre cliente-servidor, microserviços, simplificação de APIs, navegação de árvores, gerador de consultas para banco de dados, entre outros.
+Por ser uma especificação, GraphQL possui implementações em diversas linguagens de programação e atualmente é usado em diversos contextos, como comunicação entre cliente-servidor, microserviços, simplificação de APIs, navegação de árvores, gerador de consultas para banco de dados, entre outros.
 
-\begin{figure}[h]
+Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, seus campos de acesso e funções para mapear e retornar dados reais em código.
+
+\begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-schema.gql}
-  \caption{Esquema GraphQL}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-code.js}
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa.js}
   \caption{API de um código em JavaScript}
 \end{figure}
 
-Uma vez que um serviço GraphQL está sendo executado (normalmente a uma URL em um serviço web), pode ser enviado consultas GraphQL para validar e executar. Uma consulta recebida é primeiro verificado para garantir que ele só se refere aos tipos e campos definidos, em seguida, executa as funções fornecidas para produzir um resultado. \cite{GraphQL2016}
-
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-query.gql}
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-graphql-schema.graphql}
+  \caption{Esquema GraphQL para API em JavaScript}
+\end{figure}
+
+Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL para construção de estruturas de dados. Primeiramente, é feito a validação da consulta para garantir que esta só se refere aos tipos e campos definidos, em seguida, executa as funções fornecidas para produzir um resultado. \cite{GraphQL2016}
+
+\begin{figure}[H]
+  \centering
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-graphql-query.graphql}
   \caption{Query GraphQL para esquema}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-query-response.json}
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-graphql-query-response.json}
   \caption{Resposta JSON da Query GraphQL}
 \end{figure}
 

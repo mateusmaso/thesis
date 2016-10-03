@@ -1,0 +1,14 @@
+{
+  pessoa(id: 4) {
+    id
+    nome
+    sobrenome
+    nascimento: aniversario {
+      mes
+      dia
+    }
+    amigos(limite: 10) {
+      nome
+    }
+  }
+}

@@ -1,11 +1,9 @@
 \subsection[Instrospecção]{Instrospecção}
 
-- Schema Introspection
-- Documentation Alerts
-- Deprecation Alerts
+A GraphQL server supports introspection over its schema. This schema is queried using GraphQL itself, creating a powerful platform for tool‐building. Take an example query for a trivial app. In this case there is a User type with three fields: id, name, and birthday. For example, given a server with the following type definition:
 
-A GraphQL server supports introspection over its schema. This schema is queried using GraphQL itself, creating a powerful platform for tool‐building.
-
-Take an example query for a trivial app. In this case there is a User type with three fields: id, name, and birthday.
-
-For example, given a server with the following type definition:
+\begin{figure}[H]
+  \centering
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-introspection.graphql}
+  \caption{Introspecção}
+\end{figure}

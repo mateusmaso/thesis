@@ -1,18 +1,24 @@
 \subsection[Sistema de Tipagem]{Sistema de Tipagem}
 
-* Descrição do capítulo
-* Falar por cima sobre todos os tipos
-* Falar como os tipos são classificados
-* Dar um exemplo (código) de uma definição
-* Falar oq vai ser abordado em cada tópico
-* Entra tópico "Tipos de Composição"
-* Entra tópico "Tipos de Folha"
-* Entra tópico "Tipos de Abstração"
-* Entra tópico "Tipos de Entrada e Saída"
-* Entra tópico "Diretivas"
-* Explicar oq será abordado no próximo capítulo
+The GraphQL Type system describes the capabilities of a GraphQL server and is used to determine if a query is valid. The type system also describes the input types of query variables to determine if values provided at runtime are valid. A GraphQL server’s capabilities are referred to as that server’s “schema”. A schema is defined in terms of the types and directives it supports.
 
+A given GraphQL schema must itself be internally valid. A GraphQL schema is represented by a root type for each kind of operation: query and mutation; this determines the place in the type system where those operations begin. All types within a GraphQL schema must have unique names. No two provided types may have the same name. No provided type may have a name which conflicts with any built in types (including Scalar and Introspection types).
 
-- Scalars (Int, Float, String, Boolean, ID)
-- Objects
-- Interfaces
+-------
+
+(tipos folha: enumerados, escalares)
+(tipos de entrada e saida) => lista, nao nulo, objetos de entrada
+(tipos de composicao) => objetos
+(tipos de abstracao) => interfaces e unicoes
+
+The most basic type is a Scalar. A scalar represents a primitive value, like a string or an integer. Oftentimes, the possible responses for a scalar field are enumerable. GraphQL offers an Enum type in those cases, where the type specifies the space of valid responses. Scalars and Enums form the leaves in response trees; the intermediate levels are Object types, which define a set of fields, where each field is another type in the system, allowing the definition of arbitrary type hierarchies.
+
+GraphQL supports two abstract types: interfaces and unions. An Interface defines a list of fields; Object types that implement that interface are guaranteed to implement those fields. Whenever the type system claims it will return an interface, it will return a valid implementing type. A Union defines a list of possible types; similar to interfaces, whenever the type system claims a union will be returned, one of the possible types will be returned.
+
+All of the types so far are assumed to be both nullable and singular: e.g. a scalar string returns either null or a singular string. The type system might want to define that it returns a list of other types; the List type is provided for this reason, and wraps another type. Similarly, the Non-Null type wraps another type, and denotes that the result will never be null. These two types are referred to as “wrapping types”; non‐wrapping types are referred to as “base types”. A wrapping type has an underlying “base type”, found by continually unwrapping the type until a base type is found.
+
+\begin{figure}[H]
+  \centering
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-type-system.graphql}
+  \caption{Sistema de Tipagem}
+\end{figure}

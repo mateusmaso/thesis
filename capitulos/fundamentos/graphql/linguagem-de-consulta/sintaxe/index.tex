@@ -1,6 +1,13 @@
-# Sintaxe
+\subsubsection[Sintaxe]{Sintaxe}
 
-- Operations
-- Selection Sets
-- Fields (Field Alias)
-- Arguments
+A GraphQL query document describes a complete file or request string received by a GraphQL service. A document contains multiple definitions of Operations and Fragments. GraphQL query documents are only executable by a server if they contain an operation. If a document contains only one operation, that operation may be unnamed or represented in the shorthand form, which omits both the query keyword and operation name. Otherwise, if a GraphQL query document contains multiple operations, each operation must be named.
+
+There are two types of operations that GraphQL models: query – a read‐only fetch. mutation – a write followed by a fetch. Each operation is represented by an optional operation name and a selection set. If a document contains only one query operation, and that query defines no variables and contains no directives, that operation may be represented in a short‐hand form which omits the query keyword and query name. An operation selects the set of information it needs, and will receive exactly that information and nothing more, avoiding over‐fetching and under‐fetching data. In this query, the id, firstName, and lastName fields form a selection set. Selection sets may also contain fragment references.
+
+A selection set is primarily composed of fields. A field describes one discrete piece of information available to request within a selection set. Some fields describe complex data or relationships to other data. In order to further explore this data, a field may itself contain a selection set, allowing for deeply nested requests. All GraphQL operations must specify their selections down to fields which return scalar values to ensure an unambiguously shaped response. Fields are conceptually functions which return values, and occasionally accept arguments which alter their behavior. These arguments often map directly to function arguments within a GraphQL server’s implementation.
+
+\begin{figure}[H]
+  \centering
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-syntax.graphql}
+  \caption{Sintaxe}
+\end{figure}

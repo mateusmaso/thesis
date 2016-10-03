@@ -1,0 +1,15 @@
+{
+  pessoa(id: 4) {
+    ...identidade
+    ... on User {
+      friends {
+        name
+      }
+    }
+  }
+}
+
+fragment identidade on Pessoa {
+  id
+  name
+}
