@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Pessoa",
+  "description": "Uma pessoa",
+  "type": "object",
+  "required": ["nome", "aniversario"],
+  "properties": {
+    "nome": {
+      "type": "string"
+    },
+    "aniversario": {
+      "type": "string"
+    },
+    "cidade": {
+      "type": "string"
+    }
+  }
+}

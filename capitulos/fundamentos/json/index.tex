@@ -1,0 +1,56 @@
+\section{JSON}
+
+JSON ou Javascript Object Notation é um formato de serialização de dados human-readable baseado em texto com especificação padronizada e parcialmente descritivo. Foi desenvolvido por Douglas Crockford com o objetivo de representar dados em uma maneira simples, leve e flexível através da redução na sobrecarga de marcações comparado ao formato XML.
+
+Por ter se adaptado bem no ambiente de aplicações distribuídas, este formato acabou sendo amplamento utilizado por empresas como principal forma de represetação de dados serializados em seus serviços. A figura 2 mostra claramente a preferência do formato JSON por desenvolvedores ao criar novas APIs. \cite{Duvander2013}
+
+\begin{figure}[h]
+  \centering
+  \resizebox{\columnwidth}{!}{
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figuras/xml-vs-json.png}
+  }
+  \caption{Porcentagem de novas APIs em XML e JSON}
+\end{figure}
+
+Na sua essência, JSON foi construído com base em 4 tipos primitivos de dados e outros 2 para composição. Cada tipo possui seu respectivo correspondente na maioria das linguagens de programação, embora possam ser identificados por nomes diferentes. \cite{Droettboom2015}
+
+\begin{table}[ht!]
+  \centering
+  \resizebox{\columnwidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline
+      Tipo & Exemplo de Valor \\
+      \hline
+      Object & \mintinline{c}{ {"key1": "value1", "key2": "value2"} } \\
+      Array & \mintinline{c}{ ["first", "second", "third"] } \\
+      Number & \mintinline{c}{ 1, -1, 2.9999 } \\
+      String & \mintinline{c}{ "This is a string" } \\
+      Boolean & \mintinline{c}{ true, false } \\
+      Null & \mintinline{c}{ null } \\
+      \hline
+    \end{tabular}
+  }
+  \caption{Exemplo de tipos de valores em JSON}
+\end{table}
+
+Através da composição de listas, objetos e tipos primitivos, é possível representar complexas estruturas de dados que aplicações possam vir a serializar. No entanto, não existe um único padrão de representação em JSON, uma vez que dado uma estrutura para serializar, é possível representá-lo de inúmeras maneiras. \cite{Droettboom2015}
+
+Por exemplo, a seguir estão duas formas diferentes de representação em JSON para os mesmo dados de uma entidade “pessoa”:
+
+\begin{figure}[h]
+  \centering
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa.json}
+  \caption{Primeiro exemplo de representação JSON}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-2.json}
+  \caption{Segundo exemplo de representação JSON}
+\end{figure}
+
+Ambas representações são válidas, apesar da figura 4 estar representando dados em uma estrutura mais formal que a outra. No entanto, por ser um formato não descritivo, a responsabilidade de entender o que está sendo representado em JSON vai depender da análise crítica ou conhecimento prévio dos desenvolvedores. Já uma máquina, sem conhecer o contexto, não saberia como interpretar os dados de forma correta. \cite{Droettboom2015}
+
+Para isso, será abordado em seguida um dos formatos de descrição existentes hoje para descrever estruturas JSON utilizados no projeto.
+
+\input{capitulos/fundamentos/json/json-schema/index}

@@ -1,0 +1,71 @@
+# Validação
+
+Todos os testes são executados N vezes comparando o uso da ferramenta e sem o uso dela para cada tipo de servidor (RESTful e GraphQL)
+
+## Contexto (SWAPI)
+
+Entidades (Subset): People, Planet, Starship
+
+- person: Person
+	- homeworld: Planet
+		- residents: [Person]
+	- starships: [Starship]
+		- pilot: Person
+
+### Servidor
+
+- RESTful (json-schema only)
+	- https://github.com/phalt/swapi
+- GraphQL (relay to be removed?)
+	- https://github.com/graphql/swapi-graphql
+
+### Cliente (Template)
+
+- Arquivo JS (sem a ferramenta)
+	- Fetch API ou Ajax
+	- Código
+- Arquivo JS
+	- Fetch API ou Ajax
+	- GraphQL
+	- GraphQLJay
+	- GraphQLJayHyperSchema
+	- Código
+
+## Variaveis
+
+- Qualitativas (legibilidade)
+	- foi possível retornar os dados?
+		- sim
+		- não
+- Quantitativas
+	- tempo de resposta (transferência apenas)
+		- milisegundos (ms)
+	- tamanho da resposta
+		- kilobytes (kb)
+	- número de requisições
+		- “GETs” (http)
+	- adições de código no cliente
+		- linhas (+)
+	- eliminações de código no cliente
+		- linhas (-)
+	- soma do tempo de processamento local
+		- milisegundos (ms)
+
+## Testes
+
+- Acoplamento
+	- Fluxo de dados (Principal)
+		- Servidor => Cliente
+			- Mudança de Resposta
+			- Mudança de Acesso
+			- Mudança de Arquitetura (Tipo de Serviço)
+				- REST => GraphQL
+				- GraphQL => REST
+		- Cliente => Servidor
+			- Mudança de Requisito
+	- Disponibilidade de dados
+		- Servidor => Cliente
+			- Erro de Acesso (500)
+			- Inatividade de Serviço (0)
+		- Cliente => Servidor
+			- Dado não existente

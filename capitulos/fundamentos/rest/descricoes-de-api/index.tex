@@ -1,0 +1,17 @@
+\subsection[Descrições de API]{Descrições de API}
+
+Em SaaS\footnote{
+  Software as a Service.
+}, APIs REST tornaram-se padrão como interface de acesso à serviços da empresa por seus clientes. A capacidade de oferer uma completa descrição sobre a api web para permitir que usuarios descubram e entam o serviço tornou-se critico para o sucesso da empresa. Contudo, apesar do processo de implementação tournou-se uma pratica comum, a definição de metadados de apis ainda não atingiu um grau de maturidade para normas amplamente aceitas. Apenas descrever manualmente APIs através de websites em linguagem natural permite que apenas pessoas entendam, isso se for bem projetada \cite{LuckyEtAl2016}
+
+Com o fracasso de formatos tradicionais para descrição de web services como WADL, a adoção duvidosa de formatos hypermedia de resposta HATEOS como HAL e a demanda cada vez mais alta por boas especificações em formato legivel por humanos e maquinas. Nos últimos anos foram introduzidas diversas ferramentas e formatos de descrição para descrever Web APIs de REST, tanto em formatos legíveis para humanos como para máquinas. \cite{LuckyEtAl2016}
+
+A seguir, comparações feitas por Sandoval entre as 3 linguagens mais usadas para especificação de APIs: \cite{Sandoval2015}
+
+\begin{description}[leftmargin=8em,style=nextline]
+  \item[\textbf{OpenAPI} (Swagger)] Pros: Amplamente adotada, grande comunidade, suporte pra diversas linguagens. \\ Cons: Carece de especificações de metadados mais avançadas.
+  \item[\textbf{RAML}] Pros: Suporte a especificação avançada, adoção significativa, formato legível, bom suporte da indústria. \\ Cons: Falta de ferramentas de auxílio, não comprovada a longo prazo.
+  \item[\textbf{API Blueprint}] Pros: Fácil de entender, simples de escrever \\ Cons: Pouca adoção, Carece de especificações de metadados mais avançadas, instalação complexa.
+\end{description}
+
+Recentemente, empresas como Heroku tem se dedicado ao uso do JSON Schema como formato de descrição de APIs, por ser uma tecnologia limpa e ainda pouco aplicada especificamente para a construção de grandes API \cite{Leach2014}. Já Lynn propõe um método de modelagem de REST API em serviços IoT utilizando JSON Hyper-Schema visto nos capítulos anteriores. Com suporte a descrição de entrada e saída de dados em toda a interface, junto com descrições URIs, relações e métodos que se aplicam aos links. Além disso, o formato suporta HATEOS e serve como entrada de documentação e ferramenta para geração de código. \cite{LynnEtAl2016}

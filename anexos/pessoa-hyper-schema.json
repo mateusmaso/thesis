@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema#",
+  "title": "Pessoa",
+  "description": "Uma pessoa",
+  "type": "object",
+  "required": ["nome", "aniversario"],
+  "properties": {
+    "nome": {
+      "type": "string"
+    },
+    "aniversario": {
+      "type": "string"
+    },
+    "cidade": {
+      "type": "string"
+    },
+    "foto": {
+      "media": {
+        "binaryEncoding": "base64",
+        "type": "image/png"
+      }
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "/{id}.json"
+    },
+    {
+      "rel": "foto",
+      "href": "/{id}.png",
+      "mediaType": "image/png"
+    }
+  ]
+}

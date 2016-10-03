@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema#",
+  "title": "Pessoa",
+  "description": "Uma pessoa",
+  "type": "object",
+  "required": ["nome", "aniversario"],
+  "definitions": {
+    "cidade": {
+      "type": "string",
+      "properties": {
+        "nome": { "type": "string" },
+        "estado": { "type": "string" },
+        "pais": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "nome": {
+      "type": "string"
+    },
+    "aniversario": {
+      "type": "string"
+    },
+    "cidade": {
+      "$ref": "#/definitions/cidade"
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "/{id}.json"
+    },
+    {
+      "rel": "foto",
+      "href": "/{id}.png",
+      "mediaType": "image/png"
+    },
+    {
+      "rel": "cidade",
+      "href": "/{id}/cidade",
+      "targetSchema": {
+        "$ref": "#/definitions/cidade"
+      }
+    }
+  ]
+}

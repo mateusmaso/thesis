@@ -1,0 +1,12 @@
+\subsubsection[Interface Uniforme]{Interface Uniforme}
+
+Em essência, Fielding propõe que aplicações façam o uso de verbos HTTP (POST, GET, PUT, DELETE) e identificadores uniforme de recursos (URI) para mapear operações em ambientes distribuidos. Através de pequenas regras de acesso pelo cliente, é possível modificar/refatorar o servidor de maneira a minimizar riscos de acoplamento. Esta idéia, trouxe um pensamento diferente ao modelo RPC, cuja API dá ênfase a um maior número de operações. \cite{Fielding2000}
+
+\begin{itemize}[noitemsep]
+\item Identificação de Recursos: Cada recurso deve ter uma URI coesa e especifica para ser disponibilizado
+\item Representação de Recurso: Formato de representação no qual um recurso vai ser retornado para um cliente. (Exemplo: HTML, XML, JSON, TXT)
+\item Resposta Auto-explicativa: Uso de metadados na requisição e resposta. (Exemplo: código de resposta HTTP, Host, Content-Type)
+\item HATEAOS\footnote{
+  Hypermedia as the Engine of Application State.
+} - Retornar na resposta hyperlinks para que o cliente saiba navegar em busca de mais recursos relacionados.
+\end{itemize}
