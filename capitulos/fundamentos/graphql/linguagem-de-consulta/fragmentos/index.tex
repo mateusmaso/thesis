@@ -8,6 +8,22 @@ Fragments can be defined inline within a selection set. This is done to conditio
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-fragment.txt}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      pessoa(id: 4) {
+        ...identidade
+        ... on User {
+          friends {
+            name
+          }
+        }
+      }
+    }
+
+    fragment identidade on Pessoa {
+      id
+      name
+    }
+  \end{minted}
   \caption{Fragmentos}
 \end{figure}

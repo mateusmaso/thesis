@@ -8,6 +8,21 @@ A selection set is primarily composed of fields. A field describes one discrete 
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-syntax.txt}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      pessoa(id: 4) {
+        id
+        nome
+        sobrenome
+        nascimento: aniversario {
+          mes
+          dia
+        }
+        amigos(limite: 10) {
+          nome
+        }
+      }
+    }
+  \end{minted}
   \caption{Sintaxe}
 \end{figure}

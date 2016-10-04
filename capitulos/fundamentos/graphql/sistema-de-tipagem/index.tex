@@ -19,6 +19,27 @@ All of the types so far are assumed to be both nullable and singular: e.g. a sca
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/graphql-type-system.txt}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    interface Individuo {
+      nome: String
+    }
+
+    type Pessoa implements Individuo {
+      ano: Int
+      foto: Foto
+      amigos: [Pessoa]
+    }
+
+    type Foto {
+      altura: Int
+      largura: Int
+    }
+
+    union ResultadoPesquisa = Foto | Pessoa
+
+    type Pesquisa {
+      resultado: ResultadoPesquisa
+    }
+  \end{minted}
   \caption{Sistema de Tipagem}
 \end{figure}

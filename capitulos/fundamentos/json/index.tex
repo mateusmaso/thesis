@@ -38,13 +38,30 @@ Através da composição de listas, objetos e tipos primitivos, consegue-se repr
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa.json}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      "nome": "Mateus Maso",
+      "aniversario": "25 de março de 1992",
+      "cidade": "Florianópolis, SC, Brasil"
+    }
+  \end{minted}
   \caption{Primeiro exemplo de representação JSON}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-2.json}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      "nome": "Mateus",
+      "sobrenome": "Maso",
+      "nascimento": "25-03-1992",
+      "cidade": {
+        "nome": "Florianópolis",
+        "estado": "SC",
+        "pais": "Brasil"
+      }
+    }
+  \end{minted}
   \caption{Segundo exemplo de representação JSON}
 \end{figure}
 

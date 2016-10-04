@@ -8,13 +8,53 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-schema.json}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      "\$schema": "http://json-schema.org/draft-04/schema#",
+      "title": "Pessoa",
+      "description": "Uma pessoa",
+      "type": "object",
+      "required": ["nome", "aniversario"],
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "aniversario": {
+          "type": "string"
+        },
+        "cidade": {
+          "type": "string"
+        }
+      }
+    }
+  \end{minted}
   \caption{Exemplo de JSON Schema para Figura 3}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-hyper-schema.json}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
+      ...
+      "properties": {
+        ...
+        "foto": {
+          "media": {
+            "binaryEncoding": "base64",
+            "type": "image/png"
+          }
+        }
+      },
+      "links": [
+        {
+          "rel": "foto",
+          "href": "/{id}.png",
+          "mediaType": "image/png"
+        }
+      ]
+    }
+  \end{minted}
   \caption{Exemplo de JSON Hyper-Schema para Figura 3}
 \end{figure}
 
@@ -24,7 +64,38 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-hyper-schema-ref.json}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
+      ...
+      "definitions": {
+        "cidade": {
+          "type": "string",
+          "properties": {
+            "nome": { "type": "string" },
+            "estado": { "type": "string" },
+            "pais": { "type": "string" }
+          }
+        }
+      },
+      "properties": {
+        ...
+        "cidade": {
+          "\$ref": "#/definitions/cidade"
+        }
+      },
+      "links": [
+        ...
+        {
+          "rel": "cidade",
+          "href": "/{id}/cidade",
+          "targetSchema": {
+            "\$ref": "#/definitions/cidade"
+          }
+        }
+      ]
+    }
+  \end{minted}
   \caption{Exemplo de JSON Hyper-Schema para Figura 4 usando referenciamento}
 \end{figure}
 

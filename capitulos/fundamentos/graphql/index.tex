@@ -10,13 +10,38 @@ Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, 
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa.js}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    var pessoa = {
+      nome: "Mateus Maso"
+    }
+
+    class Query {
+      pessoa() {
+        return pessoa
+      }
+    }
+
+    class Pessoa {
+      nome(pessoa) {
+        return pessoa.nome
+      }
+    }
+  \end{minted}
   \caption{API de um código em JavaScript}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-graphql-schema.txt}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    type Query {
+      pessoa: User
+    }
+
+    type Pessoa {
+      id: ID
+      nome: String
+    }
+  \end{minted}
   \caption{Esquema GraphQL para API em JavaScript}
 \end{figure}
 
@@ -24,13 +49,25 @@ Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL par
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-graphql-query.txt}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      pessoa {
+        nome
+      }
+    }
+  \end{minted}
   \caption{Query GraphQL para esquema}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \inputminted[frame=single,framesep=10pt]{javascript}{anexos/pessoa-graphql-query-response.json}
+  \begin{minted}[frame=single,framesep=10pt]{javascript}
+    {
+      "pessoa": {
+        "nome": "Mateus Maso"
+      }
+    }
+  \end{minted}
   \caption{Resposta JSON da Query GraphQL}
 \end{figure}
 
