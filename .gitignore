@@ -17,4 +17,5 @@
 *.synctex.gz
 .texpadtmp
 /arquivos
+/validacao
 /node_modules
