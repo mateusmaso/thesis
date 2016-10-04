@@ -14,5 +14,7 @@
 *.toc
 *.vrb
 *.pdf
+*.synctex.gz
 .texpadtmp
 /arquivos
+/node_modules

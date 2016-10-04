@@ -2,12 +2,12 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: /Users/mateusmaso/Documents/Repositories/graphql-jay-thesis/index.aux
 I couldn't open style file abnt-alf.bst
----line 112 of file /Users/mateusmaso/Documents/Repositories/graphql-jay-thesis/index.aux
+---line 111 of file /Users/mateusmaso/Documents/Repositories/graphql-jay-thesis/index.aux
  : \bibstyle{abnt-alf
  :                   }
 I'm skipping whatever remains of this command
 I couldn't open database file abnt-options.bib
----line 113 of file /Users/mateusmaso/Documents/Repositories/graphql-jay-thesis/index.aux
+---line 112 of file /Users/mateusmaso/Documents/Repositories/graphql-jay-thesis/index.aux
  : \bibdata{abnt-options
  :                      ,capitulos/conclusao/referencias/index}
 I'm skipping whatever remains of this command

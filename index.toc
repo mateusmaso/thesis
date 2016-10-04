@@ -4,22 +4,22 @@
 \contentsline {subsection}{\numberline {1.1.1}Especifica\IeC {\c c}\IeC {\~a}o}{22}{subsection.1.1.1}
 \contentsline {subsection}{\numberline {1.1.2}Codifica\IeC {\c c}\IeC {\~a}o}{23}{subsection.1.1.2}
 \contentsline {subsection}{\numberline {1.1.3}Human-Readable}{23}{subsection.1.1.3}
-\contentsline {subsection}{\numberline {1.1.4}Esquema/IDL}{24}{subsection.1.1.4}
+\contentsline {subsection}{\numberline {1.1.4}Esquema/IDL}{23}{subsection.1.1.4}
 \contentsline {section}{\numberline {1.2}JSON}{24}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}JSON Schema}{27}{subsection.1.2.1}
-\contentsline {section}{\numberline {1.3}REST}{32}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}Restri\IeC {\c c}\IeC {\~o}es de Arquitetura}{33}{subsection.1.3.1}
-\contentsline {subsubsection}{\numberline {1.3.1.1}Cliente-Servidor}{34}{subsubsection.1.3.1.1}
-\contentsline {subsubsection}{\numberline {1.3.1.2}Sem Estado}{34}{subsubsection.1.3.1.2}
-\contentsline {subsubsection}{\numberline {1.3.1.3}Interface Uniforme}{34}{subsubsection.1.3.1.3}
-\contentsline {subsubsection}{\numberline {1.3.1.4}Separa\IeC {\c c}\IeC {\~a}o em Camadas}{35}{subsubsection.1.3.1.4}
-\contentsline {subsubsection}{\numberline {1.3.1.5}C\IeC {\'o}digo sob Demanda}{36}{subsubsection.1.3.1.5}
-\contentsline {subsubsection}{\numberline {1.3.1.6}Cache}{36}{subsubsection.1.3.1.6}
-\contentsline {subsection}{\numberline {1.3.2}RESTful}{37}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}Descri\IeC {\c c}\IeC {\~o}es de API}{38}{subsection.1.3.3}
-\contentsline {section}{\numberline {1.4}GraphQL}{39}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}Linguagem de Consulta}{42}{subsection.1.4.1}
-\contentsline {subsubsection}{\numberline {1.4.1.1}Sintaxe}{42}{subsubsection.1.4.1.1}
-\contentsline {subsubsection}{\numberline {1.4.1.2}Fragmentos}{43}{subsubsection.1.4.1.2}
-\contentsline {subsection}{\numberline {1.4.2}Sistema de Tipagem}{44}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {1.4.3}Instrospec\IeC {\c c}\IeC {\~a}o}{46}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.2.1}JSON Schema}{26}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}REST}{30}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Restri\IeC {\c c}\IeC {\~o}es de Arquitetura}{32}{subsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.1.1}Cliente-Servidor}{32}{subsubsection.1.3.1.1}
+\contentsline {subsubsection}{\numberline {1.3.1.2}Sem Estado}{32}{subsubsection.1.3.1.2}
+\contentsline {subsubsection}{\numberline {1.3.1.3}Interface Uniforme}{33}{subsubsection.1.3.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1.4}Separa\IeC {\c c}\IeC {\~a}o em Camadas}{33}{subsubsection.1.3.1.4}
+\contentsline {subsubsection}{\numberline {1.3.1.5}C\IeC {\'o}digo sob Demanda}{34}{subsubsection.1.3.1.5}
+\contentsline {subsubsection}{\numberline {1.3.1.6}Cache}{34}{subsubsection.1.3.1.6}
+\contentsline {subsection}{\numberline {1.3.2}RESTful}{35}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Descri\IeC {\c c}\IeC {\~o}es de API}{36}{subsection.1.3.3}
+\contentsline {section}{\numberline {1.4}GraphQL}{37}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Linguagem de Consulta}{40}{subsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.1.1}Sintaxe}{40}{subsubsection.1.4.1.1}
+\contentsline {subsubsection}{\numberline {1.4.1.2}Fragmentos}{41}{subsubsection.1.4.1.2}
+\contentsline {subsection}{\numberline {1.4.2}Sistema de Tipagem}{42}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}Instrospec\IeC {\c c}\IeC {\~a}o}{44}{subsection.1.4.3}
