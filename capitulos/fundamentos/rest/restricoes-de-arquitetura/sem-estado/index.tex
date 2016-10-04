@@ -1,5 +1,0 @@
-\subsubsection[Sem Estado]{Sem Estado}
-
-Como HTTP é um protocolo sem conexão (onde não há nenhuma garantia sobre qual servidor será processado e quanto tempo irá levar) cada requisição deve conter todas as informações necessarias para que um servidor entenda o que um cliente está executando. Ou seja, para ser stateless, um servidor não pode guardar informações de estado do cliente, como sessões por exemplo. \cite{Fielding2000}
-
-Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de sistemas distribuídos. Garantem que chamadas da API não estejam vinculadas a um determinado servidor. Contudo, com base no número da diversidade de clientes, ao manter um servidor sem estado é possível perder controle no tamanho de resposta, o que pode ser um fator crucial para aplicações que dependem disso. \cite{Wildermuth2015}
