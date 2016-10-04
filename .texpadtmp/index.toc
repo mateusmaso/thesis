@@ -1,8 +1,0 @@
-\select@language {brazil}
-\contentsline {chapter}{\numberline {1}\MakeUppercase {Fundamentos}}{23}{chapter.1}
-\contentsline {section}{\numberline {1.1}Serializa\IeC {\c c}\IeC {\~a}o de Dados}{23}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Especifica\IeC {\c c}\IeC {\~a}o}{24}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Codifica\IeC {\c c}\IeC {\~a}o}{25}{subsection.1.1.2}
-\contentsline {subsection}{\numberline {1.1.3}Human-Readable}{25}{subsection.1.1.3}
-\contentsline {subsection}{\numberline {1.1.4}Esquema/IDL}{26}{subsection.1.1.4}
-\contentsline {section}{\numberline {1.2}JSON}{26}{section.1.2}
