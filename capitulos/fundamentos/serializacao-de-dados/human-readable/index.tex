@@ -2,8 +2,8 @@
 
 Ao representar estruturas de dados em formatos de serialização para que máquinas possam fazer a leitura, não é garantido, no entanto, que esta representação também seja legível por seres humanos.
 
-Para que um formato seja human-readable, além de máquinas, pessoas devem conseguir ler e dizer o que está sendo representado mesmo fora de contexto. Para desenvolvedores, este detalhe é essencial no processo de debugging\footnote{
+Para que um formato seja human-readable, além de máquinas, pessoas devem conseguir ler e dizer o que está sendo representado na estrutura, mesmo fora de contexto. Para desenvolvedores, este detalhe é essencial no processo de debugging\footnote{
   Depuração é o processo de encontrar e reduzir defeitos num aplicativo de software ou mesmo em hardware.
 }. Apesar do processo de serialização de dados não prever a ideia de escrita manual, se um formato é legível por pessoas então também é possível ser descrito por elas. Em geral, a maioria dos formatos baseados em texto são human-readable, enquanto os formatos binários não são. \cite{SumarayMakki2012}
 
-Nota-se que a leitura de um formato é diferente de seu entendimento, uma vez que nem todos os formatos possuem maneiras de descrever seus metadados. Por exemplo, JSON é um formato baseado em texto e tem como objetivo a facilidade de uso e legibilidade por desenvolvedores. Contudo, nem sempre é possível identificar o que está sendo representado em suas estruturas. Através de extensões como JSON-LD e JSON Schema, é possível descrever meta informações para melhor entender o que está sendo representado sem perder a estrutura original do formato JSON.
+Nota-se que a leitura de um formato é diferente de seu entendimento, uma vez que nem todos os formatos possuem maneiras de descrever seus metadados. Por exemplo, JSON é um formato baseado em texto e tem como objetivo a facilidade de uso e legibilidade por desenvolvedores. Contudo, nem sempre é possível identificar o que está sendo representado em suas estruturas.

@@ -28,7 +28,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
       }
     }
   \end{minted}
-  \caption{Exemplo de JSON Schema para Figura 3}
+  \caption{JSON Schema para Figura 3}
 \end{figure}
 
 \begin{figure}[H]
@@ -55,7 +55,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
       ]
     }
   \end{minted}
-  \caption{Exemplo de JSON Hyper-Schema para Figura 3}
+  \caption{JSON Hyper-Schema para Figura 3}
 \end{figure}
 
 Ao exemplo das figuras 5 e 6, ambos os esquemas asseguram que, dado uma estrutura JSON, para que esta seja reconhecido como uma entidade “pessoa” deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 6, além das estruturas definidas pela figura 5, é descrito uma nova propriedade do tipo multimídia e como navegar em busca desta informação.
@@ -96,7 +96,7 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
       ]
     }
   \end{minted}
-  \caption{Exemplo de JSON Hyper-Schema para Figura 4 usando referenciamento}
+  \caption{JSON Hyper-Schema para Figura 4 usando \$ref}
 \end{figure}
 
 Como boa prática, é recomendado (mas não necessário) o uso da chave especial “\$schema” para determinar quando uma estrutura JSON está sendo representada em forma de esquema. A seguir, será descrito algumas das chaves especiais usadas para descrever objetos em esquemas. \cite{Droettboom2015}
@@ -104,19 +104,27 @@ Como boa prática, é recomendado (mas não necessário) o uso da chave especial
 \begin{table}[ht!]
   \centering
   \resizebox{\columnwidth}{!}{
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{|c|c|}
       \hline
-      Chave & Descrição & Exemplo de Valores \\
+      Chave & Descrição \\
       \hline
-      \$schema & Identificador de versão & \mintinline{c}{ http://json-schema.org/draft-04/schema# } \\
-      title & Nome da estrutura & \mintinline{c}{ "Uma pessoa" } \\
-      description & Propósito da estrutura & \mintinline{c}{ "Dados básicos de uma pessoa" } \\
-      required & Lista de prop. com presença obrigatória & \mintinline{c}{ ["nome", "sobrenome"] } \\
-      properties & Prop. usadas para validar uma estrutura & \mintinline{c}{ {"nome": {"type": "string"}} } \\
-      definitions & Prop. e subesquemas para referência & \mintinline{c}{ {"nome": {"type": "string"}} } \\
-      type & Tipo de dado & \mintinline{c}{ "string", "number", "object" } \\
-      ... & ... & ... \\
-      links & Lista de Link Description Objects & \mintinline{c}{ [{"rel": "self", "href": "/{id}"}] } \\
+      \$schema & Identificador de versão \\
+      \hline
+      type & Tipo de dado \\
+      \hline
+      title & Nome da estrutura \\
+      \hline
+      description & Propósito da estrutura \\
+      \hline
+      required & Lista de propriedades com presença obrigatória \\
+      \hline
+      properties & Propriedades usadas para validar uma estrutura \\
+      \hline
+      definitions & Propriedades (subesquemas) para referência \\
+      \hline
+      ... & ... \\
+      \hline
+      links & Lista de Link Description Objects (LDO) \\
       \hline
     \end{tabular}
   }
