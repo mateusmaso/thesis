@@ -58,9 +58,9 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
   \caption{JSON Hyper-Schema para Figura 3}
 \end{figure}
 
-Ao exemplo das figuras 5 e 6, ambos os esquemas asseguram que, dado uma estrutura JSON, para que esta seja reconhecido como uma entidade “pessoa” deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 6, além das estruturas definidas pela figura 5, é descrito uma nova propriedade do tipo multimídia e como navegar em busca desta informação.
+Ao exemplo das figuras 5 e 6, ambos os esquemas asseguram que, dado uma estrutura JSON, para que esta seja reconhecida como uma entidade “pessoa” deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 6, além das estruturas definidas pela figura 5, é descrito uma nova propriedade "foto" do tipo multimídia, além de como navegar em busca desta informação.
 
-Em casos onde a complexidade de um esquema começa a crescer, é comum a definição de subesquemas através da chave “definitions”. Desta forma, podem ser referenciados pela chave "\$ref" permitindo o reuso de estruturas dentro de um esquema. Vale lembrar que a chave “definitions” é apenas um mecanismo simples e util para definir esquemas em um lugar comum, entretanto, não sugerem que estas propriedades sejam validadas em um objeto ao menos que referenciadas em outras estruturas do esquema. \cite{Leach2014}
+Em casos onde a complexidade de um esquema começa a crescer, é comum a definição de subesquemas através da chave “definitions”. Desta forma, podem ser referenciadas pela chave "\$ref" permitindo o reuso de estruturas dentro de um esquema. Vale lembrar que a chave “definitions” é apenas um mecanismo simples e util para definir esquemas em um lugar comum, entretanto, não sugerem que estas propriedades sejam validadas em um objeto ao menos que referenciadas em outras estruturas do esquema. \cite{Leach2014}
 
 \begin{figure}[H]
   \centering
@@ -131,8 +131,8 @@ Como boa prática, é recomendado (mas não necessário) o uso da chave especial
   \caption{Subconjunto de chaves especiais JSON Schema}
 \end{table}
 
-De certa forma, JSON Schema continua sendo uma das únicas tentativas sérias de propor uma linguagem de definição em esquemas para estruturas JSON e, lentamente, está sendo estabelecida como padrão de uso para especificação JSON. Contudo, sua definição ainda está longe de ser um padrão universal, mas já há um número crescente de aplicações que suportam JSON Schema e uma quantidade significativa de ferramentas que permitem a validação de JSON Schemas. \cite{PezoaEtAl2016}
+De certa forma, JSON Schema continua sendo uma das únicas tentativas sérias de propor uma linguagem de definição por meio de esquemas. Contudo, sua definição ainda está longe de ser considerada padrão, mas já há um número crescente de aplicações que suportam o formato, além de uma quantidade significativa de ferramentas que permitem sua validação. \cite{PezoaEtAl2016}
 
-Vale lembrar também que, segundo Leach, com o recente surgimento de grandes formatos de descrição de APIs ao longo dos últimos anos como Swagger, Blueprint e RAML. JSON Schema tem-se tornado uma ótima opção de tecnologia para descrever API's uma vez que utiliza da popularidade do formato JSON uma forma simples de descrever e disponibilizar esquemas pela web. Além disso, são extremamente nesses cenários, onde pode-se usar para evitar o recebimento de chamadas de APIs mal formadas que podem afetar o motor interno da aplicação. \cite{Leach2014} \cite{PezoaEtAl2016}
+Vale lembrar também que, segundo Leach, com o recente surgimento de grandes formatos de descrição de APIs ao longo dos últimos anos, JSON Schema tem-se tornado uma ótima opção para descrever, não apenas estruturas de requisição e resposta JSON mas também como documentar e navegar pontos de acesso em API's. \cite{Leach2014}
 
-Nos próximos capítulos vamos entrar mais em detalhe sobre tipos de serviços (API web) e de que forma é possível descrever APIs para o leitura por máquinas.
+No próximo capítulo será feito uma abordagem sobre um dos estilos de arquitetura mais utilizados em APIs web hoje e de que forma é possível descrever estes serviços para o leitura de máquinas.
