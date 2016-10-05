@@ -1,16 +1,16 @@
 \subsection[Restrições de Arquitetura]{Restrições de Arquitetura}
 
-Esta seção fornece uma visão geral sobre as restrições propostas por Fielding para a implementação em elementos dentro de uma arquitetura de serviço web. Além disso, será examinado o impacto de cada restrição em sistemas distribuídos em hypermedia. \\
+Esta seção fornece uma visão geral sobre as restrições propostas por Fielding para a implementação em arquiteturas web, além de ser examinado o impacto de cada restrição nesses sistemas distribuídos. \\
 
 \textbf{Cliente-Servidor} \\
 
-É a primeira restrição para uma aplicação REST.  Neste modelo, não existe conexão entre cliente e servidor, mas sim a espera do servidor por pedidos de clientes, executando solicitações e devolvendo uma resposta. Seu objetivo é separar arquitetura e responsabilidades dos ambientes cliente e servidor. Assim, o cliente (consumidor do serviço) não se preocupa com tarefas como a comunicação de banco de dados, gerenciamento de cache, etc. O inverso também é verdadeiro, onde o servidor (prestador de serviços) não está preocupado com as tarefas do cliente como interface, experiência do usuário etc. Assim, permitindo a evolução independente das duas arquiteturas desde que a interface de comunicação entre os dois não seja alterada. \cite{Fielding2000} \\
+É a primeira restrição para uma aplicação REST.  Neste modelo, não existe conexão entre cliente e servidor, mas sim a espera do servidor por pedidos de clientes através de chamada e resposta. O cliente (consumidor do serviço) não se preocupa com tarefas de comunicação de banco de dados, gerenciamento de cache, etc. Assim como o servidor (prestador de serviços) não está preocupado com as tarefas do cliente como interface, experiência do usuário etc. Permitindo a evolução independente dos dois ambientes, \textit{desde que sua interface de comunicação não seja alterada}. \cite{Fielding2000} \\
 
 \textbf{Sem Estado} \\
 
-Como HTTP é um protocolo sem conexão (onde não há nenhuma garantia sobre qual servidor será processado e quanto tempo irá levar) cada requisição deve conter todas as informações necessarias para que um servidor entenda o que um cliente está executando. Ou seja, para ser stateless, um servidor não pode guardar informações de estado do cliente, como sessões por exemplo. \cite{Fielding2000}
+Como HTTP é um protocolo sem conexão, cada requisição deve conter todas as informações necessárias para que um servidor entenda o que um cliente está executando. Ou seja, para ser stateless, um servidor não pode guardar informações de estado do cliente, como sessões por exemplo. \cite{Fielding2000}
 
-Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de sistemas distribuídos. Garantem que chamadas da API não estejam vinculadas a um determinado servidor. Contudo, com base no número da diversidade de clientes, ao manter um servidor sem estado é possível perder controle no tamanho de resposta, o que pode ser um fator crucial para aplicações que dependem disso. \cite{Wildermuth2015} \\
+Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de sistemas distribuídos. Garantem que chamadas para API não sejam vinculadas a um determinado servidor. No entanto, dependendo na diversidade do número de clientes, ao manter um servidor sem estado é comum perder controle no tamanho de resposta, o que pode ser um fator crucial para aplicações que dependem disso. \cite{Wildermuth2015} \\
 
 \textbf{Interface Uniforme} \\
 
