@@ -8,7 +8,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     {
       "\$schema": "http://json-schema.org/draft-04/schema#",
       "title": "Pessoa",
@@ -33,7 +33,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     {
       "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
       ...
@@ -60,11 +60,11 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
 
 Ao exemplo das figuras 5 e 6, ambos os esquemas asseguram que, dado uma estrutura JSON, para que esta seja reconhecida como uma entidade “pessoa” deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 6, além das estruturas definidas pela figura 5, é descrito uma nova propriedade "foto" do tipo multimídia, além de como navegar em busca desta informação.
 
-Em casos onde a complexidade de um esquema começa a crescer, é comum a definição de subesquemas através da chave “definitions”. Desta forma, podem ser referenciadas pela chave "\$ref" permitindo o reuso de estruturas dentro de um esquema. Vale lembrar que a chave “definitions” é apenas um mecanismo simples e util para definir esquemas em um lugar comum, entretanto, não sugerem que estas propriedades sejam validadas em um objeto ao menos que referenciadas em outras estruturas do esquema. \cite{Leach2014}
+Em casos onde a complexidade de um esquema começa a crescer, é comum a definição de sub-esquemas através da chave “definitions”. Desta forma, podem ser referenciadas pela chave "\$ref" permitindo o reuso de estruturas dentro de um esquema. Vale lembrar que a chave “definitions” é apenas um mecanismo útil para definir esquemas em um lugar comum, entretanto, não sugerem que estas propriedades sejam validadas em um objeto ao menos que referenciadas em outras estruturas do esquema. \cite{Leach2014}
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     {
       "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
       ...
@@ -99,40 +99,38 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
   \caption{JSON Hyper-Schema para Figura 4 usando \$ref}
 \end{figure}
 
-Como boa prática, é recomendado (mas não necessário) o uso da chave especial “\$schema” para determinar quando uma estrutura JSON está sendo representada em forma de esquema. A seguir, será descrito algumas das chaves especiais usadas para descrever objetos em esquemas. \cite{Droettboom2015}
+Como boa prática, é recomendado (mas não necessário) o uso da chave especial “\$schema” para determinar quando uma estrutura JSON está sendo representada em forma de esquema. Na tabela 3, é descrito algumas das chaves especiais usadas para descrever objetos em esquemas. \cite{Droettboom2015}
 
 \begin{table}[ht!]
   \centering
-  \resizebox{\columnwidth}{!}{
-    \begin{tabular}{|c|c|}
-      \hline
-      Chave & Descrição \\
-      \hline
-      \$schema & Identificador de versão \\
-      \hline
-      type & Tipo de dado \\
-      \hline
-      title & Nome da estrutura \\
-      \hline
-      description & Propósito da estrutura \\
-      \hline
-      required & Lista de propriedades com presença obrigatória \\
-      \hline
-      properties & Propriedades usadas para validar uma estrutura \\
-      \hline
-      definitions & Propriedades (subesquemas) para referência \\
-      \hline
-      ... & ... \\
-      \hline
-      links & Lista de Link Description Objects (LDO) \\
-      \hline
-    \end{tabular}
-  }
+  \begin{tabular}{|c|c|}
+    \hline
+    Chave & Descrição \\
+    \hline
+    \$schema & Identificador de versão \\
+    \hline
+    type & Tipo de dado \\
+    \hline
+    title & Nome da estrutura \\
+    \hline
+    description & Propósito da estrutura \\
+    \hline
+    required & Lista de propriedades com presença obrigatória \\
+    \hline
+    properties & Propriedades usadas para validar uma estrutura \\
+    \hline
+    definitions & Propriedades (sub-esquemas) para referência \\
+    \hline
+    ... & ... \\
+    \hline
+    links & Lista de Link Description Objects (LDO) \\
+    \hline
+  \end{tabular}
   \caption{Subconjunto de chaves especiais JSON Schema}
 \end{table}
 
-De certa forma, JSON Schema continua sendo uma das únicas tentativas sérias de propor uma linguagem de definição por meio de esquemas. Contudo, sua definição ainda está longe de ser considerada padrão, mas já há um número crescente de aplicações que suportam o formato, além de uma quantidade significativa de ferramentas que permitem sua validação. \cite{PezoaEtAl2016}
+De certa forma, JSON Schema continua sendo uma das únicas tentativas sérias de propor uma linguagem de definição para o formato. Contudo, ainda está longe de ser considerada padrão, mas já há um número crescente de aplicações que suportam o formato, além de uma quantidade significativa de ferramentas que permitem sua validação. \cite{PezoaEtAl2016}
 
 Vale lembrar também que, segundo Leach, com o recente surgimento de grandes formatos de descrição de APIs ao longo dos últimos anos, JSON Schema tem-se tornado uma ótima opção para descrever, não apenas estruturas de requisição e resposta JSON mas também como documentar e navegar pontos de acesso em API's. \cite{Leach2014}
 
-No próximo capítulo será feito uma abordagem sobre um dos estilos de arquitetura mais utilizados em APIs web hoje e de que forma é possível descrever estes serviços para o leitura de máquinas.
+No próximo capítulo será feito uma abordagem sobre um dos estilos de arquitetura mais utilizados hoje em dia em APIs web, além de soluções encontradas no mercado para descrição destes serviços.

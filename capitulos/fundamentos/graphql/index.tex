@@ -10,7 +10,7 @@ Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, 
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     var pessoa = {
       nome: "Mateus Maso"
     }
@@ -32,7 +32,7 @@ Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, 
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     type Query {
       pessoa: User
     }
@@ -49,7 +49,7 @@ Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL par
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     {
       pessoa {
         nome
@@ -61,7 +61,7 @@ Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL par
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     {
       "pessoa": {
         "nome": "Mateus Maso"

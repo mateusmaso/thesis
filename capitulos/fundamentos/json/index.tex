@@ -2,13 +2,11 @@
 
 JSON ou Javascript Object Notation é um formato de serialização de dados human-readable baseado em texto com especificação padronizada e parcialmente descritivo. Foi desenvolvido por Douglas Crockford com o objetivo de representar dados em uma maneira simples, leve e flexível através da redução na sobrecarga de marcações comparado ao formato XML.
 
-Por ter se adaptado bem no ambiente de aplicações distribuídas, este formato acabou sendo amplamente utilizado por empresas como principal forma de representação de dados serializados em seus serviços. A figura 2 mostra claramente a preferência do formato JSON por desenvolvedores na elaboração de novas APIs. \cite{Duvander2013}
+Por ter se adaptado bem no ambiente de aplicações distribuídas, este formato acabou sendo amplamente utilizado em serviços como principal forma de representação de dados serializados. A figura 2 mostra claramente a preferência do formato JSON por desenvolvedores na elaboração de novas APIs. \cite{Duvander2013}
 
 \begin{figure}[H]
-  \centering
-  \resizebox{\columnwidth}{!}{
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figuras/xml-vs-json.png}
-  }
+  \centering    
+  \includegraphics[width=0.8\textwidth,height=\textheight,keepaspectratio]{figuras/xml-vs-json.png}
   \caption{Porcentagem de novas APIs em XML e JSON}
 \end{figure}
 
@@ -16,25 +14,23 @@ Na sua essência, o JSON foi construído com base em quatro tipos primitivos de 
 
 \begin{table}[H]
   \centering
-  \resizebox{\columnwidth}{!}{
-    \begin{tabular}{|c|c|c|c|c|}
-      \hline
-      Tipo & Exemplo de Valor \\
-      \hline
-      Object & \mintinline{c}{ {"key1": "value1", "key2": "value2"} } \\
-      \hline
-      Array & \mintinline{c}{ ["first", "second", "third"] } \\
-      \hline
-      Number & \mintinline{c}{ 1, -1, 2.9999 } \\
-      \hline
-      String & \mintinline{c}{ "This is a string" } \\
-      \hline
-      Boolean & \mintinline{c}{ true, false } \\
-      \hline
-      Null & \mintinline{c}{ null } \\
-      \hline
-    \end{tabular}
-  }
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Tipo & Exemplo de Valor \\
+    \hline
+    object & \mintinline[fontsize=\small]{c}{ {"chave1": "valor1", "chave2": "valor2"} } \\
+    \hline
+    array & \mintinline[fontsize=\small]{c}{ ["primeiro", "segundo", "terceiro"] } \\
+    \hline
+    number & \mintinline[fontsize=\small]{c}{ 1, -1, 2.9999 } \\
+    \hline
+    string & \mintinline[fontsize=\small]{c}{ "Isso é uma string" } \\
+    \hline
+    boolean & \mintinline[fontsize=\small]{c}{ true, false } \\
+    \hline
+    null & \mintinline[fontsize=\small]{c}{ null } \\
+    \hline
+  \end{tabular}
   \caption{Tipos de valores em JSON}
 \end{table}
 
@@ -43,7 +39,7 @@ Através da composição de listas, objetos e tipos primitivos, consegue-se repr
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     {
       "nome": "Mateus Maso",
       "aniversario": "25 de março de 1992",
@@ -55,7 +51,7 @@ Através da composição de listas, objetos e tipos primitivos, consegue-se repr
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt]{javascript}
+  \begin{minted}[frame=single,fontsize=\small]{javascript}
     {
       "nome": "Mateus",
       "sobrenome": "Maso",
@@ -72,6 +68,6 @@ Através da composição de listas, objetos e tipos primitivos, consegue-se repr
 
 Ambas representações são válidas, apesar da figura 4 estar representando os dados em uma estrutura um pouco mais formal. No entanto, por ser um formato não descritivo, a responsabilidade de entender o que está sendo representado vai depender da análise crítica ou conhecimento prévio dos desenvolvedores. Já uma máquina, sem conhecer o contexto, não saberia como interpretar os dados de forma correta. \cite{Droettboom2015}
 
-Em seguida, será abordado um dos formatos existentes hoje em dia para a descrição de estruturas JSON, o JSON Schema.
+Para resolver isso, será abordado em seguida um dos formatos existentes hoje em dia para a descrição de estruturas JSON.
 
 \input{capitulos/fundamentos/json/json-schema/index}

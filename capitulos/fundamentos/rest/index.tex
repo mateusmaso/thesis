@@ -2,23 +2,16 @@
 
 REST ou Representational State Transfer é um estilo arquitetural usado para a comunicação de sistemas distribuídos através do protocolo HTTP. Foi introduzido por Roy Fielding em 2000 com o objetivo de oferecer às aplicações web um modelo de interface de acesso baseada em recursos. Além disso, descreve 6 tipos de restrições que serviços deveriam aplicar para ganho de performance, escalabilidade, simplicidade, modificabilidade, visibilidade, portabilidade e confiabilidade.
 
-Vale lembrar que, por ter causado grande repercussão após sua publicação. O termo REST, segundo Richardson, acabou sofrendo diversas interpretações durante o tempo e, sua descrição representada de formas não originalmente propostas por Fielding. Alguns descrevem que serviços que violam essas restrições não podem ser considerados RESTful. Para Wildermuth, apesar de reconhecer as vantagens de cada restrição, serviços web devem usá-los de forma pragmatica. \cite{RichardsonEtAl2013} \cite{Wildermuth2015}
+Vale lembrar que, por ter causado grande repercussão após sua publicação. O termo REST, segundo Richardson, acabou sofrendo diversas interpretações durante o tempo e, sua descrição representada de formas não originalmente propostas por Fielding. Alguns descrevem que serviços que violam essas restrições não podem ser considerados RESTful. Para Wildermuth, apesar de reconhecer as vantagens de cada restrição, serviços web devem usá-los de forma pragmática. \cite{RichardsonEtAl2013} \cite{Wildermuth2015}
 
-Apesar de ter sido introduzido num meio acadêmico, REST acabou se adaptando bem na prática, principalmente em arquiteturas orientada a serviços. Segundo Pautasso, a eliminação da complexidade das soluções para Web Services na época que foi publicado, indicam REST como uma solução aplicável para resolver problemas de integraçao de aplicaçoes empresariais e simplificar o encadeamento necessario para construir SOAs. \cite{PautassoEtAl2008}
+Ao ser introduzido no mercado de APIs, REST acabou se adaptando bem por diversos motivos. Segundo Pautasso, a eliminação da complexidade existente em Web Services antes de sua publicação em 2000 fez com que REST fosse consideirado um dos principais responsáveis pela popularização de arquiteturas orientada a serviços. \cite{PautassoEtAl2008}
 
 \begin{figure}[H]
-  \centering
-  \resizebox{\columnwidth}{!}{
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figuras/api-styles.jpg}
-  }
+  \centering    \includegraphics[width=0.9\textwidth,height=\textheight,keepaspectratio]{figuras/api-styles.jpg}
   \caption{Distribuição de estilos e protocolos para APIs}
 \end{figure}
 
-Sua maior vantagem, mostrou-se por ser facilmente acessada por clientes web, mobile apps, IoTs\footnote{
-  Internet of Things
-} entre outros dispositivos. Isso permite que organizações construam clientes sem se preocupar com suporte à plataformas. Contudo, ao contrário de outros estilos de arquitetura, REST não sugere a criação de documentos de especificação, pois incentiva a escrita de respostas hypertexto para navegação. Para Knupp, a idéia de documentação através de respostas autodescritivas dificulta a legibilidade, além de criar complexidade e informações adicionais. Ao invés, incentiva o uso de outras ferramentas de documentação e descrição de respostas. \cite{Knupp2016}
-
-A seguir será visto as restrições de arquitetura propostas pelo modelo REST, o que é RESTful e as atuais formas de documentação com suporte a leitura de máquinas.
+A seguir será feita uma abordagem sobre os 6 tipos de restrições propostas por Fielding, o que é o termo RESTful, além de entrar em detalhe sobre as atuais soluções para documentação e descrição de APIs nesse estilo.
 
 \input{capitulos/fundamentos/rest/restricoes-de-arquitetura/index}
 \input{capitulos/fundamentos/rest/restful/index}
