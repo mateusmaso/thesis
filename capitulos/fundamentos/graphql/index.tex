@@ -1,6 +1,6 @@
 \section{GraphQL}
 
-GraphQL é uma linguagem de consulta de dados e interpretador de consultas para APIs. Foi desenvolvida pelo Facebook em 2012 mas sua especificação apenas publicada em 2015. Tem com objetivo fornecer uma descrição completa e compreensível de dados disponíveis em interfaces de aplicação. Além disso, permite que clientes façam consultas para busca exata de dados que desejam trabalhar. \cite{GraphQL2016}
+GraphQL é um interpretador e linguagem de consulta de dados para API's. Foi desenvolvida pelo Facebook em 2012 mas sua especificação apenas publicada em 2015. Tem como objetivo fornecer uma descrição completa e compreensível de dados disponíveis em interfaces de aplicação. Além disso, permite que clientes façam consultas de forma precisa em busca de dados que apenas desejam trabalhar. \cite{GraphQL2016}
 
 Importante ressaltar que GraphQL não é uma linguagem para banco de dados, por mais que possa ser utilizado para esta finalidade. Ao invés, sua linguagem e interpretador trabalham com a idéia de mapeamento de campos e tipos de dados em aplicações, fornecendo uma interface unificada e amigável para desenvolvimento de produtos, além de uma plataforma poderosa para a construção de ferramentas. \cite{GraphQL2016}
 
@@ -10,7 +10,7 @@ Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, 
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
     var pessoa = {
       nome: "Mateus Maso"
     }
@@ -32,7 +32,7 @@ Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, 
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
     type Query {
       pessoa: User
     }
@@ -49,7 +49,7 @@ Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL par
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
     {
       pessoa {
         nome
@@ -61,7 +61,7 @@ Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL par
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
     {
       "pessoa": {
         "nome": "Mateus Maso"

@@ -1,25 +1,15 @@
 \subsection[Descrição de API]{Descrição de API}
 
-% APIs REST tornaram-se padrão de interface de acesso à serviços de empresas. sobre a api web para permitir que usuarios descubram e entam o serviço tornou-se uma pratica comum
-
-% ainda não atingiu um grau de maturidade para não normas amplamente aceitas. Apenas 
-
-Para empresas de software que disponibilizam APIs REST como forma de produto, a capacidade de oferecer uma completa descrição e facilidade de uso tornou-se um fator critico para o sucesso da empresa. Diferente do processo de implementação, a prática de descrição de APIs ainda continua sendo feita em sua maior parte manualmente através de websites em linguagem natural. \cite{LuckyEtAl2016}
-
- permite que apenas pessoas entendam, isso se for bem projetada 
+Atualmente, o processo de descrição de API's tem-se tornado um dos principais fatores de sucesso na aceitação de serviços por desenvolvedores. No entanto, diferente do processo de implementação, a prática de descrição de API's REST ainda continua sendo feita em sua maior parte manualmente através de linguagem natural. Isso porque REST não apresenta uma forma de documentação externa para descrição de pontos de acesso. \cite{LuckyEtAl2016}
  
-Apesar de ter se mostrado uma solução de fácil acesso em clientes web, mobile apps e IoTs\footnote{
-  Internet of Things
-}. REST não propõem nenhuma forma de documentação além do uso de HATEOS para descrição e navegação de dados em respostas hypertexto. Para Knupp, a idéia de HATEOS é questionável pois dificulta a legibilidade, cria complexidade e aumenta o tamanho das respostas. Ao invés, sugere o uso de ferramentas para documentação de APIs. \cite{Knupp2016}
+Ao invés, Fielding propõe a descrição dinâmica de API's através do uso de hiperlinks na representação de recursos para navegação de dados (HATEOS). Contudo, para Knupp, a solução proposta por Fielding é questionável, pois na sua visão dificulta a legibilidade da interface de acesso como um todo, não prevê documentação, cria complexidade de implementação e aumenta de forma significativa o tamanho de resposta. \cite{Knupp2016}
 
-Com o fracasso de formatos tradicionais para descrição de web services como WADL, a adoção duvidosa de formatos hypermedia de resposta HATEOS como HAL e a demanda cada vez mais alta por boas especificações em formato legivel por humanos e maquinas. Nos últimos anos foram introduzidas diversas ferramentas e formatos de descrição para descrever Web APIs de REST, tanto em formatos legíveis para humanos como para máquinas. \cite{LuckyEtAl2016}
-
-A seguir, comparações feitas por Sandoval entre as 3 linguagens mais usadas para especificação de APIs: \cite{Sandoval2015}
-
+Em busca de oferecer uma solução simples e completa para descrição de API's REST, foram introduzidas nos últimos anos diversas soluções por empresas e comunidades de desenvolvimento. A seguir, são descritas 3 das linguagens e formatos que maior ganharam popularidade devido ao sua facilidade de uso e legibilidade por humanos e máquinas. \cite{Sandoval2015}
+ 
 \begin{description}[leftmargin=8em,style=nextline]
-  \item[\textbf{OpenAPI} (Swagger)] Pros: Amplamente adotada, grande comunidade, suporte pra diversas linguagens. \\ Cons: Carece de especificações de metadados mais avançadas.
-  \item[\textbf{RAML}] Pros: Suporte a especificação avançada, adoção significativa, formato legível, bom suporte da indústria. \\ Cons: Falta de ferramentas de auxílio, não comprovada a longo prazo.
-  \item[\textbf{API Blueprint}] Pros: Fácil de entender, simples de escrever \\ Cons: Pouca adoção, Carece de especificações de metadados mais avançadas, instalação complexa.
+  \item[\textbf{OpenAPI}] \textbf{Pros}: Amplamente adotada, ampla comunidade, suporte à diversas linguagens. \\ \textbf{Cons}: Carece de especificações avançadas de metadados.
+  \item[\textbf{RAML}] \textbf{Pros}: Suporte à especificação avançada de metadados, adoção significativa, formato legível, suporte da indústria. \\ \textbf{Cons}: Falta de ferramentas de auxílio, não comprovada à longo prazo.
+  \item[\textbf{API Blueprint}] \textbf{Pros}: Fácil de entender e simples de escrever \\ \textbf{Cons}: Pouca adoção, carece de especificações avançadas de metadados, difícil de executar.
 \end{description}
 
-Recentemente, empresas como Heroku tem se dedicado ao uso do JSON Schema como formato de descrição de APIs, por ser uma tecnologia limpa e ainda pouco aplicada especificamente para a construção de grandes API \cite{Leach2014}. Já Lynn propõe um método de modelagem de REST API em serviços IoT utilizando JSON Hyper-Schema visto nos capítulos anteriores. Com suporte a descrição de entrada e saída de dados em toda a interface, junto com descrições URIs, relações e métodos que se aplicam aos links. Além disso, o formato suporta HATEOS e serve como entrada de documentação e ferramenta para geração de código. \cite{LynnEtAl2016}
+Enquanto HATEOS continuar tendo baixa adoção e não houver a padronização de um formato externo para descrição de API's, novas tecnologias estão propensas a surgir pela comunidade para melhor ocupar esta posição. Uma delas, não mencionada anteriormente é o JSON Hyper-Schema que, recentemente através de Lynn e Leach, mostrou ser um método simples e completo para modelagem de API's REST. Uma vez que possui suporte à descrição de representação de entrada e saída, relacionamentos, HATEOS, URIs e verbos HTTP  \cite{LynnEtAl2016} \cite{Leach2014}.
