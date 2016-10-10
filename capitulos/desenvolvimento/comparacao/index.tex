@@ -1,71 +1,151 @@
-# Comparação
+\section{Comparação}
 
-Todos os testes são executados N vezes comparando o uso da ferramenta e sem o uso dela para cada tipo de servidor (RESTful e GraphQL)
+\begin{tikzpicture}
+  [scale=.8,auto=left,every node/.style={circle,fill=blue!20}]
+  \node (n1) at (6,10) {root};
+  \node (n2) at (0,8)  {film};
+  \node (n3) at (2,9)  {people};
+  \node (n4) at (4,8) {starship};
+  \node (n5) at (6,6)  {vehicle};
+  \node (n6) at (8,5)  {specie};
+  \node (n7) at (10,8)  {planet};
 
-## Contexto (SWAPI)
+  \foreach \from/\to in {n1/n2,n1/n2,n1/n3,n1/n4,n1/n5,n1/n6,n1/n7,n2/n3}
+    \draw (\from) -- (\to);
 
-Entidades (Subset): People, Planet, Starship
+\end{tikzpicture}
 
-- person: Person
-	- homeworld: Planet
-		- residents: [Person]
-	- starships: [Starship]
-		- pilot: Person
+% Servidor => Cliente
+% Mudança no fluxo de dados da API
 
-### Servidor
+% ## Context
 
-- RESTful (json-schema only)
-	- https://github.com/phalt/swapi
-- GraphQL (relay to be removed?)
-	- https://github.com/graphql/swapi-graphql
+% - SWAPI
+%   - Entities
+%     - Films
+%     - People
+%     - Starships
+%     - Vehicles
+%     - Species
+%     - Planets
 
-### Cliente (Template)
+% ## Queries
 
-- Arquivo JS (sem a ferramenta)
-	- Fetch API ou Ajax
-	- Código
-- Arquivo JS
-	- Fetch API ou Ajax
-	- GraphQL
-	- GraphQLJay
-	- GraphQLJayHyperSchema
-	- Código
+% - Gostaria de saber o nome do filme com maior numero de personagens de planeta com clima deserto
+%   - Subset: Film, People, Planet
+%     - films: [Film]
+%       - characters: [Person]
+%         - homeworld: Planet
+%           - climates: [String]
 
-## Variaveis
+% {
+%   allFilms {
+%     films {
+%       characters {
+%         homeworld {
+%         	climates
+%         }
+%       }
+%     }
+%   }
+% }
 
-- Qualitativas (legibilidade)
-	- foi possível retornar os dados?
-		- sim
-		- não
-- Quantitativas
-	- tempo de resposta (transferência apenas)
-		- milisegundos (ms)
-	- tamanho da resposta
-		- kilobytes (kb)
-	- número de requisições
-		- “GETs” (http)
-	- adições de código no cliente
-		- linhas (+)
-	- eliminações de código no cliente
-		- linhas (-)
-	- soma do tempo de processamento local
-		- milisegundos (ms)
+% - Gostaria de saber qual o nome da espécie predominante dos residentes que habitam no planeta "Alderaan".
+%   - Subset: Planet, People, Species
 
-## Testes
+% {
+%   allPlanets {
+%     planets {
+%       name
+%     }
+%   }
+% }
 
-- Acoplamento
-	- Fluxo de dados (Principal)
-		- Servidor => Cliente
-			- Mudança de Resposta
-			- Mudança de Acesso
-			- Mudança de Arquitetura (Tipo de Serviço)
-				- REST => GraphQL
-				- GraphQL => REST
-		- Cliente => Servidor
-			- Mudança de Requisito
-	- Disponibilidade de dados
-		- Servidor => Cliente
-			- Erro de Acesso (500)
-			- Inatividade de Serviço (0)
-		- Cliente => Servidor
-			- Dado não existente
+% {
+%   planet(id: $id) {
+%     residents {
+%       species {
+%         name
+%       }
+%     }
+%   }
+% }
+
+% - Gostaria de saber o nome do personagem que pilota mais espaçonaves e veiculos no filme "A New Hope"
+%   - Subset: Film, Starship, Vehicle, People
+
+% {
+%   allFilms {
+%     films {
+%       name
+%     }
+%   }
+% }
+
+% {
+%   film(id: $id) {
+%     starships {
+%       pilots {
+%         name
+%       }
+%     }
+%     vehicles {
+%       pilots {
+%         name
+%       }
+%     }
+%   }
+% }
+
+% ## Client
+
+% - index (w/o graphql-jay)
+% - index_2 (w/ graphql-jay)
+
+% ## Server
+
+% - [main] swapi (REST)
+%   - https://github.com/phalt/swapi
+% - swapi-graphql (GraphQL)
+%   - https://github.com/graphql/swapi-graphql
+
+% ## Test Case branches
+
+% 1) REST Data Flow changes
+% 2) REST to GraphQL migration?
+
+% - Server Changes
+%   - Mudança no Fluxo de Dados (a estrutura é a mesma)
+%     - rest:
+%       - endpoint renamed (just keep using the same endpoint)
+%       - endpoint changed (find alternate endpoint to complement)
+%       - endpoint added (faster way to access data)
+%       - endpoint removed (change endpoint access)
+%       - versioning (manter v1, e usar v2) [uso de composição pra transicao incremental]
+%       - architecture change (manter v1, e usar graphql) [uso de composição pra transicao incremental]
+%     - graphql:
+%       - break into smaller schemas for services
+
+% ## Variables
+
+% - Qualitative
+% 	- foi possível retornar os dados?
+% 		- sim
+% 		- não
+% - Quantitative
+%   - impact
+%     - number of affected clients (n)
+% 	- response time
+% 		- milliseconds (ms)
+% 	- response size
+% 		- kilobytes (kb)
+% 	- number of requests
+% 		- GET (http)
+%   - client code size
+%     - lines
+% 	<!-- - client code added
+% 		- lines (+)
+% 	- client code removed
+% 		- lines (-) -->
+% 	- soma do tempo de processamento local
+% 		- milliseconds (ms)
