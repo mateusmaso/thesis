@@ -1,14 +1,14 @@
 \subsection[Sistema de Tipagem]{Sistema de Tipagem}
 
-Para descrever estruturas de dados de API's utilizando esquema GraphQL, é preciso fazer o uso de seu sistema de tipagem. Através da abstração de entidades de um serviço, representa-se um conjunto finito de tipos, relacionamentos e diretivas para ser acessado por clientes através de documentos GraphQL.
+Para descrever um esquema GraphQL a partir de uma API, antes é preciso fazer o uso de seu sistema de tipagem. Através da abstração de entidades de um serviço, representa-se um conjunto finito de tipos para ser acessado por documentos GraphQL. Um tipo é uma forma de representação de dados especifico da linguagem de definição para que a ferramenta saiba como interpretar operações de consulta e mutação.
 
-Tipos podem ser classificados como abstrato, folha, de entrada, de saída e para composição.  Folha é blabla. Composição é blabla, elementar para representar entidades e relacionamentos. Abstrato é blabla. Entrar e saída são blabla.
+Durante o processo de mapeamento de entidades, faz-se a conversão de estruturas de dados em conjuntos dos tipos folha, de acondicionamento, de composição e abstratos. Um tipo folha é representado por valores finais, singulares e não nulos da estrutura, onde os tipos de acondicionamento e composição são utilizados em cima dos tipos folha para alterar o comportamento e combinar outros tipos em busca da representação de estruturas mais complexas. Por fim, existem os tipos abstratos, que servem para reusar os tipos anteriores através do uso de conceitos alto nível.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|c|c|c|c|c|}
     \hline
-    Tipo & Categoria \\
+    Tipo & Classificação \\
     \hline
     Enum & Folha \\
     \hline
@@ -28,25 +28,15 @@ Tipos podem ser classificados como abstrato, folha, de entrada, de saída e para
     \hline
     Interface & Abstrato \\
     \hline    
-    Non-Null & Entrada e Saída \\
+    Non-Null & Acondicionamento \\
     \hline
-  	List & Entrada e Saída \\
+  	List & Acondicionamento \\
     \hline
   \end{tabular}
   \caption{Classificação de tipos GraphQL}
 \end{table}
 
-The most basic type is a Scalar. A scalar represents a primitive value, like a string or an integer. Oftentimes, the possible responses for a scalar field are enumerable. Scalars and Enums form the leaves in response trees; the intermediate levels are Object types, which define a set of fields. GraphQL supports two abstract types: interfaces and unions. An Interface defines a list of fields; Object types that implement that interface are guaranteed to implement those fields. All of the types so far are assumed to be both nullable and singular. The type system might want to define that it returns a list of other types; the List type is provided for this reason, and wraps another type. Similarly, the Non-Null type wraps another type, and denotes that the result will never be null. These two types are referred to as “wrapping types”; non-wrapping types are referred to as “base types”. A wrapping type has an underlying “base type”, found by continually unwrapping the type until a base type is found.
-
-Vale lembrar que, para serem válidos em um esquema, precisam ser incluídos em um tipo especial chamado "root", este é usado como principal nó de entrada para cada operação (consulta e mutação).
-
-\begin{figure}[H]
-  \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
-    schema => interfaces (=> |individuo|), types  (=> |pessoa|)
-  \end{minted}
-  \caption{Demonstração um esquema GraphQL}
-\end{figure}
+Após a conversão de estruturas de dados em tipos GraphQL, para que estes também sejam acessados por documentos, é preciso incluí-los em um tipo de composição especial definido pelo esquema chamado "root". Dessa forma, é possível modelar os primeiros campos de acesso que o esquema deseja disponibilizar para que clientes façam a execução de operações a partir deles.
 
 \begin{figure}[H]
   \centering
@@ -56,14 +46,12 @@ Vale lembrar que, para serem válidos em um esquema, precisam ser incluídos em 
     }
 
     type Pessoa implements Individuo {
-      ano: Int
       foto: Foto
       amigos: [Pessoa]
     }
 
     type Foto {
-      altura: Int
-      largura: Int
+      url: String
     }
 
     union Resultado = Foto | Pessoa
@@ -73,4 +61,50 @@ Vale lembrar que, para serem válidos em um esquema, precisam ser incluídos em 
     }
   \end{minted}
   \caption{Exemplo de representação do esquema da figura 17 em GraphQL}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}    
+    var IndividuoType = new GraphQLInterfaceType({
+      fields: {
+        nome: {type: GraphQLStringType}
+      }
+    })
+    
+    var PessoaType = new GraphQLObjectType({
+      interfaces: [IndividuoType],
+      fields: () => {
+        return {
+          foto: {type: FotoType}, 
+          amigos: {type: [PessoaType]}
+        }
+      }
+    })
+    
+    var FotoType = new GraphQLObjectType({
+      fields: {
+        url: {type: GraphQLStringType}
+      }
+    })
+    
+    var ResultadoType = new GraphQLUnionType({
+      types: [PessoaType, FotoType]
+    })
+    
+    var PesquisaType = new GraphQLObjectType({
+      fields: {
+        resultado: {type: ResultadoType}
+      }
+    })
+
+    var schema = new GraphQLSchema({
+      query: new GraphQLObjectType({
+        fields: {
+          pesquisa: {type: PesquisaType}
+        }
+      })
+    })
+  \end{minted}
+  \caption{Demonstração de implementação JavaScript da Figura 17}
 \end{figure}
