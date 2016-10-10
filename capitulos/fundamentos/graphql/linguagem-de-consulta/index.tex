@@ -1,19 +1,17 @@
 \subsection[Linguagem de Consulta]{Linguagem de Consulta}
 
-Clientes que buscam realizar consultas de dados em serviços GraphQL precisam antes entender seu formato de requisição, também chamado de documento. Um documento contém operações como consultas e mutações. Além disso, é possível especificar fragmentos, uma unidade comum de composição para reuso de consultas. \cite{GraphQL2016}
+Clientes que buscam realizar consultas de dados em esquemas GraphQL, antes precisam entender seu documento de requisição. Um documento GraphQL contém operações de consultas ou mutações, além de unidades de composição e reuso de consultas, descritas pelo nome de fragmentos. \cite{GraphQL2016} \\
 
-\textbf{Sintaxe}
+\textbf{Sintaxe} \\
 
-A GraphQL query document describes a complete file or request string received by a GraphQL service. A document contains multiple definitions of Operations and Fragments. GraphQL query documents are only executable by a server if they contain an operation. If a document contains only one operation, that operation may be unnamed or represented in the shorthand form, which omits both the query keyword and operation name. Otherwise, if a GraphQL query document contains multiple operations, each operation must be named.
+Documentos GraphQL são inspirados no formato de estrutura de dados JSON, porém sem seus valores e com alterações na sintaxe. Para que um esquema entenda um documento GraphQL, este deve descrever ao menos uma operação de consulta ou mutação. Uma operação de consulta é um processo de leitura da API. Já uma operação de mutação é representado por dois processos, uma escrita seguido de uma leitura na API.
 
-There are two types of operations that GraphQL models: query a read-only fetch. mutation, a write followed by a fetch. Each operation is represented by an optional operation name and a selection set. If a document contains only one query operation, and that query defines no variables and contains no directives, that operation may be represented in a short-hand form which omits the query keyword and query name. An operation selects the set of information it needs, and will receive exactly that information and nothing more, avoiding over-fetching and under-fetching data. In this query, the id, firstName, and lastName fields form a selection set. Selection sets may also contain fragment references.
-
-A selection set is primarily composed of fields. A field describes one discrete piece of information available to request within a selection set. Some fields describe complex data or relationships to other data. In order to further explore this data, a field may itself contain a selection set, allowing for deeply nested requests. All GraphQL operations must specify their selections down to fields which return scalar values to ensure an unambiguously shaped response. Fields are conceptually functions which return values, and occasionally accept arguments which alter their behavior. These arguments often map directly to function arguments within a GraphQL server’s implementation.
+Ao executar uma operação, deve-se expressar um conjunto de seleção de dados que se deseja receber. Este conjunto é representado por campos e fragmentos, onde um campo pode receber argumentos e deve descrever um dado ou subconjunto de dados. Isso permite explorar relacionamentos complexos através do profundo aninhamento de conjuntos de seleções em busca de retornar uma estrutura JSON parecida com o que se escreve na linguagem.
 
 \begin{figure}[H]
   \centering
   \begin{minted}[frame=single,fontsize=\small]{javascript}
-    {
+    query {
       pessoa(id: 4) {
         id
         nome
@@ -28,35 +26,38 @@ A selection set is primarily composed of fields. A field describes one discrete 
       }
     }
   \end{minted}
-  \caption{Sintaxe}
+  \caption{Exemplo de uma operação de consulta com seleção profunda}
 \end{figure}
 
-\textbf{Fragmentos}
+\textbf{Fragmentos} \\
 
-Fragments are the primary unit of composition in GraphQL. Fragments allow for the reuse of common repeated selections of fields, reducing duplicated text in the document. Inline Fragments can be used directly within a selection to condition upon a type condition when querying against an interface or union.
-
-Fragments must specify the type they apply to. In this example, friendFields can be used in the context of querying a User. Fragments cannot be specified on any input value (scalar, enumeration, or input object).Fragments can be specified on object types, interfaces, and unions.
-
-Fragments can be defined inline within a selection set. This is done to conditionally include fields based on their runtime type. This feature of standard fragment inclusion was demonstrated in the query FragmentTyping example. We could accomplish the same thing using inline fragments.
+Fragmentos são a principal unidade de composição em GraphQL, pois permitem o reuso de seleção de campos que se repetem em documentos. É representado por um nome, seguido pelo tipo que está sendo aplicado a seleção de campos. Podem também ser expressos de forma "inline", onde não a a necessidade de definir um nome.
 
 \begin{figure}[H]
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
-    {
+    query {
       pessoa(id: 4) {
+        id
         ...identidade
-        ... on User {
-          friends {
-            name
-          }
-        }
+        ...relacionamentos
       }
     }
 
     fragment identidade on Pessoa {
-      id
-      name
+      nome
+      sobrenome
+      nascimento: aniversario {
+        mes
+        dia
+      }
+    }
+    
+    fragment relacionamentos on Pessoa {
+      amigos(limite: 10) {
+        nome
+      }
     }
   \end{minted}
-  \caption{Fragmentos}
+  \caption{Exemplo da figura 14 utilizando fragmentos}
 \end{figure}

@@ -1,12 +1,12 @@
 \section{GraphQL}
 
-GraphQL é um interpretador e linguagem de consulta de dados para API's. Foi desenvolvida pelo Facebook em 2012 mas sua especificação apenas publicada em 2015. Tem como objetivo fornecer uma descrição completa e compreensível de dados disponíveis em interfaces de aplicação. Além disso, permite que clientes façam consultas de forma precisa em busca de dados que apenas desejam trabalhar. \cite{GraphQL2016}
+GraphQL é, além de um interpretador, uma linguagem de consulta de dados criado pelo Facebook para trabalhar com API's de forma alternativa. Seu objetivo é fornecer uma descrição completa e compreensível de dados disponíveis em interfaces de aplicação. Assim, permitindo que clientes façam consultas de forma precisa em busca de dados que desejam trabalhar. \cite{GraphQL2016}
 
-Importante ressaltar que GraphQL não é uma linguagem para banco de dados, por mais que possa ser utilizado para esta finalidade. Ao invés, sua linguagem e interpretador trabalham com a idéia de mapeamento de campos e tipos de dados em aplicações, fornecendo uma interface unificada e amigável para desenvolvimento de produtos, além de uma plataforma poderosa para a construção de ferramentas. \cite{GraphQL2016}
+Por ser uma especificação recente, após sua publicação em 2015, GraphQL já apresenta implementações em diversas linguagens de programação e atualmente é utilizado em diversos contextos como na comunicação entre cliente-servidor, microserviços, navegação de árvores, gerador de consultas para banco de dados, entre outros.
 
-Por ser uma especificação, GraphQL possui implementações em diversas linguagens de programação e atualmente é usado em diversos contextos, como comunicação entre cliente-servidor, microserviços, simplificação de APIs, navegação de árvores, gerador de consultas para banco de dados, entre outros.
+É importante ressaltar que GraphQL não é uma linguagem de banco de dados, por mais que possa ser utilizado para esta finalidade. Ao invés, sua linguagem e interpretador trabalham com a ideia de mapeamento de campos e tipos de dados em aplicações, fornecendo uma interface unificada e amigável para desenvolvimento de produtos e de outras ferramentas, como a proposta neste trabalho. \cite{GraphQL2016}
 
-Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, seus campos de acesso e funções para mapear e retornar dados reais em código.
+Para gerar um esquema, antes é preciso que haja uma aplicação para que possa ser definido os tipos de estruturas, campos de acesso e funções de retorno de dados.
 
 \begin{figure}[H]
   \centering
@@ -27,7 +27,7 @@ Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, 
       }
     }
   \end{minted}
-  \caption{API de um código em JavaScript}
+  \caption{Exemplo de uma interface de aplicação em JavaScript (ES6)}
 \end{figure}
 
 \begin{figure}[H]
@@ -42,21 +42,21 @@ Para gerar um esquema GraphQL, antes é preciso definir os tipos de estruturas, 
       nome: String
     }
   \end{minted}
-  \caption{Esquema GraphQL para API em JavaScript}
+  \caption{Esquema GraphQL para API da Figura 11}
 \end{figure}
 
-Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL para construção de estruturas de dados. Primeiramente, é feito a validação da consulta para garantir que esta só se refere aos tipos e campos definidos, em seguida, executa as funções fornecidas para produzir um resultado. \cite{GraphQL2016}
+Após a criação do esquema, já é possível enviar consultas GraphQL para que a ferramenta valide a semântica e sintaxe, transforme em execuções de API e retorne dados representados no formato JSON.  \cite{GraphQL2016}
 
 \begin{figure}[H]
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
-    {
+    query {
       pessoa {
         nome
       }
     }
   \end{minted}
-  \caption{Query GraphQL para esquema}
+  \caption{Exemplo de consulta GraphQL para o esquema da Figura 12}
 \end{figure}
 
 \begin{figure}[H]
@@ -68,8 +68,10 @@ Uma vez que o esquema GraphQL foi gerado, pode ser enviado consultas GraphQL par
       }
     }
   \end{minted}
-  \caption{Resposta JSON da Query GraphQL}
+  \caption{Resposta JSON esperada após execução da consulta descrita pela Figura 13}
 \end{figure}
+
+A seguir, será feita uma abordagem sobre os elementos que compõem a linguagem, seu sistema de tipagem e como a analisar metadados de esquemas utilizando o processo de introspecção.
 
 \input{capitulos/fundamentos/graphql/linguagem-de-consulta/index}
 \input{capitulos/fundamentos/graphql/sistema-de-tipagem/index}
