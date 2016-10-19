@@ -1,4 +1,4 @@
-\subsection[Sistema de Tipagem]{Sistema de Tipagem}
+\section[Sistema de Tipagem]{Sistema de Tipagem}
 
 Para descrever um esquema GraphQL a partir de uma API, antes é preciso fazer o uso de seu sistema de tipagem. Através da abstração de entidades de um serviço, representa-se um conjunto finito de tipos para ser acessado por documentos GraphQL. Um tipo é uma forma de representação de dados especifico da linguagem de definição para que a ferramenta saiba como interpretar operações de consulta e mutação.
 
@@ -27,7 +27,7 @@ Durante o processo de mapeamento de entidades, faz-se a conversão de estruturas
     Union & Abstrato \\
     \hline
     Interface & Abstrato \\
-    \hline    
+    \hline
     Non-Null & Acondicionamento \\
     \hline
   	List & Acondicionamento \\
@@ -65,33 +65,33 @@ Após a conversão de estruturas de dados em tipos GraphQL, para que estes tamb�
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}    
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
     var IndividuoType = new GraphQLInterfaceType({
       fields: {
         nome: {type: GraphQLStringType}
       }
     })
-    
+
     var PessoaType = new GraphQLObjectType({
       interfaces: [IndividuoType],
       fields: () => {
         return {
-          foto: {type: FotoType}, 
+          foto: {type: FotoType},
           amigos: {type: [PessoaType]}
         }
       }
     })
-    
+
     var FotoType = new GraphQLObjectType({
       fields: {
         url: {type: GraphQLStringType}
       }
     })
-    
+
     var ResultadoType = new GraphQLUnionType({
       types: [PessoaType, FotoType]
     })
-    
+
     var PesquisaType = new GraphQLObjectType({
       fields: {
         resultado: {type: ResultadoType}

@@ -27,7 +27,7 @@ Para suprir esta alta demanda, diversos formatos de serialização foram introdu
       \hline
       Formato & Especificação & Codificação & Human-Readable & Esquema/IDL \\
       \hline
-      XML & Padronizada & Textual & Sim & Sim \\ 		  
+      XML & Padronizada & Textual & Sim & Sim \\
       \hline
       JSON & Padronizada & Textual & Sim & Parcial \\
       \hline
@@ -44,9 +44,28 @@ Para suprir esta alta demanda, diversos formatos de serialização foram introdu
   \caption{Comparação de formatos de serialização}
 \end{table}
 
-Para melhor entender cada formato, será feita uma abordagem sobre algumas das categorias de classificação utilizadas para estudar o desempenho dos formatos existentes hoje em dia.
+Para melhor entender cada formato, será feita uma abordagem sobre algumas das categorias de classificação utilizadas para estudar o desempenho dos formatos existentes hoje em dia. \\
 
-\input{capitulos/fundamentos/serializacao-de-dados/especificacao/index}
-\input{capitulos/fundamentos/serializacao-de-dados/codificacao/index}
-\input{capitulos/fundamentos/serializacao-de-dados/human-readable/index}
-\input{capitulos/fundamentos/serializacao-de-dados/esquema-idl/index}
+\textbf{Especificação} \\
+
+Um formato pode ter sua especificação classificada como padronizada ou não padronizada. Uma especificação padronizada é regida por requisitos que auxiliam na reprodutibilidade do processo em outras linguagens para maximização da compatibilidade e minimização de erros. Ao contrário, dada uma linguagem de programação, não é garantido que sua implementação esteja seguindo os padrões e poderá ser considerado como não padronizada. \cite{McDermid1991} \\
+
+\textbf{Codificação} \\
+
+Codificação é o processo de sequenciamento de caracteres usado na redução da transmissão e armazenamento de dados. É possível classificar em dois tipos: textuais e binários. Formatos baseados em texto não são codificados para seu fácil acesso e podem ser lidos diretamente através de editores de texto. Já um formato binário faz o uso intensivo da codificação e decodificação para salvar espaço. \cite{Queiros2014}
+
+\textbf{Human-Readable} \\
+
+Ao representar estruturas de dados em formatos de serialização para que máquinas possam fazer a leitura, não é garantido, no entanto, que esta representação também seja legível por seres humanos.
+
+Para que um formato seja human-readable, além de máquinas, pessoas devem conseguir ler e dizer o que está sendo representado na estrutura, mesmo fora de contexto. Para desenvolvedores, este detalhe é essencial no processo de debugging\footnote{
+  Depuração é o processo de encontrar e reduzir defeitos num aplicativo de software ou mesmo em hardware.
+}. Nota-se que a leitura de um formato é diferente de seu entendimento, uma vez que nem todos os formatos possuem maneiras de descrever seus metadados. O formato JSON, por exemplo, é baseado em texto e tem como objetivo a facilidade de uso e legibilidade por desenvolvedores. Nem sempre, contudo, é possível identificar o que está sendo representado em suas estruturas. \cite{SumarayMakki2012} \\
+
+\textbf{Esquema/IDL} \\
+
+Com objetivo de entender o que está sendo representado, alguns formatos disponibilizam na sua especificação maneiras de descrever metadados. Esta categoria é importante principalmente para que máquinas consigam inferir quais estruturas estão sendo lidas e, assim, tomar decisões de forma autônoma.
+
+Um formato descritivo normalmente disponibiliza estruturas como esquemas IDL\footnote{
+  Linguagem de descrição utilizada para descrever a interface dos componentes de um software.
+} para descrição da própria representação. À medida que estas descrições são incorporadas dentro da mesma representação, é possível classificar estes formatos como sendo auto-descritivos. \cite{Rentachintala2014}

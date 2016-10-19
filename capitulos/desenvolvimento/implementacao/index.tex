@@ -1,7 +1,22 @@
 \section{Implementação}
 
+Tem 10 funcoes, 4 (composeSchema, buildSchema, wrapSchema, deepExtendSchema) sao pra gerar o esquema. 3 (simplifyAST, transformAST, reduceASTs) pra analisar os AST e 3 (unwrapAST, fetchData, wrapData) para transformar ASTs em requests. Sendo q 3 (buildSchema, transformAST, fetchData) delas são extensiveis pra adapters.
+
+Mostrar os 2 gráficos de fluxo de execução, um para gerar o schema e o outro para requisição.
+
 \begin{enumerate}
-\item Descrever detalhes de implementação (snippets JS)
+\item composeSchema(services: [Service]) => Promise[Schema]
+\item buildSchema(schema: JSON) => Promise[Schema]
+\item wrapSchema(schema: Schema, wrapper: JSON) => Promise[Schema]
+\item deepExtendSchema(schemas: [Schema]) => Promise[Schema]
+\item simplifyAST(value: AST, info: JSON) => SimplifiedAST
+\item transformAST(schema: JSON, clientSchema: Schema, ast: SimplifiedAST) => SimplifiedAST
+\item reduceASTs(rootAST: SimplifiedAST, asts: [SimplifiedAST]) => Void
+\item unwrapAST(ast: SimplifiedAST, schema: Schema, wrapper: JSON) => SimplifiedAST
+\item fetchData(schema: JSON, ast: SimplifiedAST, url: String) => Promise[JSON]
+\item wrapData(data: JSON, schema: JSON, wrapper: JSON) => Promise[JSON]
 \end{enumerate}
 
+\
 
+Falar sobre o adaptador HyperSchema para usar em APIs REST e RESTful.
