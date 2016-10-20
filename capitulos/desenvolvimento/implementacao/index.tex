@@ -1,22 +1,84 @@
 \section{Implementação}
 
-Tem 10 funcoes, 4 (composeSchema, buildSchema, wrapSchema, deepExtendSchema) sao pra gerar o esquema. 3 (simplifyAST, transformAST, reduceASTs) pra analisar os AST e 3 (unwrapAST, fetchData, wrapData) para transformar ASTs em requests. Sendo q 3 (buildSchema, transformAST, fetchData) delas são extensiveis pra adapters.
+Tem dez funções, quatro são pra gerar o esquema. Três para analisar os AST e três para transformar ASTs em requisições. Sendo q três delas são extensíveis, através de adaptadores. \\
 
-Mostrar os 2 gráficos de fluxo de execução, um para gerar o schema e o outro para requisição.
+\textbf{Funções para construção de esquema} \\
 
-\begin{enumerate}
-\item composeSchema(services: [Service]) => Promise[Schema]
-\item buildSchema(schema: JSON) => Promise[Schema]
-\item wrapSchema(schema: Schema, wrapper: JSON) => Promise[Schema]
-\item deepExtendSchema(schemas: [Schema]) => Promise[Schema]
-\item simplifyAST(value: AST, info: JSON) => SimplifiedAST
-\item transformAST(schema: JSON, clientSchema: Schema, ast: SimplifiedAST) => SimplifiedAST
-\item reduceASTs(rootAST: SimplifiedAST, asts: [SimplifiedAST]) => Void
-\item unwrapAST(ast: SimplifiedAST, schema: Schema, wrapper: JSON) => SimplifiedAST
-\item fetchData(schema: JSON, ast: SimplifiedAST, url: String) => Promise[JSON]
-\item wrapData(data: JSON, schema: JSON, wrapper: JSON) => Promise[JSON]
-\end{enumerate}
+São quatro funções. Principal função da ferramenta, responsável por criar um esquema unificado a partir de metainformações de serviços de forma assíncrona.
 
-\
+\begin{figure}[H]
+  \centering
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  function composeSchema(
+    services: [Service]
+  ): Promise<GraphQLSchema>
 
-Falar sobre o adaptador HyperSchema para usar em APIs REST e RESTful.
+  function buildSchema(
+    schema: JSON
+  ): Promise<GraphQLSchema>
+
+  function wrapSchema(
+    schema: GraphQLSchema, 
+    wrapper: Wrapper
+  ): Promise<GraphQLSchema>
+
+  function deepExtendSchema(
+    schemas: [GraphQLSchema]
+  ): Promise<GraphQLSchema>
+  \end{minted}
+  \caption{Assinatura das funções para construção de esquema}
+\end{figure}
+
+\textbf{Funções para análise de ASTs} \\
+
+São 3 funções, responsáveis analisar ASTs e reduzir na minima arvore possivel para retornar os dados de forma performática.
+
+\begin{figure}[H]
+  \centering
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  function simplifyAST(
+    value: AST, 
+    info: JSON
+  ): SimplifiedAST
+
+  function transformAST(
+    schema: JSON,
+    clientSchema: GraphQLSchema, 
+    ast: SimplifiedAST
+  ): SimplifiedAST
+
+  function reduceASTs(
+    rootAST: SimplifiedAST, 
+    asts: [SimplifiedAST]
+  ): void
+  \end{minted}
+  \caption{Assinatura das funções para análise de ASTs}
+\end{figure}
+
+\textbf{Funções para busca de dados} \\
+
+São 3 funções, responsáveis por transformar AST em requisições HTTP para cada serviço.
+
+\begin{figure}[H]
+  \centering
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  function unwrapAST(
+    ast: SimplifiedAST, 
+    schema: GraphQLSchema, 
+    wrapper: Wrapper
+  ): SimplifiedAST
+
+  function fetchData(
+    schema: JSON, 
+    ast: SimplifiedAST, 
+    url: string
+  ): Promise<JSON>
+
+  function wrapData(
+    data: JSON, 
+    schema: JSON, 
+    wrapper: Wrapper
+  ): Promise<JSON>
+  \end{minted}
+  \caption{Assinatura das funções para busca de dados}
+\end{figure}

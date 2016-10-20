@@ -1,14 +1,9 @@
 \section[Metodologia]{Metodologia}
 
-% - Problema surgiu ao tentar integrar GraphQL em uma API RESTful.
-% 	- Precisava manter dois tipos de requisições no cliente para o mesmo recurso mas em serviços diferentes.
-% 	- E se for possível expressar as consultas no cliente na linguagem GraphQL e transformar em requisições RESTful quando não houver implementaçao por parte do interpretador GraphQL?
-% - Prox etapa foi estudar se era possível realizar a ferramenta que fizesse essa transformação.
-% 	- Por sorte, GraphQL roda no cliente web. (Relay FB)
-% - Estudo mais a fundo em soluções que oferecem documentação de APIs que maquinas pudessem ler. (JSON Hyper-Schema)
-% - Criar uma interface para a ferramenta que fosse facil de usar e acoplada ao GraphQL.
-% - Ideia de criar um gerador de schema contendo informações sobre os serviços e que pudesse ser executado na API padrao do GraphQL.
-% - Após isso foi feito a prototipação e implementação.
-% - Depois de funcionar começo a escrita da monografia.
-% - Criação dos testes para validação Prove of Concept. (POC)
-% - Analise dos resultados.
+Problema surgiu ao tentar integrar GraphQL em um cliente que fazia requisições à uma API RESTful. Cliente estava completamente acoplado ao fluxo de dados, sendo que a estrutura de dados era a mesma. Como resolver isso?
+
+Prox etapa foi a idealização do projeto. Estudar se era possível resolver esse problema e de que forma. Como criar uma ferramenta que fizesse essa intermediação. GraphQL se tornou uma dependência essencial para o sucesso da ferramenta.
+
+Seguido, foi pensado na criação de uma interface para a ferramenta que fosse fácil de usar, rodasse em serviços GraphQL existentes e pudesse funcionar em API's REST que possuem descrição em linguagens/formatos populares e completos.
+
+Após isso foi feito a implementação para Proof of Concept. Depois que validado, comecei a escrita da monografia e preparação de um ambiente de validação que pudesse enfatizar problemas reais na mudança fluxo de dados entre cliente e servidor. Coletar os dados, analisar e apresentar para comprovação da tese.

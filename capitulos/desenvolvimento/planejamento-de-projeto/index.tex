@@ -1,11 +1,119 @@
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+
 \section{Planejamento de Projeto}
 
-Explicar protótipo e usar diagramas para melhor visualizar/entender. Entrar apenas em detalhes importantes de implementação como redução de AST, algoritmo de ordenação de prioridade e geraçao de requests. 
+Explicar o processo de idealização, definição de interface e fluxo de execução da ferramenta (control flow).  \\ 
+
+\textbf{Processo de idealização} \\
 
 \begin{enumerate}
-\item Como evitar quebrar clientes na mudança de fluxo de dados?
-\item Como usar a linguagem GraphQL pra resolver isso
-\item O que é AST
-\item Fluxo de execução
-\item Interface de uso
+\item Por que é difícil realizar mudanças de fluxo de dados no servidor para ganho de performance? Porque clientes estão acoplados em um contrato de acesso à interface de aplicação.
+\item Como evitar quebrar clientes devido à mudança no fluxo de dados? Evitar que clientes façam contrato de acesso direto à API através de requisições explícitas.
+\item Como evitar que clientes façam acesso direto à API? Usando uma ferramenta que seja responsável por intermediar esse acesso de dados em APIs.
+\item De que forma ocorre essa intermediação? Usando uma linguagem para expressar as estruturas de dados que o cliente precisa.
+\item Existe uma linguagem completa para isso? Sim, ela se chama GraphQL.
+\item É possível utilizar GraphQL em um ambiente de cliente? Sim, ela foi desenvolvida para ser "isomorphic", além disso, não requer a implementação de interpretadores no servidor.
+\item Como tu vai analisar e mapear essas consultas de linguagem em requisições para o servidor? Através de um sistema chamado AST.
+\item O que é AST? São árvores sintáticas abstratas, usadas para trabalhar com a consulta da linguagem em forma de estrutura de dados.
+\item O que me garante que esse AST será convertido em requisições performáticas? Através da analise de estruturas de dados disponíveis no servidor e como acessar.
+\item Como vai ser o algoritmo de escolha de rota? Através da redução de ASTs, ou seja, analisando as estruturas de dados disponíveis e seu acesso e transformando o AST através de uma heurística que usa como variáveis o número de dados usados e dados não usados de retorno em uma requisição.
+\item Como tu vai saber quais estruturas de dados estão disponíveis no servidor (API) e de que forma são acessados? Através de formatos de descrição de API. APIs que possuem a habilidade de representar metadados podem ser usadas pela ferramenta.
 \end{enumerate}
+
+\textbf{Definição de interface} \\
+
+Falar sobre o nome da ferramenta. Dizer que o propósito da ferramenta é ser um gerador de esquema GraphQL através de configurações de serviços (API's), que seja possível ser executado pela função GraphQL e é responsável por interpretar a consulta em requisições para API's. Além disso que seja adaptável pra outros tipo de descrição serviços. Falar sobre o adaptador HyperSchema para usar em APIs REST e RESTful.
+
+\begin{enumerate}
+\item Definir serviços
+\item Gerar esquema a partir dos serviços
+\item Executar consultas usando o esquema gerado
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+    import {adapter} from "graphql-jay-hyperschema"
+  
+    export function v1() {
+      return fetch("/api/v1/schema").then((response) => {
+        return response.json()
+      }).then((schema) => {
+        return {
+          url: "/api/v1",
+          schema,
+          adapter,
+          wrapper: {}
+        }
+      })
+    }
+  \end{minted}
+  \caption{Serviço REST com adaptador de JSON Hyper-Schema}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+    import {graphql} from "graphql"
+    import {composeSchema} from "graphql-jay"
+    import services from "./services"
+    
+    composeSchema(...services).then((schema) => {
+      graphql(schema, "{ user { id } }").then((response) => { 
+        console.log(response.data)
+      })
+    })
+  \end{minted}
+  \caption{Exemplo de criação de esquema e execução}
+\end{figure}
+
+\textbf{Fluxo de execução} \\
+
+Existem dois fluxos, o primeiro é de criação de esquema. O segundo é de execução do esquema.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance = 2cm, auto]
+    \node [block] (composeSchema) {Compõe Esquema};
+    \node [cloud, left of=composeSchema] (services) {Serviços};
+    \node [block, below of=composeSchema] (buildSchema) {Constrói Esquema};
+    \node [block, below of=buildSchema] (wrapSchema) {Embrulha Esquema};
+    \node [block, below of=wrapSchema] (deepExtendSchema) {Extende Esquema};
+    \node [cloud, right of=deepExtendSchema] (schema) {Esquema};
+    \path [line] (composeSchema) -- (buildSchema);
+    \path [line] (buildSchema) -- (wrapSchema);
+    \path [line] (wrapSchema) -- (deepExtendSchema);
+    \path [line,dashed] (services) -- (composeSchema);
+    \path [line,dashed] (deepExtendSchema) -- (schema);
+  \end{tikzpicture}
+  \caption{Criação de esquema}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance = 2cm, auto]
+    \node [block] (simplifyAST) {Simplifica AST};
+    \node [cloud, left of=simplifyAST] (services) {Consulta};
+    \node [block, below of=simplifyAST] (transformAST) {Transforma AST};
+    \node [block, below of=transformAST] (reduceASTs) {Reduz ASTs};
+    \node [block, below of=reduceASTs] (unwrapAST) {Desembrulha AST};
+    \node [block, below of=unwrapAST] (fetchData) {Busca dados};
+    \node [block, below of=fetchData] (wrapData) {Embrulha dados};
+    \node [cloud, right of=wrapData] (schema) {Dados};
+    \path [line] (simplifyAST) -- (transformAST);
+    \path [line] (transformAST) -- (reduceASTs);
+    \path [line] (reduceASTs) -- (unwrapAST);
+    \path [line] (unwrapAST) -- (fetchData);
+    \path [line] (fetchData) -- (wrapData);
+    \path [line,dashed] (services) -- (simplifyAST);
+    \path [line,dashed] (wrapData) -- (schema);
+  \end{tikzpicture}
+  \caption{Execução de consulta}
+\end{figure}
+
