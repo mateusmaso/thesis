@@ -75,16 +75,16 @@ Falar sobre o nome da ferramenta. Dizer que o propósito da ferramenta é ser um
 
 \textbf{Fluxo de execução} \\
 
-Existem dois fluxos, o primeiro é de criação de esquema. O segundo é de execução do esquema.
+Existem dois fluxos, o primeiro é de criação de esquema. O segundo é de consulta no esquema.
 
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[node distance = 2cm, auto]
-    \node [block] (composeSchema) {Compõe Esquema};
+    \node [block] (composeSchema) {Compõe Esquema Unificado};
     \node [cloud, left of=composeSchema] (services) {Serviços};
-    \node [block, below of=composeSchema] (buildSchema) {Constrói Esquema};
-    \node [block, below of=buildSchema] (wrapSchema) {Embrulha Esquema};
-    \node [block, below of=wrapSchema] (deepExtendSchema) {Extende Esquema};
+    \node [block, below of=composeSchema] (buildSchema) {Constrói Esquemas de Serviços};
+    \node [block, below of=buildSchema] (wrapSchema) {Extende Esquemas de Serviços};
+    \node [block, below of=wrapSchema] (deepExtendSchema) {Extende Esquemas de Serviços};
     \node [cloud, right of=deepExtendSchema] (schema) {Esquema};
     \path [line] (composeSchema) -- (buildSchema);
     \path [line] (buildSchema) -- (wrapSchema);
@@ -98,11 +98,11 @@ Existem dois fluxos, o primeiro é de criação de esquema. O segundo é de exec
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[node distance = 2cm, auto]
-    \node [block] (simplifyAST) {Simplifica AST};
+    \node [block] (simplifyAST) {Simplifica AST da Consulta};
     \node [cloud, left of=simplifyAST] (services) {Consulta};
-    \node [block, below of=simplifyAST] (transformAST) {Transforma AST};
-    \node [block, below of=transformAST] (reduceASTs) {Reduz ASTs};
-    \node [block, below of=reduceASTs] (unwrapAST) {Desembrulha AST};
+    \node [block, below of=simplifyAST] (transformAST) {Transforma em ASTs de Serviços};
+    \node [block, below of=transformAST] (reduceASTs) {Reduz ASTs de Serviços};
+    \node [block, below of=reduceASTs] (unwrapAST) {Desembrulha ASTs};
     \node [block, below of=unwrapAST] (fetchData) {Busca dados};
     \node [block, below of=fetchData] (wrapData) {Embrulha dados};
     \node [cloud, right of=wrapData] (schema) {Dados};
@@ -114,6 +114,6 @@ Existem dois fluxos, o primeiro é de criação de esquema. O segundo é de exec
     \path [line,dashed] (services) -- (simplifyAST);
     \path [line,dashed] (wrapData) -- (schema);
   \end{tikzpicture}
-  \caption{Execução de consulta}
+  \caption{Consulta de dados}
 \end{figure}
 
