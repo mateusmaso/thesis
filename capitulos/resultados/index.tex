@@ -1,27 +1,5 @@
 \chapter{Resultados}
 
-% \begin{tikzpicture}
-% [
-%     pie chart,
-%     slice type={comet}{blu},
-%     slice type={legno}{rosso},
-%     slice type={coltello}{giallo},
-%     slice type={sedia}{viola},
-%     slice type={caffe}{verde},
-%     pie values/.style={font={\small}},
-%     scale=2
-% ]
-
-%     \pie{2008}{73/comet,13/legno,7/sedia,7/coltello}
-%     \pie[xshift=2.2cm,values of coltello/.style={pos=1.1}]%
-%         {2009}{52/comet,23/legno,17/sedia,3/coltello,5/caffe}
-%     \pie[xshift=4.4cm,values of caffe/.style={pos=1.1}]%
-%         {2010}{56/comet,26/legno,9/sedia,7/coltello,2/caffe}
-
-%     \legend[shift={(0cm,-1cm)}]{{Comet (Pordenone)}/comet, {Wood and furniture (Livenza)}/legno, {Knife (Maniago)}/coltello}
-%     \legend[shift={(3cm,-1cm)}]{{Chair (Manzano)}/sedia, {Coffee (Trieste)}/caffe}
-% \end{tikzpicture}
-
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}
@@ -73,17 +51,6 @@
   \end{tikzpicture}
   \caption{Índice de acerto com o uso da ferramenta}
 \end{figure}
-
-% \begin{tikzpicture}
-% \pgfplotsset{every axis legend/.append style={
-% 		at={(0.5,1.03)},
-% 		anchor=south}}
-% \begin{axis}[legend columns=4]
-% \addplot coordinates {(1,0.33) (2,0.66) (3,1) (4,0.33) (5,1) (6,1) (7,0.33)};
-% \addplot coordinates {(1,1) (2,1) (3,1) (4,1) (5,1) (6,1) (7,1)};
-% \legend{Cliente 1,Cliente 2}
-% \end{axis}
-% \end{tikzpicture}
 
 \begin{figure}[H]
   \centering
@@ -143,7 +110,7 @@
 		{(C1,0.57) (C2,0.42) (C3,0.37) (C4,0.31) (C5,0.43) (C6,0.42) (C7,0.49)} 
 		\closedcycle;
 	\addplot coordinates
-		{(C1,0.074) (C2,0.08) (C3,0.029) (C4,0.41) (C5,1.24) (C6,1.48) (C7,0.72)}
+		{(C1,0.074) (C2,0.08) (C3,0.029) (C4,0.031) (C5,1.24) (C6,1.48) (C7,0.72)}
 		\closedcycle;
     \legend{Processamento,Busca de Metadados}
 	\end{axis}
