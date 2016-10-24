@@ -9,7 +9,7 @@ Este projeto tem como objetivo melhorar a comunicação entre clientes e serviç
 ## Calendário
 
 - [x] Ratificação do plano 08/22/16
-- [ ] Envio do rascunho para os avaliadores 10/24/16
+- [x] Envio do rascunho para os avaliadores 10/24/16
 - [ ] Data limite para confirmar apresentação 10/31/16
 - [ ] Inicio das apresentações 11/07/16
 - [ ] Entrega final do artigo e monografia 12/12/16
