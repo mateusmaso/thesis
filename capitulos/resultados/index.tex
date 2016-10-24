@@ -1,2 +1,124 @@
 \chapter{Resultados}
 
+% \begin{tikzpicture}
+% [
+%     pie chart,
+%     slice type={comet}{blu},
+%     slice type={legno}{rosso},
+%     slice type={coltello}{giallo},
+%     slice type={sedia}{viola},
+%     slice type={caffe}{verde},
+%     pie values/.style={font={\small}},
+%     scale=2
+% ]
+
+%     \pie{2008}{73/comet,13/legno,7/sedia,7/coltello}
+%     \pie[xshift=2.2cm,values of coltello/.style={pos=1.1}]%
+%         {2009}{52/comet,23/legno,17/sedia,3/coltello,5/caffe}
+%     \pie[xshift=4.4cm,values of caffe/.style={pos=1.1}]%
+%         {2010}{56/comet,26/legno,9/sedia,7/coltello,2/caffe}
+
+%     \legend[shift={(0cm,-1cm)}]{{Comet (Pordenone)}/comet, {Wood and furniture (Livenza)}/legno, {Knife (Maniago)}/coltello}
+%     \legend[shift={(3cm,-1cm)}]{{Chair (Manzano)}/sedia, {Coffee (Trieste)}/caffe}
+% \end{tikzpicture}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+      ybar stacked,
+      enlargelimits=0.15,
+      legend style={at={(0.5,-0.20)},
+        anchor=north,legend columns=-1},
+      ylabel={Índice de Acerto},
+      symbolic x coords={C1, C2, C3, C4, 
+          C5, C6, C7},
+      xtick=data,
+      x tick label style={rotate=45,anchor=east},
+      ]
+  \addplot+[ybar] plot coordinates {(C1,0.33) (C2,0.66) 
+    (C3,1) (C4,0.33) (C5,1) (C6,1) (C7,0.33)};
+  \addplot+[ybar] plot coordinates {(C1,0) (C2,0) 
+    (C3,0) (C4,0) (C5,0) (C6,0) (C7,0)};
+  \addplot+[ybar] plot coordinates {(C1,0.66) (C2,0.33) 
+    (C3,0) (C4,0.66) (C5,0) (C6,0) (C7,0.66)};
+  \legend{Acertou, Errou, Não Respondeu}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{Índice de acerto sem o uso da ferramenta}
+\end{figure}
+
+% \begin{tikzpicture}
+% \pgfplotsset{every axis legend/.append style={
+% 		at={(0.5,1.03)},
+% 		anchor=south}}
+% \begin{axis}[legend columns=4]
+% \addplot coordinates {(1,0.33) (2,0.66) (3,1) (4,0.33) (5,1) (6,1) (7,0.33)};
+% \addplot coordinates {(1,1) (2,1) (3,1) (4,1) (5,1) (6,1) (7,1)};
+% \legend{Cliente 1,Cliente 2}
+% \end{axis}
+% \end{tikzpicture}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+      ybar,
+      enlargelimits=0.15,
+      legend style={at={(0.5,-0.15)},
+        anchor=north,legend columns=-1},
+      ylabel={Número de Requisições},
+      symbolic x coords={C3,C5,C6},
+      xtick=data,
+      nodes near coords,
+      nodes near coords align={vertical},
+      ]
+  \addplot coordinates {(C3,357) (C5,357) (C6,357)};
+  \addplot coordinates {(C3,348) (C5,160) (C6,3)};
+  \legend{Cliente 1,Cliente 2}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{Comparação no número de requisições das mudanças OK}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+      ybar,
+      enlargelimits=0.15,
+      legend style={at={(0.5,-0.15)},
+        anchor=north,legend columns=-1},
+      ylabel={Tamanho de Resposta (mb)},
+      symbolic x coords={C3,C5,C6},
+      xtick=data,
+      nodes near coords,
+      nodes near coords align={vertical},
+      ]
+  \addplot coordinates {(C3,0.22) (C5,0.22) (C6,0.22)};
+  \addplot coordinates {(C3,0.22) (C5,0.16) (C6,0.10)};
+  \legend{Cliente 1,Cliente 2}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{Comparação no tamanho de resposta das mudanças OK}
+\end{figure}
+
+\begin{tikzpicture}
+	\begin{axis}[
+        ylabel={Tempo de Overhead (s)},
+        legend style={at={(0.5,-0.15)},
+        anchor=north,legend columns=-1},
+		smooth,
+		stack plots=y,
+		area style,
+        symbolic x coords={C1,C2,C3,C4,C5,C6,C7},
+		enlarge x limits=false]
+	\addplot coordinates
+		{(C1,0.31) (C2,0.32) (C3,0.32) (C4,0.31) (C5,0.43) (C6,0.42) (C7,0.49)} 
+		\closedcycle;
+	\addplot coordinates
+		{(C1,0.41) (C2,0.42) (C3,0.41) (C4,0.41) (C5,1.24) (C6,1.48) (C7,0.72)}
+		\closedcycle;
+    \legend{Processamento,Busca de Metadados}
+	\end{axis}
+\end{tikzpicture}
