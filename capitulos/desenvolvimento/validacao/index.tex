@@ -71,26 +71,14 @@ Para explorar bem todos os pontos de acesso da SWAPI. Foram pensadas 3 consultas
 
 \textbf{Mudanças no fluxo de dados (Servidor)} \\
 
-Falar sobre os 3 tipos de mudanças. Primeiro é realocação, onde são pequenas mudanças no acesso. O segundo é transição, onde são considerados grandes mudanças como versionamento ou estilo de arquitetura. Por fim, o tipo de composição, onde o fluxo de dados é quebrado em diferentes serviços para separação de responsabilidades. Dizer que serão realizados 7 mudanças no fluxo de acesso da API REST (SWAPI) e comparado o impacto nos clientes.
+Falar sobre os 3 tipos de mudanças. Primeiro é realocação, onde são pequenas mudanças no acesso. O segundo é transição, onde são considerados grandes mudanças como versionamento ou estilo de arquitetura. Por fim, o tipo de composição, onde o fluxo de dados é quebrado em diferentes serviços para separação de responsabilidades. Dizer que serão realizados 4 mudanças no fluxo de acesso (apenas de realocação) da API REST (SWAPI) e comparado o impacto nos clientes.
 
-\begin{description}[leftmargin=8em,style=nextline]
-  \item[\textbf{Realocação}] 
-  \begin{enumerate}
-  \item Mudança no endereço de ponto de acesso.
-  \item Mudança no nível de estrutura de resposta.
-  \item Adição de ponto de acesso otimizado.
-  \item Remoção de ponto de acesso deprecado.
-  \end{enumerate}
-  \item[\textbf{Transição}] 
-  \begin{enumerate}
-  \item[5.] Mudança de versão.
-  \item[6.] Mudança no estilo de arquitetura.
-  \end{enumerate}
-  \item[\textbf{Composição}]
-  \begin{enumerate}
-  \item[7.] Mudança para micro-serviços.
-  \end{enumerate}
-\end{description}
+\begin{enumerate}
+\item Mudança no endereço de ponto de acesso.
+\item Mudança no nível de estrutura de resposta.
+\item Adição de ponto de acesso otimizado.
+\item Remoção de ponto de acesso deprecado.
+\end{enumerate}
 
 Vale lembrar que nem todos os estilos de arquiteturas são vulneráveis a esses 3 tipos de mudanças. GraphQL por exemplo é desenvolvido para evitar mudanças de realocação, pois possuem apenas um acesso. Já REST, dependendo da sua implementação, está suscetível aos três. \\
 
