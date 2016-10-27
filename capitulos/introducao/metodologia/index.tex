@@ -1,9 +1,11 @@
 \section[Metodologia]{Metodologia}
 
-Problema surgiu ao tentar integrar GraphQL em um cliente que fazia requisições à uma API RESTful. Cliente estava completamente acoplado ao fluxo de dados, sendo que a estrutura de dados era a mesma. Como resolver isso?
+A primeira etapa do trabalho foi a idealização do projeto. Onde houve uma série de perguntas e um profundo estudo para comprovar se era possível resolver o problema e de que forma seria implementado. Quais tecnologias seriam usadas para ajudar no desenvolvimento da ferramenta e o papel GraphQL e JSON Hyper-Schema para fazer com que seja minimo a curva de aprendizagem da ferramenta e possível de aplicar em produção.
 
-Prox etapa foi a idealização do projeto. Estudar se era possível resolver esse problema e de que forma. Como criar uma ferramenta que fizesse essa intermediação. GraphQL se tornou uma dependência essencial para o sucesso da ferramenta.
+Seguido, foi pensado na criação de uma interface para a ferramenta que fosse simples de usar, rodasse em serviços GraphQL já existentes e pudesse ser integrado facilmente em API's REST que já possuem uma forma completa de descrição de metadados.
 
-Seguido, foi pensado na criação de uma interface para a ferramenta que fosse fácil de usar, rodasse em serviços GraphQL existentes e pudesse funcionar em API's REST que possuem descrição em linguagens/formatos populares e completos.
+Após isso foi feito um PoC\footnote{
+  Proof of concept ou Prova de conceito
+} para validar o protótipo. Em paralelo, começou o processo de escrita da monografia, reimplementação da ferramenta e preparação de um ambiente de validação que pudesse enfatizar bem os problemas reais que clientes JavaScript sofrem devido mudança fluxo de dados em API's REST. 
 
-Após isso foi feito a implementação para Proof of Concept. Depois que validado, comecei a escrita da monografia e preparação de um ambiente de validação que pudesse enfatizar problemas reais na mudança fluxo de dados entre cliente e servidor. Coletar os dados, analisar e apresentar para comprovação da tese.
+Por fim, com o objetivo de apresentar uma comprovação da tese, é rodado os testes de validação, coletado os dados e apresentado os resultados analisados.
