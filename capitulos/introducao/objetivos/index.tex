@@ -1,9 +1,22 @@
 \section[Objetivos]{Objetivos}
 
-\textbf{Primário} \\
+O objetivo deste trabalho é o desenvolvimento de uma ferramenta que ajude na prevenção do acoplamento entre clientes e API's causado pela escrita de código voltado ao acesso direto de estruturas de dados JSON. Além disso, através da análise de metadados, poder oferecer uma maneira genérica (usando GraphQL) para busca dados independente do estilo de arquitetura e fluxo de dados implementado pela API. \\
 
-Poder efetuar mudanças de fluxo de dados no servidor sem quebrar o cliente (mudança de endpoint, versionamento, arquitetura, microserviços). Além de cultivar uma maneira diferente de comunicação de dados, através da especificação de estruturas. \\
+\textbf{Objetivos específicos} \\
 
-\textbf{Secundário} \\
+\begin{itemize}
+\item Prevenir a mudança de código em clientes devido a alterações no fluxo de dados da API.
+\item Facilitar a transição de clientes entre novas versões da API.
+\item Facilitar a transição de clientes entre novos estilos de arquiteturas da API.
+\item Oferecer uma maneira de composição de estruturas de dados entre API's de mais de um serviço e/ou micro-serviço.
+\item Promover a escrita de metadados em API's. \\
+\end{itemize}
 
-Poder compor objetos JSON em um cliente web através de  uma interface de acesso independente do tipo/estilo de serviço. Poder alertar sobre falhas de comunicação durante o fluxo de dados entre cliente e servidor. Poder ajudar na adoçao de novas tecnologias/tipos como GraphQL (Demand-Driven) em projetos que passam por problemas em serviços REST. Ajudar no processo de mapeamento de APIs para machine-readable purposes.
+\textbf{Limites da pesquisa} \\
+
+\begin{itemize}
+\item Foco exclusivo no estilo de arquitetura REST.
+\item Foco exclusivo na ferramenta JSON Hyper-Schema para descrição REST.
+\item Foco exclusivo na linguagem GraphQL para consulta de dados.
+\item Foco exclusivo apenas na mudança no fluxo de dados, e não na transição e composição.
+\end{itemize}

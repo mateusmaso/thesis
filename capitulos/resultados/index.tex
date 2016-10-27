@@ -82,14 +82,14 @@
       enlargelimits=0.15,
       legend style={at={(0.5,-0.15)},
         anchor=north,legend columns=-1},
-      ylabel={Tamanho de Resposta (mb)},
+      ylabel={Tamanho de Resposta (kb)},
       symbolic x coords={C3,C5,C6},
       xtick=data,
       nodes near coords,
       nodes near coords align={vertical},
       ]
-  \addplot coordinates {(C3,0.225777)};
-  \addplot coordinates {(C3,0.221547)};
+  \addplot coordinates {(C3,225.777)};
+  \addplot coordinates {(C3,221.547)};
   \legend{Cliente 1,Cliente 2}
   \end{axis}
   \end{tikzpicture}
@@ -104,7 +104,7 @@
 		smooth,
 		stack plots=y,
 		area style,
-        symbolic x coords={C1,C2,C3,C4,C5,C6,C7},
+        symbolic x coords={C1,C2,C3,C4},
 		enlarge x limits=false]
 	\addplot coordinates
 		{(C1,0.57) (C2,0.42) (C3,0.38) (C4,0.48)}

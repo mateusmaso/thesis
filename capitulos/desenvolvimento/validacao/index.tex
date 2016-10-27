@@ -10,16 +10,18 @@ Antes de realizar mudanças no fluxo, será preciso entender a estrutura de dado
   \centering
   \begin{tikzpicture}
     [scale=.8,auto=left,every node/.style={circle,fill=blue!20}]
-    \node (film) at (0,8)  {film};
-    \node (people) at (2,9)  {people};
-    \node (starship) at (4,8) {starship};
-    \node (vehicle) at (6,6)  {vehicle};
-    \node (specie) at (8,5)  {specie};
-    \node (planet) at (10,8)  {planet};
-    \foreach \from/\to in {people/film}
-      \draw (\from) -- (\to);
+    \node (film) at (3,7)  {film};
+    \node (people) at (-3,9)  {people};
+    \node (starship) at (0,9) {starship};
+    \node (vehicle) at (-2,6)  {vehicle};
+    \node (species) at (0,5)  {species};
+    \node (planet) at (2,8)  {planet};
+    \draw [->] (people) -- (film);
+    \draw [->] (people) -- (planet);
+    \draw [->] (people) -- (species);
+    \draw [->] (people) -- (planet);
   \end{tikzpicture}
-  \caption{Entidades Starwars API (SWAPI)}
+  \caption{Entidades SWAPI}
 \end{figure}
 
 \textbf{Consultas e respostas esperadas (Cliente)} \\
