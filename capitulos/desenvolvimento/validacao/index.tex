@@ -1,10 +1,12 @@
 \section{Validação}
 
-Falar que vai ser feito uma pesquisa comparativa sobre o uso da ferramenta como solução de desacoplamento entre cliente e servidor em mudanças feitas no fluxo de dados pelo servidor. Para isso será desenvolvido um dois clientes para realizar 3 consultas em uma API REST, um fazendo o uso da ferramenta e o outro não. Após disso, aplicaremos uma série de mudanças no fluxo e analisaremos o resultado das variáveis coletadas. \\
+Com o objetivo de testar a implementação e proposta de valor da ferramenta, é feito uma pesquisa comparativa focando no impacto do seu uso em relação a mudanças de fluxo de dados pelo servidor que afetam o contrato de acesso.
 
-\textbf{Estrutura de Dados (Entidades)} \\
+Para isso será desenvolvido um ambiente de validação onde dois clientes realizam três consultas em serviço através de uma API REST. Um deles fazendo o uso da ferramenta e o outro não. Após disso, será aplicado uma série de mudanças no serviço que afetam o fluxo de dados para que assim, possa ser analisado o impacto e resultado através das  variáveis coletadas. \\
 
-Antes de realizar mudanças no fluxo, será preciso entender a estrutura de dados e os relacionamentos disponíveis no servidor no qual os clientes vão fazer consultas. Para isso, será usado uma implementação já disponível pela comunidade com o objetivo de testar implementações e estilos de arquiteturas para API web. Esta aplicação é baseado em entidades/dados da saga de filmes Starwars. As entidades apresentadas são: Filme, Pessoa, Espécie, Planeta, Espaçonave, Veículo. A seguir está um grafo para demonstrar o relacionamento entre eles.
+\textbf{Estrutura de dados (JSON)} \\
+
+Foi escolhido trabalhar com um escopo de serviço chamado SWAPI, bastante utilizado para análise de implementações de estilos de arquitetura e linguagens de programação. Nele, são descritos seis entidades e seus respectivos relacionamentos.
 
 \begin{figure}[H]
   \centering
@@ -16,17 +18,13 @@ Antes de realizar mudanças no fluxo, será preciso entender a estrutura de dado
     \node (vehicle) at (-2,6)  {vehicle};
     \node (species) at (0,5)  {species};
     \node (planet) at (2,8)  {planet};
-    \draw [->] (people) -- (film);
-    \draw [->] (people) -- (planet);
-    \draw [->] (people) -- (species);
-    \draw [->] (people) -- (planet);
   \end{tikzpicture}
   \caption{Entidades SWAPI}
 \end{figure}
 
-\textbf{Consultas e respostas esperadas (Cliente)} \\
+\textbf{Consultas e respostas esperadas} \\
 
-Para explorar bem todos os pontos de acesso da SWAPI. Foram pensadas 3 consultas de média complexidade que envolvessem pelo menos 3 das entidades descritas pela API. Para cada uma existe apenas uma resposta exata, onde é baseado nas estruturas de dados representes da API.
+Com o propósito de explorar cada ponto de acesso e estrutura de dados do serviço SWAPI, foram pensadas em três perguntas de média complexidade onde envolvessem ao menos três das entidades da API. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados remotas.
 
 \begin{enumerate}
 \item Qual o nome do filme no qual aparece mais personagens oriundos de um planeta deserto? R: "Revenge of the Sith"
@@ -71,9 +69,9 @@ Para explorar bem todos os pontos de acesso da SWAPI. Foram pensadas 3 consultas
 
 \end{enumerate}
 
-\textbf{Mudanças no fluxo de dados (Servidor)} \\
+\textbf{Mudanças no fluxo de dados} \\
 
-Falar sobre os 3 tipos de mudanças. Primeiro é realocação, onde são pequenas mudanças no acesso. O segundo é transição, onde são considerados grandes mudanças como versionamento ou estilo de arquitetura. Por fim, o tipo de composição, onde o fluxo de dados é quebrado em diferentes serviços para separação de responsabilidades. Dizer que serão realizados 4 mudanças no fluxo de acesso (apenas de realocação) da API REST (SWAPI) e comparado o impacto nos clientes.
+É proposto quatro tipos de mudanças no fluxo de dados para quebra de contrato, onde cada mudança testa a capacidade da ferramenta em a adaptar a comunicação através da atualização dos metadados do serviço.
 
 \begin{enumerate}
 \item Mudança no endereço de ponto de acesso.
@@ -82,11 +80,9 @@ Falar sobre os 3 tipos de mudanças. Primeiro é realocação, onde são pequena
 \item Remoção de ponto de acesso deprecado.
 \end{enumerate}
 
-Vale lembrar que nem todos os estilos de arquiteturas são vulneráveis a esses 3 tipos de mudanças. GraphQL por exemplo é desenvolvido para evitar mudanças de realocação, pois possuem apenas um acesso. Já REST, dependendo da sua implementação, está suscetível aos três. \\
-
 \textbf{Variáveis} \\
 
-Foram descritas cinco variáveis para análise, todas qualitativas.  Porcentagem de acerto. Tamanho de resposta é quando. Número de requisições. Tempo de busca de metadados é. Tempo de processamento é.
+É descrito cinco variáveis para análise dos testes de validação. Todos são quantitativas e coletadas no cliente após o processo de mudança.
 
 \begin{table}[H]
   \centering

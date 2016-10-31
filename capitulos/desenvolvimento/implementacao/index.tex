@@ -1,10 +1,12 @@
 \section{Implementação}
 
-Tem dez funções, quatro são pra gerar o esquema. Três para analisar os AST e três para transformar ASTs em requisições. Sendo q três delas são extensíveis, através de adaptadores. \\
+A partir da definição de interface e fluxo de execução, foram implementados dez funções no total. Quatro delas responsáveis por gerar o esquema. Três para analisar o AST da consulta e outras três para transformar o AST em requisições para API de cada serviço. Além disso, três dessas funções são extensíveis através de adaptadores para análise diferentes formatos para descrição de metadados em API's. 
 
-\textbf{Funções para construção de esquema} \\
+A seguir, é descrito brevemente as 3 categorias de funções, junto com seu objetivo e a assinatura de cada método escrito em JavaScript. \\
 
-São quatro funções. Principal função da ferramenta, responsável por criar um esquema unificado a partir de metainformações de serviços de forma assíncrona.
+\textbf{Funções para composição de esquema} \\
+
+Representam quatro funções e seu principal objetivo é compor, de forma assíncrona, um esquema GraphQL unificado a partir dos metadados de cada serviço.
 
 \begin{figure}[H]
   \centering
@@ -26,12 +28,12 @@ São quatro funções. Principal função da ferramenta, responsável por criar 
     schemas: [GraphQLSchema]
   ): Promise<GraphQLSchema>
   \end{minted}
-  \caption{Assinatura das funções para construção de esquema}
+  \caption{Assinatura das funções para composição de esquema}
 \end{figure}
 
-\textbf{Funções para análise de ASTs} \\
+\textbf{Funções para análise de AST} \\
 
-São 3 funções, responsáveis analisar ASTs e reduzir na minima arvore possivel para retornar os dados de forma performática.
+São três funções que buscam analisar o AST gerado pela consulta GraphQL através de um algoritmo que transforma e reduz este em um AST específico e performático para cada serviço.
 
 \begin{figure}[H]
   \centering
@@ -52,12 +54,12 @@ São 3 funções, responsáveis analisar ASTs e reduzir na minima arvore possive
     asts: [SimplifiedAST]
   ): void
   \end{minted}
-  \caption{Assinatura das funções para análise de ASTs}
+  \caption{Assinatura das funções para análise de AST}
 \end{figure}
 
 \textbf{Funções para busca de dados} \\
 
-São 3 funções, responsáveis por transformar AST em requisições HTTP para cada serviço.
+São as três últimas funções responsáveis por converter os AST's produzidos na categoria de análise em requisições para API de cada serviço.
 
 \begin{figure}[H]
   \centering

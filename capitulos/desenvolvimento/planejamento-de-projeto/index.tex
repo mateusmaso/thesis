@@ -134,8 +134,8 @@ Após solucionar os problemas, é proposto o primeiro protótipo do projeto onde
     \draw [->] (schema) -- (clientFetchCode);
     \draw [->] ([yshift=0.25cm]schema.east) -- ([yshift=0.25cm]api.west);
     \draw [->] (api) -- (schema);
-    \path [line,dashed] (clientConfigCode) -| ([xshift=-0.25cm]schema.north);
-    \path [line,dashed] (description) -| ([xshift=0.25cm]schema.north);
+    \draw [->,dashed] (clientConfigCode) -| ([xshift=-0.25cm]schema.north);
+    \draw [->,dashed] (description) -| ([xshift=0.25cm]schema.north);
   \end{tikzpicture}
   \caption{Proposta de modelo para evitar quebra de contrato}
 \end{figure}
@@ -165,11 +165,11 @@ O novo modelo de comunicação procura, além de evitar a quebra de contrato, pr
 
 \textbf{Definição de interface} \\
 
-Para introduzir a ferramenta em um ambiente de clientes em produção, é importante oferecer uma interface que apresente uma baixa curva de aprendizagem e que cause pouco impacto no código existente. A ideia de utilizar GraphQL como principal linguagem de comunicação serve não apenas para poupar desenvolvimento mas também incentivar o seu uso de forma que o código de busca não fique dependente da ferramenta. Assim, clientes GraphQL podem ser desenvolvidos de forma gradual, onde não há a necessidade de implementar um interpretador GraphQL no serviço caso faça o uso da ferramenta. 
+Clientes que pensam em integrar a ferramenta em seu código esperam encontrar uma interface que apresente uma baixa curva de aprendizagem e que, acima de tudo, cause pouco impacto em sua base de código. Por isso, a ferramenta foi desenvolvida pensando em reutilizar ao máximo tecnologias promissoras ou já bem consolidadas no mercado de desenvolvimento.
 
-Outro caso é trabalhar com formatos abertos para descrição de API's, como por exemplo em REST o JSON Hyper-Schema. Isso permite agilizar a integração da ferramenta com serviços que já oferecem alguma solução completa para descrição de sua API's e que existe uma forma (adaptador) da ferramenta entender esses metadados.
+A primeira ideia foi em utilizar GraphQL como linguagem para intermediação na comunicação. Além de promover a tecnologia, a ferramenta possibilita que o cliente escreva um código de busca que também funcione para interpretadores GraphQL. O outro caso é trabalhar com formatos abertos de descrição de API's, como por exemplo o JSON Hyper-Schema. Isso permite acelerar sua integração com serviços que já oferecem soluções de descrição de sua API's.
 
-Ao integrar a ferramenta no código clientes, é preciso definir um arquivo de configuração contendo funções que descreva informações de cada serviço a ser consultado. Após, gera-se um esquema GraphQL pela ferramenta a partir das funções de configuração de serviço. Por fim, é executado no código de busca as consultas através do esquema gerado.
+Para integrar a ferramenta em código de clientes, é preciso definir um arquivo de configuração contendo funções que descrevam informações de cada serviço a ser consultado. Após, gera-se um esquema GraphQL pela ferramenta a partir das funções de configuração de serviço. Por fim, é executado consultas no código de busca através do esquema gerado.
 
 \begin{figure}[H]
   \centering
@@ -215,31 +215,33 @@ Ao a efetuar a busca de dados entre clientes e serviços utilizando a ferramenta
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[font=\small]
-    \node [block] (composeSchema) {Compõe esquema};
+    \node [block] (composeSchema) {Compor esquema unificado};
     \node [oval, above of=composeSchema,node distance=2cm] (services) {Serviços};
-    \node [block, right of=composeSchema,node distance=3cm] (buildSchema) {Constrói esquemas de serviços};
-    \node [block, right of=buildSchema,node distance=3cm] (wrapSchema) {Invólucro esquemas de serviços};
-    \node [block, right of=wrapSchema,node distance=3cm] (deepExtendSchema) {Extende esquemas de serviços};
+    \node [block, right of=composeSchema,node distance=3cm] (buildSchema) {Construir esquema para cada serviço};
+    \node [block, right of=buildSchema,node distance=3cm] (wrapSchema) {Invólucrar campos de cada esquema};
+    \node [block, right of=wrapSchema,node distance=3cm] (deepExtendSchema) {Unificar todos os esquemas};
     \node [oval, above of=deepExtendSchema,node distance=2cm] (schema) {Esquema};
-    \path [line] (composeSchema) -- (buildSchema);
-    \path [line] (buildSchema) -- (wrapSchema);
-    \path [line] (wrapSchema) -- (deepExtendSchema);
-    \path [line,dashed] (services) -- (composeSchema);
-    \path [line,dashed] (deepExtendSchema) -- (schema);
+    \draw [->] (composeSchema) -- (buildSchema);
+    \draw [->] (buildSchema) -- (wrapSchema);
+    \draw [->] (wrapSchema) -- (deepExtendSchema);
+    \draw [->,dashed] (services) -- (composeSchema);
+    \draw [->,dashed] (deepExtendSchema) -- (schema);
   \end{tikzpicture}
   \caption{Criação de esquema}
 \end{figure}
 
+O processo de criação de esquema começa resolvendo cada função de configuração de serviço e construindo um esquema GraphQL para cada um. Após, por razões de preferência de desenvolvimento, é feito o invólucro dos campos de cada esquema e para cada um estende-se até gerar um esquema unificado.
+
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[font=\small]
-    \node [block] (simplifyAST) {Simplifica AST};
+    \node [block] (simplifyAST) {Simplificar AST};
     \node [oval, above of=simplifyAST,node distance=2cm] (services) {Consulta};
-    \node [block, below of=simplifyAST,node distance=2cm] (transformAST) {Transforma ASTs de serviços};
-    \node [block, right of=transformAST,node distance=3cm] (reduceASTs) {Reduz ASTs de serviços};
-    \node [block, right of=reduceASTs,node distance=3cm] (unwrapAST) {Desfazer invólucro de ASTs};
-    \node [block, right of=unwrapAST,node distance=3cm] (fetchData) {Busca dados};
-    \node [block, above of=fetchData,node distance=2cm] (wrapData) {Invólucro dados};
+    \node [block, below of=simplifyAST,node distance=2cm] (transformAST) {Transformar AST para cada serviço};
+    \node [block, right of=transformAST,node distance=3cm] (reduceASTs) {Reduzir AST de cada serviço};
+    \node [block, right of=reduceASTs,node distance=3cm] (unwrapAST) {Desfazer invólucro de cada AST};
+    \node [block, right of=unwrapAST,node distance=3cm] (fetchData) {Realizar busca dados para cada serviço};
+    \node [block, above of=fetchData,node distance=2cm] (wrapData) {Invólucrar e unificar dados};
     \node [oval, above of=wrapData,node distance=2cm] (schema) {Dados};
     \draw [->] (simplifyAST) -- (transformAST);
     \draw [->] (transformAST) -- (reduceASTs);
@@ -252,3 +254,4 @@ Ao a efetuar a busca de dados entre clientes e serviços utilizando a ferramenta
   \caption{Consulta de dados}
 \end{figure}
 
+O processo de consulta de dados começa através de uma execução de consulta GraphQL. Primeiro é convertido a estrutura AST em um formato mais simplificado para se trabalhar. Após, transforma-se o AST principal em um AST especifico para cada serviço. Com as árvores de consulta, é feito a redução da árvore aplicando-se o algoritmo de busca. Após, é desfeito o invólucro de cada AST para poder realizar a busca de dados no serviço correspondente. Por fim, ao retornar os dados, realiza-se novamente o invólucro e estende-se cada dado até gerar um dado unificado.
