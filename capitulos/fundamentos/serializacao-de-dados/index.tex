@@ -2,23 +2,22 @@
 
 Na ciência da computação, serialização de dados é um processo de tradução usado para converter estruturas de dados\footnote{
   Uma estrutura de dados é uma forma abstrata de representar e organizar dados. Seu objetivo é ajudar a reduzir complexidade, podendo armazenar dados de diferentes tipos, como números, strings ou até mesmo outras estruturas de dados.
-} em formatos que possam ser armazenados, transmitidos e reconstruídos por um mesmo ou outro ambiente computacional. \cite{Cline2016}
+} em formatos que possam ser armazenados, transmitidos e reconstruídos por um mesmo ou por outro ambiente computacional. \cite{Cline2016}
 
-Dados serializados normalmente vivem mais tempo que suas aplicações de origem e, ao serem armazenados em disco ou transmitidos pela rede, possuem representação diferente do que sua estrutura em memória. Para se ler dados serializados em memória é preciso realizar o processo inverso, também chamado de deserialização, onde estes passam a ser representados por estruturas da linguagem de execução. \cite{Guller2016}
-
+Dados serializados normalmente têm um tempo de vida maior que suas aplicações de origem e, ao serem armazenados em disco ou transmitidos pela rede, possuem representação diferente do que sua estrutura em memória. Para se ler dados serializados em memória é preciso realizar o processo inverso, também chamado de desserialização, onde estes passam a ser representados por estruturas da linguagem de execução. \cite{Guller2016}
+  
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figuras/data-serialization-deserialization.png}
-  \caption{Processo de serialização e deserialização}
+  \smartdiagramset{circular distance=2cm,font=\small,text width=2.0cm,module minimum width=2.0cm,module minimum height=1.5cm,arrow tip=to}
+  \smartdiagram[flow diagram:horizontal]{Estrutura de dados,Serialização,Estrutura serializada,Desserialização}
+  \caption{Processo de serialização e desserialização}
 \end{figure}
 
-Este processo, embora demande tempo, permitiu que aplicações fizessem o consumo de informações de forma distribuída, contribuindo com o aumento do volume de dados que circulam pela \textit{internet}. Além disso, fez-se necessário a seleção adequada de formatos de serialização cuja estrutura não prejudicasse o desempenho de aplicações na busca por dados. \cite{SumarayMakki2012}
+Este processo, embora demande tempo, permitiu que aplicações fizessem o consumo de informações de forma distribuída, contribuindo com o aumento do volume de dados que circulam pela internet. Além disso, fez-se necessária a seleção adequada de formatos de serialização cuja estrutura não prejudicasse o desempenho de aplicações na busca por dados. \cite{SumarayMakki2012}
 
-Segundo a Cisco Systems\footnote{
-  Empresa de sistemas de rede.
-}, de 2014 para 2015, houve um aumento de 21\% no volume de tráfego de dados registrados apenas por seus aparelhos. Sendo a categoria Web, Email e Data responsável por representar aproximadamente 7,558 petabytes de dados transmitidos por seus clientes durante um mês. \cite{Cisco2016}
+Segundo a Cisco Systems, de 2014 para 2015, houve um aumento de 21\% no volume de tráfego de dados registrados apenas por seus aparelhos. As categoria Web, Email e Data foram responsáveis por representar aproximadamente 7,558 petabytes de dados transmitidos por seus clientes durante um mês. \cite{Cisco2016}
 
-Para suprir esta alta demanda, diversos formatos de serialização foram introduzidos para melhor atender os problemas de desempenho experienciados por serviços. Dentre eles, tempo de serialização e deserialização, tamanho de transferência, flexibilidade de uso, facilidade de leitura, automação, suporte para linguagem, entre outros. \cite{Guller2016}
+Para suprir esta alta demanda, diversos formatos de serialização foram introduzidos para melhor atender os problemas de desempenho experienciados por serviços. Dentre eles, tempo de serialização e desserialização, tamanho de transferência, flexibilidade de uso, facilidade de leitura, automação, suporte para linguagem, entre outros. \cite{Guller2016}
 
 \begin{table}[ht!]
   \centering
@@ -52,7 +51,7 @@ Um formato pode ter sua especificação classificada como padronizada ou não pa
 
 \textbf{Codificação} \\
 
-Codificação é o processo de sequenciamento de caracteres usado na redução da transmissão e armazenamento de dados. É possível classificar em dois tipos: textuais e binários. Formatos baseados em texto não são codificados para seu fácil acesso e podem ser lidos diretamente através de editores de texto. Já um formato binário faz o uso intensivo da codificação e decodificação para salvar espaço. \cite{Queiros2014}
+Codificação é o processo de sequenciamento de caracteres usado na redução da transmissão e armazenamento de dados. É possível classificar em dois tipos: textuais e binários. Formatos baseados em texto não são codificados para seu fácil acesso e podem ser lidos diretamente através de editores de texto. Já um formato binário faz o uso intensivo da codificação e decodificação para salvar espaço. \cite{Queiros2014} \\
 
 \textbf{Human-Readable} \\
 
