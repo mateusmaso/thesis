@@ -71,12 +71,12 @@ Vale lembrar que existem mudanças de diferentes níveis de impacto e complexida
     \node[draw,shape=circle,fill=black,style={scale=0.6}] at (0,0) {};
     \node[draw,shape=circle,fill=black,style={scale=0.6}] at (0,-2) {};
     \node[draw,shape=circle,fill=black,style={scale=0.6}] at (0,-4) {};
-	\node at (-2.8,0) {\mintinline{js}{{...}}};
-    \node at (-3.6,-2) {\mintinline{js}{{"query":"..."}}};
-    \node at (-3.6,-4) {\mintinline{js}{{"method":"..."}}};
-	\node at (3.4,0) {\mintinline{js}{{"user":{...}}}};
-    \node at (3.4,-2) {\mintinline{js}{{"data":{...}}}};
-    \node at (3.6,-4) {\mintinline{js}{{"result":{...}}}};
+	\node at (-2.8,0) {\mintinline{text}{{...}}};
+    \node at (-3.6,-2) {\mintinline{text}{{"query":"..."}}};
+    \node at (-3.6,-4) {\mintinline{text}{{"method":"..."}}};
+	\node at (3.4,0) {\mintinline{text}{{"user":{...}}}};
+    \node at (3.4,-2) {\mintinline{text}{{"data":{...}}}};
+    \node at (3.6,-4) {\mintinline{text}{{"result":{...}}}};
     \draw[->] (-2,0) -- node[midway,above] {req} (-0.2,0);
     \draw[->] (-2,-2) -- node[midway,above] {req} (-0.2,-2);
     \draw[->] (-2,-4) -- node[midway,above] {req} (-0.2,-4);
@@ -94,17 +94,36 @@ Vale lembrar que existem mudanças de diferentes níveis de impacto e complexida
 \end{figure}
 
 A fim de melhorar a comunicação entre clientes e serviços através da possível prevenção de mudanças que levam a quebra de contrato, antes, fez-se necessário solucionar uma série de problemas descritos a seguir.
- 
-\begin{enumerate}
-\item \textbf{Problema}: Dificuldade de realizar mudanças no fluxo de dados e estilo de arquitetura de uma API sem interferir no código de busca de clientes. \\ \textbf{Solução}: Encontrar uma ferramenta para uso no cliente que evite o contrato de acesso nesses casos.
-\item \textbf{Problema}: Não encontrado uma ferramenta para a resolução do problema anterior. \\ \textbf{Solução}: Construir uma ferramenta para clientes que faça a intermediação na comunicação entre seu código de busca e API do serviço.
-\item \textbf{Problema}: Criar uma linguagem para usar na comunicação entre código de busca e ferramenta para depois transformar em requisições de API. \\ \textbf{Solução}: Usar a linguagem GraphQL para expressar consulta de dados e depois analisar sintaxe a fim de transformar em requisições.
-\item \textbf{Problema}: Encontrar uma estrutura para se trabalhar com a sintaxe das consultas GraphQL descritas em texto. \\ \textbf{Solução}: Converter a sintaxe das consultas em texto em estruturas AST\footnote{
-  Árvores sintáticas abstratas
-} para análise de dependências de dados.
-\item \textbf{Problema}: Converter AST's em requisições para API's de serviços. \\ \textbf{Solução}: Análise de metadados em pontos de acesso através de arquivos de descrição de API.
-\item \textbf{Problema}: Escolher requisições de menor tempo de resposta para acesso de dados do cliente. \\ \textbf{Solução}: Algoritmo que analisa AST's e metadados de API's em busca o menor número de pontos de acesso e avalia o tamanho de resposta como critério.
-\end{enumerate}
+
+\begin{table}
+  \begin{tabularx}{\linewidth}{>{\parskip1ex}X@{\kern4\tabcolsep}>{\parskip1ex}X}
+    \toprule
+    \hfil\bfseries Problema
+    &
+    \hfil\bfseries Solução
+    \\\cmidrule(r{3\tabcolsep}){1-1}\cmidrule(l{-\tabcolsep}){2-2}
+
+    (1) Dificuldade de realizar mudanças no fluxo de dados e estilo de arquitetura de uma API sem interferir no código de busca de clientes.\par
+It's very nice\par
+    (2) Não encontrado uma ferramenta para a resolução do problema anterior.\par
+    (3) Criar uma linguagem para usar na comunicação entre código de busca e ferramenta para depois transformar em requisições de API.\par
+    (4) Encontrar uma estrutura para se trabalhar com a sintaxe das consultas GraphQL descritas em texto.\par
+    (5) Converter AST's em requisições para API's de serviços.\par
+    (6) Escolher requisições de menor tempo de resposta para acesso de dados do cliente.
+    
+    &
+
+    (1) Encontrar uma ferramenta para uso no cliente que evite o contrato de acesso nesses casos.\par
+    (2) Construir uma ferramenta para clientes que faça a intermediação na comunicação entre seu código de busca e API do serviço.\par
+    (3) Usar a linguagem GraphQL para expressar consulta de dados e depois analisar sintaxe a fim de transformar em requisições.\par
+    (4) Converter a sintaxe das consultas em texto em estruturas AST para análise de dependências de dados.\par
+    (5) Análise de metadados em pontos de acesso através de arquivos de descrição de API.\par
+    (6) Algoritmo que analisa AST's e metadados de API's em busca o menor número de pontos de acesso e avalia o tamanho de resposta como critério.
+
+    \\\bottomrule
+  \end{tabularx}
+  \caption{Problema e Solução}
+\end{table}
 
 Após solucionar os problemas, é proposto o primeiro protótipo do projeto onde prevê a criação de uma ferramenta que faça a intermediação na comunicação entre código de busca do cliente e API do serviço. Além disso, será necessário a reimplementação do código de busca para linguagem GraphQL, um arquivo para descrição da API disponibilizado pelo serviço e outro no cliente para configuração da ferramenta.
 
@@ -173,7 +192,7 @@ Para integrar a ferramenta em código de clientes, é preciso definir um arquivo
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{text}
     import {adapter} from "graphql-jay-hyperschema"
   
     export function v1() {
@@ -194,7 +213,7 @@ Para integrar a ferramenta em código de clientes, é preciso definir um arquivo
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{text}
     import {graphql} from "graphql"
     import {composeSchema} from "graphql-jay"
     import services from "./services"
@@ -214,13 +233,13 @@ Ao a efetuar a busca de dados entre clientes e serviços utilizando a ferramenta
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[font=\small]
-    \node [block] (composeSchema) {Compor esquema unificado};
-    \node [oval, above of=composeSchema,node distance=2cm] (services) {Serviços};
-    \node [block, right of=composeSchema,node distance=3cm] (buildSchema) {Construir esquema para cada serviço};
-    \node [block, right of=buildSchema,node distance=3cm] (wrapSchema) {Invólucrar campos de cada esquema};
-    \node [block, right of=wrapSchema,node distance=3cm] (deepExtendSchema) {Unificar todos os esquemas};
-    \node [oval, above of=deepExtendSchema,node distance=2cm] (schema) {Esquema};
+  \begin{tikzpicture}[font=\small,text width=5em, text centered]
+    \node [rectangle,draw,minimum height=4em] (composeSchema) {Compor esquema unificado};
+    \node [ellipse,draw,draw, above of=composeSchema,node distance=2cm] (services) {Serviços};
+    \node [rectangle,draw,minimum height=4em, right of=composeSchema,node distance=3cm] (buildSchema) {Construir esquema para cada serviço};
+    \node [rectangle,draw,minimum height=4em, right of=buildSchema,node distance=3cm] (wrapSchema) {Invólucrar campos de cada esquema};
+    \node [rectangle,draw,minimum height=4em, right of=wrapSchema,node distance=3cm] (deepExtendSchema) {Unificar todos os esquemas};
+    \node [ellipse,draw, above of=deepExtendSchema,node distance=2cm] (schema) {Esquema};
     \draw [->] (composeSchema) -- (buildSchema);
     \draw [->] (buildSchema) -- (wrapSchema);
     \draw [->] (wrapSchema) -- (deepExtendSchema);
@@ -234,15 +253,15 @@ O processo de criação de esquema começa resolvendo cada função de configura
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[font=\small]
-    \node [block] (simplifyAST) {Simplificar AST};
-    \node [oval, above of=simplifyAST,node distance=2cm] (services) {Consulta};
-    \node [block, below of=simplifyAST,node distance=2cm] (transformAST) {Transformar AST para cada serviço};
-    \node [block, right of=transformAST,node distance=3cm] (reduceASTs) {Reduzir AST de cada serviço};
-    \node [block, right of=reduceASTs,node distance=3cm] (unwrapAST) {Desfazer invólucro de cada AST};
-    \node [block, right of=unwrapAST,node distance=3cm] (fetchData) {Realizar busca dados para cada serviço};
-    \node [block, above of=fetchData,node distance=2cm] (wrapData) {Invólucrar e unificar dados};
-    \node [oval, above of=wrapData,node distance=2cm] (schema) {Dados};
+  \begin{tikzpicture}[font=\small,text width=5em, text centered]
+    \node [rectangle,draw,minimum height=4em] (simplifyAST) {Simplificar AST};
+    \node [ellipse,draw, above of=simplifyAST,node distance=2cm] (services) {Consulta};
+    \node [rectangle,draw,minimum height=4em, below of=simplifyAST,node distance=2cm] (transformAST) {Transformar AST para cada serviço};
+    \node [rectangle,draw,minimum height=4em, right of=transformAST,node distance=3cm] (reduceASTs) {Reduzir AST de cada serviço};
+    \node [rectangle,draw,minimum height=4em, right of=reduceASTs,node distance=3cm] (unwrapAST) {Desfazer invólucro de cada AST};
+    \node [rectangle,draw,minimum height=4em, right of=unwrapAST,node distance=3cm] (fetchData) {Realizar busca dados para cada serviço};
+    \node [rectangle,draw,minimum height=4em, above of=fetchData,node distance=2cm] (wrapData) {Invólucrar e unificar dados};
+    \node [ellipse,draw, above of=wrapData,node distance=2cm] (schema) {Dados};
     \draw [->] (simplifyAST) -- (transformAST);
     \draw [->] (transformAST) -- (reduceASTs);
     \draw [->] (reduceASTs) -- (unwrapAST);

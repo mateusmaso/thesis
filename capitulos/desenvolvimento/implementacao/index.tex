@@ -10,7 +10,7 @@ Representam quatro funções e seu principal objetivo é compor, de forma assín
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
   function composeSchema(
     services: [Service]
   ): Promise<GraphQLSchema>
@@ -37,7 +37,7 @@ São três funções que buscam analisar o AST gerado pela consulta GraphQL atra
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
   function simplifyAST(
     value: AST, 
     info: JSON
@@ -63,7 +63,7 @@ São as três últimas funções responsáveis por converter os AST's produzidos
 
 \begin{figure}[H]
   \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\small]{javascript}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
   function unwrapAST(
     ast: SimplifiedAST, 
     schema: GraphQLSchema, 

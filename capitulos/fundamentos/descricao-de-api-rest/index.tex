@@ -7,9 +7,21 @@ Ao invés, Fielding propõe a descrição dinâmica de API's através do uso de 
 Em busca de oferecer uma solução simples e completa para descrição de API's REST, foram introduzidas nos últimos anos diversas soluções por empresas e comunidades de desenvolvimento. A seguir, são descritas três das linguagens e formatos que maior ganharam popularidade devido a sua facilidade de uso e legibilidade por humanos e máquinas. \cite{Sandoval2015}
 
 \begin{description}[leftmargin=8em,style=nextline]
-  \item[\textbf{OpenAPI}] \textbf{Pros}: Amplamente adotada, ampla comunidade, suporte à diversas linguagens. \\ \textbf{Cons}: Carece de especificações avançadas de metadados.
-  \item[\textbf{RAML}] \textbf{Pros}: Suporte à especificação avançada de metadados, adoção significativa, formato legível, suporte da indústria. \\ \textbf{Cons}: Falta de ferramentas de auxílio, não comprovada à longo prazo.
-  \item[\textbf{API Blueprint}] \textbf{Pros}: Fácil de entender e simples de escrever \\ \textbf{Cons}: Pouca adoção, carece de especificações avançadas de metadados, difícil de executar.
+  \item[\textbf{OpenAPI}] 
+    \begin{enumerate}
+        \item[\textbf{+}] Amplamente adotada, ampla comunidade, suporte à diversas linguagens.
+        \item[\textbf{$-$}] Carece de especificações avançadas de metadados.
+    \end{enumerate}
+  \item[\textbf{RAML}] 
+    \begin{enumerate}
+      \item[\textbf{+}] Suporte à especificação avançada de metadados, adoção significativa, formato legível, suporte da indústria.
+       \item[\textbf{$-$}] Falta de ferramentas de auxílio, não comprovada à longo prazo.
+    \end{enumerate}
+  \item[\textbf{API Blueprint}] 
+    \begin{enumerate}
+      \item[\textbf{+}] Fácil de entender e simples de escrever.
+       \item[\textbf{$-$}] Pouca adoção, carece de especificações avançadas de metadados, difícil de executar.
+    \end{enumerate}
 \end{description}
 
 Como ainda não existe uma padronização de formato (externo) para descrição de API's, novas tecnologias estão sujeitas à surgir para melhor se adaptar a comunidade de desenvolvimento. Uma delas, não mencionada anteriormente é o JSON Hyper-Schema que, recentemente através de Lynn e Leach, mostrou ser um método simples e completo para modelagem de API's REST. Uma vez que possui suporte à descrição de representação de entrada e saída, relacionamentos, HATEOAS, URIs e verbos HTTP  \cite{LynnEtAl2016} \cite{Leach2014}.

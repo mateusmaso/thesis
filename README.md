@@ -1,4 +1,4 @@
-# graphql-jay-thesis
+# thesis
 
 Estudo sobre o uso da linguagem GraphQL na composição de dados através de serviços baseados em JSON.
 
