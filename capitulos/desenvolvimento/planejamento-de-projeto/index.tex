@@ -36,7 +36,7 @@ No entanto, para que haja garantia na comunicação, ao buscar dados diretamente
   \caption{Contrato entre cliente e serviço na busca de dados}
 \end{figure}
 
-Atualmente, um dos problemas mais comuns de quebra de contrato entre API's e clientes ocorre em serviços que implementam o estilo de arquitetura REST. Em REST, pequenas mudanças como a de fluxo de dados\footnote{
+Atualmente, um dos problemas mais comuns de quebra de contrato entre APIs e clientes ocorre em serviços que implementam o estilo de arquitetura REST. Em REST, pequenas mudanças como a de fluxo de dados\footnote{
   Fluxo de acesso do cliente em pontos de acesso para a busca de uma representação da estrutura total do serviço.
 } podem causar instabilidade e o versionamento desnecessário de sua interface. Já em arquiteturas como GraphQL, o risco para esse tipo de mudança é baixo, pois não limita na interface a forma que clientes façam o acesso em busca de dados.
 
@@ -104,11 +104,11 @@ A fim de melhorar a comunicação entre clientes e serviços através da possív
     \\\cmidrule(r{3\tabcolsep}){1-1}\cmidrule(l{-\tabcolsep}){2-2}
 
     (1) Dificuldade de realizar mudanças no fluxo de dados e estilo de arquitetura de uma API sem interferir no código de busca de clientes.\par
-It's very nice\par
+Its very nice\par
     (2) Não encontrado uma ferramenta para a resolução do problema anterior.\par
     (3) Criar uma linguagem para usar na comunicação entre código de busca e ferramenta para depois transformar em requisições de API.\par
     (4) Encontrar uma estrutura para se trabalhar com a sintaxe das consultas GraphQL descritas em texto.\par
-    (5) Converter AST's em requisições para API's de serviços.\par
+    (5) Converter ASTs em requisições para APIs de serviços.\par
     (6) Escolher requisições de menor tempo de resposta para acesso de dados do cliente.
     
     &
@@ -118,7 +118,7 @@ It's very nice\par
     (3) Usar a linguagem GraphQL para expressar consulta de dados e depois analisar sintaxe a fim de transformar em requisições.\par
     (4) Converter a sintaxe das consultas em texto em estruturas AST para análise de dependências de dados.\par
     (5) Análise de metadados em pontos de acesso através de arquivos de descrição de API.\par
-    (6) Algoritmo que analisa AST's e metadados de API's em busca o menor número de pontos de acesso e avalia o tamanho de resposta como critério.
+    (6) Algoritmo que analisa ASTs e metadados de APIs em busca o menor número de pontos de acesso e avalia o tamanho de resposta como critério.
 
     \\\bottomrule
   \end{tabularx}
@@ -186,7 +186,7 @@ O novo modelo de comunicação procura, além de evitar a quebra de contrato, pr
 
 Clientes que pensam em integrar a ferramenta em seu código esperam encontrar uma interface que apresente uma baixa curva de aprendizagem e que, acima de tudo, cause pouco impacto em sua base de código. Por isso, a ferramenta foi desenvolvida pensando em reutilizar ao máximo tecnologias promissoras ou já bem consolidadas no mercado de desenvolvimento.
 
-A primeira ideia foi em utilizar GraphQL como linguagem para intermediação na comunicação. Além de promover a tecnologia, a ferramenta possibilita que o cliente escreva um código de busca que também funcione para interpretadores GraphQL. O outro caso é trabalhar com formatos abertos de descrição de API's, como por exemplo o JSON Hyper-Schema. Isso permite acelerar sua integração com serviços que já oferecem soluções de descrição de sua API's.
+A primeira ideia foi em utilizar GraphQL como linguagem para intermediação na comunicação. Além de promover a tecnologia, a ferramenta possibilita que o cliente escreva um código de busca que também funcione para interpretadores GraphQL. O outro caso é trabalhar com formatos abertos de descrição de APIs, como por exemplo o JSON Hyper-Schema. Isso permite acelerar sua integração com serviços que já oferecem soluções de descrição de sua APIs.
 
 Para integrar a ferramenta em código de clientes, é preciso definir um arquivo de configuração contendo funções que descrevam informações de cada serviço a ser consultado. Após, gera-se um esquema GraphQL pela ferramenta a partir das funções de configuração de serviço. Por fim, é executado consultas no código de busca através do esquema gerado.
 
