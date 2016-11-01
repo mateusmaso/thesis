@@ -1,21 +1,21 @@
 \section[Descrição de API REST]{Descrição de API REST}
 
-Atualmente, o processo de descrição de APIs tem-se tornado um dos principais fatores de sucesso na aceitação de serviços por desenvolvedores. No entanto, diferente do processo de implementação, a prática de descrição de APIs REST ainda continua sendo feita em sua maior parte manualmente através de linguagem natural. Isso porque REST não apresenta uma forma de documentação externa para descrição de pontos de acesso. \cite{LuckyEtAl2016}
+Atualmente, o processo de descrição de APIs tem-se tornado um dos principais fatores de sucesso na aceitação de serviços por desenvolvedores. No entanto, diferentemente do processo de implementação, a prática de descrição de APIs REST ainda continua sendo feita em sua maior parte manualmente através de linguagem natural. Isso porque REST não apresenta uma forma de documentação externa para descrição de pontos de acesso. \cite{LuckyEtAl2016}
 
-Ao invés, Fielding propõe a descrição dinâmica de APIs através do uso de hiperlinks na representação de recursos para navegação de dados (HATEOAS). Contudo, para Knupp, a solução proposta por Fielding é questionável, pois na sua visão dificulta a legibilidade da interface de acesso, não prevê documentação, cria complexidade de implementação e aumenta de forma significativa o tamanho de resposta. \cite{Knupp2016}
+Ao invés, Fielding propõe a descrição dinâmica de APIs através do uso de \textit{hyperlinks} na representação de recursos para navegação de dados (HATEOAS). Contudo, para Knupp, a solução proposta por Fielding é questionável, pois na sua visão dificulta a legibilidade da interface de acesso, não prevê documentação, cria complexidade de implementação e aumenta de forma significativa o tamanho de resposta. \cite{Knupp2016}
 
-Em busca de oferecer uma solução simples e completa para descrição de APIs REST, foram introduzidas nos últimos anos diversas soluções por empresas e comunidades de desenvolvimento. A seguir, são descritas três das linguagens e formatos que maior ganharam popularidade devido a sua facilidade de uso e legibilidade por humanos e máquinas. \cite{Sandoval2015}
+Em busca de oferecer uma solução simples e completa para descrição de APIs REST, foram introduzidas nos últimos anos diversas soluções por empresas e comunidades de desenvolvimento. A seguir, são descritas três das linguagens e formatos que ganharam maior popularidade devido a sua facilidade de uso e legibilidade por humanos e máquinas. \cite{Sandoval2015}
 
 \begin{description}[leftmargin=8em,style=nextline]
   \item[\textbf{OpenAPI}] 
     \begin{enumerate}
-        \item[\textbf{+}] Amplamente adotada, ampla comunidade, suporte à diversas linguagens.
+        \item[\textbf{+}] Amplamente adotada, ampla comunidade, suporte a diversas linguagens.
         \item[\textbf{$-$}] Carece de especificações avançadas de metadados.
     \end{enumerate}
   \item[\textbf{RAML}] 
     \begin{enumerate}
       \item[\textbf{+}] Suporte à especificação avançada de metadados, adoção significativa, formato legível, suporte da indústria.
-       \item[\textbf{$-$}] Falta de ferramentas de auxílio, não comprovada à longo prazo.
+       \item[\textbf{$-$}] Falta de ferramentas de auxílio, não comprovada a longo prazo.
     \end{enumerate}
   \item[\textbf{API Blueprint}] 
     \begin{enumerate}
@@ -24,4 +24,4 @@ Em busca de oferecer uma solução simples e completa para descrição de APIs R
     \end{enumerate}
 \end{description}
 
-Como ainda não existe uma padronização de formato (externo) para descrição de APIs, novas tecnologias estão sujeitas à surgir para melhor se adaptar a comunidade de desenvolvimento. Uma delas, não mencionada anteriormente é o JSON Hyper-Schema que, recentemente através de Lynn e Leach, mostrou ser um método simples e completo para modelagem de APIs REST. Uma vez que possui suporte à descrição de representação de entrada e saída, relacionamentos, HATEOAS, URIs e verbos HTTP  \cite{LynnEtAl2016} \cite{Leach2014}.
+Como ainda não existe uma padronização de formato (externo) para descrição de APIs, novas tecnologias estão sujeitas a surgir para melhor se adaptar a comunidade de desenvolvimento. Uma delas, não mencionada anteriormente é o JSON Hyper-Schema que, recentemente através de Lynn e Leach, mostrou ser um método simples e completo para modelagem de APIs REST. Uma vez que possui suporte à descrição de representação de entrada e saída, relacionamentos, HATEOAS, URIs e verbos HTTP  \cite{LynnEtAl2016} \cite{Leach2014}.

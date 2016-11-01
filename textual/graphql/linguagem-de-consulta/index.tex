@@ -4,9 +4,9 @@ Clientes que buscam realizar consultas de dados em esquemas GraphQL, antes preci
 
 \textbf{Sintaxe} \\
 
-Documentos GraphQL são inspirados no formato de estrutura de dados JSON, porém sem seus valores e com alterações na sintaxe. Para que um esquema entenda um documento GraphQL, este deve descrever ao menos uma operação de consulta ou mutação. Uma operação de consulta é um processo de leitura da API. Já uma operação de mutação é representado por dois processos, uma escrita seguido de uma leitura na API.
+Documentos GraphQL são inspirados no formato de estrutura de dados JSON, porém sem seus valores e com alterações na sintaxe. Para que um esquema entenda um documento GraphQL, este deve descrever ao menos uma operação de consulta ou mutação. Uma operação de consulta é um processo de leitura da API. Já uma operação de mutação é representada por dois processos, uma escrita seguida de uma leitura na API.
 
-Ao executar uma operação, deve-se expressar um conjunto de seleção de dados que se deseja receber. Este conjunto é representado por campos e fragmentos, onde um campo pode receber argumentos e deve descrever um dado ou subconjunto de dados. Isso permite explorar relacionamentos complexos através do profundo aninhamento de conjuntos de seleções em busca de retornar uma estrutura JSON parecida com o que se escreve na linguagem.
+Ao executar uma operação de seleção, deve-se expressar um conjunto de dados que se deseja receber. Este conjunto é representado por campos e fragmentos, onde um campo pode receber argumentos e deve descrever um dado ou subconjunto de dados. Isso permite explorar relacionamentos complexos através do profundo aninhamento de conjuntos de seleções em busca de retornar uma estrutura JSON parecida com o que se escreve na linguagem.
 
 \begin{figure}[H]
   \centering
@@ -31,7 +31,7 @@ Ao executar uma operação, deve-se expressar um conjunto de seleção de dados 
 
 \textbf{Fragmentos} \\
 
-Fragmentos são a principal unidade de composição em GraphQL, pois permitem o reuso de seleção de campos que se repetem em documentos. É representado por um nome, seguido pelo tipo que está sendo aplicado a seleção de campos. Podem também ser expressos de forma "inline", onde não a a necessidade de definir um nome.
+Fragmentos são a principal unidade de composição em GraphQL, pois permitem o reuso de seleção de campos que se repetem em documentos. Um fragmento é representado por um nome, seguido pelo tipo que está sendo aplicado à seleção de campos. Podem também ser expressos de forma "inline", onde não há a necessidade de definir um nome.
 
 \begin{figure}[H]
   \centering
@@ -59,5 +59,5 @@ Fragmentos são a principal unidade de composição em GraphQL, pois permitem o 
       }
     }
   \end{minted}
-  \caption{Exemplo da figura 14 utilizando fragmentos}
+  \caption{Exemplo da figura 12 utilizando fragmentos}
 \end{figure}
