@@ -7,7 +7,7 @@
 %   Licence: LPPL (LaTeX Project Public License)
 %     You can change this file in the terms of LPPL
 %     (http://www.latex-project.org/lppl.html)
-%
+% 
 %   Licenca: LPPL (LaTeX Project Public License)
 %     Esta licenca diz basicamente que se voce editar o codigo desta
 %     classe, mesmo localmente (no seu micro), voce DEVE RENOMEAR o arquivo
@@ -19,7 +19,7 @@
 %   de acordo com as normas da Associacao Brasileira de Normas
 %   Tecnicas (ABNT). Esta classe, junto com o estilo bibTeX, foram
 %   desenvolvidos no grupo de trabalho abnTeX (ABsurd Norms for TeX :-)
-%   (http://abntex.codigolivre.org.br)
+%   (http://abntex.codigolivre.org.br) 
 %
 %   Class to make theses or monographies following norms defined by
 %   Brazilian Association for Tecnical Norms. This class is developed
@@ -52,7 +52,7 @@
 %      times, notimes (default)
 %      indentfirst (default), noindentfirst
 %    mechanism for saving other options names
-%    perform tests to set fontsize, openright and paper properly
+%    perform tests to set fontsize, openright and paper properly 
 %      (in order to get 12pt, a4 and openright as default, but user can change)
 %    option procession
 %    work around for prevent report to add figure and table counter in the
@@ -142,21 +142,21 @@
 % Retirado um bug no \@chapter que causa o cabecalho ter o numero do capitulo errado
 %
 % Revision 1.26  2003/10/13 09:40:01  gweber
-% Passa a usar cvs-id.def para gerar informa��es sobre data e vers�o.
+% Passa a usar cvs-id.def para gerar informações sobre data e versão.
 %
 % Revision 1.25  2003/09/16 16:49:29  gweber
-% Troca de \bibname por \refname o que equivale a trocar "Refer�ncas Bibliogr�ficas" por
-% "Refer�ncias". Isto atende ao que entendemos esteja impl�cito na NBR14724-2002.
+% Troca de \bibname por \refname o que equivale a trocar "Referêncas Bibliográficas" por
+% "Referências". Isto atende ao que entendemos esteja implícito na NBR14724-2002.
 %
 % Revision 1.24  2003/08/22 14:45:18  gweber
 % Resolvido bug 178 que fazia o texto de \part aparecer duas vezes.
 %
 % Revision 1.23  2003/06/30 14:10:47  gweber
-% Links criados com hyperref para ap�ndices e anexos n�o misturam mais com os links para cap�tulos comuns,
+% Links criados com hyperref para apêndices e anexos não misturam mais com os links para capítulos comuns,
 % resolvendo o bug #140.
 %
 % Revision 1.22  2003/05/30 10:39:19  gweber
-% Altera��es introduzidas em 0.7-beta.
+% Alterações introduzidas em 0.7-beta.
 %
 % Revision 1.21.2.1  2003/05/30 10:16:07  gweber
 % Correction of bug 137 which causes the class to fail when loading
@@ -237,7 +237,7 @@
 %
 % Added in version 0.4.2
 %
-% - Added \StarChaptersInTOC, \StarChaptersNotInTOC to differenciate
+% - Added \StarChaptersInTOC, \StarChaptersNotInTOC to differenciate  
 %    from "standard" (old) stared chapters like \tableofcontents,
 %    \listoffigures, \listoftables, thebibliography and theindex.
 % - Huge bugs in commands or environments \tableofcontents, \listoffigures,
@@ -326,8 +326,8 @@
                              \renewcommand{\ABNTheadertype}{ruled}}
 \ExecuteOptions{plainheader}
 
-%% Option `capchap', `capsec':
-%%   titles of chapters or sections in capital letters
+%% Option `capchap', `capsec': 
+%%   titles of chapters or sections in capital letters 
 \newboolean{ABNTcapchap}
 \setboolean{ABNTcapchap}{false}
 \newboolean{ABNTcapsec}
@@ -456,7 +456,7 @@
 %%
 %% Report says:  \newcounter{figure}[chapter], \newcounter{table}[chapter]
 %% But this is not ABNT (figure counter should not reset to 1 if chapter
-%% increments). There is no straight forward way to "\renewcounter"
+%% increments). There is no straight forward way to "\renewcounter" 
 %% then. So I have to make an work around.
 %%
 %% Idea: redefine \newcounter s.t. id newcounter is figure or table, then do
@@ -532,7 +532,7 @@
    % eucal[mathscr]: new calligraphic letters
    \typeout{ABNT -> incluindo eucal[mathscr]}%
    \RequirePackage[mathscr]{eucal}%
-   % makeidx -> removed. Useless if the user don't care about.
+   % makeidx -> removed. Useless if the user don't care about.  
  }%
  {}%
 
@@ -541,8 +541,8 @@
 \IfFileExists{setspace.sty}%
 {\RequirePackage{setspace}}% then
 % else
-{%
-% first a warning at the end of the document and than
+{% 
+% first a warning at the end of the document and than 
 % fake the \setstretch command, not provided by setspace.
 \AtEndDocument{\ClassWarningNoLine{abnt}%
 % warning text
@@ -565,7 +565,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 % This command is defined by 'setspace' package, to ajust extra spacing
 % before and after display math. It depends on if your setspace.sty is of
-% 21 march 1998 or ouder.
+% 21 march 1998 or ouder. 
 \providecommand{\setdisplayskipstretch}[1]{\relax}
 
 % equivalent to the option 'nodisplayskipstretch' of setspace.
@@ -586,16 +586,16 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
    \setlength{\headsep}{1.2cm-\headheight}
    % The distance beetwen the paper border and the number must be 2cm
    % 2cm=\topmargin+\voffset+1in
-    \setlength{\topmargin}{2cm-1in-\voffset}
+    \setlength{\topmargin}{2cm-1in-\voffset} 
    % The inferior border must be 2cm
    % \paperheight=\topmargin+\voffset+1in+\headheight+\headsep+\textheight+2cm
-    \setlength{\textheight}%
+    \setlength{\textheight}% 
       {\paperheight-\topmargin-\voffset-1in-\headheight-\headsep-2cm}
   }%
   {% no header is not ABNT!!!
    % Let's fake it: 2cm each vertical margin and de same horizontal margin.
    \setlength{\topmargin}{2cm-\headheight-\headsep-\voffset-1in}
-   \setlength{\textheight}%
+   \setlength{\textheight}% 
       {\paperheight-2cm-\footskip-2cm}
   }%
 
@@ -611,7 +611,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%    Page styles available:
+%    Page styles available: 
 %         plainheader, header, ruledheader
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -620,7 +620,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 \newcommand{\leftmarkformat}{\itshape}
 \newcommand{\thepageformat}{\small}
 
-%
+% 
 
 \newcommand{\ABNTmarkboth}[2]{%
  \ifthenelse{\boolean{ABNTNextOutOfTOC}}
@@ -664,8 +664,8 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
         \thesection\ \ %
       \fi%
       ##1}%
-  }%
-}%
+  }%   
+}% 
  %%  Defining pagestyle plainheader
 %
 \newcommand{\ps@plainheader}{%
@@ -693,8 +693,8 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
         \thesection\ \ %
       \fi%
       ##1}%
-  }%
-}%
+  }%   
+}% 
  %%  Defining pagestyle ruledheader
 %
 \newcommand{\ps@ruledheader}{%
@@ -726,12 +726,12 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
         \thesection\ \ %
       \fi%
       ##1}%
-  }%
-}%
+  }%   
+}% 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%    Page numbering
+%%    Page numbering 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newboolean{ABNTinpretext}
@@ -765,7 +765,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
         \pagestyle{plain}%
         \renewcommand{\chaptertitlepagestyle}{plain}
        }%
-  }%
+  }% 
   {%
    \ifthenelse{\equal{\ABNTpnum}{ABNT}}%
      {% ABNT strict
@@ -801,7 +801,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
         }%
      }%
      {% RomArab
-      % - page style with numeration
+      % - page style with numeration 
       % - BEFORE \tableofcontents
       %     \thepage in roman
       %     page counter starts AFTER `folha de rosto'
@@ -901,12 +901,12 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 %%%%%%%%%%%%%%%%%%%%%%   Special definitions   %%%%%%%%%%%%%%%%%%%%
 % What is going on here?
-%
+%   
 %  This class supports auto include in toc for both \chapter* and
 %  \section* (and similars). As we know, the command \chapter admits an
 %  optional argument, which goes to the toc and the marks, if it's present
 %  (otherwise the main parameter of \chapter is used in toc and marks also.)
-%
+%  
 %  To allow exactly the same mechanism for \chapter and \chapter*, \section
 %  and \section*, \subsection and \subsection*, etc, I had to define
 %  similar commands to some important core commands in LaTeX, like \secdef
@@ -919,7 +919,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %
 %  Now, \chapter* and \part* are almost equal to \chapter and \part
 %
-%  The origin of this material are the files
+%  The origin of this material are the files 
 %     $texmfDIR/tex/latex/base/latex.ltx  (codigo fonte do LaTeX)
 %     $texmfDIR/tex/latex/base/report.cls (classe standard)
 
@@ -942,7 +942,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
            \ABNTBeginOfTextualPart%
           }%
           {}%
-       }%
+       }% 
        {}%
      \global\@topnum\z@%
      \@afterindentfalse%
@@ -1008,7 +1008,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 
 
-% \@chapter :
+% \@chapter : 
 \def\@chapter[#1]#2%
       {\ifthenelse{\boolean{ABNThypertoc}}{\renewcommand{\theHchapter}{\chaptertype\thechapter}}{}
        \ifnum \c@secnumdepth >\m@ne
@@ -1024,7 +1024,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
          \ifthenelse{\boolean{ABNTaftertoc}}%
            {\ABNTaddcontentsline{toc}{chapter}{#1}}%
            {}%
-       \fi
+       \fi       
        \if@twocolumn
          \@topnewpage[\@makechapterhead{#2}]%
        \else
@@ -1266,7 +1266,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
       #1\nobreak\hfil \nobreak%
       \ifthenelse{\boolean{ABNTpagenumstyle}}
          {%
-          \hb@xt@\@pnumwidth{\hss
+          \hb@xt@\@pnumwidth{\hss 
             \ifthenelse{\not\equal{#2}{}}{{\normalfont p.\thinspace#2}}{}}\par
          }
          {%
@@ -1350,7 +1350,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
          \ifthenelse{\equal{#1}{}}
             {\def\thechapter{\anapchaptername{} \Alph{chapter}}}
             {\def\thechapter{\anapchaptername{} \Alph{chapter}{}
-                                \ABNTtravessao{} #1}}
+                                \ABNTtravessao{} #1}} 
          \ABNTchaptermark{}
          \endgroup
          \if@twocolumn
@@ -1381,7 +1381,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
          {
           \ABNTaddcontentsline{toc}{chapter}%
                    {\protect\numberline{\thechapter}#1}
-         }
+         }  
        \else
          \ABNTaddcontentsline{toc}{chapter}{#1}
        \fi
@@ -1405,13 +1405,13 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
     {\ifthenelse{\boolean{ABNTCapAnnexAppendix}}
        {\settowidth{\ABNTanapindent}{\MakeUppercase{\anapchaptername}
           \thechapter{} \ABNTtravessao{} }}
-       {\settowidth{\ABNTanapindent}{\anapchaptername}
+       {\settowidth{\ABNTanapindent}{\anapchaptername} 
           \thechapter{} \ABNTtravessao{} }
     }
     {}
   \vspace*{30pt}
 %
-  \raggedright\espaco{1.2}\par
+  \raggedright\espaco{1.2}\par  
   \begin{list}{}{%
        \setlength{\listparindent}{0cm}%
        \setlength{\itemindent}{-\ABNTanapindent}%
@@ -1422,7 +1422,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
       \ifthenelse{\equal{#1}{}}
          {\ifthenelse{\boolean{ABNTCapAnnexAppendix}}
             {\MakeUppercase{\anapchaptername}}
-            {\anapchaptername}
+            {\anapchaptername} 
           \thechapter \ABNTaposindicativoanap}
          {\ifthenelse{\boolean{ABNTCapAnnexAppendix}}
             {\MakeUppercase{\anapchaptername}}
@@ -1579,7 +1579,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
    \thispagestyle{\chaptertitlepagestyle}%
    \global\@topnum\z@%
    \@afterindentfalse%
-   \@mkboth{\indexname}{\indexname}%
+   \@mkboth{\indexname}{\indexname}% 
    \ifthenelse{\boolean{ABNTincludeintoc}}%
       {\ABNTaddcontentsline{toc}{chapter}{\indexname}}%
       {}%
@@ -1625,7 +1625,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 %% Environment `citado'=`citacao', similar to quoation, but with 4cm of
 %% extra left margin, in a smaller font and simple line spacing.
-
+ 
 \newenvironment{citado}%
   {\begin{espacosimples}%
    \small
@@ -1642,7 +1642,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
   {\begin{citado}}%
   {\end{citado}}%
 
-%% Contents shows up to subsubsection.
+%% Contents shows up to subsubsection. 
 \setcounter{tocdepth}{4}
 
 %% Section number will appear up to \subsubsection
@@ -1796,7 +1796,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
      \setlength{\parskip}{0cm}
      {\instituicaoformat\ABNTinstituicaodata\par}
      \setlength{\parskip}{.3cm}\par
-
+     
     }
 \end{espacosimples}
 \end{center}
@@ -1831,7 +1831,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
   {\end{espacosimples}\newpage}%abstract
 
 %%%%%%%%%%%   resumo  %%%%%%%%%%%
-% Ambiente para Resumo. O mesmo efeito do abstract, mas em portugues.
+% Ambiente para Resumo. O mesmo efeito do abstract, mas em portugues. 
 %
 \newcommand{\resumoname}{Resumo}
 \newenvironment{resumo}%
@@ -1878,7 +1878,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 \newcommand{\ABNTcsign}[1]%
   {\begingroup\par\centering\ABNTsign{#1}\par\endgroup}
 
-% environment "folhadeaprovacao"
+% environment "folhadeaprovacao" 
 %   just clearpage correctly to twoside and openright compatibility
 %
 \newenvironment{folhadeaprovacao}%
@@ -1892,10 +1892,10 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \ifthenelse{\boolean{ABNTtimesfont}}% if `times'option enabled...
  {\IfFileExists{mathptmx.sty}%  try `mathptmx' first
-    {\RequirePackage{mathptmx}}%
+    {\RequirePackage{mathptmx}}% 
     {\IfFileExists{mathptm.sty}% if not installed, try `mathptm'
        {\RequirePackage{mathptm}}%
-       {\IfFileExists{times.sty} %
+       {\IfFileExists{times.sty} % 
          {\RequirePackage{times}}%
          {\renewcommand{\rmdefault}{ptm}}%
        }%
@@ -1936,7 +1936,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
  {}%
 }
 
-%%%%%%    Indent code
+%%%%%%    Indent code 
 
 % indenting first paragraph of each section
 \ifthenelse{\boolean{ABNTindentfirst}}%
@@ -1971,3 +1971,4 @@ http://abntex.codigolivre.org.br\space\spABNT\spABNT|}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \endinput
+
