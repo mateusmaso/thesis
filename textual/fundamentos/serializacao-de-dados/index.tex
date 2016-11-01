@@ -24,7 +24,7 @@ Para suprir esta alta demanda, diversos formatos de serialização foram introdu
   \resizebox{\columnwidth}{!}{
     \begin{tabular}{|c|c|c|c|c|}
       \hline
-      Formato & Especificação & Codificação & Human-Readable & Esquema/IDL \\
+      Formato & Especificação & Codificação & Legibilidade & Esquema/IDL \\
       \hline
       XML & Padronizada & Textual & Sim & Sim \\
       \hline
@@ -51,13 +51,13 @@ Um formato pode ter sua especificação classificada como padronizada ou não pa
 
 \textbf{Codificação} \\
 
-Codificação é o processo de sequenciamento de caracteres usado na redução da transmissão e armazenamento de dados. É possível classificar em dois tipos: textuais e binários. Formatos baseados em texto não são codificados para seu fácil acesso e podem ser lidos diretamente através de editores de texto. Já um formato binário faz o uso intensivo da codificação e decodificação para salvar espaço. \cite{Queiros2014} \\
+Codificação é o processo de sequenciamento de caracteres usado na representação dos dados transmitidos ou armazenados. É possível classificar em dois tipos: textuais e binários. Formatos baseados em texto podem ser lidos diretamente através de editores de texto. Já um formato binário faz o uso intensivo da codificação e decodificação para salvar espaço. \cite{Queiros2014} \\
 
-\textbf{Human-Readable} \\
+\textbf{Legibilidade} \\
 
 Ao representar estruturas de dados em formatos de serialização para que máquinas possam fazer a leitura, não é garantido, no entanto, que esta representação também seja legível por seres humanos.
 
-Para que um formato seja human-readable, além de máquinas, pessoas devem conseguir ler e dizer o que está sendo representado na estrutura, mesmo fora de contexto. Para desenvolvedores, este detalhe é essencial no processo de debugging\footnote{
+Para que um formato seja legível por humanos (\textit{human-readable}), além de máquinas, pessoas devem conseguir ler e dizer o que está sendo representado na estrutura, mesmo fora de contexto. Para desenvolvedores, este detalhe é essencial no processo de debugging\footnote{
   Depuração é o processo de encontrar e reduzir defeitos num aplicativo de software ou mesmo em hardware.
 }. Nota-se que a leitura de um formato é diferente de seu entendimento, uma vez que nem todos os formatos possuem maneiras de descrever seus metadados. O formato JSON, por exemplo, é baseado em texto e tem como objetivo a facilidade de uso e legibilidade por desenvolvedores. Nem sempre, contudo, é possível identificar o que está sendo representado em suas estruturas. \cite{SumarayMakki2012} \\
 
