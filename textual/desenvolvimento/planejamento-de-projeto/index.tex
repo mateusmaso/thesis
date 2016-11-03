@@ -1,6 +1,6 @@
 \section{Planejamento de Projeto}
 
-Para melhor entender as etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização do modelo proposto, definição de interface e fluxo de execução da ferramenta. \\
+Para melhor entender as etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização de um novo modelo de comunicação, além da definição de interface da ferramenta e seu fluxo de execução. \\
 
 \textbf{Processo de idealização do modelo} \\
 
@@ -10,7 +10,7 @@ Atualmente, para que clientes façam o uso remoto de estruturas de dados, estes 
 
 No entanto, para que haja garantia na comunicação, ao buscar dados diretamente em pontos de acesso\footnote{
   Parte de uma interface exposta por um serviço através de um canal de comunicação.
-} de uma API, cria-se um contrato de acesso entre o cliente e a interface do serviço. Isso porque, uma vez implementado o código de busca, é preciso uma garantia de que não haja mudanças na interface que ponham em risco a funcionalidade do cliente e, assim, possivelmente comprometer parte da lógica da aplicação. Este modelo é representado pela figura 17.
+} de uma API, cria-se um contrato de acesso entre o cliente e a interface do serviço. Isso porque, uma vez implementado o código de busca, é preciso uma garantia de que não haja mudanças na interface que ponham em risco a funcionalidade do cliente e, assim, possivelmente comprometer parte da lógica da aplicação. Este contrato é representado no modelo de comunicação da figura 17 através das chamadas entre o código de busca do cliente e API do serviço.
 
 \begin{figure}[H]
   \centering
@@ -33,23 +33,23 @@ No entanto, para que haja garantia na comunicação, ao buscar dados diretamente
     \draw [->] ([yshift=0.25cm]clientFetchCode.east) -- ([yshift=0.25cm]api.west);
     \draw [->] (api) -- (clientFetchCode);
   \end{tikzpicture}
-  \caption{Modelo de contrato entre cliente e serviço na busca por dados}
+  \caption{Modelo de comunicação entre cliente e serviço}
 \end{figure}
 
-Atualmente, um dos problemas mais comuns de quebra de contrato entre APIs e clientes ocorre em serviços que implementam o estilo de arquitetura REST. Em REST, pequenas mudanças como a de fluxo de dados\footnote{
+% Mudança na Interface (API), alteração de método (assinatura, argumentos, retorno). => Fluxo de dados e Estilo de arquitetura.
+
+Em APIs REST, pequenas mudanças no serviço como a de fluxo de dados\footnote{
   Fluxo de acesso na interface pelo cliente em busca de dados no serviço.
-} podem afetar clientes e o versionamento desnecessário de sua interface. Já em arquiteturas como GraphQL (interpretador), o risco para esse tipo de mudança é menor, pois existe uma possibilidade maior de navegação no fluxo de dados descritas pelo serviço.
+} podem afetar o contrato de clientes e o versionamento desnecessário de sua interface. Isso porque o código de busca de dados em clientes é feito através de múltiplas chamadas e. Descrito na figura 18.
 
-% não é limitado por pontos de acesso de sua interface
-
-Vale lembrar que existem mudanças de diferentes níveis de impacto e complexidade de resolução. Por exemplo, mudanças como a de fluxo de dados ou estilo de arquitetura são possíveis de serem evitadas, pois afetam apenas o código de busca. Já mudanças como a alteração de campos da estrutura de dados são mais difíceis de serem resolvidas, pois seu acoplamento vai além do código de busca, podendo estar presente na lógica da aplicação.
+% , ao invés de expressar a estrutura de dados que precisa e o serviço fazer 
 
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[font=\small]
     \draw (-2,0) -- (-2,-5) (2,0) -- (2,-5);
     \node at (-2,0.3) {Cliente};
-    \node at (2,0.3) {API (Serviço)};
+    \node at (2,0.3) {API REST};
     \node[dashed] (virtualData) at (-4,-1){\includegraphics[width=1.1cm]{figuras/code}};
     \node[below of=virtualData,node distance=0.0cm] {\{data\}};
     \node (data) at (-4,-4.5) {\includegraphics[width=1.1cm]{figuras/code}};
@@ -61,9 +61,10 @@ Vale lembrar que existem mudanças de diferentes níveis de impacto e complexida
     \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
     \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
   \end{tikzpicture}
-  \caption{Fluxo de dados}
+  \caption{Exemplo de fluxo de dados em uma API REST}
 \end{figure}
 
+Outra mudança que causa quebra de contrato é no estilo de arquitetura. Descrito na figura 19.
 
 \begin{figure}[H]
   \centering
@@ -94,6 +95,8 @@ Vale lembrar que existem mudanças de diferentes níveis de impacto e complexida
   \end{tikzpicture}
   \caption{Requisição e resposta para estilos de arquitetura}
 \end{figure}
+
+Vale lembrar que existem mudanças de diferentes níveis de impacto e complexidade de resolução. Por exemplo, mudanças como a de fluxo de dados ou estilo de arquitetura são possíveis de serem evitadas, pois afetam apenas o código de busca. Já mudanças como a alteração de campos da estrutura de dados são mais difíceis de serem resolvidas, pois seu acoplamento vai além do código de busca, podendo estar presente na lógica da aplicação.
 
 A fim de melhorar a comunicação entre clientes e serviços através da possível prevenção de mudanças que levam a quebra de contrato, antes, fez-se necessário solucionar uma série de problemas descritos a seguir.
 
@@ -136,8 +139,8 @@ Após solucionar os problemas, é proposto o primeiro protótipo do projeto onde
     \node[right of=client] (clientFetchCode) at (-2.2,0) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[below of=clientFetchCode, node distance=1.6cm] (clientLogicCode) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[above of=clientFetchCode, node distance=1.6cm] (clientConfigCode) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[circle,draw,right of=clientFetchCode,node distance=2.3cm] (schema) {Ferramenta};
-    \node[rectangle,minimum width=0.8cm, minimum height=3cm,draw,node distance=1.8cm,right of=schema,node distance=2.7cm] (api) {API};
+    \node[circle,draw,right of=clientFetchCode,node distance=2.3cm] (broker) {Intermediador};
+    \node[rectangle,minimum width=0.8cm, minimum height=3cm,draw,node distance=1.8cm,right of=broker,node distance=2.7cm] (api) {API};
     \node[right of=api, node distance=1.8cm] (json) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[below of=json,node distance=1.8cm] (server) {\includegraphics[width=1.0cm]{figuras/server}};
     \node[above of=json, node distance=1.8cm] (description) {\includegraphics[width=1.1cm]{figuras/code}};
@@ -151,14 +154,14 @@ Após solucionar os problemas, é proposto o primeiro protótipo do projeto onde
     \node[below of=client,node distance=1.8cm] {\ldots};
     \node[right of=json,node distance=1.8cm] {\ldots};
     \draw[decorate,decoration={brace,raise=0.2cm,mirror}] ([yshift=6pt]clientConfigCode.north west) -- ([yshift=-12pt]clientLogicCode.south west);
-    \draw [->] ([yshift=0.25cm]clientFetchCode.east) -- ([yshift=0.25cm]schema.west);
-    \draw [->] (schema) -- (clientFetchCode);
-    \draw [->] ([yshift=0.25cm]schema.east) -- ([yshift=0.25cm]api.west);
-    \draw [->] (api) -- (schema);
-    \draw [->,dashed] (clientConfigCode) -| ([xshift=-0.25cm]schema.north);
-    \draw [->,dashed] (description) -| ([xshift=0.25cm]schema.north);
+    \draw [->] ([yshift=0.25cm]clientFetchCode.east) -- ([yshift=0.25cm]broker.west);
+    \draw [->] (broker) -- (clientFetchCode);
+    \draw [->] ([yshift=0.25cm]broker.east) -- ([yshift=0.25cm]api.west);
+    \draw [->] (api) -- (broker);
+    \draw [->,dashed] (clientConfigCode) -| ([xshift=-0.25cm]broker.north);
+    \draw [->,dashed] (description) -| ([xshift=0.25cm]broker.north);
   \end{tikzpicture}
-  \caption{Proposta de modelo para evitar quebra de contrato}
+  \caption{Modelo proposto para evitar contrato de comunicação}
 \end{figure}
 
 O novo modelo de comunicação procura, além de evitar a quebra de contrato, proporcionar um ambiente escalável para a composição de dados através de serviços baseados em JSON. Podendo ser aplicado em outras áreas de dificuldade como na adoção de novos estilos de arquiteturas e busca de dados em micro-serviços.
@@ -168,7 +171,7 @@ O novo modelo de comunicação procura, além de evitar a quebra de contrato, pr
   \begin{tikzpicture}[font=\small]
     \node (client1) at (-2,0) {\includegraphics[width=1.0cm]{figuras/client}};
     \node (client2) at (2,0) {\includegraphics[width=1.0cm]{figuras/client}};
-    \node[circle,draw,below of=client2,node distance=2.3cm] (schema) {Ferramenta};
+    \node[circle,draw,below of=client2,node distance=2.3cm] (tool) {Ferramenta};
     \node[cloud, cloud puffs=16, draw] (service1) at (-3,-6) {Serviço 1};
     \node[cloud, cloud puffs=16, draw] (service2) at (0,-6) {Serviço 2};
     \node[cloud, cloud puffs=16, draw] (service3) at (3,-6) {Serviço 3};
@@ -176,12 +179,12 @@ O novo modelo de comunicação procura, além de evitar a quebra de contrato, pr
     \draw [<->] (client1) -- (service1);
     \draw [<->] (client1) -- (service2);
     \draw [<->] (client1) -- (service3);
-    \draw [<->] (client2) -- (schema);
-    \draw [<->] (schema) -- (service1);
-    \draw [<->] (schema) -- (service2);
-    \draw [<->] (schema) -- (service3);
+    \draw [<->] (client2) -- (tool);
+    \draw [<->] (tool) -- (service1);
+    \draw [<->] (tool) -- (service2);
+    \draw [<->] (tool) -- (service3);
   \end{tikzpicture}
-  \caption{Composição de serviços sem e com o modelo proposto}
+  \caption{Composição de serviços com a ferramenta do modelo proposto}
 \end{figure}
 
 \textbf{Definição de interface} \\
