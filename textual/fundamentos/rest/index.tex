@@ -4,15 +4,14 @@ REST (\textit{Representational State Transfer}) é um estilo de arquitetura usad
 
 Em virtude de causar grande repercussão após sua publicação, o termo REST, segundo Richardson, acabou sofrendo diversas interpretações durante o tempo e sua descrição foi representada de formas não originalmente propostas por Fielding \cite{RichardsonEtAl2013}. Alguns descrevem que serviços que violam essas restrições não podem ser considerados RESTful. Para Wildermuth, apesar de reconhecer as vantagens de cada restrição, serviços web devem usá-los de forma pragmática \cite{Wildermuth2015}.
 
-Ao ser introduzido no mercado de APIs, REST acabou se adaptando bem por ter se mostrado uma solução de fácil acesso em clientes web, dispositivos móveis e de IoT\footnote{
+Ao ser introduzido no mercado de APIs Web, REST acabou se adaptando bem por ter se mostrado uma solução de fácil acesso em clientes web, dispositivos móveis e de IoT\footnote{
   Do inglês \textit{Internet of Things} (Intenet das Coisas).
-}. Segundo Pautasso, a eliminação da complexidade existente em Web Services antes de sua publicação em 2000 fez com que REST fosse considerado um dos principais responsáveis pela popularização de arquiteturas orientada a serviços. \cite{PautassoEtAl2008}
+}. Segundo Pautasso, a eliminação da complexidade existente em Web Services antes de sua publicação em 2000 fez com que REST fosse considerado um dos principais responsáveis pela popularização de arquiteturas orientada a serviços, visível pela figura 7. \cite{PautassoEtAl2008}
 
 \begin{figure}[H]
   \centering    \includegraphics[width=0.9\textwidth,height=\textheight,keepaspectratio]{figuras/api-styles.jpg}
-  \caption{Distribuição de estilos e protocolos para APIs}
+  \caption{Distribuição de estilos e protocolos para APIs Web}
 \end{figure}
-% CITAR A FIGURA NO TEXTO
 
 A seguir será apresentada uma visão geral sobre as restrições propostas por Fielding para a implementação em arquiteturas web, além de ser examinado o impacto de cada restrição nesses sistemas distribuídos. \\
 
@@ -32,13 +31,12 @@ Em essência, Fielding propõe que aplicações façam o uso de verbos HTTP (POS
 \item Identificação de Recursos: Cada recurso deve ser disponibilizado através de uma URI específica e coesa. (Exemplo: GET /customers/1)
 \item Manipulação de Recursos através de Representações: Um recurso pode ser representado em diferentes formatos para diferentes clientes. (Exemplo: HTML, XML, JSON)
 \item Resposta Auto-explicativa: Metadados devem ser adicionados na requisição e resposta de um recurso para descrever seu estado atual ou desejado. (Exemplo: código de resposta HTTP, Host, Content-Type)
-\item HATEOAS (
- \textit{Hypermedia as the Engine of Application State}): Caso um recurso possua relacionamentos, ao ser representado, estes devem estar especificados em forma de \textit{hyperlinks} para facilitar a navegação de dados por clientes.
+\item HATEOAS (\textit{Hypermedia as the Engine of Application State}): Caso um recurso possua relacionamentos, ao ser representado, estes devem estar especificados em forma de \textit{hyperlinks} para facilitar a navegação de dados por clientes.
 \end{itemize}
 
 \textbf{Separação em Camadas} \\
 
-Um dos princípios desta restrição está em evitar que clientes façam diretamente requisição para o servidor sem antes passar por um intermediário, como por exemplo um balanceador de caga (\textit{load balancer})\footnote{
+Um dos princípios desta restrição está em evitar que clientes façam diretamente requisição para o servidor sem antes passar por um intermediário, como por exemplo um balanceador de carga (\textit{load balancer})\footnote{
   Técnica para distribuir a carga de trabalho uniformemente entre dois ou mais computadores
 }. Desse modo, fica assegurado que clientes apenas se preocupem com a comunicação, deixando que intermediários lidem com a distribuição de requisições. \cite{Fielding2000} \\
 

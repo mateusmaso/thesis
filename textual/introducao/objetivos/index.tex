@@ -1,17 +1,18 @@
 \section[Objetivos]{Objetivos}
 
-O principal objetivo deste trabalho é o desenvolvimento de uma ferramenta que ajude na prevenção do acoplamento entre clientes e APIs Web causado pela escrita de código voltado ao acesso direto de estruturas de dados JSON. Além disso, através da análise de metadados, poder oferecer uma maneira genérica (usando GraphQL) para busca dados independente do estilo de arquitetura e fluxo de dados implementado pela API Web. \\
+O principal objetivo deste trabalho é propor um modelo de comunicação cliente-servidor escalável que permita a composição de serviços e que faça a prevenção na criação de contrato entre clientes e interfaces de acesso. Para sua validação, será desenvolvido uma ferramenta que implemente o modelo e que seja tolerante à alterações no fluxo de dados e estilo de arquitetura de APIs. \\
 
 \textbf{Objetivos específicos} \\
 
 No intuito de atingir o objetivo geral do trabalho, serão buscados os seguintes objetivos específicos:
 
 \begin{itemize}
-\item Prevenir a mudança de código em clientes devido a alterações na implementação do fluxo de dados por uma API.
-\item Facilitar a transição de código em clientes ao atualizar para uma nova versão implementada por uma API.
-\item Facilitar a transição de código em clientes ao atualizar para um novo estilo de arquitetura implementado por uma API.
-\item Oferecer uma maneira de composição de estruturas de dados entre mais de um serviço e interface de aplicação.
-\item Promover a documentação e descrição de metadados em APIs. \\
+\item Propor modelo de comunicação replicável e agnóstico a plataforma.
+\item Desenvolver ferramenta que aplique o modelo para plataforma Web.
+\item Validar a ferramenta na comunicação entre clientes e APIs Web.
+\item Oferecer solução para consulta através da composição de serviços.
+\item Promover a busca de dados através de linguagem de consulta.
+\item Promover documentação e descrição de metadados em APIs. \\
 \end{itemize}
 
 \textbf{Limites da pesquisa} \\
@@ -19,10 +20,7 @@ No intuito de atingir o objetivo geral do trabalho, serão buscados os seguintes
 O escopo do presente trabalho é delimitado da seguinte forma:
 
 \begin{itemize}
-\item Foco exclusivo no formato JSON para representação de dados.
-\item Foco exclusivo na linguagem GraphQL para consulta de dados.
-\item Foco exclusivo no estilo de arquitetura REST para realizar testes.
-\item Foco exclusivo na ferramenta JSON Hyper-Schema para descrição de APIs REST.
-\item Foco exclusivo em validar a ferramenta através de testes para prevenir a mudança de código em clientes devido à alterações na implementação do fluxo de dados por uma API.
+\item Enfase na comunicação entre clientes e APIs REST.
+\item Foco exclusivo nas tecnologias GraphQL, JSON e JSON Schema.
+\item Testes de composição de serviços não aplicados para a ferramenta.
 \end{itemize}
-%Evite repetir "foco exclusivo" no início de todos os itens, para que não fique repetitivo.

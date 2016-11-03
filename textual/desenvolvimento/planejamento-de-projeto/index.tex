@@ -1,16 +1,16 @@
 \section{Planejamento de Projeto}
 
-Para melhor entender as etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização, definição de interface e fluxo de execução da ferramenta. \\
+Para melhor entender as etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização do modelo proposto, definição de interface e fluxo de execução da ferramenta. \\
 
-\textbf{Processo de idealização} \\
+\textbf{Processo de idealização do modelo} \\
 
-Atualmente, para que clientes façam o uso de estruturas de dados remotos, estes precisam encontrar um meio de buscá-los eventualmente antes de executar uma lógica que dependa dos dados. Isso sugere a escrita de um código encarregado de acessar serviços\footnote{
+Atualmente, para que clientes façam o uso remoto de estruturas de dados, estes precisam encontrar um meio de buscá-los eventualmente antes de executar a lógica de um código que dependa dos dados. Isso sugere a escrita de um código encarregado de acessar serviços\footnote{
   Infraestrutura distribuída (servidores, banco de dados, etc) que responde à pedidos de operações oriundas de clientes em forma de requisições de API.
 } em busca de dados pela rede.
 
 No entanto, para que haja garantia na comunicação, ao buscar dados diretamente em pontos de acesso\footnote{
   Parte de uma interface exposta por um serviço através de um canal de comunicação.
-} de uma API, cria-se um contrato de acesso entre o cliente e a interface do serviço. Isso porque, uma vez implementado o código de busca, é preciso uma garantia de que não haja mudanças que ponham em risco sua funcionalidade e, assim, comprometer parte da lógica da aplicação. Além de possíveis danos financeiros, perde-se tempo de desenvolvimento de reimplementação.
+} de uma API, cria-se um contrato de acesso entre o cliente e a interface do serviço. Isso porque, uma vez implementado o código de busca, é preciso uma garantia de que não haja mudanças na interface que ponham em risco a funcionalidade do cliente e, assim, possivelmente comprometer parte da lógica da aplicação. Este modelo é representado pela figura 17.
 
 \begin{figure}[H]
   \centering
@@ -33,12 +33,14 @@ No entanto, para que haja garantia na comunicação, ao buscar dados diretamente
     \draw [->] ([yshift=0.25cm]clientFetchCode.east) -- ([yshift=0.25cm]api.west);
     \draw [->] (api) -- (clientFetchCode);
   \end{tikzpicture}
-  \caption{Contrato entre cliente e serviço na busca de dados}
+  \caption{Modelo de contrato entre cliente e serviço na busca por dados}
 \end{figure}
 
 Atualmente, um dos problemas mais comuns de quebra de contrato entre APIs e clientes ocorre em serviços que implementam o estilo de arquitetura REST. Em REST, pequenas mudanças como a de fluxo de dados\footnote{
-  Fluxo de acesso do cliente em pontos de acesso para a busca de uma representação da estrutura total do serviço.
-} podem causar instabilidade e o versionamento desnecessário de sua interface. Já em arquiteturas como GraphQL, o risco para esse tipo de mudança é baixo, pois não limita na interface a forma que clientes façam o acesso em busca de dados.
+  Fluxo de acesso na interface pelo cliente em busca de dados no serviço.
+} podem afetar clientes e o versionamento desnecessário de sua interface. Já em arquiteturas como GraphQL (interpretador), o risco para esse tipo de mudança é menor, pois existe uma possibilidade maior de navegação no fluxo de dados descritas pelo serviço.
+
+% não é limitado por pontos de acesso de sua interface
 
 Vale lembrar que existem mudanças de diferentes níveis de impacto e complexidade de resolução. Por exemplo, mudanças como a de fluxo de dados ou estilo de arquitetura são possíveis de serem evitadas, pois afetam apenas o código de busca. Já mudanças como a alteração de campos da estrutura de dados são mais difíceis de serem resolvidas, pois seu acoplamento vai além do código de busca, podendo estar presente na lógica da aplicação.
 
