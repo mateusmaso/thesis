@@ -1,16 +1,16 @@
 \section{Planejamento de Projeto}
 
-Para melhor entender as etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização de um novo modelo de comunicação, além da definição de interface da ferramenta e seu fluxo de execução. \\
+Para melhor entender as etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização, proposta de modelo, além da definição de interface e fluxo de execução da ferramenta. \\
 
-\textbf{Processo de idealização do modelo} \\
+\textbf{Processo de idealização} \\
 
-Atualmente, para que clientes façam o uso remoto de estruturas de dados, estes precisam encontrar um meio de buscá-los eventualmente antes de executar a lógica de um código que dependa dos dados. Isso sugere a escrita de um código encarregado de acessar serviços\footnote{
+Atualmente, para que clientes façam o uso remoto de estruturas de dados, estes precisam encontrar um meio de buscá-los eventualmente antes de executar uma lógica que dependa dos dados. Isso sugere a escrita de um código encarregado de acessar serviços\footnote{
   Infraestrutura distribuída (servidores, banco de dados, etc) que responde à pedidos de operações oriundas de clientes em forma de requisições de API.
 } em busca de dados pela rede.
 
-No entanto, para que haja garantia na comunicação, ao buscar dados diretamente em pontos de acesso\footnote{
+No entanto, para que haja garantia na comunicação, cria-se um contrato de acesso entre o cliente e a interface do serviço para a busca de dados em pontos de acesso\footnote{
   Parte de uma interface exposta por um serviço através de um canal de comunicação.
-} de uma API, cria-se um contrato de acesso entre o cliente e a interface do serviço. Isso porque, uma vez implementado o código de busca, é preciso uma garantia de que não haja mudanças na interface que ponham em risco a funcionalidade do cliente e, assim, possivelmente comprometer parte da lógica da aplicação. Este contrato é representado no modelo de comunicação da figura 17 através das chamadas entre o código de busca do cliente e API do serviço.
+} da API. Isso porque, após a implementação do código de busca, é preciso uma garantia de que não haja mudanças na interface que ponham em risco a funcionalidade do cliente e, assim, possivelmente comprometer parte da lógica da aplicação. Este contrato é representado no modelo de comunicação da figura 17 através das chamadas entre o código de busca do cliente e API do serviço.
 
 \begin{figure}[H]
   \centering
@@ -36,20 +36,16 @@ No entanto, para que haja garantia na comunicação, ao buscar dados diretamente
   \caption{Modelo de comunicação entre cliente e serviço}
 \end{figure}
 
-% Mudança na Interface (API), alteração de método (assinatura, argumentos, retorno). => Fluxo de dados e Estilo de arquitetura.
-
-Em APIs REST, pequenas mudanças no serviço como a de fluxo de dados\footnote{
+Mudanças na interface de acesso de serviços normalmente visam facilitar, flexibilizar e/ou otimizar o fluxo de dados\footnote{
   Fluxo de acesso na interface pelo cliente em busca de dados no serviço.
-} podem afetar o contrato de clientes e o versionamento desnecessário de sua interface. Isso porque o código de busca de dados em clientes é feito através de múltiplas chamadas e. Descrito na figura 18.
-
-% , ao invés de expressar a estrutura de dados que precisa e o serviço fazer 
+} em clientes. Esse tipo de mudança pode ser de caráter pequeno, como o a alteração no nome de um método ou número argumentos, até mudanças mais drásticas como a alteração de dados de retorno e estilo de arquitetura. A figura 18 mostra um exemplo fluxo de dados que um cliente precisou executar em busca de dados remotos na API de um serviço.
 
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[font=\small]
     \draw (-2,0) -- (-2,-5) (2,0) -- (2,-5);
     \node at (-2,0.3) {Cliente};
-    \node at (2,0.3) {API REST};
+    \node at (2,0.3) {API (Serviço)};
     \node[dashed] (virtualData) at (-4,-1){\includegraphics[width=1.1cm]{figuras/code}};
     \node[below of=virtualData,node distance=0.0cm] {\{data\}};
     \node (data) at (-4,-4.5) {\includegraphics[width=1.1cm]{figuras/code}};
@@ -61,46 +57,14 @@ Em APIs REST, pequenas mudanças no serviço como a de fluxo de dados\footnote{
     \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
     \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
   \end{tikzpicture}
-  \caption{Exemplo de fluxo de dados em uma API REST}
+  \caption{Exemplo de fluxo de dados entre cliente e API}
 \end{figure}
 
-Outra mudança que causa quebra de contrato é no estilo de arquitetura. Descrito na figura 19.
+Felizmente, o impacto de mudanças de fluxo de dados em clientes são previsíveis, pois afetam em sua maioria o código de busca. Já mudanças como a alteração de campos da estrutura de dados são de um grau de complexidade maior, pois seu impacto vai além do código de busca, podendo estar presente na lógica da aplicação.
 
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[font=\small]
-    \draw (0,1) -- (0,-5);
-    \node at (0,1.3) {API};
-    \node[draw,shape=circle,fill=black,style={scale=0.6}] at (0,0) {};
-    \node[draw,shape=circle,fill=black,style={scale=0.6}] at (0,-2) {};
-    \node[draw,shape=circle,fill=black,style={scale=0.6}] at (0,-4) {};
-	\node at (-2.8,0) {\mintinline{text}{{...}}};
-    \node at (-3.6,-2) {\mintinline{text}{{"query":"..."}}};
-    \node at (-3.6,-4) {\mintinline{text}{{"method":"..."}}};
-	\node at (3.4,0) {\mintinline{text}{{"user":{...}}}};
-    \node at (3.4,-2) {\mintinline{text}{{"data":{...}}}};
-    \node at (3.6,-4) {\mintinline{text}{{"result":{...}}}};
-    \draw[->] (-2,0) -- node[midway,above] {req} (-0.2,0);
-    \draw[->] (-2,-2) -- node[midway,above] {req} (-0.2,-2);
-    \draw[->] (-2,-4) -- node[midway,above] {req} (-0.2,-4);
-    \draw[->] (0.2,0) -- node[midway,above] {res} (2,0);
-    \draw[->] (0.2,-2) -- node[midway,above] {res} (2,-2);
-    \draw[->] (0.2,-4) -- node[midway,above] {res} (2,-4);
-    \draw[->,decorate,decoration={snake,post length=1mm}] (0,0) -- (1,1);
-    \draw[->,decorate,decoration={snake,post length=1mm}] (0,-2) -- (1,-1);
-    \draw[->,decorate,decoration={snake,post length=1mm}] (0,-4) -- (1,-3);
-    \node[draw] at (2.4,1.2) {/api/v1/users/1};
-    \node[draw] at (2.2,-0.8) {/api/graphql};
-    \node[draw] at (2.2,-2.8) {/api/jsonrpc};
-  \end{tikzpicture}
-  \caption{Requisição e resposta para estilos de arquitetura}
-\end{figure}
+Com o objetivo de evitar o impacto de mudanças no fluxo de dados em clientes e viabilizar um novo modelo de comunicação, fez-se necessário solucionar os seguintes problemas descritos pela tabela 5. \\
 
-Vale lembrar que existem mudanças de diferentes níveis de impacto e complexidade de resolução. Por exemplo, mudanças como a de fluxo de dados ou estilo de arquitetura são possíveis de serem evitadas, pois afetam apenas o código de busca. Já mudanças como a alteração de campos da estrutura de dados são mais difíceis de serem resolvidas, pois seu acoplamento vai além do código de busca, podendo estar presente na lógica da aplicação.
-
-A fim de melhorar a comunicação entre clientes e serviços através da possível prevenção de mudanças que levam a quebra de contrato, antes, fez-se necessário solucionar uma série de problemas descritos a seguir.
-
-\begin{table}
+\begin{table}[H]
   \begin{tabularx}{\linewidth}{>{\parskip1ex}X@{\kern4\tabcolsep}>{\parskip1ex}X}
     \toprule
     \hfil\bfseries Problema
@@ -108,29 +72,28 @@ A fim de melhorar a comunicação entre clientes e serviços através da possív
     \hfil\bfseries Solução
     \\\cmidrule(r{3\tabcolsep}){1-1}\cmidrule(l{-\tabcolsep}){2-2}
 
-    (1) Dificuldade de realizar mudanças no fluxo de dados e estilo de arquitetura de uma API sem interferir no código de busca de clientes.\par
-Its very nice\par
-    (2) Não encontrado uma ferramenta para a resolução do problema anterior.\par
-    (3) Criar uma linguagem para usar na comunicação entre código de busca e ferramenta para depois transformar em requisições de API.\par
-    (4) Encontrar uma estrutura para se trabalhar com a sintaxe das consultas GraphQL descritas em texto.\par
-    (5) Converter ASTs em requisições para APIs de serviços.\par
-    (6) Escolher requisições de menor tempo de resposta para acesso de dados do cliente.
-    
+    (1) Garantir que não haja criação de contrato entre código de busca e API.\par
+    (2) Realizar mudanças no fluxo de dados de uma API sem interferir no código de busca de clientes.\par
+    (3) Encontrar uma forma de expressar requisições entre o cliente e o intermediador.\par
+    (4) Encontrar uma estrutura para analisar consultas.\par
+    (5) Mapear consultas em formato AST em requisições de API.\par
+
     &
 
-    (1) Encontrar uma ferramenta para uso no cliente que evite o contrato de acesso nesses casos.\par
-    (2) Construir uma ferramenta para clientes que faça a intermediação na comunicação entre seu código de busca e API do serviço.\par
-    (3) Usar a linguagem GraphQL para expressar consulta de dados e depois analisar sintaxe a fim de transformar em requisições.\par
-    (4) Converter a sintaxe das consultas em texto em estruturas AST para análise de dependências de dados.\par
-    (5) Análise de metadados em pontos de acesso através de arquivos de descrição de API.\par
-    (6) Algoritmo que analisa ASTs e metadados de APIs em busca o menor número de pontos de acesso e avalia o tamanho de resposta como critério.
+    (1) Construir um intermediador responsável por manter a comunicação entre cliente e serviço.\par
+	(2) Evitar que clientes escrevam código de busca voltado à especificação da API, e sim para o intermediador.\par
+    (3) Usar uma linguagem de consulta para expressar dependência de dados.\par
+    (4) Converter consultas em formato AST.\par
+    (5) Analisar metadados da API e formas de acesso para a estrutura AST.\par
 
     \\\bottomrule
   \end{tabularx}
   \caption{Problema e Solução}
 \end{table}
 
-Após solucionar os problemas, é proposto o primeiro protótipo do projeto onde prevê a criação de uma ferramenta que faça a intermediação na comunicação entre código de busca do cliente e API do serviço. Além disso, será necessário a reimplementação do código de busca para linguagem GraphQL, um arquivo para descrição da API disponibilizado pelo serviço e outro no cliente para configuração da ferramenta.
+\textbf{Proposta de modelo} \\
+
+A fim de melhorar o atual modelo de comunicação cliente-servidor, é proposto um novo modelo, descrito pela figura 19, que prevê a criação de uma ferramenta na plataforma do cliente para a intermediação na comunicação entre o código de busca do cliente e API do serviço. Além disso, a reimplementação do código de busca para a linguagem de consulta que o intermediador entenda, assim como um arquivo disponibilizado pelo serviço para descrição dos metadados de sua API e outro no cliente para configuração do intermediador.
 
 \begin{figure}[H]
   \centering
@@ -164,7 +127,7 @@ Após solucionar os problemas, é proposto o primeiro protótipo do projeto onde
   \caption{Modelo proposto para evitar contrato de comunicação}
 \end{figure}
 
-O novo modelo de comunicação procura, além de evitar a quebra de contrato, proporcionar um ambiente escalável para a composição de dados através de serviços baseados em JSON. Podendo ser aplicado em outras áreas de dificuldade como na adoção de novos estilos de arquiteturas e busca de dados em micro-serviços.
+O modelo também visa otimizar a busca de dados de clientes através da possibilidade de implementação de algoritmos que direcionam o acesso de APIs de serviços baseado no menor tamanho na resposta de dados e número requisições em pontos de acesso. Além disso, propõe um ambiente escalável para a composição de dados através de serviços baseados em JSON, visto na figura 20. Podendo ser aplicado em contextos onde há a dificuldade na adoção de novos estilos de arquiteturas e busca de dados em microsserviços.
 
 \begin{figure}[H]
   \centering
@@ -187,13 +150,13 @@ O novo modelo de comunicação procura, além de evitar a quebra de contrato, pr
   \caption{Composição de serviços com a ferramenta do modelo proposto}
 \end{figure}
 
-\textbf{Definição de interface} \\
+\textbf{Definição de interface da ferramenta} \\
 
 Clientes que pensam em integrar a ferramenta em seu código esperam encontrar uma interface que apresente uma baixa curva de aprendizagem e que, acima de tudo, cause pouco impacto em sua base de código. Por isso, a ferramenta foi desenvolvida pensando em reutilizar ao máximo tecnologias promissoras ou já bem consolidadas no mercado de desenvolvimento.
 
 A primeira ideia foi em utilizar GraphQL como linguagem para intermediação na comunicação. Além de promover a tecnologia, a ferramenta possibilita que o cliente escreva um código de busca que também funcione para interpretadores GraphQL. O outro caso é trabalhar com formatos abertos de descrição de APIs, como por exemplo o JSON Hyper-Schema. Isso permite acelerar sua integração com serviços que já oferecem soluções de descrição de sua APIs.
 
-Para integrar a ferramenta em código de clientes, é preciso definir um arquivo de configuração contendo funções que descrevam informações de cada serviço a ser consultado. Após, gera-se um esquema GraphQL pela ferramenta a partir das funções de configuração de serviço. Por fim, é executado consultas no código de busca através do esquema gerado.
+Para integrar a ferramenta em código de clientes, é preciso definir um arquivo de configuração contendo funções que descrevam informações de cada serviço a ser consultado. Após, constrói-se um esquema GraphQL a partir das funções de configuração de serviço, responsável por ser o intermediador. Por fim, é executado consultas no código de busca através do esquema gerado.
 
 \begin{figure}[H]
   \centering
@@ -225,14 +188,14 @@ Para integrar a ferramenta em código de clientes, é preciso definir um arquivo
     
     composeSchema(...services).then((schema) => {
       graphql(schema, "{ user { id } }").then((response) => { 
-        console.log(response.data)
+        // lógica
       })
     })
   \end{minted}
   \caption{Exemplo de criação de esquema e execução de consulta}
 \end{figure}
 
-\textbf{Fluxo de execução} \\
+\textbf{Fluxo de execução da ferramenta} \\
 
 Ao a efetuar a busca de dados entre clientes e serviços utilizando a ferramenta, dois fluxos de execução são realizados. O primeiro é o processo criação de esquema, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo é o processo de consulta de dados, onde a leva como entrada consultas em texto GraphQL e retorna estruturas de dados JSON remotas.
 
@@ -278,4 +241,4 @@ O processo de criação de esquema começa resolvendo cada função de configura
   \caption{Consulta de dados}
 \end{figure}
 
-O processo de consulta de dados começa através de uma execução de consulta GraphQL. Primeiro é convertido a estrutura AST em um formato mais simplificado para se trabalhar. Após, transforma-se o AST principal em um AST especifico para cada serviço. Com as árvores de consulta, é feito a redução da árvore aplicando-se o algoritmo de busca. Após, é desfeito o invólucro de cada AST para poder realizar a busca de dados no serviço correspondente. Por fim, ao retornar os dados, realiza-se novamente o invólucro e estende-se cada dado até gerar um dado unificado.
+O processo de consulta de dados começa através de uma execução de consulta GraphQL. Primeiro é convertido a estrutura AST em um formato mais simplificado para se trabalhar. Após, transforma-se o AST principal em um AST especifico para cada serviço. Com as árvores de consulta, é feito a redução aplicando-se um algoritmo de otimização de busca. Após, é desfeito o invólucro de cada AST para poder realizar a busca de dados no serviço correspondente. Por fim, ao retornar os dados, realiza-se novamente o invólucro e estende-se cada dado até gerar um dado unificado.

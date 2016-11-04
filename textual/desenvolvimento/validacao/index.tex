@@ -1,8 +1,8 @@
 \section{Validação}
 
-Com o objetivo de testar a implementação e proposta de valor da ferramenta, é feito uma pesquisa comparativa focando no impacto do seu uso em relação a mudanças de fluxo de dados pelo servidor que afetam o contrato de acesso.
+Com o objetivo de validar o modelo proposto através do desenvolvimento de uma ferramenta que aplique o modelo na plataforma de clientes web, é feito uma pesquisa comparativa focando no impacto do uso da ferramenta em relação a mudanças no fluxo de dados da API de serviços que afetam o contrato de acesso.
 
-Para isso será desenvolvido um ambiente de validação onde dois clientes realizam três consultas em serviço através de uma API REST. Um deles fazendo o uso da ferramenta e o outro não. Após disso, será aplicado uma série de mudanças no serviço que afetam o fluxo de dados para que assim, possa ser analisado o impacto e resultado através das  variáveis coletadas. \\
+Para isso será desenvolvido um ambiente de validação onde dois clientes realizam três consultas em serviço através de uma API REST. Um deles fazendo o uso da ferramenta e o outro não. Após, será aplicado uma série de mudanças no serviço que afetam o fluxo de dados para que assim, possa ser analisado o impacto e resultado através das  variáveis coletadas. \\
 
 \textbf{Estrutura de dados (JSON)} \\
 
@@ -12,8 +12,8 @@ Foi escolhido trabalhar com um escopo de serviço chamado SWAPI, bastante utiliz
   \centering
   \begin{tikzpicture}
     [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (film) at (3,7)  {film};
-    \node (people) at (-3,9)  {people};
+    \node (film) at (2,6)  {film};
+    \node (people) at (-2,8)  {people};
     \node (starship) at (0,9) {starship};
     \node (vehicle) at (-2,6)  {vehicle};
     \node (species) at (0,5)  {species};
@@ -33,9 +33,9 @@ Com o propósito de explorar cada ponto de acesso e estrutura de dados do servi�
   \centering
   \begin{tikzpicture}
     [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (film) at (0,8)  {film};
-    \node (people) at (2,9)  {people};
-    \node (planet) at (10,8)  {planet};
+    \node (film) at (0,0)  {film};
+    \node (people) at (2,0)  {people};
+    \node (planet) at (4,0)  {planet};
   \end{tikzpicture}
   \caption{Entidades envolvidas na primeira pergunta}
 \end{figure}
@@ -46,9 +46,9 @@ Com o propósito de explorar cada ponto de acesso e estrutura de dados do servi�
   \centering
   \begin{tikzpicture}
     [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (people) at (2,9)  {people};
-    \node (specie) at (8,5)  {specie};
-    \node (planet) at (10,8)  {planet};
+    \node (people) at (0,0)  {people};
+    \node (specie) at (2,0)  {specie};
+    \node (planet) at (4,0)  {planet};
   \end{tikzpicture}
   \caption{Entidades envolvidas na segunda pergunta}
 \end{figure}
@@ -59,10 +59,10 @@ Com o propósito de explorar cada ponto de acesso e estrutura de dados do servi�
   \centering
   \begin{tikzpicture}
     [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (film) at (0,8)  {film};
-    \node (people) at (2,9)  {people};
-    \node (starship) at (4,8) {starship};
-    \node (vehicle) at (6,6)  {vehicle};
+    \node (film) at (0,0)  {film};
+    \node (people) at (2,0)  {people};
+    \node (starship) at (4,0) {starship};
+    \node (vehicle) at (6,0)  {vehicle};
   \end{tikzpicture}
   \caption{Entidades envolvidas na terceira pergunta}
 \end{figure}
@@ -82,7 +82,7 @@ Com o propósito de explorar cada ponto de acesso e estrutura de dados do servi�
 
 \textbf{Variáveis} \\
 
-É descrito cinco variáveis para análise dos testes de validação. Todos são quantitativas e coletadas no cliente após o processo de mudança.
+É descrito cinco variáveis para análise dos testes de validação. Todos são quantitativas e coletadas no cliente após cada processo de mudança da API. Totalizando um número de 20 dados possíveis para análise no final de sua execução.
 
 \begin{table}[H]
   \centering
@@ -101,7 +101,7 @@ Com o propósito de explorar cada ponto de acesso e estrutura de dados do servi�
     Tempo de processamento & ms & Quantitativa \\
     \hline
   \end{tabular}
-  \caption{Variáveis de análise}
+  \caption{Variáveis de coleta e análise}
 \end{table}
 
  
