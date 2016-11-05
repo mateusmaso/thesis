@@ -1,12 +1,12 @@
 \section{Implementação}
 
-A partir da definição de interface e fluxo de execução, foram implementados dez funções no total. Quatro delas responsáveis por gerar o esquema. Três para analisar o AST da consulta e outras três para transformar o AST em requisições para API de cada serviço. Além disso, três dessas funções são extensíveis através de adaptadores para análise diferentes formatos para descrição de metadados em APIs. 
+A partir do planejamento de projeto e especificação da ferramenta baseado no modelo proposto, foram implementados dez funções no total para testes em plataforma web. Quatro delas responsáveis por gerar o esquema, criando o intermediador. Três para analisar o AST das consultas e outras três para transformar o AST em requisições para API de cada serviço. Além disso, três dessas funções são extensíveis (substituíveis) através de adaptadores, sendo que apenas uma delas é pública.
 
 A seguir, é descrito brevemente as 3 categorias de funções, junto com seu objetivo e a assinatura de cada método escrito em JavaScript. \\
 
-\textbf{Funções para composição de esquema} \\
+\textbf{Funções para criação do esquema} \\
 
-Representam quatro funções e seu principal objetivo é compor, de forma assíncrona, um esquema GraphQL unificado a partir dos metadados de cada serviço.
+Representam quatro funções e seu principal objetivo é compor, de forma assíncrona, um esquema GraphQL unificado a partir das funcões de configuração de cada serviço. Sendo "composeSchema" a única função pública da ferramenta.
 
 \begin{figure}[H]
   \centering
@@ -28,12 +28,12 @@ Representam quatro funções e seu principal objetivo é compor, de forma assín
     schemas: [GraphQLSchema]
   ): Promise<GraphQLSchema>
   \end{minted}
-  \caption{Assinatura das funções para composição de esquema}
+  \caption{Assinatura das funções para criação do esquema}
 \end{figure}
 
 \textbf{Funções para análise de AST} \\
 
-São três funções que buscam analisar o AST gerado pela consulta GraphQL através de um algoritmo que transforma e reduz este em um AST específico e performático para cada serviço.
+São três funções que buscam analisar o AST gerado por uma consulta GraphQL no esquema através de um algoritmo que simplifica, transforma e reduz em um AST específico e performático para cada serviço.
 
 \begin{figure}[H]
   \centering
@@ -59,7 +59,7 @@ São três funções que buscam analisar o AST gerado pela consulta GraphQL atra
 
 \textbf{Funções para busca de dados} \\
 
-São as três últimas funções responsáveis por converter os ASTs produzidos na categoria de análise em requisições para API de cada serviço.
+São as três últimas funções responsáveis por converter os ASTs retornados e realizar as respectivas requisições para a API de cada serviço em busca de dados.
 
 \begin{figure}[H]
   \centering

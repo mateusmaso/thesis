@@ -1,77 +1,77 @@
 \section{Validação}
 
-Com o objetivo de validar o modelo proposto através do desenvolvimento de uma ferramenta que aplique o modelo na plataforma de clientes web, é feito uma pesquisa comparativa focando no impacto do uso da ferramenta em relação a mudanças no fluxo de dados da API de serviços que afetam o contrato de acesso.
+Com o objetivo de validar o modelo proposto através da ferramenta desenvolvida para plataforma web, é feito uma pesquisa comparativa focando o impacto do seu uso em relação à mudanças no fluxo de dados da API de um serviço.
 
-Para isso será desenvolvido um ambiente de validação onde dois clientes realizam três consultas em serviço através de uma API REST. Um deles fazendo o uso da ferramenta e o outro não. Após, será aplicado uma série de mudanças no serviço que afetam o fluxo de dados para que assim, possa ser analisado o impacto e resultado através das  variáveis coletadas. \\
+Para isso será desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API REST de um serviço. Após, será aplicado uma série de mudanças na API do serviço que afetam o fluxo de dados para que assim, possa ser analisado o resultado das variáveis coletadas sobre o impacto causado no código de busca. \\
 
-\textbf{Estrutura de dados (JSON)} \\
+\textbf{Escopo de serviço} \\
 
-Foi escolhido trabalhar com um escopo de serviço chamado SWAPI, bastante utilizado para análise de implementações de estilos de arquitetura e linguagens de programação. Nele, são descritos seis entidades e seus respectivos relacionamentos.
+Foi escolhido trabalhar com um escopo de serviço bastante utilizado para análise de implementações de estilos de arquitetura e linguagens de programação chamado SWAPI. Nele, são descritos seis entidades e seus respectivos relacionamentos. Em um nível de expansão 0, dados de relacionamento não são retornados na representação.
 
-\begin{figure}[H]
+\begin{table}[H]
   \centering
-  \begin{tikzpicture}
-    [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (film) at (2,6)  {film};
-    \node (people) at (-2,8)  {people};
-    \node (starship) at (0,9) {starship};
-    \node (vehicle) at (-2,6)  {vehicle};
-    \node (species) at (0,5)  {species};
-    \node (planet) at (2,8)  {planet};
-  \end{tikzpicture}
-  \caption{Entidades SWAPI}
-\end{figure}
+  \begin{tabular}{|l|c|c|}
+    \hline
+    URI & Descrição & Nível de expansão \\
+    \hline
+    /people & Busca lista de pessoas & 0 \\
+    \hline
+    /people/:id & Busca pessoa pelo id & 0 \\
+    \hline
+    /films & Busca lista de filmes & 0 \\
+    \hline
+    /films/:id & Busca filme pelo id & 0 \\
+    \hline
+    /starships & Busca lista de espaçonaves & 0 \\
+    \hline
+    /starships/:id & Busca espaçonave pelo id & 0 \\
+    \hline
+    /vehicles & Busca lista de veículos & 0 \\
+    \hline
+    /vehicles/:id & Busca veículo pelo id & 0 \\
+    \hline
+    /species & Busca lista de espécies & 0 \\
+    \hline
+    /species/:id & Busca espécie pelo id & 0 \\
+    \hline
+    /planets & Busca lista de planetas & 0 \\
+    \hline
+    /planets/:id & Busca planeta pelo id & 0 \\
+    \hline
+  \end{tabular}
+  \caption{Pontos de acesso SWAPI para busca de dados}
+\end{table}
 
-\textbf{Consultas e respostas esperadas} \\
+\textbf{Perguntas e respostas esperadas} \\
 
-Com o propósito de explorar cada ponto de acesso e estrutura de dados do serviço SWAPI, foram pensadas em três perguntas de média complexidade onde envolvessem ao menos três das entidades da API. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados remotas.
+Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram pensadas em três perguntas de média complexidade onde envolvessem ao menos três das entidades para consulta na API. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno nos pontos de acesso.
 
 \begin{enumerate}
 \item Qual o nome do filme no qual aparece mais personagens oriundos de um planeta deserto? R: "Revenge of the Sith"
-
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}
-    [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (film) at (0,0)  {film};
-    \node (people) at (2,0)  {people};
-    \node (planet) at (4,0)  {planet};
-  \end{tikzpicture}
-  \caption{Entidades envolvidas na primeira pergunta}
-\end{figure}
-
 \item Qual o nome da espécie predominante entre os habitantes do planeta "Tatooine"? R: "Droid"
-
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}
-    [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (people) at (0,0)  {people};
-    \node (specie) at (2,0)  {specie};
-    \node (planet) at (4,0)  {planet};
-  \end{tikzpicture}
-  \caption{Entidades envolvidas na segunda pergunta}
-\end{figure}
-
 \item Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? R: "Chewbacca"
-
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}
-    [scale=.8,auto=left,every node/.style={circle,draw}]
-    \node (film) at (0,0)  {film};
-    \node (people) at (2,0)  {people};
-    \node (starship) at (4,0) {starship};
-    \node (vehicle) at (6,0)  {vehicle};
-  \end{tikzpicture}
-  \caption{Entidades envolvidas na terceira pergunta}
-\end{figure}
-
 \end{enumerate}
 
 \textbf{Mudanças no fluxo de dados} \\
 
 É proposto quatro tipos de mudanças no fluxo de dados para quebra de contrato, onde cada mudança testa a capacidade da ferramenta em a adaptar a comunicação através da atualização dos metadados do serviço.
+
+Q1:\\
+- /api/films\\
+- characters => /api/people/:id\\
+- character.homeworld => /api/planet/:id\\
+
+Q2:\\
+- /api/planets/1\\
+- planet.residents => /api/people/:id\\
+- resident.species => /api/species/:id\\
+
+Q3:\\
+- /api/films/1\\
+- film.starships => /api/starships/:id\\
+- film.starships.pilots => /api/people/:id\\
+- film.vehicles => /api/vehicles/:id\\
+- film.vehicles.pilots => /api/people/:id\\
 
 \begin{enumerate}
 \item Mudança no endereço de ponto de acesso.
@@ -79,6 +79,28 @@ Com o propósito de explorar cada ponto de acesso e estrutura de dados do servi�
 \item Adição de ponto de acesso otimizado.
 \item Remoção de ponto de acesso deprecado.
 \end{enumerate}
+
+gráfico fluxo de dados antes e depois \\
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \draw (-2,0) -- (-2,-5) (2,0) -- (2,-5);
+    \node at (-2,0.3) {Cliente};
+    \node at (2,0.3) {API (Serviço)};
+    \node[dashed] (virtualData) at (-4,-1){\includegraphics[width=1.1cm]{figuras/code}};
+    \node[below of=virtualData,node distance=0.0cm] {\{data\}};
+    \node (data) at (-4,-4.5) {\includegraphics[width=1.1cm]{figuras/code}};
+    \node[below of=data,node distance=0.0cm] {\{data\}};
+    \node[cloud, cloud puffs=16,draw,minimum height=1.2cm] (cloudData) at (4,-2.5) {\includegraphics[width=1.1cm]{figuras/code}};
+    \node[below of=cloudData,node distance=0.0cm] {\{data\}};
+    \draw[->] (-2,-1) -- node[midway,above] {requisição} (2,-1.5);
+    \draw[<-] (-2,-2.5) -- node[midway,above] {resposta} (2,-2);
+    \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
+    \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
+  \end{tikzpicture}
+  \caption{Exemplo de fluxo de dados entre cliente e API}
+\end{figure}
 
 \textbf{Variáveis} \\
 
