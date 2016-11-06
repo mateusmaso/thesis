@@ -4,9 +4,9 @@ Para um melhor entendimento das etapas de desenvolvimento, antes é preciso conh
 
 \textbf{Processo de idealização} \\
 
-Atualmente, para que clientes possam consumir dados remotos, é preciso que haja um meio de buscá-los antes de executar qualquer lógica que dependa deles. Para isso, é preciso a implementação de um código de acesso a serviços \footnote{
+Atualmente, para que clientes possam consumir dados remotos, é preciso que haja um meio de buscá-los antes de executar qualquer lógica que dependa deles. Para isso, é preciso a implementação de um código de busca para acesso à dados em serviços\footnote{
   Infraestrutura distribuída (servidores, banco de dados, etc) que respondem a pedidos de operações oriundas de clientes em forma de requisições de API.
-} em busca de dados pela rede.
+} através de uma rede.
 
 No entanto, para que se possa manter garantia na comunicação, é necessário um contrato de acesso entre o cliente e a interface do serviço. Isso porque, após a implementação do código de busca pelo cliente, qualquer mudança em pontos de acesso\footnote{
   Parte de uma interface exposta por um serviço através de um canal de comunicação.
@@ -59,10 +59,12 @@ Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Ela
     \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
     \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
   \end{tikzpicture}
-  \caption{Fluxo de dados entre cliente e API}
+  \caption{Fluxo de dados entre cliente e API.}
 \end{figure}
 
-Felizmente, o impacto nos clientes com as mudanças no fluxo de dados de uma API são previsíveis, pois afetam diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos da estruturas de dados (renomear o retorno de atributo de "name" para "fullname", por exemplo) são de um grau de complexidade maior, pois seu impacto não influenciaria o código de busca e sim a lógica da aplicação, onde é bem mais difícil debugar.
+Felizmente, o impacto nos clientes com as mudanças no fluxo de dados de uma API são previsíveis, pois afetam diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos nas estruturas de dados\footnote{
+  Exemplo: dada uma entidade pessoa, separar o campo "nome" em dois novos campos como "nome" e "sobrenome".
+} são de um grau de complexidade maior, pois seu impacto pode não influenciar o código de busca e sim a lógica da aplicação, onde é bem mais difícil debugar.
 
 Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o impacto no código de busca em clientes devido a mudanças no fluxo de dados, fez-se necessário solucionar os seguintes problemas descritos na tabela 5. \\
 
@@ -124,10 +126,10 @@ A fim de melhorar o modelo de comunicação cliente-servidor apresentado, é pro
     \draw [->,dashed] (clientConfigCode) -| ([xshift=-0.25cm]broker.north);
     \draw [->,dashed] (metadata) -| ([xshift=0.25cm]broker.north);
   \end{tikzpicture}
-  \caption{Modelo proposto para evitar contrato de comunicação}
+  \caption{Modelo proposto para evitar contrato de comunicação.}
 \end{figure}
 
-Além de eliminar o contrato, o modelo também visa automatizar o acesso de APIs na busca por dados em clientes. Através algoritmos implementados na ferramenta para transformação de consultas em requisições, é feito a escolha do caminho de melhor custo benefício em relação aos serviços disponíveis para acesso. Além disso, o modelo proporciona um ambiente escalável para a composição de dados através de serviços, visto na figura 20.
+Além de propor a eliminação de contrato, o modelo visa também automatizar o acesso de clientes em APIs na busca por dados. Através algoritmos de implementação na ferramenta, é feito a escolha do caminho de acesso de melhor custo benefício em relação aos serviços disponíveis para o cliente. Além disso, o modelo proporciona um ambiente escalável para a composição de dados através de serviços, visto na figura 20.
 
 \begin{figure}[H]
   \centering
@@ -152,9 +154,9 @@ Além de eliminar o contrato, o modelo também visa automatizar o acesso de APIs
 
 \textbf{Especificação de ferramenta baseado no modelo proposto} \\
 
-Para aumentar as chances de aceitação do modelo por desenvolvedores, foi preciso pensar em uma especificação de ferramenta que apresente uma interface de baixa curva de aprendizagem, um fluxo de execução replicável/agnóstico à plataforma e, acima de tudo, cause pouco impacto na base de código de clientes. Por isso, a ferramenta proposta neste projeto foi desenvolvida pensando em reutilizar tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
+Para a aceitação do modelo em ambientes de desenvolvimento de clientes, foi preciso pensar em uma especificação de ferramenta que apresentasse uma interface de baixa curva de aprendizagem, um fluxo de execução replicável e agnóstico à plataforma, além do baixo impacto na base de código de clientes. Por isso, a ferramenta proposta neste projeto foi desenvolvida pensando em reutilizar tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
 
-A primeira ideia foi estudar o uso da tecnologia GraphQL como principal tecnologia para intermediação na comunicação. Além de promover, GraphQL é base para os demais fluxos de execução e possibilita que clientes escrevam um código de busca que não fique preso à uma interface de acesso. O outro caso foi em trabalhar com formatos abertos de descrição de APIs, como por exemplo o JSON Schema. Através de adaptadores, a ferramenta permite acelerar a integração com serviços que já oferecem soluções de descrição de suas APIs.
+Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover o seu uso, GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso à uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
 
 A seguir é feito a análise dos dois fluxos de execução descritos pela especificação da ferramenta. O primeiro, visto na figura 21, é o processo criação do intermediador, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, visto na figura 22, é o processo de consulta de dados no intermediador, onde leva como entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
 
@@ -198,6 +200,8 @@ A seguir é feito a análise dos dois fluxos de execução descritos pela especi
   \caption{Consulta de dados no intermediador (esquema)}
 \end{figure}
 
-O processo de criação do intermediador começa resolvendo cada função de configuração de serviço e construindo um esquema GraphQL para cada um. Após, é feito o invólucro dos campos de cada esquema e para cada um estende-se até gerar um esquema GraphQL unificado.
+O processo de criação do intermediador começa através da resolução de cada função de configuração\footnote{
+  URL, metadados, adaptador e definições de invólucro.
+} de serviço e construído um esquema GraphQL interno para cada um. Após, é feito o invólucro dos campos dos esquemas e, para cada um, estende-se até gerar um esquema GraphQL unificado.
 
-O processo de consulta de dados no intermediador começa através de uma chamada de consulta GraphQL no esquema gerado. Primeiro é convertido a estrutura AST em um formato mais simplificado para se trabalhar. Após, transforma-se o AST principal em um AST especifico para cada serviço. Com as árvores de consulta, é feito a redução aplicando-se um algoritmo de otimização de busca. Após, é desfeito o invólucro de cada AST para poder realizar a busca de dados no serviço correspondente. Por fim, ao retornar os dados, realiza-se novamente o invólucro e estende-se cada dado até gerar um dado unificado.
+O processo de consulta de dados no intermediador começa através de uma chamada de consulta no esquema gerado. Primeiro, usa-se o AST fornecido pela função de resolução de consulta GraphQL e converte-se em uma estrutura mais fácil de se trabalhar. Após, transforma-se o AST já simplificado em ASTs especifico para o esquema de cada serviço. Durante esse processo, é feito a redução das árvores aplicando-se um algoritmo de otimização de busca que analisa o conjunto como um todo. Por fim, para se poder realizar a busca de dados correspondente em cada serviço, é desfeito o invólucro dos ASTs, realizado as requisições e feito o invólucro e união dos dados JSON retornados.

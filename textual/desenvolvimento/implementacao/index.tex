@@ -1,8 +1,8 @@
 \section{Implementação}
 
-A fim de aplicar a especificação da ferramenta baseado no modelo proposto no planejamento de projeto, foram implementados um total de dez funções para o uso de clientes na plataforma web. Dentre as funções, quatro delas são responsáveis por criar o intermediador gerando um esquema GraphQL. Três para analisar as consultas através do formato AST e outras três para transformar as consultas em requisições na API de serviços. 
+A fim de aplicar a especificação da ferramenta proposta no planejamento de projeto, foram implementados um total de dez funções para o uso de clientes da plataforma web. Dentre as funções, quatro delas são responsáveis por criar o intermediador gerando um esquema GraphQL. Três para analisar as consultas através do formato AST e outras três para transformar as consultas em requisições na API de serviços. 
 
-Nota-se que, apenas quatro dessas dez funções são públicas e expostas para o cliente. Sendo uma delas (composeSchema) a principal para configuração/uso da ferramenta e, as outras três (buildSchema, transformAST, fetchData), para uso interno de adaptadores. A seguir, é descrito brevemente as 3 categorias de funções, junto com seu objetivo e a assinatura de cada método escrito em JavaScript. \\
+Nota-se que, apenas quatro dessas dez funções são públicas e expostas para o cliente. Sendo uma delas (composeSchema) a principal para configuração/uso da ferramenta e, as outras três (buildSchema, transformAST, fetchData), para serem sobrescritas por adaptadores. A seguir, é descrito brevemente as 3 categorias de funções, junto com seu objetivo e a assinatura JavaScript de cada função. \\
 
 \textbf{Funções para criação do esquema} \\
 
@@ -16,19 +16,19 @@ Representam quatro funções e seu principal objetivo é compor, de forma assín
   ): Promise<GraphQLSchema>
 
   function buildSchema(
-    schema: JSON
+    metadata: JSON
   ): Promise<GraphQLSchema>
 
   function wrapSchema(
     schema: GraphQLSchema, 
-    wrapper: Wrapper
+    wrapper: JSON
   ): Promise<GraphQLSchema>
 
   function deepExtendSchema(
     schemas: [GraphQLSchema]
   ): Promise<GraphQLSchema>
   \end{minted}
-  \caption{Assinatura das funções para criação do esquema}
+  \caption{Assinatura das funções para criação do esquema.}
 \end{figure}
 
 \textbf{Funções para análise de consulta} \\
@@ -44,8 +44,8 @@ São três funções que buscam analisar consultas GraphQL feitas no esquema ger
   ): SimplifiedAST
 
   function transformAST(
-    schema: JSON,
-    clientSchema: GraphQLSchema, 
+    metadata: JSON,
+    schema: GraphQLSchema, 
     ast: SimplifiedAST
   ): SimplifiedAST
 
@@ -54,7 +54,7 @@ São três funções que buscam analisar consultas GraphQL feitas no esquema ger
     asts: [SimplifiedAST]
   ): void
   \end{minted}
-  \caption{Assinatura das funções para análise de consulta}
+  \caption{Assinatura das funções para análise de consulta.}
 \end{figure}
 
 \textbf{Funções para busca de dados} \\
@@ -67,20 +67,20 @@ São as três últimas funções responsáveis por converter os ASTs de cada ser
   function unwrapAST(
     ast: SimplifiedAST, 
     schema: GraphQLSchema, 
-    wrapper: Wrapper
+    wrapper: JSON
   ): SimplifiedAST
 
   function fetchData(
-    schema: JSON, 
+    metadata: JSON, 
     ast: SimplifiedAST, 
-    url: string
+    url: String
   ): Promise<JSON>
 
   function wrapData(
     data: JSON, 
-    schema: JSON, 
+    schema: GraphQLSchema, 
     wrapper: Wrapper
   ): Promise<JSON>
   \end{minted}
-  \caption{Assinatura das funções para busca de dados}
+  \caption{Assinatura das funções para busca de dados.}
 \end{figure}

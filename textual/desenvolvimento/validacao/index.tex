@@ -1,10 +1,10 @@
 \section{Validação}
 
-Com o objetivo de validar o modelo proposto através da ferramenta desenvolvida para plataforma web, é feito uma pesquisa comparativa focando o impacto do seu uso em relação à mudanças no fluxo de dados. Para isso será desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API de um serviço REST. Após, será aplicado uma série de mudanças no fluxo de dados da API REST e coletado os dados para análise do impacto causado no código de busca desses clientes. \\
+Com o objetivo de validar o modelo proposto, é feito uma pesquisa comparativa focando o impacto sobre uso da ferramenta implementada em relação à mudanças no fluxo de dados. Para isso será desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API de um serviço REST. Após, será aplicado uma série de mudanças no fluxo de dados da API e coletado os dados para análise do impacto causado no código de busca desses clientes. \\
 
 \textbf{Escopo de serviço} \\
 
-Foi escolhido trabalhar com um escopo de serviço SWAPI (Starwars), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em diversas linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Na tabela 6, é descrito os pontos de acesso da API REST (SWAPI) utilizada na validação. Nota-se que todos os pontos de acesso não retornam seus relacionamentos expandidos, ou seja, seu nível de expansão é zero.
+Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Para o escopo do projeto, será implementado uma API REST que expõe consultas dessas entidades em formato JSON através de pontos de acesso em URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
 
 \begin{table}[H]
   \centering
@@ -37,12 +37,12 @@ Foi escolhido trabalhar com um escopo de serviço SWAPI (Starwars), bastante uti
     /planets/:id & Busca planeta pelo id \\
     \hline
   \end{tabular}
-  \caption{Pontos de acesso SWAPI para busca de dados}
+  \caption{Pontos de acesso (GET) SWAPI.}
 \end{table}
 
 \textbf{Perguntas e respostas esperadas} \\
 
-Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram pensadas em três perguntas de média complexidade e onde fossem envolvidos ao menos três das entidades para consulta na API. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno nos pontos de acesso.
+Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram pensadas em três perguntas de média complexidade, onde fossem envolvidos ao menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno.
 
 \begin{enumerate}
 \item[\textbf{Q1.}] Qual o nome do filme no qual aparece mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
@@ -50,7 +50,7 @@ Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, 
 \item[\textbf{Q3.}] Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? \textbf{R:} "Chewbacca"
 \end{enumerate}
 
-Falar sobre como é feito o fluxo de dados para acesso das informações.
+No intuito de acertar as respostas, a seguir na tabela 7, é descrito o fluxo de dados necessário de cada pergunta para a busca de dados por clientes.
 
 \begin{table}[H]
   \centering
@@ -105,50 +105,41 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
     \end{minipage} \\
     \hline
   \end{tabular}
-  \caption{Fluxo de dados para responder as perguntas}
+  \caption{Fluxo de dados para responder as perguntas.}
 \end{table}
 
 \textbf{Mudanças no fluxo de dados} \\
 
-É proposto quatro tipos de mudanças no fluxo de dados para quebra de contrato, onde cada mudança testa a capacidade da ferramenta em a adaptar a comunicação através da atualização dos metadados do serviço.
-
-\begin{enumerate}
-\item[\textbf{C1.}] Mudança no endereço de ponto de acesso.
-\item[\textbf{C2.}] Mudança no nível de estrutura de resposta.
-\item[\textbf{C3.}] Adição de ponto de acesso otimizado.
-\item[\textbf{C4.}] Remoção de ponto de acesso deprecado.
-\end{enumerate}
-
-Falar sobre as alterações no fluxo de dados mais em detalhe.
+Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de mudanças não acumulativas no fluxo de dados. Cada mudança busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para que a ferramenta consiga operar direito. Na tabela 8, é descrito o changelog das mudanças realizadas.
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|c|c|}
+  \begin{tabular}{|c|c|c|}
     \hline
-    Mudança & Descrição \\
+    Mudança & Descrição & Changelog \\
     \hline
-    C1 & \begin{minipage}[t]{0.8\textwidth}
+    C1 & Mudança no endereço de ponto de acesso. & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
         \item Renomeação da URI /films para /movies.
         \item Renomeação da URI /films/:id para /movies/:id
       \end{itemize}
     \end{minipage} \\
     \hline
-    C2 & \begin{minipage}[t]{0.8\textwidth}
+    C2 & Mudança no nível de estrutura de resposta. & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
         \item Expansão do campo pilots da URI /starships/:id
         \item Expansão do campo pilots da URI /vehicles/:id
       \end{itemize}
     \end{minipage} \\
     \hline
-    C3 & \begin{minipage}[t]{0.8\textwidth}
+    C3 & Adição de ponto de acesso otimizado. & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
         \item[\textbf{+}] Adição da URI /tatooine.
         \item[\textbf{+}] Adição da URI /films/:id/characters.
       \end{itemize}
     \end{minipage} \\
     \hline
-    C4 & \begin{minipage}[t]{0.8\textwidth}
+    C4 & Remoção de ponto de acesso deprecado. & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
         \item[\textbf{+}] Adição da URI /people/:id/homeworld.
         \item[\textbf{$-$}] Remoção da URI /planet/:id.
@@ -156,97 +147,97 @@ Falar sobre as alterações no fluxo de dados mais em detalhe.
     \end{minipage} \\
     \hline
   \end{tabular}
-  \caption{Changelog das alterações no fluxo de dados}
+  \caption{Changelog do novo fluxo de dado para cada mudança}
 \end{table}
 
-\begin{table}[H]
-  \centering
-  \begin{tabular}{|c|c|c|c|}
-    \hline
-    Mudança & Q1 & Q2 & Q3 \\
-    \hline
-    C1 & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/movies
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/planet/:id
-      \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/planets/1
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/species/:id
-      \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/movies/1
-        \item[\textbf{GET}] /api/starships/:id
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/vehicles/:id
-        \item[\textbf{GET}] /api/people/:id
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-    C2 & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/films
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/planet/:id
-      \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/planets/1
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/species/:id
-      \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/films/1
-        \item[\textbf{GET}] /api/starships/:id
-        \item[\textbf{GET}] /api/vehicles/:id
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-    C3 & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/films
-        \item[\textbf{GET}] /api/films/:id/characters
-        \item[\textbf{GET}] /api/planet/:id
-      \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/tatooine
-        \item[\textbf{GET}] /api/species/:id
-      \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/films/1
-        \item[\textbf{GET}] /api/starships/:id
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/vehicles/:id
-        \item[\textbf{GET}] /api/people/:id
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-    C4 & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/films
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/people/:id/homeworld
-      \end{itemize}
-    \end{minipage} & - & \begin{minipage}[t]{0.3\textwidth}
-      \begin{itemize}
-        \item[\textbf{GET}] /api/films/1
-        \item[\textbf{GET}] /api/starships/:id
-        \item[\textbf{GET}] /api/people/:id
-        \item[\textbf{GET}] /api/vehicles/:id
-        \item[\textbf{GET}] /api/people/:id
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-  \end{tabular}
-  \caption{Novo fluxo de dados para cada mudança}
-\end{table}
+% \begin{table}[H]
+%   \centering
+%   \begin{tabular}{|c|c|c|c|}
+%     \hline
+%     Mudança & Q1 & Q2 & Q3 \\
+%     \hline
+%     C1 & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/movies
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/planet/:id
+%       \end{itemize}
+%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/planets/1
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/species/:id
+%       \end{itemize}
+%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/movies/1
+%         \item[\textbf{GET}] /api/starships/:id
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/vehicles/:id
+%         \item[\textbf{GET}] /api/people/:id
+%       \end{itemize}
+%     \end{minipage} \\
+%     \hline
+%     C2 & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/films
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/planet/:id
+%       \end{itemize}
+%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/planets/1
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/species/:id
+%       \end{itemize}
+%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/films/1
+%         \item[\textbf{GET}] /api/starships/:id
+%         \item[\textbf{GET}] /api/vehicles/:id
+%       \end{itemize}
+%     \end{minipage} \\
+%     \hline
+%     C3 & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/films
+%         \item[\textbf{GET}] /api/films/:id/characters
+%         \item[\textbf{GET}] /api/planet/:id
+%       \end{itemize}
+%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/tatooine
+%         \item[\textbf{GET}] /api/species/:id
+%       \end{itemize}
+%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/films/1
+%         \item[\textbf{GET}] /api/starships/:id
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/vehicles/:id
+%         \item[\textbf{GET}] /api/people/:id
+%       \end{itemize}
+%     \end{minipage} \\
+%     \hline
+%     C4 & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/films
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/people/:id/homeworld
+%       \end{itemize}
+%     \end{minipage} & - & \begin{minipage}[t]{0.3\textwidth}
+%       \begin{itemize}
+%         \item[\textbf{GET}] /api/films/1
+%         \item[\textbf{GET}] /api/starships/:id
+%         \item[\textbf{GET}] /api/people/:id
+%         \item[\textbf{GET}] /api/vehicles/:id
+%         \item[\textbf{GET}] /api/people/:id
+%       \end{itemize}
+%     \end{minipage} \\
+%     \hline
+%   \end{tabular}
+%   \caption{Novo fluxo de dados para cada mudança}
+% \end{table}
 
 \textbf{Consultas no intermediador} \\
 
