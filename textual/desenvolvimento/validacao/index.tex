@@ -4,37 +4,37 @@ Com o objetivo de validar o modelo proposto através da ferramenta desenvolvida 
 
 \textbf{Escopo de serviço} \\
 
-Foi escolhido trabalhar com um escopo de serviço SWAPI (Starwars), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em diversas linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Na tabela 6, é descrito os pontos de acesso da API REST (SWAPI) utilizada na validação. Nota-se que o um nível de expansão refere-se a profundidade relacionamentos de dados JSON retornados pelo ponto de acesso.
+Foi escolhido trabalhar com um escopo de serviço SWAPI (Starwars), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em diversas linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Na tabela 6, é descrito os pontos de acesso da API REST (SWAPI) utilizada na validação. Nota-se que todos os pontos de acesso não retornam seus relacionamentos expandidos, ou seja, seu nível de expansão é zero.
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|l|c|c|}
+  \begin{tabular}{|l|c|}
     \hline
-    URI & Descrição & Nível de expansão \\
+    URI & Descrição \\
     \hline
-    /people & Busca lista de pessoas & 0 \\
+    /people & Busca lista de pessoas \\
     \hline
-    /people/:id & Busca pessoa pelo id & 0 \\
+    /people/:id & Busca pessoa pelo id \\
     \hline
-    /films & Busca lista de filmes & 0 \\
+    /films & Busca lista de filmes \\
     \hline
-    /films/:id & Busca filme pelo id & 0 \\
+    /films/:id & Busca filme pelo id \\
     \hline
-    /starships & Busca lista de espaçonaves & 0 \\
+    /starships & Busca lista de espaçonaves \\
     \hline
-    /starships/:id & Busca espaçonave pelo id & 0 \\
+    /starships/:id & Busca espaçonave pelo id \\
     \hline
-    /vehicles & Busca lista de veículos & 0 \\
+    /vehicles & Busca lista de veículos \\
     \hline
-    /vehicles/:id & Busca veículo pelo id & 0 \\
+    /vehicles/:id & Busca veículo pelo id \\
     \hline
-    /species & Busca lista de espécies & 0 \\
+    /species & Busca lista de espécies \\
     \hline
-    /species/:id & Busca espécie pelo id & 0 \\
+    /species/:id & Busca espécie pelo id \\
     \hline
-    /planets & Busca lista de planetas & 0 \\
+    /planets & Busca lista de planetas \\
     \hline
-    /planets/:id & Busca planeta pelo id & 0 \\
+    /planets/:id & Busca planeta pelo id \\
     \hline
   \end{tabular}
   \caption{Pontos de acesso SWAPI para busca de dados}
@@ -47,7 +47,7 @@ Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, 
 \begin{enumerate}
 \item[\textbf{Q1.}] Qual o nome do filme no qual aparece mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
 \item[\textbf{Q2.}] Qual o nome da espécie predominante entre os habitantes do planeta "Tatooine"? \textbf{R:} "Droid"
-\item[\textbf{Q3.}] Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? \textbf{R:} "Chewbacca" \\
+\item[\textbf{Q3.}] Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? \textbf{R:} "Chewbacca"
 \end{enumerate}
 
 Falar sobre como é feito o fluxo de dados para acesso das informações.
@@ -67,8 +67,8 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
     \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
       \begin{itemize}
         \item[\textbf{x1}] films
-        \item[\textbf{xN}] films.characters
-        \item[\textbf{xN}] films.characters.homeworld
+        \item[\textbf{x162}] films.characters
+        \item[\textbf{x162}] films.characters.homeworld
       \end{itemize}
     \end{minipage} \\
     \hline
@@ -81,8 +81,8 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
     \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
       \begin{itemize}
         \item[\textbf{x1}] planet
-        \item[\textbf{xN}] planet.residents
-        \item[\textbf{xN}] planet.residents.species
+        \item[\textbf{x10}] planet.residents
+        \item[\textbf{x2}] planet.residents.species
       \end{itemize}
     \end{minipage} \\
     \hline
@@ -97,10 +97,10 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
     \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
       \begin{itemize}
         \item[\textbf{x1}] film
-        \item[\textbf{xN}] film.starships
-        \item[\textbf{xN}] film.starships.pilots
-        \item[\textbf{xN}] film.vehicles
-        \item[\textbf{xN}] film.vehicles.pilots
+        \item[\textbf{x8}] film.starships
+        \item[\textbf{x9}] film.starships.pilots
+        \item[\textbf{x4}] film.vehicles
+        \item[\textbf{x0}] film.vehicles.pilots
       \end{itemize}
     \end{minipage} \\
     \hline
@@ -110,7 +110,7 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
 
 \textbf{Mudanças no fluxo de dados} \\
 
-É proposto quatro tipos de mudanças no fluxo de dados para quebra de contrato, onde cada mudança testa a capacidade da ferramenta em a adaptar a comunicação através da atualização dos metadados do serviço. \\
+É proposto quatro tipos de mudanças no fluxo de dados para quebra de contrato, onde cada mudança testa a capacidade da ferramenta em a adaptar a comunicação através da atualização dos metadados do serviço.
 
 \begin{enumerate}
 \item[\textbf{C1.}] Mudança no endereço de ponto de acesso.
@@ -123,29 +123,104 @@ Falar sobre as alterações no fluxo de dados mais em detalhe.
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|c|c|c|}
+  \begin{tabular}{|c|c|}
     \hline
-    Mudança & Descrição & Questões afetadas \\
+    Mudança & Descrição \\
+    \hline
+    C1 & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{+}] URI /films renamed to /movies.
+        \item[\textbf{$-$}] /films/:id renamed to /movies/:id
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C2 & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{+}] pilots field from URI /starships/:id expanded.
+        \item[\textbf{$-$}] pilots field from URI /vehicles/:id expanded.
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C3 & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{+}] URI /tatooine added.
+        \item[\textbf{$-$}] URI /films/:id/characters added.
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C4 & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{+}] URI /planet/:id removed.
+        \item[\textbf{$-$}] URI /people/:id/homeworld added.
+      \end{itemize}
+    \end{minipage} \\
     \hline
   \end{tabular}
   \caption{Changelog das alterações no fluxo de dados}
 \end{table}
 
-% c1
-% - URI /films renamed to /movies. \\
-% - URI /films/:id renamed to /movies/:id
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    Mudança & Q1 & Q2 & Q3 \\
+    \hline
+    C1 & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/movies
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/planet/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/planets/1
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/species/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films/1
+        \item[\textbf{GET}] /api/starships/:id
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/vehicles/:id
+        \item[\textbf{GET}] /api/people/:id
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C2 \\
+    \hline
+    C3 \\
+    \hline
+    C4 \\
+    \hline
+  \end{tabular}
+  \caption{Novo fluxo de dados para cada mudança}
+\end{table}
 
-% c2
-% - pilots field from URI /starships/:id expanded. \\
-% - pilots field from URI /vehicles/:id expanded.
+\textbf{Consultas no intermediador} \\
 
-% c3
-% - URI /tatooine added. \\
-% - URI /films/:id/characters added.
-
-% c4
-% - URI /planet/:id removed. \\
-% - URI /people/:id/homeworld added.
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Pergunta & Consulta GraphQL \\
+    \hline
+    Q1 & \begin{minipage}[t]{0.5\textwidth}
+      \begin{minted}{text}
+      int main() {
+        printf("hello, world");
+        return 0;
+      }
+      \end{minted}
+    \end{minipage} \\
+    \hline
+    Q2 & Busca pessoa pelo id \\
+    \hline
+    Q3 & Busca lista de filmes \\
+    \hline
+  \end{tabular}
+  \caption{Pontos de acesso SWAPI para busca de dados}
+\end{table}
 
 \textbf{Variáveis} \\
 
