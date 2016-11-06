@@ -1,12 +1,10 @@
 \section{Validação}
 
-Com o objetivo de validar o modelo proposto através da ferramenta desenvolvida para plataforma web, é feito uma pesquisa comparativa focando o impacto do seu uso em relação à mudanças no fluxo de dados da API de um serviço.
-
-Para isso será desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API REST de um serviço. Após, será aplicado uma série de mudanças na API do serviço que afetam o fluxo de dados para que assim, possa ser analisado o resultado das variáveis coletadas sobre o impacto causado no código de busca. \\
+Com o objetivo de validar o modelo proposto através da ferramenta desenvolvida para plataforma web, é feito uma pesquisa comparativa focando o impacto do seu uso em relação à mudanças no fluxo de dados. Para isso será desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API de um serviço REST. Após, será aplicado uma série de mudanças no fluxo de dados da API REST e coletado os dados para análise do impacto causado no código de busca desses clientes. \\
 
 \textbf{Escopo de serviço} \\
 
-Foi escolhido trabalhar com um escopo de serviço bastante utilizado para análise de implementações de estilos de arquitetura e linguagens de programação chamado SWAPI. Nele, são descritos seis entidades e seus respectivos relacionamentos. Em um nível de expansão 0, dados de relacionamento não são retornados na representação.
+Foi escolhido trabalhar com um escopo de serviço SWAPI (Starwars), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em diversas linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Na tabela 6, é descrito os pontos de acesso da API REST (SWAPI) utilizada na validação. Nota-se que o um nível de expansão refere-se a profundidade relacionamentos de dados JSON retornados pelo ponto de acesso.
 
 \begin{table}[H]
   \centering
@@ -44,63 +42,110 @@ Foi escolhido trabalhar com um escopo de serviço bastante utilizado para análi
 
 \textbf{Perguntas e respostas esperadas} \\
 
-Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram pensadas em três perguntas de média complexidade onde envolvessem ao menos três das entidades para consulta na API. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno nos pontos de acesso.
+Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram pensadas em três perguntas de média complexidade e onde fossem envolvidos ao menos três das entidades para consulta na API. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno nos pontos de acesso.
 
 \begin{enumerate}
-\item Qual o nome do filme no qual aparece mais personagens oriundos de um planeta deserto? R: "Revenge of the Sith"
-\item Qual o nome da espécie predominante entre os habitantes do planeta "Tatooine"? R: "Droid"
-\item Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? R: "Chewbacca"
+\item[\textbf{Q1.}] Qual o nome do filme no qual aparece mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
+\item[\textbf{Q2.}] Qual o nome da espécie predominante entre os habitantes do planeta "Tatooine"? \textbf{R:} "Droid"
+\item[\textbf{Q3.}] Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? \textbf{R:} "Chewbacca" \\
 \end{enumerate}
+
+Falar sobre como é feito o fluxo de dados para acesso das informações.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Pergunta & Fluxo de Dados & Número de requisições \\
+    \hline
+    Q1 & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/planet/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{x1}] films
+        \item[\textbf{xN}] films.characters
+        \item[\textbf{xN}] films.characters.homeworld
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    Q2 & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/planets/1
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/species/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{x1}] planet
+        \item[\textbf{xN}] planet.residents
+        \item[\textbf{xN}] planet.residents.species
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    Q3 & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films/1
+        \item[\textbf{GET}] /api/starships/:id
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/vehicles/:id
+        \item[\textbf{GET}] /api/people/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
+      \begin{itemize}
+        \item[\textbf{x1}] film
+        \item[\textbf{xN}] film.starships
+        \item[\textbf{xN}] film.starships.pilots
+        \item[\textbf{xN}] film.vehicles
+        \item[\textbf{xN}] film.vehicles.pilots
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+  \end{tabular}
+  \caption{Fluxo de dados para responder as perguntas}
+\end{table}
 
 \textbf{Mudanças no fluxo de dados} \\
 
-É proposto quatro tipos de mudanças no fluxo de dados para quebra de contrato, onde cada mudança testa a capacidade da ferramenta em a adaptar a comunicação através da atualização dos metadados do serviço.
-
-Q1:\\
-- /api/films\\
-- characters => /api/people/:id\\
-- character.homeworld => /api/planet/:id\\
-
-Q2:\\
-- /api/planets/1\\
-- planet.residents => /api/people/:id\\
-- resident.species => /api/species/:id\\
-
-Q3:\\
-- /api/films/1\\
-- film.starships => /api/starships/:id\\
-- film.starships.pilots => /api/people/:id\\
-- film.vehicles => /api/vehicles/:id\\
-- film.vehicles.pilots => /api/people/:id\\
+É proposto quatro tipos de mudanças no fluxo de dados para quebra de contrato, onde cada mudança testa a capacidade da ferramenta em a adaptar a comunicação através da atualização dos metadados do serviço. \\
 
 \begin{enumerate}
-\item Mudança no endereço de ponto de acesso.
-\item Mudança no nível de estrutura de resposta.
-\item Adição de ponto de acesso otimizado.
-\item Remoção de ponto de acesso deprecado.
+\item[\textbf{C1.}] Mudança no endereço de ponto de acesso.
+\item[\textbf{C2.}] Mudança no nível de estrutura de resposta.
+\item[\textbf{C3.}] Adição de ponto de acesso otimizado.
+\item[\textbf{C4.}] Remoção de ponto de acesso deprecado.
 \end{enumerate}
 
-gráfico fluxo de dados antes e depois \\
+Falar sobre as alterações no fluxo de dados mais em detalhe.
 
-\begin{figure}[H]
+\begin{table}[H]
   \centering
-  \begin{tikzpicture}[font=\small]
-    \draw (-2,0) -- (-2,-5) (2,0) -- (2,-5);
-    \node at (-2,0.3) {Cliente};
-    \node at (2,0.3) {API (Serviço)};
-    \node[dashed] (virtualData) at (-4,-1){\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=virtualData,node distance=0.0cm] {\{data\}};
-    \node (data) at (-4,-4.5) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=data,node distance=0.0cm] {\{data\}};
-    \node[cloud, cloud puffs=16,draw,minimum height=1.2cm] (cloudData) at (4,-2.5) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=cloudData,node distance=0.0cm] {\{data\}};
-    \draw[->] (-2,-1) -- node[midway,above] {requisição} (2,-1.5);
-    \draw[<-] (-2,-2.5) -- node[midway,above] {resposta} (2,-2);
-    \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
-    \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
-  \end{tikzpicture}
-  \caption{Exemplo de fluxo de dados entre cliente e API}
-\end{figure}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Mudança & Descrição & Questões afetadas \\
+    \hline
+  \end{tabular}
+  \caption{Changelog das alterações no fluxo de dados}
+\end{table}
+
+% c1
+% - URI /films renamed to /movies. \\
+% - URI /films/:id renamed to /movies/:id
+
+% c2
+% - pilots field from URI /starships/:id expanded. \\
+% - pilots field from URI /vehicles/:id expanded.
+
+% c3
+% - URI /tatooine added. \\
+% - URI /films/:id/characters added.
+
+% c4
+% - URI /planet/:id removed. \\
+% - URI /people/:id/homeworld added.
 
 \textbf{Variáveis} \\
 

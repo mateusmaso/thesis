@@ -1,16 +1,16 @@
 \section{Planejamento de Projeto}
 
-Para melhor entender as etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização, proposta de modelo, além de detalhes na especificação da ferramenta baseado no modelo proposto, como interface e fluxo de execução. \\
+Para um melhor entendimento das etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização, proposta de modelo, além de detalhes na especificação da ferramenta baseado no modelo proposto, como interface e fluxo de execução. \\
 
 \textbf{Processo de idealização} \\
 
-Atualmente, para que clientes façam o uso remoto de estruturas de dados, estes precisam encontrar um meio de buscá-los eventualmente antes de executar uma lógica que dependa dos dados. Isso sugere a escrita de um código encarregado de acessar serviços\footnote{
-  Infraestrutura distribuída (servidores, banco de dados, etc) que responde à pedidos de operações oriundas de clientes em forma de requisições de API.
+Atualmente, para que clientes possam consumir dados remotos, é preciso que haja um meio de buscá-los antes de executar qualquer lógica que dependa deles. Para isso, é preciso a implementação de um código de acesso a serviços \footnote{
+  Infraestrutura distribuída (servidores, banco de dados, etc) que respondem a pedidos de operações oriundas de clientes em forma de requisições de API.
 } em busca de dados pela rede.
 
-No entanto, para que haja garantia na comunicação, cria-se um contrato de acesso entre o cliente e a interface do serviço para a busca de dados em pontos de acesso\footnote{
+No entanto, para que se possa manter garantia na comunicação, é necessário um contrato de acesso entre o cliente e a interface do serviço. Isso porque, após a implementação do código de busca pelo cliente, qualquer mudança em pontos de acesso\footnote{
   Parte de uma interface exposta por um serviço através de um canal de comunicação.
-} da API. Isso porque, após a implementação do código de busca, é preciso uma garantia de que não haja mudanças na interface que ponham em risco a funcionalidade do cliente e, assim, possivelmente comprometer parte da lógica da aplicação. Este contrato é representado no modelo de comunicação da figura 17 através das chamadas entre o código de busca do cliente e API do serviço.
+} da API podem colocar em risco sua funcionalidade e comprometer parte da lógica da aplicação. Este contrato é, portanto, representado no modelo de comunicação da figura 17 através das chamadas entre o código de busca do cliente e API do serviço.
 
 \begin{figure}[H]
   \centering
@@ -23,9 +23,9 @@ No entanto, para que haja garantia na comunicação, cria-se um contrato de aces
     \node[below of=server, node distance=1.8cm] (datastore) {\includegraphics[width=1.0cm]{figuras/database}};
     \node[above of=server, node distance=1.8cm] (json) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[cloud, cloud puffs=30, minimum width=11cm, minimum height=10cm, draw,style={scale=0.6}] (service) at (server) {};
-    \node[below of=clientFetchCode,node distance=0.0cm] {\textless$busca$\textgreater};
-    \node[below of=clientLogicCode,node distance=0.0cm] {\textless$logica$\textgreater};
-    \node[below of=json,node distance=0.0cm] {\{data\}};
+    \node[below of=clientFetchCode,node distance=0.0cm] {\textless\textit{busca}\textgreater};
+    \node[below of=clientLogicCode,node distance=0.0cm] {\textless\textit{lógica}\textgreater};
+    \node[below of=json,node distance=0.0cm] {\{dados\}};
     \node[below of=service,node distance=3.6cm] {Serviço};
     \node[below of=client,node distance=1.8cm] {\ldots};
     \node[right of=server,node distance=1.8cm] {\ldots};
@@ -33,12 +33,14 @@ No entanto, para que haja garantia na comunicação, cria-se um contrato de aces
     \draw [->] ([yshift=0.25cm]clientFetchCode.east) -- ([yshift=0.25cm]api.west);
     \draw [->] (api) -- (clientFetchCode);
   \end{tikzpicture}
-  \caption{Atual modelo de comunicação entre cliente e serviço}
+  \caption{Modelo de comunicação entre cliente e serviço.}
 \end{figure}
 
-O atual modelo de comunicação pode não apresentar problemas visíveis para serviços com pouca demanda de dados de clientes. Contudo, ao longo do tempo e com aumento no número de contratos, mudanças na interface de acesso de serviços são necessárias para facilitar, flexibilizar e/ou otimizar o fluxo de dados\footnote{
+O modelo de comunicação representado pode não revelar possíveis problemas para serviços com pouca demanda de dados e diversidade de clientes. Contudo, ao longo do tempo, com o aumento na quantidade de contratos, mudanças podem se tornar difíceis, como, por exemplo, as de fluxo de dados\footnote{
   Fluxo de acesso na interface pelo cliente em busca de dados no serviço.
-} da API em clientes. Esse tipo de mudança pode ser de caráter pequeno, como o a alteração no nome de um método ou número argumentos, até mudanças mais drásticas como a alteração de dados de retorno e estilo de arquitetura. A figura 18 mostra um exemplo de fluxo de dados que um cliente precisou executar em busca de dados remotos na API de um serviço.
+} nas interfaces de acesso. 
+
+Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Elas ocorrem para abraçar a constante transformação na demanda de dados por clientes. Com isso, busca-se manter uma comunicação eficiente com redução no número de chamadas e tamanho de dados feitas na API. Essas mudanças podem ser desde uma simples alteração no nome de um método ou número argumentos, até as mais complexas como dados de retorno e estilo de arquitetura. A figura 18 mostra um exemplo de fluxo de dados que um cliente executa em busca de dados remotos na API de um serviço.
 
 \begin{figure}[H]
   \centering
@@ -46,23 +48,23 @@ O atual modelo de comunicação pode não apresentar problemas visíveis para se
     \draw (-2,0) -- (-2,-5) (2,0) -- (2,-5);
     \node at (-2,0.3) {Cliente};
     \node at (2,0.3) {API (Serviço)};
-    \node[dashed] (virtualData) at (-4,-1){\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=virtualData,node distance=0.0cm] {\{data\}};
+    \node[loosely dotted] (virtualData) at (-4,-1){\includegraphics[width=1.1cm]{figuras/code}};
+    \node[below of=virtualData,node distance=0.0cm] {\{dados\}};
     \node (data) at (-4,-4.5) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=data,node distance=0.0cm] {\{data\}};
+    \node[below of=data,node distance=0.0cm] {\{dados\}};
     \node[cloud, cloud puffs=16,draw,minimum height=1.2cm] (cloudData) at (4,-2.5) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=cloudData,node distance=0.0cm] {\{data\}};
+    \node[below of=cloudData,node distance=0.0cm] {\{dados\}};
     \draw[->] (-2,-1) -- node[midway,above] {requisição} (2,-1.5);
     \draw[<-] (-2,-2.5) -- node[midway,above] {resposta} (2,-2);
     \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
     \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
   \end{tikzpicture}
-  \caption{Exemplo de fluxo de dados entre cliente e API}
+  \caption{Fluxo de dados entre cliente e API}
 \end{figure}
 
-Felizmente, o impacto de mudanças de fluxo de dados em clientes são previsíveis, pois afetam em sua maioria o código de busca. Já mudanças como a alteração de campos da estrutura de dados são de um grau de complexidade maior, pois seu impacto vai além do código de busca, podendo estar presente na lógica da aplicação.
+Felizmente, o impacto nos clientes com as mudanças no fluxo de dados de uma API são previsíveis, pois afetam diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos da estruturas de dados (renomear o retorno de atributo de "name" para "fullname", por exemplo) são de um grau de complexidade maior, pois seu impacto não influenciaria o código de busca e sim a lógica da aplicação, onde é bem mais difícil debugar.
 
-Com o objetivo de evitar o impacto de mudanças no fluxo de dados em código de busca dos clientes e viabilizar um novo modelo de comunicação, fez-se necessário solucionar os seguintes problemas descritos pela tabela 5. \\
+Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o impacto no código de busca em clientes devido a mudanças no fluxo de dados, fez-se necessário solucionar os seguintes problemas descritos na tabela 5. \\
 
 \begin{table}[H]
   \begin{tabularx}{\linewidth}{>{\parskip1ex}X@{\kern4\tabcolsep}>{\parskip1ex}X}
@@ -73,27 +75,25 @@ Com o objetivo de evitar o impacto de mudanças no fluxo de dados em código de 
     \\\cmidrule(r{3\tabcolsep}){1-1}\cmidrule(l{-\tabcolsep}){2-2}
 
     (1) Garantir que não haja criação de contrato entre código de busca e API.\par
-    (2) Realizar mudanças no fluxo de dados de uma API sem interferir no código de busca de clientes.\par
+    (2) Realizar mudanças no fluxo de dados de uma API sem interferir no código de busca dos clientes.\par
     (3) Encontrar uma forma de expressar requisições entre o cliente e o intermediador.\par
-    (4) Encontrar uma estrutura para analisar consultas.\par
-    (5) Mapear consultas em formato AST em requisições de API.\par
+    (4) Mapear consultas no intermediador em requisições para API de serviços.\par
 
     &
 
     (1) Construir um intermediador responsável por manter a comunicação entre cliente e serviço.\par
 	(2) Evitar que clientes escrevam código de busca voltado à especificação da API, e sim para o intermediador.\par
     (3) Usar uma linguagem de consulta para expressar dependência de dados.\par
-    (4) Converter consultas em formato AST.\par
-    (5) Analisar metadados da API e formas de acesso para a estrutura AST.\par
+    (4) Analisar dependência de dados e formas de acesso através de metadados da API de serviços.\par
 
-    \\\bottomrule
+\\\bottomrule
   \end{tabularx}
-  \caption{Problema e Solução}
+  \caption{Problema-solução na concepção do novo modelo.}
 \end{table}
 
 \textbf{Proposta de modelo} \\
 
-A fim de melhorar o atual modelo de comunicação cliente-servidor, é proposto um novo modelo pela figura 19, que prevê a criação de uma ferramenta na plataforma do cliente para a intermediação na comunicação entre o código de busca do cliente e API do serviço. Além disso, ocorre a reimplementação do código de busca para a linguagem de consulta que o intermediador entenda, assim como um arquivo disponibilizado pelo serviço para descrição dos metadados de sua API e outro no cliente para configuração, ambos essenciais para o funcionamento do intermediador.
+A fim de melhorar o modelo de comunicação cliente-servidor apresentado, é proposto um novo modelo na figura 19. Ele prevê a criação de uma ferramenta no cliente para a intermediação da comunicação entre o código de busca e API de serviços. Além disso, há a necessidade de reimplementação do código de busca para uma nova linguagem de consulta que seja interpretada pelo intermediador. Da mesma forma, soma-se a criação de um arquivo no serviço para descrição de metadados da API e outro no cliente para configuração, ambos essenciais para o funcionamento do intermediador.
 
 \begin{figure}[H]
   \centering
@@ -106,13 +106,13 @@ A fim de melhorar o atual modelo de comunicação cliente-servidor, é proposto 
     \node[rectangle,minimum width=0.8cm, minimum height=3cm,draw,node distance=1.8cm,right of=broker,node distance=2.7cm] (api) {API};
     \node[right of=api, node distance=1.8cm] (json) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[below of=json,node distance=1.8cm] (server) {\includegraphics[width=1.0cm]{figuras/server}};
-    \node[above of=json, node distance=1.8cm] (description) {\includegraphics[width=1.1cm]{figuras/code}};
+    \node[above of=json, node distance=1.8cm] (metadata) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[cloud, cloud puffs=30, minimum width=11cm, minimum height=10cm, draw,style={scale=0.6}] (service) at (json) {};
-    \node[below of=clientFetchCode,node distance=0.0cm] {\textless$busca$\textgreater};
-    \node[below of=clientLogicCode,node distance=0.0cm] {\textless$logica$\textgreater};
-    \node[below of=clientConfigCode,node distance=0.0cm] {\textless$config$\textgreater};
-    \node[below of=description,node distance=0.0cm] {\{desc\}};
-    \node[below of=json,node distance=0.0cm] {\{data\}};
+    \node[below of=clientFetchCode,node distance=0.0cm] {\textless\textit{busca}\textgreater};
+    \node[below of=clientLogicCode,node distance=0.0cm] {\textless\textit{lógica}\textgreater};
+    \node[below of=clientConfigCode,node distance=0.0cm] {\textless\textit{config}\textgreater};
+    \node[below of=metadata,node distance=0.0cm] {\{metadados\}};
+    \node[below of=json,node distance=0.0cm] {\{dados\}};
     \node[below of=service,node distance=3.6cm] {Serviço};
     \node[below of=client,node distance=1.8cm] {\ldots};
     \node[right of=json,node distance=1.8cm] {\ldots};
@@ -122,12 +122,12 @@ A fim de melhorar o atual modelo de comunicação cliente-servidor, é proposto 
     \draw [->] ([yshift=0.25cm]broker.east) -- ([yshift=0.25cm]api.west);
     \draw [->] (api) -- (broker);
     \draw [->,dashed] (clientConfigCode) -| ([xshift=-0.25cm]broker.north);
-    \draw [->,dashed] (description) -| ([xshift=0.25cm]broker.north);
+    \draw [->,dashed] (metadata) -| ([xshift=0.25cm]broker.north);
   \end{tikzpicture}
   \caption{Modelo proposto para evitar contrato de comunicação}
 \end{figure}
 
-O modelo também visa otimizar a busca de dados de clientes através da possibilidade de implementação de algoritmos na ferramenta que direcionam o acesso em APIs de serviços baseado no menor tamanho na resposta de dados e número requisições em pontos de acesso. Além disso, propõe um ambiente escalável para a composição de dados através de serviços, visto na figura 20.
+Além de eliminar o contrato, o modelo também visa automatizar o acesso de APIs na busca por dados em clientes. Através algoritmos implementados na ferramenta para transformação de consultas em requisições, é feito a escolha do caminho de melhor custo benefício em relação aos serviços disponíveis para acesso. Além disso, o modelo proporciona um ambiente escalável para a composição de dados através de serviços, visto na figura 20.
 
 \begin{figure}[H]
   \centering
@@ -147,14 +147,14 @@ O modelo também visa otimizar a busca de dados de clientes através da possibil
     \draw [<->] (tool) -- (service2);
     \draw [<->] (tool) -- (service3);
   \end{tikzpicture}
-  \caption{Composição de serviços com a ferramenta do modelo proposto}
+  \caption{Composição de serviços através da ferramenta do modelo}
 \end{figure}
 
 \textbf{Especificação de ferramenta baseado no modelo proposto} \\
 
 Para aumentar as chances de aceitação do modelo por desenvolvedores, foi preciso pensar em uma especificação de ferramenta que apresente uma interface de baixa curva de aprendizagem, um fluxo de execução replicável/agnóstico à plataforma e, acima de tudo, cause pouco impacto na base de código de clientes. Por isso, a ferramenta proposta neste projeto foi desenvolvida pensando em reutilizar tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
 
-A primeira ideia foi estudar o uso da tecnologia GraphQL como principal linguagem para intermediação na comunicação. Além de promover, a tecnologia é base para os demais fluxos de execução e possibilita que clientes escrevam um código de busca que também funcione em APIs GraphQL sem a ferramenta. O outro caso foi em trabalhar com formatos abertos de descrição de APIs, como por exemplo o JSON Schema. Através de adaptadores, a ferramenta permite acelerar a integração com serviços que já oferecem soluções de descrição de suas APIs.
+A primeira ideia foi estudar o uso da tecnologia GraphQL como principal tecnologia para intermediação na comunicação. Além de promover, GraphQL é base para os demais fluxos de execução e possibilita que clientes escrevam um código de busca que não fique preso à uma interface de acesso. O outro caso foi em trabalhar com formatos abertos de descrição de APIs, como por exemplo o JSON Schema. Através de adaptadores, a ferramenta permite acelerar a integração com serviços que já oferecem soluções de descrição de suas APIs.
 
 A seguir é feito a análise dos dois fluxos de execução descritos pela especificação da ferramenta. O primeiro, visto na figura 21, é o processo criação do intermediador, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, visto na figura 22, é o processo de consulta de dados no intermediador, onde leva como entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
 
@@ -200,4 +200,4 @@ A seguir é feito a análise dos dois fluxos de execução descritos pela especi
 
 O processo de criação do intermediador começa resolvendo cada função de configuração de serviço e construindo um esquema GraphQL para cada um. Após, é feito o invólucro dos campos de cada esquema e para cada um estende-se até gerar um esquema GraphQL unificado.
 
-O processo de consulta de dados no intermediador começa através de uma chamada de consulta GraphQL no esquema GraphQL unificado. Primeiro é convertido a estrutura AST em um formato mais simplificado para se trabalhar. Após, transforma-se o AST principal em um AST especifico para cada serviço. Com as árvores de consulta, é feito a redução aplicando-se um algoritmo de otimização de busca. Após, é desfeito o invólucro de cada AST para poder realizar a busca de dados no serviço correspondente. Por fim, ao retornar os dados, realiza-se novamente o invólucro e estende-se cada dado até gerar um dado unificado.
+O processo de consulta de dados no intermediador começa através de uma chamada de consulta GraphQL no esquema gerado. Primeiro é convertido a estrutura AST em um formato mais simplificado para se trabalhar. Após, transforma-se o AST principal em um AST especifico para cada serviço. Com as árvores de consulta, é feito a redução aplicando-se um algoritmo de otimização de busca. Após, é desfeito o invólucro de cada AST para poder realizar a busca de dados no serviço correspondente. Por fim, ao retornar os dados, realiza-se novamente o invólucro e estende-se cada dado até gerar um dado unificado.

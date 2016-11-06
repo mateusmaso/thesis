@@ -1,12 +1,12 @@
 \section{Implementação}
 
-A partir do planejamento de projeto e especificação da ferramenta baseado no modelo proposto, foram implementados dez funções no total para testes em plataforma web. Quatro delas responsáveis por gerar o esquema, criando o intermediador. Três para analisar o AST das consultas e outras três para transformar o AST em requisições para API de cada serviço. Além disso, três dessas funções são extensíveis (substituíveis) através de adaptadores, sendo que apenas uma delas é pública.
+A fim de aplicar a especificação da ferramenta baseado no modelo proposto no planejamento de projeto, foram implementados um total de dez funções para o uso de clientes na plataforma web. Dentre as funções, quatro delas são responsáveis por criar o intermediador gerando um esquema GraphQL. Três para analisar as consultas através do formato AST e outras três para transformar as consultas em requisições na API de serviços. 
 
-A seguir, é descrito brevemente as 3 categorias de funções, junto com seu objetivo e a assinatura de cada método escrito em JavaScript. \\
+Nota-se que, apenas quatro dessas dez funções são públicas e expostas para o cliente. Sendo uma delas (composeSchema) a principal para configuração/uso da ferramenta e, as outras três (buildSchema, transformAST, fetchData), para uso interno de adaptadores. A seguir, é descrito brevemente as 3 categorias de funções, junto com seu objetivo e a assinatura de cada método escrito em JavaScript. \\
 
 \textbf{Funções para criação do esquema} \\
 
-Representam quatro funções e seu principal objetivo é compor, de forma assíncrona, um esquema GraphQL unificado a partir das funcões de configuração de cada serviço. Sendo "composeSchema" a única função pública da ferramenta.
+Representam quatro funções e seu principal objetivo é compor, de forma assíncrona, um esquema GraphQL unificado a partir das funcões de configuração de cada serviço.
 
 \begin{figure}[H]
   \centering
@@ -31,9 +31,9 @@ Representam quatro funções e seu principal objetivo é compor, de forma assín
   \caption{Assinatura das funções para criação do esquema}
 \end{figure}
 
-\textbf{Funções para análise de AST} \\
+\textbf{Funções para análise de consulta} \\
 
-São três funções que buscam analisar o AST gerado por uma consulta GraphQL no esquema através de um algoritmo que simplifica, transforma e reduz em um AST específico e performático para cada serviço.
+São três funções que buscam analisar consultas GraphQL feitas no esquema gerado em formato AST. A análise descreve algoritmos que simplificam, transformam e reduzem o AST principal da consulta, quebrando em ASTs específicos para cada serviço.
 
 \begin{figure}[H]
   \centering
@@ -54,12 +54,12 @@ São três funções que buscam analisar o AST gerado por uma consulta GraphQL n
     asts: [SimplifiedAST]
   ): void
   \end{minted}
-  \caption{Assinatura das funções para análise de AST}
+  \caption{Assinatura das funções para análise de consulta}
 \end{figure}
 
 \textbf{Funções para busca de dados} \\
 
-São as três últimas funções responsáveis por converter os ASTs retornados e realizar as respectivas requisições para a API de cada serviço em busca de dados.
+São as três últimas funções responsáveis por converter os ASTs de cada serviço e realizar as respectivas requisições para a API em busca de dados.
 
 \begin{figure}[H]
   \centering

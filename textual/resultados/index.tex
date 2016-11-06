@@ -5,10 +5,12 @@
   \begin{tikzpicture}
   \begin{axis}[
       ybar stacked,
+      ymax=1,
+      ymin=0,
       enlargelimits=0.15,
       legend style={at={(0.5,-0.20)},
         anchor=north,legend columns=-1},
-      ylabel={Índice de Acerto},
+      ylabel={Índice de acerto},
       symbolic x coords={C1, C2, C3, C4, 
           C5, C6, C7},
       xtick=data,
@@ -31,10 +33,12 @@
   \begin{tikzpicture}
   \begin{axis}[
       ybar stacked,
+      ymax=1,
+      ymin=0,
       enlargelimits=0.15,
       legend style={at={(0.5,-0.20)},
         anchor=north,legend columns=-1},
-      ylabel={Índice de Acerto},
+      ylabel={Índice de acerto},
       symbolic x coords={C1, C2, C3, C4, 
           C5, C6, C7},
       xtick=data,
@@ -57,21 +61,19 @@
   \begin{tikzpicture}
   \begin{axis}[
       ybar,
+      ymax=400,
+      ymin=100,
       enlargelimits=0.15,
-      legend style={at={(0.5,-0.15)},
-        anchor=north,legend columns=-1},
-      ylabel={Número de Requisições},
-      symbolic x coords={C3,C5,C6},
+      ylabel={Número de requisições},
+      symbolic x coords={Cliente 1,Cliente 2},
       xtick=data,
       nodes near coords,
       nodes near coords align={vertical},
       ]
-  \addplot coordinates {(C3,360)};
-  \addplot coordinates {(C3,194)};
-  \legend{Cliente 1,Cliente 2}
+  \addplot coordinates {(Cliente 1,360) (Cliente 2,194)};
   \end{axis}
   \end{tikzpicture}
-  \caption{Comparação no número de requisições das mudanças OK}
+  \caption{Comparação no número de requisições C3}
 \end{figure}
 
 \begin{figure}[H]
@@ -79,29 +81,30 @@
   \begin{tikzpicture}
   \begin{axis}[
       ybar,
+      ymax=230,
+      ymin=200,
       enlargelimits=0.15,
-      legend style={at={(0.5,-0.15)},
-        anchor=north,legend columns=-1},
-      ylabel={Tamanho de Resposta (kb)},
-      symbolic x coords={C3,C5,C6},
+      ylabel={Tamanho de resposta (kb)},
+      symbolic x coords={Cliente 1,Cliente 2},
       xtick=data,
       nodes near coords,
       nodes near coords align={vertical},
       ]
-  \addplot coordinates {(C3,225.777)};
-  \addplot coordinates {(C3,221.547)};
-  \legend{Cliente 1,Cliente 2}
+  \addplot coordinates {(Cliente 1,225.777) (Cliente 2,221.547)};
   \end{axis}
   \end{tikzpicture}
-  \caption{Comparação no tamanho de resposta das mudanças OK}
+  \caption{Comparação no tamanho de resposta C3}
 \end{figure}
 
-\begin{tikzpicture}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
 	\begin{axis}[
-        ylabel={Tempo de Overhead (s)},
+        ybar interval,
+        ylabel={Tempo gasto (s)},
         legend style={at={(0.5,-0.15)},
         anchor=north,legend columns=-1},
-		smooth,
+        const plot,
 		stack plots=y,
 		area style,
         symbolic x coords={C1,C2,C3,C4},
@@ -114,4 +117,6 @@
 		\closedcycle;
     \legend{Processamento,Busca de Metadados}
 	\end{axis}
-\end{tikzpicture}
+  \end{tikzpicture}
+  \caption{Overhead da ferramenta}
+\end{figure}
