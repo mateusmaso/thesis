@@ -1,6 +1,6 @@
 \section{Implementação}
 
-A fim de aplicar a especificação da ferramenta proposta no planejamento de projeto, foram implementados um total de dez funções para o uso de clientes da plataforma web. Dentre as funções, quatro delas são responsáveis por criar o intermediador gerando um esquema GraphQL. Três para analisar as consultas através do formato AST e outras três para transformar as consultas em requisições na API de serviços. 
+A fim de aplicar a especificação da ferramenta proposta no planejamento de projeto, foram implementados um total de dez funções para o uso de clientes da plataforma web. Dentre as funções, quatro delas são responsáveis por criar o intermediador gerando um esquema GraphQL. Três para analisar as consultas através do formato AST e outras três para transformar as consultas em requisições na API de serviços.
 
 Nota-se que, apenas quatro dessas dez funções são públicas e expostas para o cliente. Sendo uma delas (composeSchema) a principal para configuração/uso da ferramenta e, as outras três (buildSchema, transformAST, fetchData), para serem sobrescritas por adaptadores. A seguir, é descrito brevemente as 3 categorias de funções, junto com seu objetivo e a assinatura JavaScript de cada função. \\
 
@@ -20,7 +20,7 @@ Representam quatro funções e seu principal objetivo é compor, de forma assín
   ): Promise<GraphQLSchema>
 
   function wrapSchema(
-    schema: GraphQLSchema, 
+    schema: GraphQLSchema,
     wrapper: JSON
   ): Promise<GraphQLSchema>
 
@@ -28,7 +28,7 @@ Representam quatro funções e seu principal objetivo é compor, de forma assín
     schemas: [GraphQLSchema]
   ): Promise<GraphQLSchema>
   \end{minted}
-  \caption{Assinatura das funções para criação do esquema.}
+  \caption{Assinatura das funções para criação do esquema}
 \end{figure}
 
 \textbf{Funções para análise de consulta} \\
@@ -39,22 +39,22 @@ São três funções que buscam analisar consultas GraphQL feitas no esquema ger
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
   function simplifyAST(
-    value: AST, 
+    value: AST,
     info: JSON
   ): SimplifiedAST
 
   function transformAST(
     metadata: JSON,
-    schema: GraphQLSchema, 
+    schema: GraphQLSchema,
     ast: SimplifiedAST
   ): SimplifiedAST
 
   function reduceASTs(
-    rootAST: SimplifiedAST, 
+    rootAST: SimplifiedAST,
     asts: [SimplifiedAST]
   ): void
   \end{minted}
-  \caption{Assinatura das funções para análise de consulta.}
+  \caption{Assinatura das funções para análise de consulta}
 \end{figure}
 
 \textbf{Funções para busca de dados} \\
@@ -65,22 +65,22 @@ São as três últimas funções responsáveis por converter os ASTs de cada ser
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
   function unwrapAST(
-    ast: SimplifiedAST, 
-    schema: GraphQLSchema, 
+    ast: SimplifiedAST,
+    schema: GraphQLSchema,
     wrapper: JSON
   ): SimplifiedAST
 
   function fetchData(
-    metadata: JSON, 
-    ast: SimplifiedAST, 
+    metadata: JSON,
+    ast: SimplifiedAST,
     url: String
   ): Promise<JSON>
 
   function wrapData(
-    data: JSON, 
-    schema: GraphQLSchema, 
+    data: JSON,
+    schema: GraphQLSchema,
     wrapper: Wrapper
   ): Promise<JSON>
   \end{minted}
-  \caption{Assinatura das funções para busca de dados.}
+  \caption{Assinatura das funções para busca de dados}
 \end{figure}

@@ -33,12 +33,12 @@ No entanto, para que se possa manter garantia na comunicação, é necessário u
     \draw [->] ([yshift=0.25cm]clientFetchCode.east) -- ([yshift=0.25cm]api.west);
     \draw [->] (api) -- (clientFetchCode);
   \end{tikzpicture}
-  \caption{Modelo de comunicação entre cliente e serviço.}
+  \caption{Modelo de comunicação entre cliente e serviço}
 \end{figure}
 
 O modelo de comunicação representado pode não revelar possíveis problemas para serviços com pouca demanda de dados e diversidade de clientes. Contudo, ao longo do tempo, com o aumento na quantidade de contratos, mudanças podem se tornar difíceis, como, por exemplo, as de fluxo de dados\footnote{
   Fluxo de acesso na interface pelo cliente em busca de dados no serviço.
-} nas interfaces de acesso. 
+} nas interfaces de acesso.
 
 Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Elas ocorrem para abraçar a constante transformação na demanda de dados por clientes. Com isso, busca-se manter uma comunicação eficiente com redução no número de chamadas e tamanho de dados feitas na API. Essas mudanças podem ser desde uma simples alteração no nome de um método ou número argumentos, até as mais complexas como dados de retorno e estilo de arquitetura. A figura 18 mostra um exemplo de fluxo de dados que um cliente executa em busca de dados remotos na API de um serviço.
 
@@ -59,7 +59,7 @@ Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Ela
     \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
     \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
   \end{tikzpicture}
-  \caption{Fluxo de dados entre cliente e API.}
+  \caption{Fluxo de dados entre cliente e API}
 \end{figure}
 
 Felizmente, o impacto nos clientes com as mudanças no fluxo de dados de uma API são previsíveis, pois afetam diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos nas estruturas de dados\footnote{
@@ -90,7 +90,7 @@ Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o i
 
 \\\bottomrule
   \end{tabularx}
-  \caption{Problema-solução na concepção do novo modelo.}
+  \caption{Problema-solução na concepção do novo modelo}
 \end{table}
 
 \textbf{Proposta de modelo} \\
@@ -126,7 +126,7 @@ A fim de melhorar o modelo de comunicação cliente-servidor apresentado, é pro
     \draw [->,dashed] (clientConfigCode) -| ([xshift=-0.25cm]broker.north);
     \draw [->,dashed] (metadata) -| ([xshift=0.25cm]broker.north);
   \end{tikzpicture}
-  \caption{Modelo proposto para evitar contrato de comunicação.}
+  \caption{Modelo proposto para evitar contrato de comunicação}
 \end{figure}
 
 Além de propor a eliminação de contrato, o modelo visa também automatizar o acesso de clientes em APIs na busca por dados. Através algoritmos de implementação na ferramenta, é feito a escolha do caminho de acesso de melhor custo benefício em relação aos serviços disponíveis para o cliente. Além disso, o modelo proporciona um ambiente escalável para a composição de dados através de serviços, visto na figura 20.
@@ -156,7 +156,7 @@ Além de propor a eliminação de contrato, o modelo visa também automatizar o 
 
 Para a aceitação do modelo em ambientes de desenvolvimento de clientes, foi preciso pensar em uma especificação de ferramenta que apresentasse uma interface de baixa curva de aprendizagem, um fluxo de execução replicável e agnóstico à plataforma, além do baixo impacto na base de código de clientes. Por isso, a ferramenta proposta neste projeto foi desenvolvida pensando em reutilizar tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
 
-Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover o seu uso, GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso à uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
+Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover o seu uso, GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso à uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
 
 A seguir é feito a análise dos dois fluxos de execução descritos pela especificação da ferramenta. O primeiro, visto na figura 21, é o processo criação do intermediador, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, visto na figura 22, é o processo de consulta de dados no intermediador, onde leva como entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
 
@@ -177,7 +177,7 @@ A seguir é feito a análise dos dois fluxos de execução descritos pela especi
   \end{tikzpicture}
   \caption{Criação do intermediador (esquema)}
 \end{figure}
- 
+
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[font=\small,text width=5em, text centered]
