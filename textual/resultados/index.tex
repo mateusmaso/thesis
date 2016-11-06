@@ -1,5 +1,7 @@
 \chapter{Resultados}
 
+Falar que no total foram rodados 8 testes, 4 para o cliente 1 e 4 para o cliente 2. E o que se observou foi que o cliente 2 teve um índice de acerto elevado que o cliente 1. No cliente 1, \% de acerto, etc. Visto na figura 28 e 29.
+
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}
@@ -56,6 +58,8 @@
   \caption{Índice de acerto com o uso da ferramenta}
 \end{figure}
 
+Falar que no caso do C3, em que os dois conseguiram responder. Houve uma investigação mais a fundo e percebeu-se que o cliente 2 optou por pontos de acesso com menor número de requisição e tamanho de dados. Visto na figura 30 e 31.
+
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}
@@ -95,6 +99,8 @@
   \end{tikzpicture}
   \caption{Comparação no tamanho de resposta C3}
 \end{figure}
+
+Por fim, houve um overhead de tantos segundos. A maioria está no bootstrap pra buscar os metadados. Isso é um tempo em que o cliente não pode fazer a requisição ainda.
 
 \begin{figure}[H]
   \centering

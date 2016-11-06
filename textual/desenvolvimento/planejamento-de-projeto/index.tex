@@ -1,16 +1,16 @@
 \section{Planejamento de Projeto}
 
-Para um melhor entendimento das etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização, proposta de modelo, além de detalhes na especificação da ferramenta baseado no modelo proposto, como interface e fluxo de execução. \\
+Para um melhor entendimento das etapas de desenvolvimento, antes é preciso conhecer o contexto do problema que deu origem ao processo de idealização, a proposta de modelo e detalhes na especificação da ferramenta baseado no modelo proposto, como interface e fluxo de execução. \\
 
 \textbf{Processo de idealização} \\
 
-Atualmente, para que clientes possam consumir dados remotos, é preciso que haja um meio de buscá-los antes de executar qualquer lógica que dependa deles. Para isso, é preciso a implementação de um código de busca para acesso à dados em serviços\footnote{
+Atualmente, para que clientes possam consumir dados remotos, é preciso que haja um meio de buscá-los antes de executar qualquer lógica que dependa deles. Para isso, é preciso a implementação de um código de busca para acesso aos dados em serviços\footnote{
   Infraestrutura distribuída (servidores, banco de dados, etc) que respondem a pedidos de operações oriundas de clientes em forma de requisições de API.
 } através de uma rede.
 
 No entanto, para que se possa manter garantia na comunicação, é necessário um contrato de acesso entre o cliente e a interface do serviço. Isso porque, após a implementação do código de busca pelo cliente, qualquer mudança em pontos de acesso\footnote{
   Parte de uma interface exposta por um serviço através de um canal de comunicação.
-} da API podem colocar em risco sua funcionalidade e comprometer parte da lógica da aplicação. Este contrato é, portanto, representado no modelo de comunicação da figura 17 através das chamadas entre o código de busca do cliente e API do serviço.
+} da API podem colocar em risco a funcionalidade e comprometer a lógica da aplicação. Este contrato é, portanto, representado no modelo de comunicação da figura 17 através das chamadas entre o código de busca do cliente e API do serviço.
 
 \begin{figure}[H]
   \centering

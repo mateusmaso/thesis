@@ -108,148 +108,64 @@ No intuito de acertar as respostas, a seguir na tabela 7, é descrito o fluxo de
   \caption{Fluxo de dados para responder as perguntas}
 \end{table}
 
-\textbf{Mudanças no fluxo de dados} \\
+\textbf{Consultas e metadados} \\
 
-Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de mudanças não acumulativas no fluxo de dados. Cada mudança busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para que a ferramenta consiga operar direito. Na tabela 8, é descrito o changelog das mudanças realizadas.
+Para que fosse possível realizar consultas na SWAPI sobre a ferramenta, antes foi usado o formato JSON Hyper-Schema para descrição de metadados da API, visto na figura 26. Além disso, foi criado um adaptador para a ferramenta que pudesse analisar e interpretar o formato desses metadados. Por fim, na figura 27, é descrito as consultas em GraphQL que passará pelo intermediador para cada pergunta implementado no código de busca do cliente com a ferramenta.
 
-\begin{table}[H]
+\begin{figure}[H]
   \centering
-  \begin{tabular}{|c|c|c|}
-    \hline
-    Mudança & Descrição & Changelog \\
-    \hline
-    C1 & Mudança no endereço de ponto de acesso. & \begin{minipage}[t]{0.8\textwidth}
-      \begin{itemize}
-        \item Renomeação da URI /films para /movies.
-        \item Renomeação da URI /films/:id para /movies/:id
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-    C2 & Mudança no nível de estrutura de resposta. & \begin{minipage}[t]{0.8\textwidth}
-      \begin{itemize}
-        \item Expansão do campo pilots da URI /starships/:id
-        \item Expansão do campo pilots da URI /vehicles/:id
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-    C3 & Adição de ponto de acesso otimizado. & \begin{minipage}[t]{0.8\textwidth}
-      \begin{itemize}
-        \item[\textbf{+}] Adição da URI /tatooine.
-        \item[\textbf{+}] Adição da URI /films/:id/characters.
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-    C4 & Remoção de ponto de acesso deprecado. & \begin{minipage}[t]{0.8\textwidth}
-      \begin{itemize}
-        \item[\textbf{+}] Adição da URI /people/:id/homeworld.
-        \item[\textbf{$-$}] Remoção da URI /planet/:id.
-      \end{itemize}
-    \end{minipage} \\
-    \hline
-  \end{tabular}
-  \caption{Changelog do novo fluxo de dado para cada mudança}
-\end{table}
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
+    {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema#",
+      "title": "swapi",
+      "type": "object",
+      "definitions": {
+        "allFilms": { ... },
+        "film": { ... },
+        "people": { ... },
+        "planet": { ... },
+        "species": { ... },
+        "starship": { ... },
+        "vehicle": { ... }
+      },
+      "properties": {
+        "allFilms": { "$ref": "#/definitions/allFilms" },
+        "film": { "$ref": "#/definitions/film" },
+        "people": { "$ref": "#/definitions/people" },
+        "planet": { "$ref": "#/definitions/planet" },
+        "species": { "$ref": "#/definitions/species" },
+        "starship": { "$ref": "#/definitions/starship" }
+      },
+      "links": [{
+        "rel": "allFilms",
+        "href": "/films",
+        "targetSchema": {
+          "$ref": "#/definitions/allFilms"
+        }
+      }, {
+        "rel": "film",
+        "href": "/films/{filmID}",
+        "schema": { ... },
+        "targetSchema": {
+          "$ref": "#/definitions/film"
+        }
+      }, {
+        "rel": "planet",
+        "href": "/planets/{planetID}",
+        "schema": { ... },
+        "targetSchema": {
+          "$ref": "#/definitions/planet"
+        }
+      }]
+    }
+  \end{minted}
+  \caption{JSON Hyper-Schema para SWAPI}
+\end{figure}
 
-% \begin{table}[H]
-%   \centering
-%   \begin{tabular}{|c|c|c|c|}
-%     \hline
-%     Mudança & Q1 & Q2 & Q3 \\
-%     \hline
-%     C1 & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/movies
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/planet/:id
-%       \end{itemize}
-%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/planets/1
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/species/:id
-%       \end{itemize}
-%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/movies/1
-%         \item[\textbf{GET}] /api/starships/:id
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/vehicles/:id
-%         \item[\textbf{GET}] /api/people/:id
-%       \end{itemize}
-%     \end{minipage} \\
-%     \hline
-%     C2 & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/films
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/planet/:id
-%       \end{itemize}
-%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/planets/1
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/species/:id
-%       \end{itemize}
-%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/films/1
-%         \item[\textbf{GET}] /api/starships/:id
-%         \item[\textbf{GET}] /api/vehicles/:id
-%       \end{itemize}
-%     \end{minipage} \\
-%     \hline
-%     C3 & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/films
-%         \item[\textbf{GET}] /api/films/:id/characters
-%         \item[\textbf{GET}] /api/planet/:id
-%       \end{itemize}
-%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/tatooine
-%         \item[\textbf{GET}] /api/species/:id
-%       \end{itemize}
-%     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/films/1
-%         \item[\textbf{GET}] /api/starships/:id
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/vehicles/:id
-%         \item[\textbf{GET}] /api/people/:id
-%       \end{itemize}
-%     \end{minipage} \\
-%     \hline
-%     C4 & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/films
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/people/:id/homeworld
-%       \end{itemize}
-%     \end{minipage} & - & \begin{minipage}[t]{0.3\textwidth}
-%       \begin{itemize}
-%         \item[\textbf{GET}] /api/films/1
-%         \item[\textbf{GET}] /api/starships/:id
-%         \item[\textbf{GET}] /api/people/:id
-%         \item[\textbf{GET}] /api/vehicles/:id
-%         \item[\textbf{GET}] /api/people/:id
-%       \end{itemize}
-%     \end{minipage} \\
-%     \hline
-%   \end{tabular}
-%   \caption{Novo fluxo de dados para cada mudança}
-% \end{table}
-
-\textbf{Consultas no intermediador} \\
-
-\begin{table}[H]
+\begin{figure}[H]
   \centering
-  \begin{tabular}{|c|c|}
-    \hline
-    Pergunta & Consulta GraphQL \\
-    \hline
-    Q1 & \begin{minipage}[t]{0.5\textwidth}
-      \begin{minted}{text}
-      {
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
+      query q1 {
         allFilms {
           title
           characters {
@@ -259,12 +175,8 @@ Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de
           }
         }
       }
-      \end{minted}
-    \end{minipage} \\
-    \hline
-    Q2 & \begin{minipage}[t]{0.5\textwidth}
-      \begin{minted}{text}
-      {
+      
+      query q2 {
         planet(planetID: 1) {
           residents {
             species {
@@ -273,12 +185,8 @@ Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de
           }
         }
       }
-      \end{minted}
-    \end{minipage} \\
-    \hline
-    Q3 & \begin{minipage}[t]{0.5\textwidth}
-      \begin{minted}{text}
-      {
+      
+      query q3 {
         film(filmID: 1) {
           starships {
             pilots {
@@ -292,11 +200,58 @@ Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de
           }
         }
       }
-      \end{minted}
+  \end{minted}
+  \caption{Consultas GraphQL para as perguntas}
+\end{figure}
+
+\textbf{Mudanças no fluxo de dados} \\
+
+Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de mudanças não acumulativas no fluxo de dados. Cada mudança busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para que a ferramenta consiga operar direito. Na tabela 8, é descrito o changelog das mudanças realizadas.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Mudança & Descrição & Changelog \\
+    \hline
+    C1 & \begin{minipage}[t]{0.3\textwidth}
+      Mudança no endereço de ponto de acesso. 
+    \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item Renomeação da URI /films para /movies.
+        \item Renomeação da URI /films/:id para /movies/:id
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C2 & \begin{minipage}[t]{0.3\textwidth}
+      Mudança no nível de estrutura de resposta. 
+    \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item Expansão do campo pilots da URI /starships/:id
+        \item Expansão do campo pilots da URI /vehicles/:id
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C3 & \begin{minipage}[t]{0.3\textwidth}
+      Adição de ponto de acesso otimizado. 
+    \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item[\textbf{+}] Adição da URI /tatooine.
+        \item[\textbf{+}] Adição da URI /films/:id/characters.
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C4 & \begin{minipage}[t]{0.3\textwidth}
+      Remoção de ponto de acesso deprecado. 
+    \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item[\textbf{+}] Adição da URI /people/:id/homeworld.
+        \item[\textbf{$-$}] Remoção da URI /planet/:id.
+      \end{itemize}
     \end{minipage} \\
     \hline
   \end{tabular}
-  \caption{Consultas GraphQL para as perguntas}
+  \caption{Changelog do novo fluxo de dado para cada mudança}
 \end{table}
 
 \textbf{Variáveis} \\
