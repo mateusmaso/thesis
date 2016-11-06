@@ -58,13 +58,13 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
     \hline
     Pergunta & Fluxo de Dados & Número de requisições \\
     \hline
-    Q1 & \begin{minipage}[t]{0.4\textwidth}
+    Q1 & \begin{minipage}[t]{0.3\textwidth}
       \begin{itemize}
         \item[\textbf{GET}] /api/films
         \item[\textbf{GET}] /api/people/:id
         \item[\textbf{GET}] /api/planet/:id
       \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
+    \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item[\textbf{x1}] films
         \item[\textbf{x162}] films.characters
@@ -72,13 +72,13 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
       \end{itemize}
     \end{minipage} \\
     \hline
-    Q2 & \begin{minipage}[t]{0.4\textwidth}
+    Q2 & \begin{minipage}[t]{0.3\textwidth}
       \begin{itemize}
         \item[\textbf{GET}] /api/planets/1
         \item[\textbf{GET}] /api/people/:id
         \item[\textbf{GET}] /api/species/:id
       \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
+    \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item[\textbf{x1}] planet
         \item[\textbf{x10}] planet.residents
@@ -86,7 +86,7 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
       \end{itemize}
     \end{minipage} \\
     \hline
-    Q3 & \begin{minipage}[t]{0.4\textwidth}
+    Q3 & \begin{minipage}[t]{0.3\textwidth}
       \begin{itemize}
         \item[\textbf{GET}] /api/films/1
         \item[\textbf{GET}] /api/starships/:id
@@ -94,7 +94,7 @@ Falar sobre como é feito o fluxo de dados para acesso das informações.
         \item[\textbf{GET}] /api/vehicles/:id
         \item[\textbf{GET}] /api/people/:id
       \end{itemize}
-    \end{minipage} & \begin{minipage}[t]{0.4\textwidth}
+    \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item[\textbf{x1}] film
         \item[\textbf{x8}] film.starships
@@ -127,31 +127,31 @@ Falar sobre as alterações no fluxo de dados mais em detalhe.
     \hline
     Mudança & Descrição \\
     \hline
-    C1 & \begin{minipage}[t]{0.4\textwidth}
+    C1 & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
-        \item[\textbf{+}] URI /films renamed to /movies.
-        \item[\textbf{$-$}] /films/:id renamed to /movies/:id
+        \item Renomeação da URI /films para /movies.
+        \item Renomeação da URI /films/:id para /movies/:id
       \end{itemize}
     \end{minipage} \\
     \hline
-    C2 & \begin{minipage}[t]{0.4\textwidth}
+    C2 & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
-        \item[\textbf{+}] pilots field from URI /starships/:id expanded.
-        \item[\textbf{$-$}] pilots field from URI /vehicles/:id expanded.
+        \item Expansão do campo pilots da URI /starships/:id
+        \item Expansão do campo pilots da URI /vehicles/:id
       \end{itemize}
     \end{minipage} \\
     \hline
-    C3 & \begin{minipage}[t]{0.4\textwidth}
+    C3 & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
-        \item[\textbf{+}] URI /tatooine added.
-        \item[\textbf{$-$}] URI /films/:id/characters added.
+        \item[\textbf{+}] Adição da URI /tatooine.
+        \item[\textbf{+}] Adição da URI /films/:id/characters.
       \end{itemize}
     \end{minipage} \\
     \hline
-    C4 & \begin{minipage}[t]{0.4\textwidth}
+    C4 & \begin{minipage}[t]{0.8\textwidth}
       \begin{itemize}
-        \item[\textbf{+}] URI /planet/:id removed.
-        \item[\textbf{$-$}] URI /people/:id/homeworld added.
+        \item[\textbf{+}] Adição da URI /people/:id/homeworld.
+        \item[\textbf{$-$}] Remoção da URI /planet/:id.
       \end{itemize}
     \end{minipage} \\
     \hline
@@ -179,6 +179,47 @@ Falar sobre as alterações no fluxo de dados mais em detalhe.
       \end{itemize}
     \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
       \begin{itemize}
+        \item[\textbf{GET}] /api/movies/1
+        \item[\textbf{GET}] /api/starships/:id
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/vehicles/:id
+        \item[\textbf{GET}] /api/people/:id
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C2 & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/planet/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/planets/1
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/species/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films/1
+        \item[\textbf{GET}] /api/starships/:id
+        \item[\textbf{GET}] /api/vehicles/:id
+      \end{itemize}
+    \end{minipage} \\
+    \hline
+    C3 & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films
+        \item[\textbf{GET}] /api/films/:id/characters
+        \item[\textbf{GET}] /api/planet/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/tatooine
+        \item[\textbf{GET}] /api/species/:id
+      \end{itemize}
+    \end{minipage} & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
         \item[\textbf{GET}] /api/films/1
         \item[\textbf{GET}] /api/starships/:id
         \item[\textbf{GET}] /api/people/:id
@@ -187,11 +228,21 @@ Falar sobre as alterações no fluxo de dados mais em detalhe.
       \end{itemize}
     \end{minipage} \\
     \hline
-    C2 \\
-    \hline
-    C3 \\
-    \hline
-    C4 \\
+    C4 & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/people/:id/homeworld
+      \end{itemize}
+    \end{minipage} & - & \begin{minipage}[t]{0.3\textwidth}
+      \begin{itemize}
+        \item[\textbf{GET}] /api/films/1
+        \item[\textbf{GET}] /api/starships/:id
+        \item[\textbf{GET}] /api/people/:id
+        \item[\textbf{GET}] /api/vehicles/:id
+        \item[\textbf{GET}] /api/people/:id
+      \end{itemize}
+    \end{minipage} \\
     \hline
   \end{tabular}
   \caption{Novo fluxo de dados para cada mudança}
@@ -207,19 +258,54 @@ Falar sobre as alterações no fluxo de dados mais em detalhe.
     \hline
     Q1 & \begin{minipage}[t]{0.5\textwidth}
       \begin{minted}{text}
-      int main() {
-        printf("hello, world");
-        return 0;
+      {
+        allFilms {
+          title
+          characters {
+            homeworld {
+              climate
+            }
+          }
+        }
       }
       \end{minted}
     \end{minipage} \\
     \hline
-    Q2 & Busca pessoa pelo id \\
+    Q2 & \begin{minipage}[t]{0.5\textwidth}
+      \begin{minted}{text}
+      {
+        planet(planetID: 1) {
+          residents {
+            species {
+              name
+            }
+          }
+        }
+      }
+      \end{minted}
+    \end{minipage} \\
     \hline
-    Q3 & Busca lista de filmes \\
+    Q3 & \begin{minipage}[t]{0.5\textwidth}
+      \begin{minted}{text}
+      {
+        film(filmID: 1) {
+          starships {
+            pilots {
+              name
+            }
+          }
+          vehicles {
+            pilots {
+              name
+            }
+          }
+        }
+      }
+      \end{minted}
+    \end{minipage} \\
     \hline
   \end{tabular}
-  \caption{Pontos de acesso SWAPI para busca de dados}
+  \caption{Consultas GraphQL para as perguntas}
 \end{table}
 
 \textbf{Variáveis} \\
