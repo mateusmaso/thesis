@@ -1,10 +1,10 @@
 \section{Validação}
 
-Com o objetivo de validar o modelo proposto, é feito uma pesquisa comparativa focando o impacto sobre uso da ferramenta implementada em relação à mudanças no fluxo de dados. Para isso será desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API de um serviço REST. Após, será aplicado uma série de mudanças no fluxo de dados da API e coletado os dados para análise do impacto causado no código de busca desses clientes. \\
+Com o objetivo de validar o modelo proposto, é realizada uma pesquisa comparativa com foco no impacto sobre o uso da ferramenta implementada em relação às mudanças no fluxo de dados. Para isso, é desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API de um serviço REST. Por fim, é aplicada uma série de quatro mudanças no fluxo de dados da API e coletados os dados para análise do impacto causado no código de busca desses clientes. \\
 
 \textbf{Escopo de serviço} \\
 
-Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Para o escopo do projeto, será implementado uma API REST que expõe consultas dessas entidades em formato JSON através de pontos de acesso em URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
+Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Dentro do escopo do projeto, é implementado uma API REST que expõe consultas dessas entidades em formato JSON através de pontos de acesso em URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
 
 \begin{table}[H]
   \centering
@@ -42,15 +42,15 @@ Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{
 
 \textbf{Perguntas e respostas esperadas} \\
 
-Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram pensadas em três perguntas de média complexidade, onde fossem envolvidos ao menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno.
+Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram determinadas três perguntas de média complexidade, onde fossem envolvidos ao menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno.
 
 \begin{enumerate}
-\item[\textbf{Q1.}] Qual o nome do filme no qual aparece mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
+\item[\textbf{Q1.}] Qual o nome do filme no qual aparecem mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
 \item[\textbf{Q2.}] Qual o nome da espécie predominante entre os habitantes do planeta "Tatooine"? \textbf{R:} "Droid"
 \item[\textbf{Q3.}] Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? \textbf{R:} "Chewbacca"
 \end{enumerate}
 
-No intuito de acertar as respostas, a seguir na tabela 7, é descrito o fluxo de dados necessário de cada pergunta para a busca de dados por clientes.
+No intuito de atingir as respostas esperadas, a tabela 7 descreve o fluxo de dados necessário de cada pergunta para a busca de dados por clientes.
 
 \begin{table}[H]
   \centering
@@ -110,7 +110,49 @@ No intuito de acertar as respostas, a seguir na tabela 7, é descrito o fluxo de
 
 \textbf{Consultas e metadados} \\
 
-Para que fosse possível realizar consultas na SWAPI sobre a ferramenta, antes foi usado o formato JSON Hyper-Schema para descrição de metadados da API, visto na figura 26. Além disso, foi criado um adaptador para a ferramenta que pudesse analisar e interpretar o formato desses metadados. Por fim, na figura 27, é descrito as consultas em GraphQL que passará pelo intermediador para cada pergunta implementado no código de busca do cliente com a ferramenta.
+Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a SWAPI, foi preciso implementar três consultas GraphQL (uma para cada pergunta), além de descrever os metadados da API REST. Nas consultas da figura 26, foram realizadas apenas a busca de dados necessários para o funcionamento da lógica de resposta. Enquanto aos metadados da figura 27, foram descritos apenas os pontos de acesso utilizados no formato JSON Hyper-Schema, junto com implementação de um adaptador para a ferramenta que consiga interpretar este formato.
+
+\begin{figure}[H]
+  \centering
+  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
+      query q1 {
+        allFilms {
+          title
+          characters {
+            homeworld {
+              climate
+            }
+          }
+        }
+      }
+      
+      query q2 {
+        planet(planetID: 1) {
+          residents {
+            species {
+              name
+            }
+          }
+        }
+      }
+      
+      query q3 {
+        film(filmID: 1) {
+          starships {
+            pilots {
+              name
+            }
+          }
+          vehicles {
+            pilots {
+              name
+            }
+          }
+        }
+      }
+  \end{minted}
+  \caption{Consultas GraphQL para as perguntas}
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -162,51 +204,9 @@ Para que fosse possível realizar consultas na SWAPI sobre a ferramenta, antes f
   \caption{JSON Hyper-Schema para SWAPI}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
-      query q1 {
-        allFilms {
-          title
-          characters {
-            homeworld {
-              climate
-            }
-          }
-        }
-      }
-      
-      query q2 {
-        planet(planetID: 1) {
-          residents {
-            species {
-              name
-            }
-          }
-        }
-      }
-      
-      query q3 {
-        film(filmID: 1) {
-          starships {
-            pilots {
-              name
-            }
-          }
-          vehicles {
-            pilots {
-              name
-            }
-          }
-        }
-      }
-  \end{minted}
-  \caption{Consultas GraphQL para as perguntas}
-\end{figure}
-
 \textbf{Mudanças no fluxo de dados} \\
 
-Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de mudanças não acumulativas no fluxo de dados. Cada mudança busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para que a ferramenta consiga operar direito. Na tabela 8, é descrito o changelog das mudanças realizadas.
+Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de mudanças não acumulativas no fluxo de dados. Cada uma busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para a correta operação da ferramenta. A tabela 8 descreve o changelog das mudanças realizadas.
 
 \begin{table}[H]
   \centering
@@ -256,7 +256,7 @@ Para avaliar o impacto no código dos dois clientes, é proposto quatro tipos de
 
 \textbf{Variáveis} \\
 
-É descrito cinco variáveis para análise dos testes de validação. Todos são quantitativas e coletadas no cliente após cada processo de mudança da API. Totalizando um número de 20 dados possíveis para análise no final de sua execução.
+São descritas cinco variáveis para análise dos quatro testes de validação em cada um dos clientes. Todas são quantitativas e coletadas no cliente após cada processo de mudança da API. Dessa maneira, totalizam um número de 40 dados possíveis para análise no final da execução nos dois clientes.
 
 \begin{table}[H]
   \centering
