@@ -1,21 +1,18 @@
 \chapter{Conclusão}
 
-Com aumento no número de serviços e diversidade de clientes distribuídos pela Web, tornou-se um desafio de desenvolvimento conseguir satisfazer a demanda de dados de clientes em serviços sem estar preso à contratos de acesso. Ao mesmo tempo que novos estilos de arquitetura surgem para minimizar este problema, estes não apresentam compatibilidade aos estilos mais usados no mercado. Dessa forma, surgindo a necessidade de um novo modelo de comunicação cliente-servidor que pudesse simplificar o acesso e composição de dados em serviços independente de seu fluxo de acesso, além de não apresentar ser facilmente vulnerável à suas mudanças ao longo do tempo.
+Tornou-se evidente através deste trabalho a vulnerabilidade do atual modelo de comunicação cliente-servidor em relação à possíveis mudanças no fluxo de dados ocorridas ao longo do tempo em APIs Web. Isso porque, com o aumento no número de serviços e diversidade de clientes distribuídos, existe uma necessidade em satisfazer a demanda de dados por clientes sem causar dependência e criação de contratos de acesso.
 
-Este trabalho realizou um estudo sobre a causa e propôs um melhor modelo de comunicação entre as duas partes interessadas. Além de mostrar a importância de criar um ambiente de desenvolvimento que promove mudanças no fluxo de dados e estilo de arquitetura para facilitar a comunicação.
+O esforço dedicado neste trabalho em resolver esta vulnerabilidade resultou na proposta de um novo modelo de comunicação possível de ser aplicado. Serviços que hesitam realizar mudanças no fluxo de dados devido à quebra de contrato, apresentam agora uma opção de evitar sua criação através da descrição dos metadados de sua API e o uso da ferramenta proposta para a busca de dados em seus clientes.
 
-Desta forma, uma das principais contribuições deste trabalho foi em mostrar que deveriamos estar nos preocupando em não como acessar os dados/entender APIs, mas sim expressar as dependecias que precisamos em cada cliente através de uma linguagem como GraphQL. E deixar que ferramentas automatizem a realização da busca desses dados. O importante é não estarmos desenvolvendo clientes acoplados a APIs de serviços, pois isso dificulta X, Y e Z.
+Além disso, uma das principais contribuição deste trabalho foi em mostrar os benefícios da busca de dados automatizada e a facilidade na composição de serviços que a ferramenta proporciona em clientes. Em seguida, mostrar a importância de escrever código de busca através de expressões como consultas GraphQL, ao invés de chamadas diretas em pontos de acesso de uma API. 
 
-Além disso, este trabalho mostra um ótimo exemplo de outras oportunidades que podem ser criadas a partir da documentação de APIs em linguagens de acesso à maquinas. E que devemos escolher estilos de arquitetura que melhor se encaixam no contexto de desenvolvimento de um serviço. Por exemplo, GraphQL (interpretador) é ótimo para diversos casos, mas muito verboso para um projeto inicial. REST, é ótimo para debugar e está no mercado há muito mais tempo.
+Por fim, o trabalho é um exemplo de oportunidade concretizada graças ao uso formatos para descrição de APIs Web.
 
 \input{textual/conclusao/trabalhos-futuros/index}
 
-Acredita-se que após a analise dos resultados obtidos pela ferramenta, novas.
-
-\begin{enumerate}
-\item Realizar mais testes de validação na transição versões de APIs e estilos de arquitetura
-\item Realizar mais testes de composição de dados em serviços/microserviços.
-\item Criar novos adaptadores de metadados para formatos de descrição de APIs.
-\item Replicar a ferramenta em outras plataformas de desenvolvimento de clientes como mobile.
-\item Melhorar o algoritmo de busca e análise de dados, para diminuição do tempo de overhead.
-\end{enumerate}
+\begin{itemize}
+\item Realizar mais testes de validação como a de composição de serviços, transição entre versões de API e estilos de arquitetura.
+\item Criar novos adaptadores para formatos de descrição de APIs. (OpenAPI, RAML, API Blueprint)
+\item Implementar a especificação da ferramenta em outras plataformas de desenvolvimento. (Android e iOS)
+\item Melhorar o algoritmo de análise de consultas AST.
+\end{itemize}
