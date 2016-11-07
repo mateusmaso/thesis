@@ -1,12 +1,23 @@
 \chapter{Conclusão}
 
-Neste trabalho foi desenvolvido.
+Com aumento no número de serviços distribuídos pela Web e diversidade de clientes para seu consumo, recentemente, tornou-se um desafio de desenvolvimento conseguir satisfazer a demanda de dados em clientes sem estar preso à contratos e causar efeitos colaterais. Dessa forma, criando a necessidade de propor um novo modelo de comunicação cliente-servidor pudesse simplificar o acesso e composição de dados em serviços, além de não estar facilmente vulnerável à mudanças de sua API ao longo do tempo.
 
-Acredita-se que este trabalho terá relevância para estudos posteriores.
+Este trabalho realizou um estudo sobre a causa e propôs um melhor modelo de comunicação entre as duas partes interessadas. Além de mostrar a importância de criar um ambiente de desenvolvimento que promove mudanças no fluxo de dados e estilo de arquitetura para facilitar a comunicação.
 
-Portanto, os resultados obtidos através deste trabalho apresentam
-contribuições importantes.
+Desta  forma,  uma  das principais contribuições deste trabalho foi em mostrar que deveriamos estar nos preocupando em não como acessar os dados/entender APIs, mas sim expressar as dependecias que precisamos em cada cliente através de uma linguagem como GraphQL. E deixar que ferramentas automatizem a realização da busca desses dados. O importante é não estarmos desenvolvendo clientes acoplados a APIs de serviços, pois isso dificulta X, Y e Z.
+
+Além disso, este trabalho mostra um ótimo exemplo de outras oportunidades que podem ser criadas a partir da documentação de APIs em linguagens de acesso à maquinas. E que devemos escolher estilos de arquitetura que melhor se encaixam no contexto de desenvolvimento de um serviço. 
+
+% Por exemplo, GraphQL (interpretador) é ótimo para diversos casos, mas muito verboso para um projeto inicial. REST, é ótimo para debugar e está no mercado há muito mais tempo. Sem contar outras tecnologias que estao sendo descartadas como JSON-RPC ou já foram à muito tempo, por motivos que talvez após a introdução deste modelo estaria podendo ser reavaliadas.
 
 \input{textual/conclusao/trabalhos-futuros/index}
 
-Pretende-se melhorar ..., melhorar ... e ...
+Acredita-se que após a analise dos resultados obtidos pela ferramenta, novas.
+
+\begin{enumerate}
+\item Realizar mais testes de validação na transição versões de APIs e estilos de arquitetura
+\item Realizar mais testes de composição de dados em serviços/microserviços.
+\item Criar novos adaptadores de metadados para formatos de descrição de APIs.
+\item Replicar a ferramenta em outras plataformas de desenvolvimento de clientes como mobile.
+\item Melhorar o algoritmo de busca e análise de dados, para diminuição do tempo de overhead.
+\end{enumerate}
