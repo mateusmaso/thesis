@@ -2,13 +2,13 @@
 
 A fim de aplicar a especificação da ferramenta abordada no planejamento de projeto, foi proposta a implementação de dez funções com três categorias para o uso de clientes na plataforma web. Cada uma dessas funções levantadas resolve um problema para se fazer necessário chegar no objetivo de representar os dois fluxos de execução.
 
-Dentro do conjunto de funções, quatro delas são responsáveis por criar o intermediador. Três funções para analisar as consultas através do formato AST e as demais três para transformar as consultas em requisições na API de serviços. Somente quatro são públicas e expostas para o cliente, sendo uma delas (composeSchema) a principal para configuração/uso da ferramenta e, as outras três (buildSchema, transformAST, fetchData), para serem sobrescritas por adaptadores. 
+Dentro do conjunto de funções, quatro delas são responsáveis por criar o intermediador; três funções analisam as consultas através do formato AST; e as outras três transformam as consultas em requisições na API de serviços. Somente quatro são públicas e expostas para o cliente, sendo uma delas (composeSchema) a principal para configuração/uso da ferramenta, e as outras três (buildSchema, transformAST, fetchData) para serem sobrescritas por adaptadores. 
 
-A seguir, é descrito brevemente essas três categorias de funções, ao lado de seu objetivo e a assinatura JavaScript de cada função. \\
+A seguir, são descritas brevemente essas três categorias de funções, ao lado de seu objetivo e a assinatura JavaScript de cada função. \\
 
 \textbf{Criação do esquema} \\
 
-Constitui quatro funções e seu principal objetivo é compor, de forma assíncrona, um esquema GraphQL unificado a partir das funcões de configuração de cada serviço.
+Consiste de quatro funções e seu principal objetivo é compor, de forma assíncrona, um esquema GraphQL unificado a partir das funcões de configuração de cada serviço.
 
 \begin{figure}[H]
   \centering
@@ -35,7 +35,7 @@ Constitui quatro funções e seu principal objetivo é compor, de forma assíncr
 
 \textbf{Análise de consulta} \\
 
-Constitui três funções que buscam analisar consultas GraphQL feitas no esquema gerado em formato AST. A análise descreve algoritmos que simplificam, transformam e reduzem o AST principal da consulta, quebrando-as em ASTs específicos para cada serviço.
+É constituído de três funções que buscam analisar consultas GraphQL feitas no esquema gerado em formato AST. A análise descreve algoritmos que simplificam, transformam e reduzem o AST principal da consulta, quebrando-a em ASTs específicos para cada serviço.
 
 \begin{figure}[H]
   \centering
@@ -61,7 +61,7 @@ Constitui três funções que buscam analisar consultas GraphQL feitas no esquem
 
 \textbf{Busca de dados} \\
 
-Constitui as três últimas funções responsáveis por converter os ASTs de cada serviço e realizar as respectivas requisições para a API em busca de dados.
+Consiste nas três últimas funções responsáveis por converter os ASTs de cada serviço e realizar as respectivas requisições para a API em busca de dados.
 
 \begin{figure}[H]
   \centering

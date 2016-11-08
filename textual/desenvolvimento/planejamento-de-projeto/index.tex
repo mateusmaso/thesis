@@ -4,13 +4,13 @@ Para um melhor entendimento das etapas de desenvolvimento, é preciso antes conh
 
 \textbf{Processo de idealização} \\
 
-Atualmente, para que clientes possam consumir dados remotos, é preciso que haja um meio de buscá-los antes de executar qualquer lógica que dependa deles. Para isso, é preciso a implementação de um código de busca para acesso aos dados em serviços\footnote{
+De modo a permitir que clientes possam consumir dados remotos, é preciso que haja um meio de buscá-los antes de executar qualquer lógica que dependa deles. Para isso, a solução comumente adotada é a implementação de um código de busca para acesso aos dados em serviços\footnote{
   Infraestrutura distribuída (servidores, banco de dados, etc) que respondem a pedidos de operações oriundas de clientes em forma de requisições de API.
 } através de uma rede.
 
 No entanto, para que se possa manter garantia na comunicação, é necessário um contrato de acesso entre o cliente e a interface do serviço. Isso porque, após a implementação do código de busca pelo cliente, qualquer mudança em pontos de acesso\footnote{
   Parte de uma interface exposta por um serviço através de um canal de comunicação.
-} da API podem colocar em risco a funcionalidade e comprometer a lógica da aplicação. Este contrato é, portanto, representado no modelo de comunicação da figura 17 através de chamadas entre o código de busca do cliente e API do serviço.
+} da API podem colocar em risco a funcionalidade e comprometer a lógica da aplicação. Este contrato é, portanto, representado no modelo de comunicação da figura 17 através de chamadas entre o código de busca do cliente e a API do serviço.
 
 \begin{figure}[H]
   \centering
@@ -40,7 +40,7 @@ O modelo de comunicação representado pode não revelar possíveis problemas pa
   Fluxo de acesso na interface pelo cliente em busca de dados no serviço.
 } nas interfaces de acesso.
 
-Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Elas ocorrem para abraçar a constante transformação na demanda de dados por clientes. Com isso, busca-se manter uma comunicação eficiente com redução no número de chamadas e tamanho de dados feitas na API. Essas mudanças podem ser desde uma simples alteração no nome de um método ou número argumentos, até as mais complexas como dados de retorno e estilo de arquitetura. A figura 18 ilustra o fluxo de dados entre um cliente e um serviço.
+Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Elas ocorrem para abraçar a constante transformação na demanda de dados por clientes. Com isso, busca-se manter uma comunicação eficiente, com redução no número de chamadas feitas na API e do tamanho de dados transmitidos pela rede. Essas mudanças podem ser desde uma simples alteração no nome de um método ou número argumentos, até as mais complexas, como dados de retorno e estilo de arquitetura. A figura 18 ilustra o fluxo de dados entre um cliente e um serviço.
 
 \begin{figure}[H]
   \centering
@@ -62,7 +62,7 @@ Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Ela
   \caption{Fluxo de dados entre cliente e API}
 \end{figure}
 
-Felizmente, o impacto nos clientes com as mudanças no fluxo de dados de uma API são previsíveis, pois afetam diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos nas estruturas de dados, como renomear um campo "nome" e "nome\_completo", são de um grau de complexidade maior, pois seu impacto pode não influenciar o código de busca e sim a lógica da aplicação, onde é bem mais difícil debugar.
+Felizmente, o impacto nos clientes das mudanças no fluxo de dados de uma API é previsível, pois afeta diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos nas estruturas de dados, como renomear um campo "nome" para "nome\_completo", são de um grau de complexidade maior, pois seu impacto pode não influenciar o código de busca e sim a lógica da aplicação, onde é bem mais difícil debugar.
 
 Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o impacto no código de busca em clientes devido a mudanças no fluxo de dados, fez-se necessário solucionar os seguintes problemas descritos na tabela 5. \\
 
@@ -150,12 +150,12 @@ A proposta de eliminação de contrato visa também automatizar o acesso de clie
   \caption{Composição de serviços através da ferramenta do modelo}
 \end{figure}
 
-\textbf{Especificação de ferramenta baseado no modelo proposto} \\
+\textbf{Especificação de ferramenta com base no modelo proposto} \\
 
 Visando a aceitação do modelo em ambientes de desenvolvimento de clientes, foi preciso pensar em uma especificação de ferramenta que apresentasse uma interface de baixa curva de aprendizagem, um fluxo de execução replicável e agnóstico à plataforma, além do baixo impacto na base de código de clientes. Por conseguinte, a ferramenta proposta foi desenvolvida pensando na reutilização de tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
 
 % arrumar
-Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover o seu uso, GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso à uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
+Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover o seu uso, GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso a uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
 
 A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, figura 21, é o processo de criação do intermediador, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, figura 22, é o processo de consulta de dados no intermediador, onde leva como entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
 
@@ -198,7 +198,7 @@ A seguir, é realizada a análise dos dois fluxos de execução descritos na esp
   \end{tikzpicture}
   \caption{Consulta de dados no intermediador (esquema)}
 \end{figure}
-
+%O verbo 'Invólucrar', que aparece nas duas figuras, não existe em português (o Google reconhece como espanhol e traduz para 'envolver'). 
 O processo de criação do intermediador começa através da resolução de cada função de configuração\footnote{
   URL, metadados, adaptador e definições de invólucro.
 } de serviço e construído um esquema GraphQL interno para cada um. Logo mais, é aplicado o invólucro dos campos dos esquemas e, para cada um, estende-se até gerar um esquema GraphQL unificado.
