@@ -18,15 +18,15 @@ No entanto, para que se possa manter garantia na comunicação, é necessário u
     \node (client) at (-3,0) {\includegraphics[width=1.0cm]{figuras/client}};
     \node[right of=client] (clientFetchCode) at (-2.2,0.7) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[below of=clientFetchCode, node distance=1.6cm] (clientLogicCode) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[rectangle,minimum width=0.8cm, minimum height=3cm,draw,right of=clientFetchCode, node distance=3.0cm] (api) {API};
+    \node[rectangle,minimum width=0.8cm, minimum height=3cm,draw,right of=clientFetchCode, node distance=3.0cm] (api) {$API$};
     \node[right of=api, node distance=1.8cm] (server) {\includegraphics[width=1.0cm]{figuras/server}};
     \node[below of=server, node distance=1.8cm] (datastore) {\includegraphics[width=1.0cm]{figuras/database}};
-    \node[above of=server, node distance=1.8cm] (json) {\includegraphics[width=1.1cm]{figuras/code}};
+    \node[above of=server, node distance=1.8cm] (data) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[cloud, cloud puffs=30, minimum width=11cm, minimum height=10cm, draw,style={scale=0.6}] (service) at (server) {};
-    \node[below of=clientFetchCode,node distance=0.0cm] {\textless\textit{busca}\textgreater};
-    \node[below of=clientLogicCode,node distance=0.0cm] {\textless\textit{lógica}\textgreater};
-    \node[below of=json,node distance=0.0cm] {\{dados\}};
-    \node[below of=service,node distance=3.6cm] {Serviço};
+    \node[below of=clientFetchCode,node distance=0.0cm] {\textless$fetch$\textgreater};
+    \node[below of=clientLogicCode,node distance=0.0cm] {\textless$logic$\textgreater};
+    \node[below of=data,node distance=0.0cm] {\{$data$\}};
+    \node[below of=service,node distance=3.6cm] {$Service$};
     \node[below of=client,node distance=1.8cm] {\ldots};
     \node[right of=server,node distance=1.8cm] {\ldots};
     \draw[decorate,decoration={brace,raise=0.2cm,mirror}] ([yshift=6pt]clientFetchCode.north west) -- ([yshift=-12pt]clientLogicCode.south west);
@@ -46,18 +46,18 @@ Mudanças no fluxo de dados são inevitáveis em aplicações distribuídas. Ela
   \centering
   \begin{tikzpicture}[font=\small]
     \draw (-2,0) -- (-2,-5) (2,0) -- (2,-5);
-    \node at (-2,0.3) {Cliente};
-    \node at (2,0.3) {API (Serviço)};
+    \node at (-2,0.3) {Client};
+    \node at (2,0.3) {API (Service)};
     \node[loosely dotted] (virtualData) at (-4,-1){\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=virtualData,node distance=0.0cm] {\{dados\}};
+    \node[below of=virtualData,node distance=0.0cm] {\{$data$\}};
     \node (data) at (-4,-4.5) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=data,node distance=0.0cm] {\{dados\}};
+    \node[below of=data,node distance=0.0cm] {\{$data$\}};
     \node[cloud, cloud puffs=16,draw,minimum height=1.2cm] (cloudData) at (4,-2.5) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=cloudData,node distance=0.0cm] {\{dados\}};
-    \draw[->] (-2,-1) -- node[midway,above] {requisição} (2,-1.5);
-    \draw[<-] (-2,-2.5) -- node[midway,above] {resposta} (2,-2);
-    \draw[->] (-2,-3) -- node[midway,above] {requisição} (2,-3.5);
-    \draw[<-] (-2,-4.5) -- node[midway,above] {resposta} (2,-4);
+    \node[below of=cloudData,node distance=0.0cm] {\{$data$\}};
+    \draw[->] (-2,-1) -- node[midway,above] {$request$} (2,-1.5);
+    \draw[<-] (-2,-2.5) -- node[midway,above] {$response$} (2,-2);
+    \draw[->] (-2,-3) -- node[midway,above] {$request$} (2,-3.5);
+    \draw[<-] (-2,-4.5) -- node[midway,above] {$response$} (2,-4);
   \end{tikzpicture}
   \caption{Fluxo de dados entre cliente e API}
 \end{figure}
@@ -102,20 +102,20 @@ Um novo modelo é proposto a fim de melhorar a comunicação cliente-servidor ap
     \node[right of=client] (clientFetchCode) at (-2.2,0) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[below of=clientFetchCode, node distance=1.6cm] (clientLogicCode) {\includegraphics[width=1.1cm]{figuras/code}};
     \node[above of=clientFetchCode, node distance=1.6cm] (clientConfigCode) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[circle,draw,right of=clientFetchCode,node distance=2.3cm] (broker) {Intermediador};
-    \node[rectangle,minimum width=0.8cm, minimum height=3cm,draw,node distance=1.8cm,right of=broker,node distance=2.7cm] (api) {API};
-    \node[right of=api, node distance=1.8cm] (json) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[below of=json,node distance=1.8cm] (server) {\includegraphics[width=1.0cm]{figuras/server}};
-    \node[above of=json, node distance=1.8cm] (metadata) {\includegraphics[width=1.1cm]{figuras/code}};
-    \node[cloud, cloud puffs=30, minimum width=11cm, minimum height=10cm, draw,style={scale=0.6}] (service) at (json) {};
-    \node[below of=clientFetchCode,node distance=0.0cm] {\textless\textit{busca}\textgreater};
-    \node[below of=clientLogicCode,node distance=0.0cm] {\textless\textit{lógica}\textgreater};
-    \node[below of=clientConfigCode,node distance=0.0cm] {\textless\textit{config}\textgreater};
-    \node[below of=metadata,node distance=0.0cm] {\{metadados\}};
-    \node[below of=json,node distance=0.0cm] {\{dados\}};
-    \node[below of=service,node distance=3.6cm] {Serviço};
-    \node[below of=client,node distance=1.8cm] {\ldots};
-    \node[right of=json,node distance=1.8cm] {\ldots};
+    \node[rectangle,draw,right of=clientFetchCode,minimum height=1cm,node distance=2.0cm] (broker) {$Broker$};
+    \node[rectangle,minimum width=0.8cm, minimum height=3cm,draw,node distance=1.8cm,right of=broker,node distance=2.7cm] (api) {$API$};
+    \node[right of=api, node distance=1.8cm] (data) {\includegraphics[width=1.1cm]{figuras/code}};
+    \node[below of=data,node distance=1.8cm] (server) {\includegraphics[width=1.0cm]{figuras/server}};
+    \node[above of=data, node distance=1.8cm] (metadata) {\includegraphics[width=1.1cm]{figuras/code}};
+    \node[cloud, cloud puffs=30, minimum width=11cm, minimum height=10cm, draw,style={scale=0.6}] (service) at (data) {};
+    \node[below of=clientFetchCode,node distance=0.0cm] {\textless$fetch$\textgreater};
+    \node[below of=clientLogicCode,node distance=0.0cm] {\textless$logic$\textgreater};
+    \node[below of=clientConfigCode,node distance=0.0cm] {\textless$config$\textgreater};
+    \node[below of=metadata,node distance=0.0cm] {\{$metadata$\}};
+    \node[below of=data,node distance=0.0cm] {\{$data$\}};
+    \node[below of=service,node distance=3.6cm] {$Service$};
+    \node[below of=client,node distance=1.8cm] {\vdots};
+    \node[right of=data,node distance=1.8cm] {\ldots};
     \draw[decorate,decoration={brace,raise=0.2cm,mirror}] ([yshift=6pt]clientConfigCode.north west) -- ([yshift=-12pt]clientLogicCode.south west);
     \draw [->] ([yshift=0.25cm]clientFetchCode.east) -- ([yshift=0.25cm]broker.west);
     \draw [->] (broker) -- (clientFetchCode);
@@ -134,18 +134,15 @@ A proposta de eliminação de contrato visa também automatizar o acesso de clie
   \begin{tikzpicture}[font=\small]
     \node (client1) at (-2,0) {\includegraphics[width=1.0cm]{figuras/client}};
     \node (client2) at (2,0) {\includegraphics[width=1.0cm]{figuras/client}};
-    \node[circle,draw,below of=client2,node distance=2.3cm] (tool) {Ferramenta};
-    \node[cloud, cloud puffs=16, draw] (service1) at (-3,-6) {Serviço 1};
-    \node[cloud, cloud puffs=16, draw] (service2) at (0,-6) {Serviço 2};
-    \node[cloud, cloud puffs=16, draw] (service3) at (3,-6) {Serviço 3};
-    \node[right of=service3,node distance=2.8cm] {\ldots};
-    \draw [<->] (client1) -- (service1);
-    \draw [<->] (client1) -- (service2);
-    \draw [<->] (client1) -- (service3);
-    \draw [<->] (client2) -- (tool);
-    \draw [<->] (tool) -- (service1);
-    \draw [<->] (tool) -- (service2);
-    \draw [<->] (tool) -- (service3);
+    \node[rectangle,draw,minimum height=1cm,below of=client2,node distance=2.3cm] (tool) {$Tool$};
+    \node[cloud, cloud puffs=16, draw] (service1) at (-3,-6) {$Service_1$};
+    \node (serviceDots) at (0,-6) {\ldots};
+    \node[cloud, cloud puffs=16,minimum height=1cm, draw] (serviceN) at (3,-6) {$Service_N$};
+    \draw [->] (client1) -- (service1);
+    \draw [->] (client1) -- (serviceN);
+    \draw [->] (client2) -- (tool);
+    \draw [->] (tool) -- (service1);
+    \draw [->] (tool) -- (serviceN);
   \end{tikzpicture}
   \caption{Composição de serviços através da ferramenta do modelo}
 \end{figure}
@@ -154,53 +151,92 @@ A proposta de eliminação de contrato visa também automatizar o acesso de clie
 
 Visando a aceitação do modelo em ambientes de desenvolvimento de clientes, foi preciso pensar em uma especificação de ferramenta que apresentasse uma interface de baixa curva de aprendizagem, um fluxo de execução replicável e agnóstico à plataforma, além do baixo impacto na base de código de clientes. Por conseguinte, a ferramenta proposta foi desenvolvida pensando na reutilização de tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
 
-% arrumar
 Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover o seu uso, GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso a uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
 
 A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, figura 21, é o processo de criação do intermediador, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, figura 22, é o processo de consulta de dados no intermediador, onde leva como entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[font=\small,text width=5em, text centered]
-    \node [rectangle,draw,minimum height=4em] (composeSchema) {Compor esquema unificado};
-    \node [ellipse,draw,draw, above of=composeSchema,node distance=2cm] (services) {Serviços};
-    \node [rectangle,draw,minimum height=4em, right of=composeSchema,node distance=3cm] (buildSchema) {Construir esquema para cada serviço};
-    \node [rectangle,draw,minimum height=4em, right of=buildSchema,node distance=3cm] (wrapSchema) {Invólucrar campos de cada esquema};
-    \node [rectangle,draw,minimum height=4em, right of=wrapSchema,node distance=3cm] (deepExtendSchema) {Unificar todos os esquemas};
-    \node [ellipse,draw, above of=deepExtendSchema,node distance=2cm] (schema) {Esquema};
-    \draw [->] (composeSchema) -- (buildSchema);
-    \draw [->] (buildSchema) -- (wrapSchema);
-    \draw [->] (wrapSchema) -- (deepExtendSchema);
-    \draw [->,dashed] (services) -- (composeSchema);
-    \draw [->,dashed] (deepExtendSchema) -- (schema);
-  \end{tikzpicture}
-  \caption{Criação do intermediador (esquema)}
+  \smartdiagramset{circular distance=2cm,uniform arrow color=true,arrow line width=1pt,arrow color=gray!50!black,uniform color list=white for 6 items,font=\small,text width=2.0cm,module minimum width=2.0cm,module minimum height=1.5cm,arrow tip=to,back arrow disabled=true}
+  \smartdiagram[flow diagram:horizontal]{(1) Construir esquema para serviço,(2) Envolver campos do esquema, (3) Unificar esquemas}
+  
+%   \begin{tikzpicture}[font=\small,text width=5em, text centered]
+%     \node [rectangle,draw,minimum height=4em,node distance=3cm] (buildSchema) {(1) Construir esquema para serviço};
+%     \node [ellipse,draw,draw, above of=buildSchema,node distance=2cm] (services) {Serviços};
+%     \node [rectangle,draw,minimum height=4em, right of=buildSchema,node distance=3cm] (wrapSchema) {(2) Envolver campos do esquema};
+%     \node [rectangle,draw,minimum height=4em, right of=wrapSchema,node distance=3cm] (deepExtendSchema) {(3) Unificar esquemas};
+%     \node [ellipse,draw, above of=deepExtendSchema,node distance=2cm] (schema) {Esquema};
+%     \draw [->] (buildSchema) -- (wrapSchema);
+%     \draw [->] (wrapSchema) -- (deepExtendSchema);
+%     \draw [->,dashed] (services) -- (buildSchema);
+%     \draw [->,dashed] (deepExtendSchema) -- (schema);
+%   \end{tikzpicture}
+  \caption{Processo de criação do intermediador}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[font=\small,text width=5em, text centered]
-    \node [rectangle,draw,minimum height=4em] (simplifyAST) {Simplificar AST};
-    \node [ellipse,draw, above of=simplifyAST,node distance=2cm] (services) {Consulta};
-    \node [rectangle,draw,minimum height=4em, below of=simplifyAST,node distance=2cm] (transformAST) {Transformar AST para cada serviço};
-    \node [rectangle,draw,minimum height=4em, right of=transformAST,node distance=3cm] (reduceASTs) {Reduzir AST de cada serviço};
-    \node [rectangle,draw,minimum height=4em, right of=reduceASTs,node distance=3cm] (unwrapAST) {Desfazer invólucro de cada AST};
-    \node [rectangle,draw,minimum height=4em, right of=unwrapAST,node distance=3cm] (fetchData) {Realizar busca dados para cada serviço};
-    \node [rectangle,draw,minimum height=4em, above of=fetchData,node distance=2cm] (wrapData) {Invólucrar e unificar dados};
-    \node [ellipse,draw, above of=wrapData,node distance=2cm] (schema) {Dados};
-    \draw [->] (simplifyAST) -- (transformAST);
-    \draw [->] (transformAST) -- (reduceASTs);
-    \draw [->] (reduceASTs) -- (unwrapAST);
-    \draw [->] (unwrapAST) -- (fetchData);
-    \draw [->] (fetchData) -- (wrapData);
-    \draw [->,dashed] (services) -- (simplifyAST);
-    \draw [->,dashed] (wrapData) -- (schema);
-  \end{tikzpicture}
-  \caption{Consulta de dados no intermediador (esquema)}
+  \smartdiagramset{font=\small,circular distance=2cm,uniform arrow color=true,arrow line width=1pt,arrow color=gray!50!black,uniform color list=white for 7 items,font=\small,text width=2.0cm,module minimum width=2.0cm,module minimum height=1.5cm,arrow tip=to,back arrow disabled=true}
+  \smartdiagram[flow diagram:horizontal]{(4) Simplificar AST,(5) Transformar AST,(6) Reduzir ASTs,(7) Desfazer envoltório de AST,(8) Buscar de dados,(9) Criar envoltório,(10) Unificar dados}
+%   \begin{tikzpicture}[font=\small,text width=5em, text centered]
+%     \node [rectangle,draw,minimum height=4em] (simplifyAST) {(4) Simplificar AST};
+%     \node [ellipse,draw, above of=simplifyAST,node distance=2cm] (ast) {AST};
+%     \node [rectangle,draw,minimum height=4em, below of=simplifyAST,node distance=2cm] (transformAST) {(5) Transformar AST};
+%     \node [rectangle,draw,minimum height=4em, right of=transformAST,node distance=3cm] (reduceASTs) {(6) Reduzir ASTs};
+%     \node [rectangle,draw,minimum height=4em, right of=reduceASTs,node distance=3cm] (unwrapAST) {(7) Desfazer envoltório de AST};
+%     \node [rectangle,draw,minimum height=4em, right of=unwrapAST,node distance=3cm] (fetchData) {(8) Buscar de dados};
+%     \node [rectangle,draw,minimum height=4em, above of=fetchData,node distance=2cm] (wrapData) {(9) Criar envoltório};
+%     \node [rectangle,draw,minimum height=4em, above of=wrapData,node distance=2cm] (deepExtendData) {(10) Unificar dados};
+%     \node [ellipse,draw, above of=deepExtendData,node distance=2cm] (data) {Dados};
+%     \draw [->] (simplifyAST) -- (transformAST);
+%     \draw [->] (transformAST) -- (reduceASTs);
+%     \draw [->] (reduceASTs) -- (unwrapAST);
+%     \draw [->] (unwrapAST) -- (fetchData);
+%     \draw [->] (fetchData) -- (wrapData);
+%     \draw [->] (wrapData) -- (deepExtendData);
+%     \draw [->,dashed] (ast) -- (simplifyAST);
+%     \draw [->,dashed] (deepExtendData) -- (data);
+%   \end{tikzpicture}
+  \caption{Consulta de dados no intermediador (resolveQuery)}
 \end{figure}
-%O verbo 'Invólucrar', que aparece nas duas figuras, não existe em português (o Google reconhece como espanhol e traduz para 'envolver'). 
-O processo de criação do intermediador começa através da resolução de cada função de configuração\footnote{
-  URL, metadados, adaptador e definições de invólucro.
-} de serviço e construído um esquema GraphQL interno para cada um. Logo mais, é aplicado o invólucro dos campos dos esquemas e, para cada um, estende-se até gerar um esquema GraphQL unificado.
 
-O processo de consulta de dados no intermediador começa através de uma chamada de consulta no esquema gerado. Primeiro utiliza-se o AST fornecido pela função de resolução de consulta GraphQL e converte-se para uma estrutura de maior facilidade de trabalho. Em seguida, transforma-se o AST já simplificado em ASTs específicos para o esquema de cada serviço. Durante esse processo, reduz-se as árvores através de um algoritmo de otimização de busca que analisa o conjunto como um todo. Por fim, para se poder realizar a busca de dados correspondente em cada serviço, é desfeito o invólucro dos ASTs, realizadas as requisições e feito o invólucro e união dos dados JSON retornados.
+O processo de criação do intermediador começa através da resolução de cada função de configuração\footnote{
+  URL, metadados, adaptador e definições de envoltório.
+} de serviço e construído um esquema GraphQL interno para cada um. Logo mais, é aplicado o envoltório dos campos dos esquemas e, para cada um, estende-se até gerar um esquema GraphQL unificado.
+
+O processo de consulta de dados no intermediador começa através de uma chamada de consulta no esquema gerado. Primeiro utiliza-se o AST fornecido pela função de resolução de consulta GraphQL e converte-se para uma estrutura de maior facilidade de trabalho. Em seguida, transforma-se o AST já simplificado em ASTs específicos para o esquema de cada serviço. Durante esse processo, reduz-se as árvores através de um algoritmo de otimização de busca que analisa o conjunto como um todo. Por fim, para se poder realizar a busca de dados correspondente em cada serviço, é desfeito o envoltório dos ASTs, realizadas as requisições e criado o envoltório e união dos dados JSON retornados. \\
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \begin{pgfonlayer}{background}
+      \path[rounded corners, draw=black!50, dashed] (-5.2,0) rectangle (5.2,5);           
+    \end{pgfonlayer}
+    \node [circle, draw] (ast) at (-4.5,2.5) {$AST$};
+    \node [right of=ast,node distance=1.5cm] (astTransformedDots) {\vdots};
+    \node [above of=astTransformedDots,node distance=1.5cm] (astTransformed1) {$AST_1$};
+    \node [below of=astTransformedDots,node distance=1.5cm] (astTransformedN) {$AST_N$};
+    \node [rectangle,draw,minimum width=0.6cm,font=\footnotesize,right of=astTransformedDots,node distance=1.5cm] (reduceASTs) {$6$};
+    \node [right of=reduceASTs,node distance=1.5cm] (unwrappedASTDots) {\vdots};
+    \node [above of=unwrappedASTDots,node distance=1.5cm] (unwrappedAST1) {$AST_1$};
+    \node [below of=unwrappedASTDots,node distance=1.5cm] (unwrappedASTN) {$AST_N$};
+    \node [right of=unwrappedASTDots,node distance=1.5cm] (dataDots) {\vdots};
+    \node [above of=dataDots,node distance=1.5cm] (data1) {$Data_1$};
+    \node [below of=dataDots,node distance=1.5cm] (dataN) {$Data_N$};
+    \node [rectangle,draw,minimum width=0.6cm,font=\footnotesize,right of=dataDots,node distance=1.5cm] (deepExtendData) {$10$};
+    \node [circle, draw,right of=deepExtendData,node distance=1.5cm] (data) {$Data$};
+    \draw [->,loop above] (ast) -- (ast) node [pos=0.5,above,font=\footnotesize] {$4$};
+    \draw [->] (ast) -- (astTransformed1) node [pos=0.5,above,font=\footnotesize] {$5$};
+    \draw [->] (ast) -- (astTransformedN) node [pos=0.5,above,font=\footnotesize] {$5$};
+    \draw [->] (astTransformed1) -- (reduceASTs);
+    \draw [->] (astTransformedN) -- (reduceASTs);
+    \draw [->] (reduceASTs) -- (unwrappedAST1) node [midway,above,font=\footnotesize] {$7$};
+    \draw [->] (reduceASTs) -- (unwrappedASTN) node [midway,above,font=\footnotesize] {$7$};
+    \draw [->] (unwrappedAST1) -- (data1) node [midway,above,font=\footnotesize] {$8$};
+    \draw [->] (unwrappedASTN) -- (dataN) node [midway,above,font=\footnotesize] {$8$};
+    \draw [->] (data1) -- (deepExtendData) node [midway,above,font=\footnotesize] {$9$};
+    \draw [->] (dataN) -- (deepExtendData) node [midway,above,font=\footnotesize] {$9$};
+    \draw [->] (deepExtendData) -- (data);
+  \end{tikzpicture}
+  \caption{teste}
+\end{figure}
