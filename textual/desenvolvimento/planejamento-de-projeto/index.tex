@@ -156,37 +156,23 @@ Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como pr
 A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, figura 21, é o processo de criação do intermediador, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, figura 22, é o processo de consulta de dados no intermediador, onde leva como entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
 
 \begin{enumerate}[noitemsep]
-  \item \textbf{Construir esquema para serviço}: Serve para ..
-  \item \textbf{Envolver campos de um esquema}: Serve para ...
-  \item \textbf{Unificar esquemas}: Serve para produzir um esquema unificado, utilizado para interpretar 
-  \item \textbf{Simplificar AST}:
-  \item \textbf{Transformar AST}:
-  \item \textbf{Reduzir ASTs}:
-  \item \textbf{Desfazer envoltório de AST}:
-  \item \textbf{Buscar de dados}:
-  \item \textbf{Criar envoltório}:
-  \item \textbf{Unificar dados}:
+  \item \textbf{Construir esquema para serviço}: Serve para criar um esquema GraphQL para os metadados do serviço. Este processo pode ser sobrescrito por adaptadores.
+  \item \textbf{Envolver campos de esquema}: Serve para fazer X. Um exemplo seria Y.
+  \item \textbf{Unificar esquemas}: Serve para produzir um esquema unificado, utilizado para interpretar.
+  \item \textbf{Simplificar AST}: Serve para facilitar o trabalho e aplicar fragmentos diretamente na consulta.
+  \item \textbf{Transformar AST}: Serve para adicionar campos a mais, em adaptadores, podem ser usados para adicionar campos a mais. Este processo pode ser sobrescrito por adaptadores.
+  \item \textbf{Reduzir ASTs}: Serve para analisar todos os ASTs, classificar por heuristicas baseadas em tamanho de dados retornado e requisições.
+  \item \textbf{Desfazer envoltório de AST}: Serve para poder realizar a consulta certa em busca dos dados do serviço.
+  \item \textbf{Buscar de dados}: Serve para interpretar o AST e requisições para a API do serviço. Este processo pode ser sobrescrito por adaptadores.
+  \item \textbf{Criar envoltório de dados}: Serve para remapear os campos para o formato que o esquema vai entender.
+  \item \textbf{Unificar dados}: Serve para juntar profundamente todos os dados retornados de cada serviço.
 \end{enumerate}
-
-% \begin{figure}[H]
-%   \centering
-%   \smartdiagramset{circular distance=2cm,uniform arrow color=true,arrow line width=1pt,arrow color=gray!50!black,uniform color list=white for 6 items,font=\small,text width=2.0cm,module minimum width=2.0cm,module minimum height=1.5cm,arrow tip=to,back arrow disabled=true}
-%   \smartdiagram[flow diagram:horizontal]{(1) Construir esquema para serviço,(2) Envolver campos do esquema, (3) Unificar esquemas}
-%   \caption{Processo de criação do intermediador}
-% \end{figure}
-
-% \begin{figure}[H]
-%   \centering
-%   \smartdiagramset{font=\small,circular distance=2cm,uniform arrow color=true,arrow line width=1pt,arrow color=gray!50!black,uniform color list=white for 7 items,font=\small,text width=2.0cm,module minimum width=2.0cm,module minimum height=1.5cm,arrow tip=to,back arrow disabled=true}
-%   \smartdiagram[flow diagram:horizontal]{(4) Simplificar AST,(5) Transformar AST,(6) Reduzir ASTs,(7) Desfazer envoltório de AST,(8) Buscar de dados,(9) Criar envoltório,(10) Unificar dados}
-%   \caption{Consulta de dados no intermediador (resolveQuery)}
-% \end{figure}
 
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[font=\small]
     \begin{pgfonlayer}{background}
-      \path[rounded corners, draw=black!50, dashed] (-5.2,0) rectangle (5.2,5);           
+      \path[rounded corners, draw=black!50, dashed] (-5.2,0) rectangle (5.2,5);
     \end{pgfonlayer}
     \node (serviceDots) at (-4,2.5) {\vdots};
     \node [circle, draw, above of=serviceDots,node distance=1.5cm,font=\footnotesize] (service1) {$Service_1$};
@@ -214,7 +200,7 @@ A seguir, é realizada a análise dos dois fluxos de execução descritos na esp
   \centering
   \begin{tikzpicture}[font=\small]
     \begin{pgfonlayer}{background}
-      \path[rounded corners, draw=black!50, dashed] (-5.2,0) rectangle (5.2,5);           
+      \path[rounded corners, draw=black!50, dashed] (-5.2,0) rectangle (5.2,5);
     \end{pgfonlayer}
     \node [circle, draw] (ast) at (-4.5,2.5) {$AST$};
     \node [right of=ast,node distance=1.5cm] (astTransformedDots) {\vdots};
@@ -229,7 +215,7 @@ A seguir, é realizada a análise dos dois fluxos de execução descritos na esp
     \node [below of=dataDots,node distance=1.5cm] (dataN) {$Data_N$};
     \node [rectangle,draw,minimum width=0.6cm,font=\footnotesize,right of=dataDots,node distance=1.5cm] (deepExtendData) {$10$};
     \node [circle, draw,right of=deepExtendData,node distance=1.5cm] (data) {$Data$};
-    \draw [->,min distance=3cm,font=\footnotesize] (ast) edge[loop above] node {$4$} (ast);    
+    \draw [->,min distance=3cm,font=\footnotesize] (ast) edge[loop above] node {$4$} (ast);
     \draw [->] (ast) -- (astTransformed1) node [midway,above,font=\footnotesize] {$5$};
     \draw [->] (ast) -- (astTransformedN) node [midway,above,font=\footnotesize] {$5$};
     \draw [->] (astTransformed1) -- (reduceASTs);
