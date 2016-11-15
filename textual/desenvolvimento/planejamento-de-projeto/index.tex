@@ -134,15 +134,15 @@ A proposta de eliminação de contrato visa também automatizar o acesso de clie
   \begin{tikzpicture}[font=\small]
     \node (client1) at (-2,0) {\includegraphics[width=1.0cm]{figuras/client}};
     \node (client2) at (2,0) {\includegraphics[width=1.0cm]{figuras/client}};
-    \node[rectangle,draw,minimum height=1cm,below of=client2,node distance=2.3cm] (tool) {$Tool$};
+    \node[rectangle,draw,minimum height=2cm,minimum width=3cm,below of=client2,node distance=2.3cm] (tool) {$Tool$};
     \node[cloud, cloud puffs=16, draw] (service1) at (-3,-6) {$Service_1$};
     \node (serviceDots) at (0,-6) {\ldots};
     \node[cloud, cloud puffs=16,minimum height=1cm, draw] (serviceN) at (3,-6) {$Service_N$};
-    \draw [->] (client1) -- (service1);
-    \draw [->] (client1) -- (serviceN);
-    \draw [->] (client2) -- (tool);
-    \draw [->] (tool) -- (service1);
-    \draw [->] (tool) -- (serviceN);
+    \draw [->] (client1) -- (service1) node [midway,above,font=\footnotesize] {$request$};
+    \draw [->] (client1) -- (serviceN) node [midway,above,font=\footnotesize] {$request$};
+    \draw [->] (client2) -- (tool) node [midway,above,font=\footnotesize] {$query$};
+    \draw [->] (tool) -- (service1) node [midway,above,font=\footnotesize] {$request$};
+    \draw [->] (tool) -- (serviceN) node [midway,above,font=\footnotesize] {$request$};
   \end{tikzpicture}
   \caption{Composição de serviços através da ferramenta do modelo}
 \end{figure}
