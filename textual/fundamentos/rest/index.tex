@@ -4,20 +4,18 @@ REST (\textit{Representational State Transfer}) é um estilo de arquitetura usad
 
 Em virtude de causar grande repercussão após sua publicação, o termo REST, segundo Richardson, acabou sofrendo diversas interpretações durante o tempo e sua descrição foi representada de formas não originalmente propostas por Fielding \cite{RichardsonEtAl2013}. Alguns descrevem que serviços que violam essas restrições não podem ser considerados RESTful. Para Wildermuth, apesar de reconhecer as vantagens de cada restrição, serviços Web devem usá-los de forma pragmática. \cite{Wildermuth2015}
 
-Ao ser introduzido no mercado de APIs Web, REST acabou se adaptando bem por ter se mostrado uma solução de fácil acesso em clientes Web, dispositivos móveis e de IoT\footnote{
-  Do inglês \textit{Internet of Things} (Intenet das Coisas).
-}. Segundo Pautasso, a eliminação da complexidade existente em Web Services antes de sua publicação em 2000 fez com que REST fosse considerado um dos principais responsáveis pela popularização de arquiteturas orientada a serviços, visível pela figura 7. \cite{PautassoEtAl2008}
+Ao ser introduzido no mercado de APIs Web, REST acabou se adaptando bem por ter se mostrado uma solução de fácil acesso em clientes. Segundo Pautasso, a eliminação da complexidade existente em Web Services antes de sua publicação em 2000 fez com que REST fosse considerado um dos principais responsáveis pela popularização de arquiteturas orientada a serviços, visível pela figura 7. \cite{PautassoEtAl2008}
 
 \begin{figure}[H]
   \centering    \includegraphics[width=0.9\textwidth,height=\textheight,keepaspectratio]{figuras/api-styles.jpg}
   \caption{Distribuição de estilos e protocolos para APIs Web}
 \end{figure}
 
-A seguir será apresentada uma visão geral sobre as restrições propostas por Fielding para a implementação em arquiteturas Web, além de ser examinado o impacto de cada restrição nesses sistemas distribuídos. \\
+A seguir será apresentada uma visão geral sobre as restrições propostas por Fielding para a implementação da arquitetura, além de ser examinado o impacto de cada restrição em sistemas distribuídos. \\
 
 \textbf{Cliente-Servidor} \\
 
-Nesta primeira restrição, não existe conexão entre cliente e servidor, mas sim a espera do servidor por pedidos de clientes através de chamada e resposta. O cliente (consumidor do serviço) não se preocupa com tarefas de comunicação de banco de dados, gerenciamento de cache, entre outros. O mesmo ocorre como o servidor (prestador de serviços), que não está preocupado com as tarefas do cliente como interface ou experiência do usuário, por exemplo. Isso permite a evolução independente dos dois ambientes, desde que a interface usada para comunicação entre o cliente e o servidor não seja alterada. \cite{Fielding2000} \\
+Nesta primeira restrição, não existe conexão entre duas aplicações distribuídas, mas sim a espera de uma (servidor) por pedidos da outra (clientes) através de chamada e resposta. O cliente (consumidor do serviço) não se preocupa com tarefas de comunicação de banco de dados, gerenciamento de cache, entre outros. O mesmo ocorre como o servidor (prestador de serviços), que não está preocupado com as tarefas do cliente como interface ou experiência do usuário, por exemplo. Isso permite a evolução independente dos dois ambientes, desde que a interface usada para comunicação entre o cliente e o servidor não seja alterada. \cite{Fielding2000} \\
 
 \textbf{Sem Estado} \\
 
@@ -27,7 +25,7 @@ Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de sistem
 
 Em essência, Fielding propõe que aplicações façam o uso de verbos HTTP (POST, GET, PUT, DELETE) e identificadores uniformes de recursos (URIs) para mapear operações em ambientes distribuídos e minimizar o acoplamento entre cliente-servidor. Essas regras de acesso são: \cite{Fielding2000}
 
-\begin{itemize}[noitemsep]
+\begin{itemize}
 \item Identificação de Recursos: Cada recurso deve ser disponibilizado através de uma URI específica e coesa. (Exemplo: GET /customers/1)
 \item Manipulação de Recursos através de Representações: Um recurso pode ser representado em diferentes formatos para diferentes clientes. (Exemplo: HTML, XML, JSON)
 \item Resposta Auto-explicativa: Metadados devem ser adicionados na requisição e resposta de um recurso para descrever seu estado atual ou desejado. (Exemplo: código de resposta HTTP, Host, Content-Type)

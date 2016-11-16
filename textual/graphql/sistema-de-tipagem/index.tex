@@ -1,6 +1,6 @@
 \section[Sistema de Tipagem]{Sistema de Tipagem}
 
-Para descrever um esquema GraphQL a partir de uma API, antes é preciso fazer o uso de seu sistema de tipagem. Através da abstração de entidades de um serviço, representa-se um conjunto finito de tipos para ser acessado por documentos GraphQL. Um tipo é uma forma de representação de dados específico da linguagem de definição, que indica à ferramenta como interpretar operações de consulta e mutação.
+Para descrever um esquema GraphQL a partir de uma API, antes é preciso fazer o uso de seu sistema de tipagem. Através da abstração de entidades de um serviço, representa-se um conjunto finito de tipos para serem acessados por documentos GraphQL. Um tipo é uma forma de representação de dados específico da linguagem de definição, que indica à ferramenta como interpretar operações de consulta e mutação.
 
 Durante o processo de mapeamento de entidades, faz-se a conversão de estruturas de dados em conjuntos dos tipos folha, de acondicionamento, de composição e abstratos. Um tipo folha é representado por valores finais, singulares e não nulos da estrutura, onde os tipos de acondicionamento e composição são utilizados em cima dos tipos folha para alterar o comportamento e combinar outros tipos em busca da representação de estruturas mais complexas. Por fim, existem os tipos abstratos, que servem para reusar os tipos anteriores através do uso de conceitos de alto nível.
 
@@ -60,51 +60,6 @@ Após a conversão de estruturas de dados em tipos GraphQL, para que estes tamb�
       resultado: Resultado
     }
   \end{minted}
-  \caption{Exemplo de representação do esquema da Figura 17}
+  \caption{Esquema GraphQL utilizando listas, interfaces e uniões}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
-    var IndividuoType = new GraphQLInterfaceType({
-      fields: {
-        nome: {type: GraphQLStringType}
-      }
-    })
-
-    var PessoaType = new GraphQLObjectType({
-      interfaces: [IndividuoType],
-      fields: () => {
-        return {
-          foto: {type: FotoType},
-          amigos: {type: [PessoaType]}
-        }
-      }
-    })
-
-    var FotoType = new GraphQLObjectType({
-      fields: {
-        url: {type: GraphQLStringType}
-      }
-    })
-
-    var ResultadoType = new GraphQLUnionType({
-      types: [PessoaType, FotoType]
-    })
-
-    var PesquisaType = new GraphQLObjectType({
-      fields: {
-        resultado: {type: ResultadoType}
-      }
-    })
-
-    var schema = new GraphQLSchema({
-      query: new GraphQLObjectType({
-        fields: {
-          pesquisa: {type: PesquisaType}
-        }
-      })
-    })
-  \end{minted}
-  \caption{Implementação JavaScript da Figura 17}
-\end{figure}

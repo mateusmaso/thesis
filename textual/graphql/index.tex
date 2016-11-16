@@ -12,6 +12,7 @@ Nas figuras 8 e 9, é descrito um exemplo de mapeamento de uma API em JavaScript
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
     var pessoa = {
+      id: 1,
       nome: "Mateus Maso"
     }
 
@@ -31,14 +32,14 @@ Nas figuras 8 e 9, é descrito um exemplo de mapeamento de uma API em JavaScript
       }
     }
   \end{minted}
-  \caption{Exemplo de API em JavaScript (ES6)}
+  \caption{API JavaScript escrito em ES6}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
     type Query {
-      pessoa: User
+      pessoa: Pessoa
     }
 
     type Pessoa {
@@ -60,7 +61,7 @@ Após criado o esquema, é descrito nas figuras 10 e 11 um exemplo de consulta u
       }
     }
   \end{minted}
-  \caption{Exemplo de consulta GraphQL para Figura 9}
+  \caption{Consulta GraphQL para Figura 9}
 \end{figure}
 
 \begin{figure}[H]
@@ -72,7 +73,7 @@ Após criado o esquema, é descrito nas figuras 10 e 11 um exemplo de consulta u
       }
     }
   \end{minted}
-  \caption{Resposta JSON esperada após execução pela Figura 10}
+  \caption{Resposta JSON esperada após execução da Figura 10}
 \end{figure}
 
 A seguir, será feita uma abordagem sobre os elementos que compõem a linguagem, seu sistema de tipagem e como analisar metadados de esquemas utilizando o processo de introspecção.
