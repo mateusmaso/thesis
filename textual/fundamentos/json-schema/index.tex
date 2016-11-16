@@ -36,9 +36,9 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
     {
       "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
-      ...
+      ...,
       "properties": {
-        ...
+        ...,
         "foto": {
           "media": {
             "binaryEncoding": "base64",
@@ -58,7 +58,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
   \caption{JSON Hyper-Schema para Figura 3}
 \end{figure}
 
-Ao exemplo das figuras 5 e 6, ambos os esquemas asseguram que, dada uma estrutura JSON, para que esta seja reconhecida como uma entidade “pessoa”, deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 6, além das estruturas definidas pela figura 5, é descrita uma nova propriedade "foto" do tipo multimídia, além de como navegar em busca desta informação.
+Ao exemplo das figuras 4 e 5, ambos os esquemas asseguram que, dada uma estrutura JSON, para que esta seja reconhecida como uma entidade “pessoa”, deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 5, além das estruturas definidas pela figura 4, é descrita uma nova propriedade "foto" do tipo multimídia, além de como navegar em busca desta informação.
 
 Em casos onde a complexidade de um esquema começa a crescer, é comum a definição de sub-esquemas através da chave “definitions”. Desta forma, podem ser referenciadas pela chave "\$ref" permitindo o reuso de estruturas dentro de um esquema. Vale lembrar que a chave “definitions” é apenas um mecanismo útil para definir esquemas em um lugar comum, entretanto, não sugerem que estas propriedades sejam validadas em um objeto ao menos que referenciadas em outras estruturas do esquema. \cite{Leach2014}
 
@@ -67,7 +67,7 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
     {
       "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
-      ...
+      ...,
       "definitions": {
         "cidade": {
           "type": "string",
@@ -79,13 +79,13 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
         }
       },
       "properties": {
-        ...
+        ...,
         "cidade": {
           "\$ref": "#/definitions/cidade"
         }
       },
       "links": [
-        ...
+        ...,
         {
           "rel": "cidade",
           "href": "/{id}/cidade",
@@ -131,6 +131,6 @@ Como boa prática, é recomendado (mas não necessário) o uso da chave especial
 
 De certa forma, JSON Schema continua sendo uma das únicas tentativas sérias de propor uma linguagem de definição para o formato JSON. Contudo, ainda está longe de ser considerada padrão, mas já há um número crescente de aplicações que suportam o formato, além de uma quantidade significativa de ferramentas que permitem sua validação. \cite{PezoaEtAl2016}
 
-Vale lembrar também que, segundo Leach, com o recente surgimento de grandes formatos de descrição de APIs ao longo dos últimos anos, JSON Hyper-Schema tem-se tornado uma ótima opção para descrever, não apenas estruturas de requisição e resposta JSON mas também como documentar e navegar pela interface. \cite{Leach2014}
+Vale lembrar também que, segundo Leach, com o recente surgimento de grandes formatos de descrição de APIs ao longo dos últimos anos, JSON Hyper-Schema tem-se tornado uma ótima opção para descrever, não apenas estruturas de requisição e resposta JSON mas também realizar a documentação e navegação de interface de acesso. \cite{Leach2014}
 
 Nas próximas seções será abordado um dos estilos de arquitetura mais utilizados hoje em dia em APIs Web, além de soluções encontradas no mercado para descrição destes serviços.
