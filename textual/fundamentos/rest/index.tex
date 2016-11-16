@@ -1,6 +1,6 @@
 \section{REST}
 
-REST (\textit{Representational State Transfer}) é um estilo de arquitetura usada para a comunicação de sistemas distribuídos através do protocolo HTTP. Foi introduzido por Roy Fielding em 2000 com o objetivo de oferecer às aplicações Web um modelo de interface de acesso baseada em recursos. Além disso, descreve seis tipos de restrições que serviços deveriam aplicar para ganho de performance, escalabilidade, simplicidade, modificabilidade, visibilidade, portabilidade e confiabilidade.
+REST (\textit{Representational State Transfer}) é um estilo de arquitetura usada para a comunicação de aplicações distribuídas através do protocolo HTTP. Foi introduzido por Roy Fielding em 2000 com o objetivo de oferecer às aplicações Web um modelo de interface de acesso baseada em recursos. Além disso, descreve seis tipos de restrições que serviços deveriam aplicar para ganho de performance, escalabilidade, simplicidade, modificabilidade, visibilidade, portabilidade e confiabilidade.
 
 Em virtude de causar grande repercussão após sua publicação, o termo REST, segundo Richardson, acabou sofrendo diversas interpretações durante o tempo e sua descrição foi representada de formas não originalmente propostas por Fielding \cite{RichardsonEtAl2013}. Alguns descrevem que serviços que violam essas restrições não podem ser considerados RESTful. Para Wildermuth, apesar de reconhecer as vantagens de cada restrição, serviços Web devem usá-los de forma pragmática. \cite{Wildermuth2015}
 
@@ -11,7 +11,7 @@ Ao ser introduzido no mercado de APIs Web, REST acabou se adaptando bem por ter 
   \caption{Distribuição de estilos e protocolos para APIs Web}
 \end{figure}
 
-A seguir será apresentada uma visão geral sobre as restrições propostas por Fielding para a implementação da arquitetura, além de ser examinado o impacto de cada restrição em sistemas distribuídos. \\
+A seguir será apresentada uma visão geral sobre as restrições propostas por Fielding para a implementação da arquitetura, além de ser examinado o impacto de cada restrição em aplicações distribuídas. \\
 
 \textbf{Cliente-Servidor} \\
 
@@ -19,11 +19,11 @@ Nesta primeira restrição, não existe conexão entre duas aplicações distrib
 
 \textbf{Sem Estado} \\
 
-Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de sistemas distribuídos, pois garante que chamadas à API não estejam vinculadas a um determinado servidor. Como HTTP é um protocolo sem conexão, cada requisição deve conter todas as informações necessárias para que um servidor entenda o que um cliente está executando. Para Wildermuth, no entanto, dependendo da diversidade no número de clientes, ao manter um servidor sem estado, perder-se o controle no tamanho da estrutura de resposta necessária para atender a demanda de todos os clientes. \cite{Wildermuth2015} \\
+Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de aplicações distribuídas, pois garante que chamadas à API não estejam vinculadas a um determinado servidor. Como HTTP é um protocolo sem conexão, cada requisição deve conter todas as informações necessárias para que um servidor entenda o que um cliente está executando. Para Wildermuth, no entanto, dependendo da diversidade no número de clientes, ao manter um servidor sem estado, perder-se o controle no tamanho da estrutura de resposta necessária para atender a demanda de todos os clientes. \cite{Wildermuth2015} \\
 
 \textbf{Interface Uniforme} \\
 
-Em essência, Fielding propõe que aplicações façam o uso de verbos HTTP (POST, GET, PUT, DELETE) e identificadores uniformes de recursos (URIs) para mapear operações em ambientes distribuídos e minimizar o acoplamento entre cliente-servidor. Essas regras de acesso são: \cite{Fielding2000}
+Em essência, Fielding propõe que aplicações façam o uso de verbos HTTP (POST, GET, PUT, DELETE) e identificadores uniformes de recursos (URIs) para mapear operações em APIs e minimizar o acoplamento na comunicação cliente-servidor. Essas regras de acesso são: \cite{Fielding2000}
 
 \begin{itemize}
 \item Identificação de Recursos: Cada recurso deve ser disponibilizado através de uma URI específica e coesa. (Exemplo: GET /customers/1)
