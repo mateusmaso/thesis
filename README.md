@@ -4,7 +4,7 @@ Um Modelo de Comunicação para Automação na Execução de Consultas de Dados 
 
 ## Descrição
 
-Este trabalho realiza um estudo sobre o uso da linguagem GraphQL e formatos de descrição de API para propor um modelo de comunicação cliente-servidor através da automação na execução de consultas de dados. Dessa forma, o modelo visa direcionar desenvolvedores de clientes à implementação de códigos de busca independente de especificação de API. Como resultado, é desenvolvida uma ferramenta com base no modelo proposto para validar sua aplicabilidade.
+Este trabalho realiza um estudo sobre o uso da linguagem GraphQL e formatos de descrição de API para propor um modelo de comunicação cliente-servidor através da automação na execução de consultas de dados. Dessa forma, o modelo visa direcionar desenvolvedores de clientes à implementação de códigos de busca independente de especificação de API. Como resultado, é desenvolvida uma ferramenta prevista pelo modelo para validar sua aplicabilidade.
 
 ## Calendário
 

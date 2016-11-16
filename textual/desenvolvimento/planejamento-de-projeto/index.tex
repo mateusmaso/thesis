@@ -156,16 +156,16 @@ Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como pr
 A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, figura 21, é o processo de criação do intermediador, que recebe como entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, figura 22, é o processo de consulta de dados no intermediador, onde leva como entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
 
 \begin{enumerate}[noitemsep]
-  \item \textbf{Construir esquema para serviço}: Serve para criar um esquema GraphQL para os metadados do serviço. Este processo pode ser sobrescrito por adaptadores.
-  \item \textbf{Envolver campos de esquema}: Serve para fazer X. Um exemplo seria Y.
+  \item \textbf{Construir esquema para serviço}: (Arrumar) Serve para criar um esquema GraphQL para os metadados do serviço. Este processo pode ser sobrescrito por adaptadores.
+  \item \textbf{Envolver campos de esquema}: (Arrumar) Serve para fazer X. Um exemplo seria Y.
   \item \textbf{Unificar esquemas}: Serve para produzir um esquema unificado, utilizado para interpretar.
-  \item \textbf{Simplificar AST}: Serve para facilitar o trabalho e aplicar fragmentos diretamente na consulta.
-  \item \textbf{Transformar AST}: Serve para adicionar campos a mais, em adaptadores, podem ser usados para adicionar campos a mais. Este processo pode ser sobrescrito por adaptadores.
-  \item \textbf{Reduzir ASTs}: Serve para analisar todos os ASTs, classificar por heuristicas baseadas em tamanho de dados retornado e requisições.
-  \item \textbf{Desfazer envoltório de AST}: Serve para poder realizar a consulta certa em busca dos dados do serviço.
-  \item \textbf{Buscar de dados}: Serve para interpretar o AST e requisições para a API do serviço. Este processo pode ser sobrescrito por adaptadores.
-  \item \textbf{Criar envoltório de dados}: Serve para remapear os campos para o formato que o esquema vai entender.
-  \item \textbf{Unificar dados}: Serve para juntar profundamente todos os dados retornados de cada serviço.
+  \item \textbf{Simplificar AST}: (Arrumar) Serve para facilitar o trabalho e aplicar fragmentos diretamente na consulta.
+  \item \textbf{Transformar AST}: (Arrumar) Serve para adicionar campos a mais, em adaptadores, podem ser usados para adicionar campos a mais. Este processo pode ser sobrescrito por adaptadores.
+  \item \textbf{Reduzir ASTs}: (Arrumar) Serve para analisar todos os ASTs, classificar por heuristicas baseadas em tamanho de dados retornado e requisições.
+  \item \textbf{Desfazer envoltório de AST}: (Arrumar) Serve para poder realizar a consulta certa em busca dos dados do serviço.
+  \item \textbf{Buscar de dados}: (Arrumar) Serve para interpretar o AST e requisições para a API do serviço. Este processo pode ser sobrescrito por adaptadores.
+  \item \textbf{Criar envoltório de dados}: (Arrumar) Serve para remapear os campos para o formato que o esquema vai entender.
+  \item \textbf{Unificar dados}: (Arrumar) Serve para juntar profundamente todos os dados retornados de cada serviço.
 \end{enumerate}
 
 \begin{figure}[H]
