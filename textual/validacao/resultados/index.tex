@@ -1,6 +1,6 @@
 \section{Resultados}
 
-Os resultados obtidos neste capítulo apresentam a média dos valores coletados após diversas execuções dos quatro testes de mudança de forma sequencial em uma máquina virtual. Tanto o servidor SWAPI como os clientes JavaScript foram executados no mesmo ambiente computacional, porém com conexão local de latência 10mb/s para simulação de um ambiente distribuído. Para a variável de processamento, foram utilizados valores que pudessem representar um dispositivo computacional de médio porte. (1 CPU de 2.4 GHz e 4gb de RAM)
+Os resultados obtidos nos testes de validação apresentam a média dos valores coletados após diversas execuções dos quatro testes de mudança de forma sequencial em uma máquina virtual. Tanto o serviço SWAPI como os clientes JavaScript foram executados no mesmo ambiente computacional, porém com conexão local de latência 10mb/s para simulação de um ambiente distribuído. Para a variável de processamento, foram utilizados valores que pudessem representar um dispositivo computacional de médio porte. (1 CPU de 2.4 GHz e 4gb de RAM)
 
 Inicialmente, observa-se na figura 28 que o cliente 1 (sem o uso da ferramenta) não apresenta um bom índice de acerto das respostas. Dentre as quatro mudanças, obteve apenas 58\% de acerto, sendo a C3 a única mudança em que conseguiu responder certo todas pois não houve mudança nos pontos de acesso que estava utilizando. Um resultado esperado, significando que houve quebra de contrato e impacto negativo ao código de busca.
 
@@ -64,7 +64,7 @@ Nota-se que ambos os clientes não apresentaram erros na resposta, ao invés aca
   \caption{Índice de acerto com o uso da ferramenta}
 \end{figure}
 
-Ao analisar a mudança C3 isoladamente, onde ambos conseguem responder com 100\% de acerto, percebe-se na figura 30 e 31 que o cliente 2 consegue realizar uma busca mais performática (menor número de requisição e tamanho de dados) que o cliente 1. Isso porque, após a mudança e sem alterar o código de busca de dados, a ferramenta consegue remapear as requisições geradas pelas consultas GraphQL graças ao algoritmo de implementação e automação das chamadas em pontos de acesso.
+Ao analisar a mudança C3 isoladamente, onde ambos conseguem responder com 100\% de acerto, percebe-se na figura 30 e 31 que o cliente 2 consegue realizar uma busca mais performática (menor número de requisição e tamanho de dados) que o cliente 1. Isso porque, após a mudança e sem alterar o código de busca de dados, a ferramenta consegue remapear as requisições geradas pelas consultas GraphQL graças ao algoritmo de implementação na automação das chamadas em pontos de acesso.
 
 Outro ponto importante é que, após a mudança C3 e atualização dos metadados no cliente, o algoritmo da ferramenta percebe que há a possibilidade de realizar menos requisições em busca dos dados para responder as perguntas. O que resulta em uma redução de aproximadamente 54\% dos acessos entre o cliente 1 e cliente 2.
 

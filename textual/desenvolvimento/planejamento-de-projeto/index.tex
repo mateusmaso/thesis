@@ -8,9 +8,7 @@ De modo a permitir que clientes possam consumir dados remotos, é preciso que ha
   Infraestrutura distribuída (servidores, banco de dados, etc) que respondem a pedidos de operações oriundas de clientes em forma de requisições de API.
 } através de uma rede.
 
-No entanto, para que se possa manter garantia na comunicação, é necessário um contrato de acesso entre o cliente e a interface do serviço. Isso porque, após a implementação do código de busca pelo cliente, qualquer mudança em pontos de acesso\footnote{
-  Parte de uma interface exposta por um serviço através de um canal de comunicação.
-} da API podem colocar em risco a funcionalidade e comprometer a lógica da aplicação. Este contrato é, portanto, representado no modelo de comunicação da figura 17 através de chamadas entre o código de busca do cliente e a API do serviço.
+No entanto, para que se possa manter garantia na comunicação, é necessário um contrato de acesso entre o cliente e a interface do serviço. Isso porque, após a implementação do código de busca pelo cliente, qualquer mudança em métodos da API podem colocar em risco a funcionalidade e comprometer a lógica da aplicação. Este contrato é, portanto, representado no modelo de comunicação da figura 17 através de chamadas entre o código de busca do cliente e a API do serviço.
 
 \begin{figure}[H]
   \centering
@@ -127,7 +125,7 @@ Um novo modelo é proposto a fim de melhorar a comunicação cliente-servidor ap
   \caption{Modelo proposto para evitar contrato de comunicação}
 \end{figure}
 
-A proposta de eliminação de contrato visa também automatizar o acesso de clientes em APIs na busca de dados através da implementação de algoritmos na ferramenta. Dessa maneira, escolhe-se o caminho de acesso de melhor custo benefício em relação aos serviços disponíveis para o cliente. O modelo proporciona, além disso, um ambiente escalável para a composição de dados através de serviços, visto na figura 20.
+(Arrumar) A proposta de eliminação de contrato visa também automatizar o acesso de clientes em APIs na busca de dados através da implementação de algoritmos na ferramenta. Dessa maneira, escolhe-se o caminho de acesso de melhor custo benefício em relação aos serviços disponíveis para o cliente. O modelo proporciona, além disso, um ambiente escalável para a composição de dados através de serviços, visto na figura 20.
 
 \begin{figure}[H]
   \centering
@@ -144,12 +142,12 @@ A proposta de eliminação de contrato visa também automatizar o acesso de clie
     \draw [->] (tool) -- (service1) node [midway,above,font=\footnotesize] {$request$};
     \draw [->] (tool) -- (serviceN) node [midway,above,font=\footnotesize] {$request$};
   \end{tikzpicture}
-  \caption{Composição de serviços através da ferramenta do modelo}
+  \caption{(Arrumar) Composição de serviços através da ferramenta do modelo}
 \end{figure}
 
 \textbf{Especificação de ferramenta com base no modelo proposto} \\
 
-Visando a aceitação do modelo em ambientes de desenvolvimento de clientes, foi preciso pensar em uma especificação de ferramenta que apresentasse uma interface de baixa curva de aprendizagem, um fluxo de execução replicável e agnóstico à plataforma, além do baixo impacto na base de código de clientes. Por conseguinte, a ferramenta proposta foi desenvolvida pensando na reutilização de tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
+Visando a aceitação da ferramenta prevista pelo modelo em ambientes de desenvolvimento de clientes, foi preciso pensar em uma especificação que apresentasse uma interface de baixa curva de aprendizagem, um fluxo de execução replicável e agnóstico à plataforma, além do baixo impacto na base de código de clientes. Por conseguinte, a ferramenta proposta foi desenvolvida pensando na reutilização de tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
 
 Após um estudo, a primeira escolha foi em utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover o seu uso, GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso a uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
 
