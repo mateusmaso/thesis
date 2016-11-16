@@ -1,14 +1,16 @@
 \section[Objetivos]{Objetivos}
 
-Com o objetivo de resolver o problema de acoplamento causado pela implementação do código de busca de clientes, este trabalho propõe um novo modelo de comunicação cliente-servidor que, através da automação de consultas em APIs Web, direcione desenvolvedores à implementação de um código de busca em clientes independente de especificação de API. Com isso, o modelo visa ser tolerante à mudanças na especificação, otimizar requisições e facilitar a composição de serviços em busca de dados. Para sua validação, será desenvolvido uma ferramenta baseado no modelo de comunicação proposto. \\
+Com o objetivo de resolver o problema de acoplamento mencionado anteriormente, este trabalho propõe um novo modelo de comunicação cliente-servidor através da automação na execução de consultas de dados sobre APIs Web. Dessa forma, o modelo visa direcionar desenvolvedores de clientes à implementação de códigos de busca independente de especificação de API. Resultando no desenvolvimento de clientes tolerante à mudanças na especificação.
+
+Além disso, o modelo proposto prevê o desenvolvimento de uma ferramenta para servir como intermediador na comunicação e realizar a automação de consultas. Permitindo também a implementação de otimizações de requisição e a composição de serviços para busca de dados. \\
 
 \textbf{Objetivos específicos} \\
 
 No intuito de atingir o objetivo geral do trabalho, serão buscados os seguintes objetivos específicos:
 
 \begin{itemize}
-\item Propor modelo de comunicação replicável e agnóstico à plataforma.
-\item Desenvolver ferramenta que aplique o modelo para plataforma Web.
+\item Descrever modelo de comunicação replicável e agnóstico à plataforma.
+\item Desenvolver ferramenta prevista pelo modelo para plataforma Web.
 \item Validar a ferramenta na comunicação entre clientes e APIs Web.
 \item Promover a busca de dados através de linguagens de consulta.
 \item Promover a documentação de APIs através de formatos de descrição. \\
@@ -19,7 +21,7 @@ No intuito de atingir o objetivo geral do trabalho, serão buscados os seguintes
 O escopo do presente trabalho é delimitado da seguinte forma:
 
 \begin{itemize}
-\item Enfase na comunicação entre clientes web e APIs REST.
+\item Enfase na comunicação entre clientes e APIs REST.
 \item Enfase na tecnologia GraphQL para linguagem de consulta.
 \item Enfase na tecnologia JSON Hyper-Schema para descrição de APIs.
 \item Testes de composição de serviços não aplicados para a ferramenta.
