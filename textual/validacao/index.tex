@@ -4,7 +4,7 @@ Com o objetivo de validar o modelo proposto, é realizada uma pesquisa comparati
 
 \textbf{Escopo de serviço} \\
 
-Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Dentro do escopo de serviço, é implementado uma API REST que expõe consultas dessas entidades em formato JSON através de pontos de acesso em URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
+Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Dentro do escopo de serviço, é implementado uma API REST que expõe consultas dessas entidades em formato de representação JSON através de URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
 
 \begin{table}[H]
   \centering
@@ -110,7 +110,7 @@ No intuito de atingir as respostas esperadas, a tabela 7 descreve o fluxo de dad
 
 \textbf{Consultas e metadados} \\
 
-Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a SWAPI, foi preciso implementar três consultas GraphQL (uma para cada pergunta), além de descrever os metadados da API REST. Nas consultas da figura 26, foram realizadas apenas a busca de dados necessários para o funcionamento da lógica de resposta. Enquanto aos metadados da figura 27, foram descritos apenas os pontos de acesso utilizados no formato JSON Hyper-Schema, junto com implementação de um adaptador para a ferramenta que consiga interpretar este formato.
+Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a SWAPI, foi preciso implementar três consultas GraphQL (uma para cada pergunta), além de descrever os metadados da API REST. Nas consultas da figura 26, foram realizadas apenas a busca de dados necessários para o funcionamento da lógica de resposta. Enquanto aos metadados da figura 27, foram descritos apenas as URIs utilizadas no formato JSON Hyper-Schema, junto com implementação de um adaptador para a ferramenta que consiga interpretar este formato.
 
 \begin{figure}[H]
   \centering
