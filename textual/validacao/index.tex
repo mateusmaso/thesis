@@ -1,6 +1,6 @@
 \chapter{Validação}
 
-Com o objetivo de validar o modelo proposto, é realizada uma pesquisa comparativa com foco no impacto sobre o uso da ferramenta implementada em relação às mudanças no fluxo de dados. Para isso, é desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API de um serviço REST. Por fim, é aplicada uma série de quatro mudanças no fluxo de dados da API e coletados os dados para análise do impacto causado no código de busca desses clientes. \\
+Com o objetivo de validar o modelo proposto, é realizada uma pesquisa comparativa com foco no impacto em relação ao uso da ferramenta implementada e mudanças no fluxo de dados sobre APIs Web. Para isso, é desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas na API de um serviço REST. Por fim, é aplicada uma série de quatro mudanças no fluxo de dados da API e coletados os dados para análise do impacto causado no código de busca desses clientes. \\
 
 \textbf{Escopo de serviço} \\
 
@@ -44,7 +44,7 @@ Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{
 
 Com o propósito de explorar cada ponto de acesso para busca de dados na SWAPI, foram determinadas três perguntas de média complexidade, onde fossem envolvidos ao menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno.
 
-\begin{enumerate}[noitemsep]
+\begin{enumerate}
 \item[\textbf{Q1.}] Qual o nome do filme no qual aparecem mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
 \item[\textbf{Q2.}] Qual o nome da espécie predominante entre os habitantes do planeta "Tatooine"? \textbf{R:} "Droid"
 \item[\textbf{Q3.}] Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? \textbf{R:} "Chewbacca"
@@ -206,7 +206,7 @@ Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a 
 
 \textbf{Mudanças no fluxo de dados} \\
 
-Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de mudanças não acumulativas no fluxo de dados. Cada uma busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para a correta operação da ferramenta. A tabela 8 descreve o changelog das mudanças realizadas.
+Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de mudanças na API não acumulativas que afetam o fluxo de dados. Cada uma busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para a correta operação da ferramenta. A tabela 8 descreve o changelog das mudanças realizadas.
 
 \begin{table}[H]
   \centering
@@ -256,7 +256,7 @@ Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de
 
 \textbf{Variáveis} \\
 
-São descritas cinco variáveis para análise dos quatro testes de validação em cada um dos clientes. Todas são quantitativas e coletadas no cliente após cada processo de mudança da API. Dessa maneira, totalizam um número de 40 dados possíveis para análise no final da execução nos dois clientes.
+São descritas cinco variáveis para análise dos quatro testes de validação em cada um dos clientes. Todas são quantitativas e coletadas no cliente após cada processo de mudança da API. Dessa maneira, totalizam um número de 40 dados normalizados possíveis para análise no final da execução nos dois clientes.
 
 \begin{table}[H]
   \centering
