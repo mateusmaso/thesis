@@ -1,10 +1,10 @@
 \section{JSON}
 
-JSON (\textit{Javascript Object Notation}) é um formato de serialização de dados legível por humanos baseado em texto com especificação padronizada e parcialmente descritivo. Foi desenvolvido por Douglas Crockford com o objetivo de representar dados em uma maneira simples, leve e flexível através da redução na sobrecarga de marcações comparado ao formato XML.
+JSON (\textit{Javascript Object Notation}) é um formato de serialização de dados legível por humanos baseado em texto com especificação padronizada e parcialmente descritivo. Foi desenvolvido por Douglas Crockford com o objetivo de representar dados de uma maneira simples, leve e flexível através da redução na sobrecarga de marcações comparado ao formato XML.
 
 Por ter se adaptado bem no ambiente de aplicações distribuídas, este formato acabou sendo amplamente utilizado em serviços como principal forma de representação de dados serializados. \cite{Duvander2013}
 
-Na sua essência, o JSON foi construído com base em quatro tipos primitivos de dados e outros dois para composição. Cada tipo possui seu respectivo correspondente na maioria das linguagens de programação, embora possam ser identificados por nomes diferentes. \cite{Droettboom2015}
+O JSON, na sua essência, foi construído com base em quatro tipos primitivos de dados e outros dois para composição. Cada tipo possui seu respectivo correspondente na maioria das linguagens de programação, embora possam ser identificados por nomes diferentes. \cite{Droettboom2015}
 
 \begin{table}[H]
   \centering
@@ -25,10 +25,10 @@ Na sua essência, o JSON foi construído com base em quatro tipos primitivos de 
     null & \mintinline[fontsize=\footnotesize]{text}{ null } \\
     \hline
   \end{tabular}
-  \caption{Tipos de valores em JSON}
+  \caption{Tipos de valores em JSON.}
 \end{table}
 
-Através da composição de listas, objetos e tipos primitivos, consegue-se representar complexas estruturas de dados. Não existe, no entanto, um único padrão de representação. Dada uma estrutura, é possível representá-la de inúmeras maneiras. A seguir estão duas formas diferentes de representação em JSON de uma entidade “pessoa”:
+Através da composição de listas, objetos e tipos primitivos, consegue-se representar complexas estruturas de dados. Não existe, no entanto, um único padrão de representação. Dada uma estrutura, é possível representá-la de inúmeras maneiras. A seguir, estão duas formas distintas de representação em JSON de uma entidade “pessoa”:
  \cite{Droettboom2015}
 
 \begin{figure}[H]
@@ -40,7 +40,7 @@ Através da composição de listas, objetos e tipos primitivos, consegue-se repr
       "cidade": "Florianópolis, SC, Brasil"
     }
   \end{minted}
-  \caption{Representação JSON de uma entidade pessoa}
+  \caption{Representação JSON de uma entidade pessoa.}
 \end{figure}
 
 \begin{figure}[H]
@@ -62,4 +62,4 @@ Através da composição de listas, objetos e tipos primitivos, consegue-se repr
 
 Ambas representações são válidas, apesar da figura 3 estar representando os dados em uma estrutura um pouco mais formal. No entanto, por ser um formato não descritivo, a responsabilidade de entender o que está sendo representado vai depender da análise crítica ou conhecimento prévio dos desenvolvedores. Já uma máquina, sem conhecer o contexto, não saberia como interpretar os dados de forma correta. \cite{Droettboom2015}
 
-Para resolver isso, será abordado em seguida um dos formatos existentes hoje em dia para a descrição de estruturas JSON.
+Para resolver isso, é abordado em seguida um dos formatos existentes hoje em dia para a descrição de estruturas JSON.

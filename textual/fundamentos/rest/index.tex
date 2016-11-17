@@ -4,14 +4,14 @@ REST (\textit{Representational State Transfer}) é um estilo de arquitetura usad
 
 Em virtude de causar grande repercussão após sua publicação, o termo REST, segundo Richardson, acabou sofrendo diversas interpretações durante o tempo e sua descrição foi representada de formas não originalmente propostas por Fielding \cite{RichardsonEtAl2013}. Alguns descrevem que serviços que violam essas restrições não podem ser considerados RESTful. Para Wildermuth, apesar de reconhecer as vantagens de cada restrição, serviços Web devem usá-los de forma pragmática. \cite{Wildermuth2015}
 
-Ao ser introduzido no mercado de APIs Web, REST acabou se adaptando bem por ter se mostrado uma solução de fácil acesso em clientes. Segundo Pautasso, a eliminação da complexidade existente em Web Services antes de sua publicação em 2000 fez com que REST fosse considerado um dos principais responsáveis pela popularização de arquiteturas orientada a serviços, visível pela figura 7. \cite{PautassoEtAl2008}
+Ao ser introduzido no mercado de APIs Web, REST acabou se adaptando bem por ter se mostrado uma solução de fácil acesso em clientes. Segundo Pautasso, a eliminação da complexidade existente em Web Services antes de sua publicação em 2000 fez com que REST fosse considerado um dos principais responsáveis pela popularização de arquiteturas orientada a serviços, percebido na figura 7. \cite{PautassoEtAl2008}
 
 \begin{figure}[H]
   \centering    \includegraphics[width=0.9\textwidth,height=\textheight,keepaspectratio]{figuras/api-styles.jpg}
   \caption{Distribuição de estilos e protocolos para APIs Web}
 \end{figure}
 
-A seguir será apresentada uma visão geral sobre as restrições propostas por Fielding para a implementação da arquitetura, além de ser examinado o impacto de cada restrição em aplicações distribuídas. \\
+A seguir, é apresentada uma visão geral sobre as restrições propostas por Fielding para a implementação da arquitetura, além de examinar-se o impacto de cada restrição em aplicações distribuídas. \\
 
 \textbf{Cliente-Servidor} \\
 
@@ -19,7 +19,7 @@ Nesta primeira restrição, não existe conexão entre duas aplicações distrib
 
 \textbf{Sem Estado} \\
 
-Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de aplicações distribuídas, pois garante que chamadas à API não estejam vinculadas a um determinado servidor. Como HTTP é um protocolo sem conexão, cada requisição deve conter todas as informações necessárias para que um servidor entenda o que um cliente está executando. Para Wildermuth, no entanto, dependendo da diversidade no número de clientes, ao manter um servidor sem estado, perder-se o controle no tamanho da estrutura de resposta necessária para atender a demanda de todos os clientes. \cite{Wildermuth2015} \\
+Esta restrição ajuda na viabilidade, confiabilidade e escalabilidade de aplicações distribuídas, pois garante que chamadas à API não estejam vinculadas a um determinado servidor. Como o HTTP é um protocolo sem conexão, cada requisição deve conter todas as informações necessárias para que um servidor entenda o que um cliente está executando. Para Wildermuth, no entanto, dependendo da diversidade no número de clientes, ao manter um servidor sem estado, perder-se o controle no tamanho da estrutura de resposta necessária para atender a demanda de todos os clientes. \cite{Wildermuth2015} \\
 
 \textbf{Interface Uniforme} \\
 
@@ -29,7 +29,7 @@ Em essência, Fielding propõe que aplicações façam o uso de verbos HTTP (POS
 \item Identificação de Recursos: Cada recurso deve ser disponibilizado através de uma URI específica e coesa. (Exemplo: GET /customers/1)
 \item Manipulação de Recursos através de Representações: Um recurso pode ser representado em diferentes formatos para diferentes clientes. (Exemplo: HTML, XML, JSON)
 \item Resposta Auto-explicativa: Metadados devem ser adicionados na requisição e resposta de um recurso para descrever seu estado atual ou desejado. (Exemplo: código de resposta HTTP, Host, Content-Type)
-\item HATEOAS (\textit{Hypermedia as the Engine of Application State}): Caso um recurso possua relacionamentos, ao ser representado, estes devem estar especificados em forma de \textit{hyperlinks} para facilitar a navegação de dados por clientes.
+\item HATEOAS (\textit{Hypermedia as the Engine of Application State}): Caso um recurso possua relacionamentos, ao ser representado, estes devem estar especificados no formato de \textit{hyperlinks} para facilitar a navegação de dados por clientes.
 \end{itemize}
 
 \textbf{Separação em Camadas} \\
@@ -40,8 +40,8 @@ Um dos princípios desta restrição está em evitar que clientes façam diretam
 
 \textbf{Código sob Demanda} \\
 
-Apesar de ser a única restrição opcional do estilo, ela permite que servidores disponibilizem código em forma de script para que seja executado no cliente. Dessa forma, a lógica de serviço do servidor é estendida para seus clientes. \cite{Fielding2000} \\
+Apesar de ser a única restrição opcional do estilo, ela permite que servidores disponibilizem código em forma de script para que seja executado no cliente. Com isso, a lógica de serviço do servidor é estendida para seus clientes. \cite{Fielding2000} \\
 
 \textbf{Cache} \\
 
-Visa aumentar o desempenho de um serviço. Quando um recurso é acessado por mais de um cliente, se não houve mudança é recomendado que a resposta seja armazenada em cache, evitando o processamento desnecessário. Isso significa que servidores, quando possível, devem implementar regras de cache para beneficio de ambos os ambientes. \cite{Fielding2000}
+Visa aumentar o desempenho de um serviço. Quando um recurso é acessado por mais de um cliente, se não houver mudança é recomendado que a resposta seja armazenada em cache, evitando o processamento desnecessário. Isso significa que servidores, quando possível, devem implementar regras de cache para beneficio de ambos os ambientes. \cite{Fielding2000}

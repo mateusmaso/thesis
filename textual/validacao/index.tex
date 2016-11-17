@@ -1,10 +1,10 @@
 \chapter{Validação}
 
-Com o objetivo de validar o modelo proposto, é realizada uma pesquisa comparativa com foco no impacto em relação ao uso da ferramenta implementada e mudanças no fluxo de dados sobre APIs Web. Para isso, é desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas de dados sobre a API de um serviço REST. Por fim, é aplicada uma série de quatro mudanças no fluxo de dados da API e coletados os dados para análise do impacto causado no código de busca desses clientes. \\
+Com o objetivo de validar o modelo proposto, é realizada uma pesquisa comparativa com foco no impacto da relação do uso da ferramenta implementada e mudanças no fluxo de dados sobre APIs Web. Para isso, é desenvolvido um ambiente de validação onde dois clientes, um com a ferramenta e o outro não, realizam três consultas de dados sobre uma API REST. Por fim, é aplicada uma série de quatro mudanças no fluxo de dados da API e coletados os dados para análise do impacto causado no código de busca desses clientes. \\
 
 \textbf{Escopo de serviço} \\
 
-Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Dentro do escopo de serviço, é implementado uma API REST que expõe consultas dessas entidades em formato de representação JSON através de URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
+Escolheu-se trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Dentro do escopo de serviço, é implementado uma API REST que expõe consultas dessas entidades em formato de representação JSON através de URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
 
 \begin{table}[H]
   \centering
@@ -42,7 +42,7 @@ Foi escolhido trabalhar com um escopo de serviço conhecido como SWAPI (\textit{
 
 \textbf{Perguntas e respostas esperadas} \\
 
-Com o propósito de explorar cada URI para consulta de dados na SWAPI, foram determinadas três perguntas de média complexidade, onde fossem envolvidos ao menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa, onde sua lógica é baseada em campos das estruturas de dados de retorno.
+Com o propósito de explorar cada URI para consulta de dados na SWAPI, foram determinadas três perguntas de média complexidade, onde fossem envolvidos pelos menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa e sua lógica é baseada em campos das estruturas de dados de retorno.
 
 \begin{enumerate}
 \item[\textbf{Q1.}] Qual o nome do filme no qual aparecem mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
@@ -110,7 +110,7 @@ No intuito de atingir as respostas esperadas, a tabela 7 descreve o fluxo de dad
 
 \textbf{Consultas e metadados} \\
 
-Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a SWAPI, foi preciso implementar três consultas GraphQL (uma para cada pergunta), além de descrever os metadados da API REST. Nas consultas da figura 25, foram realizadas apenas a consulta de dados necessárias para o funcionamento da lógica de resposta. Enquanto aos metadados da figura 26, foram descritos apenas as URIs utilizadas no formato JSON Hyper-Schema, junto com implementação de um adaptador para a ferramenta que consiga interpretar este formato.
+Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a SWAPI, foi preciso implementar três consultas GraphQL (uma para cada pergunta), além de descrever os metadados da API REST. Nas consultas da figura 25, foram realizadas apenas a consulta de dados necessárias para o funcionamento da lógica de resposta. Enquanto aos metadados da figura 26, foram descritos apenas as URIs utilizada no formato JSON Hyper-Schema, junto à implementação de um adaptador para que a ferramenta consiga interpretar este formato.
 
 \begin{figure}[H]
   \centering
@@ -206,7 +206,7 @@ Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a 
 
 \textbf{Mudanças no fluxo de dados} \\
 
-Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de mudanças na API não acumulativas que afetam o fluxo de dados. Cada uma busca testar a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para a correta operação da ferramenta. A tabela 8 descreve o \textit{changelog} das mudanças realizadas.
+Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de mudanças na API não acumulativas que afetam o fluxo de dados. Cada uma busca por em teste a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para a correta operação da ferramenta. A tabela 8 descreve o \textit{changelog} das mudanças realizadas.
 
 \begin{table}[H]
   \centering
