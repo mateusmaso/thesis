@@ -4,7 +4,7 @@ Com o objetivo de validar o modelo proposto, é realizada uma pesquisa comparati
 
 \textbf{Escopo de serviço} \\
 
-Escolheu-se trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Dentro do escopo de serviço, é implementado uma API REST que expõe consultas dessas entidades em formato de representação JSON através de URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno (HATEOAS).
+Escolheu-se trabalhar com um escopo de serviço conhecido como SWAPI (\textit{Starwars API}), bastante utilizado para análise de implementações de tecnologias e estilos de arquitetura em linguagens de programação. Nele, são descritos seis entidades (Pessoa, Filme, Espaçonave, Veículo, Espécie, Planeta) e seus respectivos relacionamentos. Dentro do escopo de serviço, é implementado uma API REST que expõe consultas dessas entidades em formato de representação JSON através de URIs, visto na tabela 6. Nota-se que as representações possuem apenas um nível de expansão, ou seja, para acesso dos relacionamentos é preciso consultar a API através de links descritos pela estrutura de retorno.
 
 \begin{table}[H]
   \centering
@@ -42,7 +42,7 @@ Escolheu-se trabalhar com um escopo de serviço conhecido como SWAPI (\textit{St
 
 \textbf{Perguntas e respostas esperadas} \\
 
-Com o propósito de explorar cada URI para consulta de dados na SWAPI, foram determinadas três perguntas de média complexidade, onde fossem envolvidos pelos menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa e sua lógica é baseada em campos das estruturas de dados de retorno.
+Com o propósito de explorar cada URI para consulta de dados na SWAPI, foram determinadas três perguntas de média complexidade, onde fossem envolvidos pelo menos três das entidades do escopo. Para cada pergunta existe apenas uma resposta certa e sua lógica é baseada em campos das estruturas de dados de retorno.
 
 \begin{enumerate}
 \item[\textbf{Q1.}] Qual o nome do filme no qual aparecem mais personagens oriundos de um planeta deserto? \textbf{R:} "Revenge of the Sith"
@@ -50,13 +50,13 @@ Com o propósito de explorar cada URI para consulta de dados na SWAPI, foram det
 \item[\textbf{Q3.}] Qual o nome do personagem que mais pilota espaçonaves e veículos durante o filme "A New Hope"? \textbf{R:} "Chewbacca"
 \end{enumerate}
 
-No intuito de atingir as respostas esperadas, a tabela 7 descreve o fluxo de dados necessário de cada pergunta para a consulta de dados por clientes.
+No intuito de atingir as respostas esperadas, a tabela 7 descreve o fluxo de dados necessário para responder cada pergunta através da consulta de dados na SWAPI.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|c|c|c|}
     \hline
-    Pergunta & Fluxo de Dados & Número de requisições \\
+    Pergunta & Requisições & Número de chamadas \\
     \hline
     Q1 & \begin{minipage}[t]{0.3\textwidth}
       \begin{itemize}
@@ -108,9 +108,9 @@ No intuito de atingir as respostas esperadas, a tabela 7 descreve o fluxo de dad
   \caption{Fluxo de dados para responder as perguntas}
 \end{table}
 
-\textbf{Consultas e metadados} \\
+\textbf{Consultas GraphQL e metadados} \\
 
-Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a SWAPI, foi preciso implementar três consultas GraphQL (uma para cada pergunta), além de descrever os metadados da API REST. Nas consultas da figura 25, foram realizadas apenas a consulta de dados necessárias para o funcionamento da lógica de resposta. Enquanto aos metadados da figura 26, foram descritos apenas as URIs utilizada no formato JSON Hyper-Schema, junto à implementação de um adaptador para que a ferramenta consiga interpretar este formato.
+Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a SWAPI, foi preciso implementar três consultas GraphQL (uma para cada pergunta), além de descrever os metadados da API REST em formato JSON Hyper-Schema. Na figura 25, foram realizadas selecionados apenas os campos necessários para o funcionamento da lógica de resposta. Enquanto aos metadados da figura 26, foram descritos apenas as URIs utilizadas.
 
 \begin{figure}[H]
   \centering
@@ -206,7 +206,7 @@ Para permitir a comunicação entre o cliente que faz o uso da ferramenta com a 
 
 \textbf{Mudanças no fluxo de dados} \\
 
-Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de mudanças na API não acumulativas que afetam o fluxo de dados. Cada uma busca por em teste a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para a correta operação da ferramenta. A tabela 8 descreve o \textit{changelog} das mudanças realizadas.
+Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de mudanças não acumulativas na especificação da API que afetam o fluxo de dados. Cada uma busca por em teste a capacidade da ferramenta em se adaptar e realizar a comunicação mesmo após a alteração no fluxo. Nota-se que, para cada mudança na API do serviço, é preciso a atualização de seus metadados para a correta operação da ferramenta. A tabela 8 descreve o \textit{changelog} das mudanças realizadas.
 
 \begin{table}[H]
   \centering
@@ -215,7 +215,7 @@ Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de
     Mudança & Descrição & Changelog \\
     \hline
     C1 & \begin{minipage}[t]{0.3\textwidth}
-      Mudança no endereço de ponto de acesso.
+      Mudança de acesso em endereços.
     \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item Renomeação da URI /films para /movies.
@@ -224,7 +224,7 @@ Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de
     \end{minipage} \\
     \hline
     C2 & \begin{minipage}[t]{0.3\textwidth}
-      Mudança no nível de estrutura de resposta.
+      Mudança no nível da estrutura de resposta em endereços.
     \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item Expansão do campo pilots da URI /starships/:id
@@ -233,7 +233,7 @@ Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de
     \end{minipage} \\
     \hline
     C3 & \begin{minipage}[t]{0.3\textwidth}
-      Adição de ponto de acesso otimizado.
+      Introdução de novos endereços.
     \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item[\textbf{+}] Adição da URI /tatooine.
@@ -242,7 +242,7 @@ Para avaliar o impacto no código em ambos clientes, é proposto quatro tipos de
     \end{minipage} \\
     \hline
     C4 & \begin{minipage}[t]{0.3\textwidth}
-      Remoção de ponto de acesso deprecado.
+      Substituição de endereço \textit{deprecated}.
     \end{minipage} & \begin{minipage}[t]{0.5\textwidth}
       \begin{itemize}
         \item[\textbf{+}] Adição da URI /people/:id/homeworld.

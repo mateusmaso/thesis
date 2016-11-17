@@ -2,7 +2,7 @@
 
 A fim de aplicar a especificação da ferramenta abordada no planejamento de projeto, foi proposta a implementação de onze funções com três categorias para o uso de clientes na plataforma Web. Cada uma dessas funções levantadas resolve um problema para se fazer necessário chegar no objetivo de representar os dois fluxos de execução.
 
-Dentro do conjunto de funções, quatro delas são responsáveis por criar o intermediador; três funções analisam as consultas através do formato AST; e as outras quatro transformam as consultas em requisições para API de serviços. Somente quatro são públicas e expostas para o cliente, sendo uma delas (composeSchema) a principal para configuração/uso da ferramenta, e as outras três (buildSchema, transformAST, fetchData) para serem sobrescritas por adaptadores.
+Dentro do conjunto de funções, quatro delas são responsáveis por criar o intermediador; três funções analisam as consultas através do formato AST; e as outras quatro transformam as consultas em requisições para API de serviços. Somente quatro são públicas e expostas para o cliente, sendo uma delas (composeSchema) a principal para criação do esquema de consulta e, as outras três (buildSchema, transformAST, fetchData), para serem sobrescritas por adaptadores.
 
 A seguir, são descritas brevemente essas três categorias de funções, ao lado de seu objetivo e a assinatura JavaScript de cada função. \\
 
