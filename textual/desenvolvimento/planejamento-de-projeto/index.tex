@@ -60,7 +60,7 @@ Mudanças no fluxo de dados pela API são inevitáveis em aplicações distribu�
   \caption{Fluxo de dados entre cliente e API}
 \end{figure}
 
-O impacto causado em clientes por mudanças no fluxo de dados de uma API felizmente é previsível, pois afeta diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos nas estruturas de dados, como renomear um campo "nome" para "nome\_completo", são de um grau de complexidade maior, pois seu impacto pode não influenciar o código de busca e sim a lógica da aplicação, onde é bem mais difícil de debugar.
+O impacto causado em clientes por mudanças no fluxo de dados de uma API felizmente é previsível, pois afeta diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos nas estruturas de dados, como renomear um campo "nome" para "nome\_completo", são de um grau de complexidade maior, pois pode não ter impacto no código de busca e sim na lógica da aplicação, onde é bem mais difícil de depurar erros.
 
 Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o impacto no código de busca em clientes devido a mudanças no fluxo de dados, fez-se necessário solucionar os seguintes problemas descritos na tabela 5. \\
 
@@ -91,7 +91,7 @@ Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o i
 
 \textbf{Proposta de modelo} \\
 
-Um novo modelo é proposto pretendendo melhorar a comunicação cliente-servidor apresentada. Observado na figura 18, este prevê a criação de uma ferramenta no cliente para a intermediação da comunicação entre o código de busca e API de serviços. Além disso, há a necessidade de reimplementação do código de busca para uma nova linguagem de consulta que seja interpretada pelo intermediador. Da mesma forma, soma-se a criação de um arquivo no serviço para descrição de metadados da API e outro no cliente para configuração, ambos essenciais para o funcionamento da ferramenta.
+Um novo modelo é proposto com o intuito de melhorar a comunicação cliente-servidor apresentada. Observado na figura 18, este prevê a criação de uma ferramenta no cliente para a intermediação da comunicação entre o código de busca e a API de serviços. Além disso, há a necessidade de reimplementação do código de busca para uma nova linguagem de consulta que seja interpretada pelo intermediador. Da mesma forma, soma-se a criação de um arquivo no serviço para descrição de metadados da API e outro no cliente para configuração, ambos essenciais para o funcionamento da ferramenta.
 
 \begin{figure}[H]
   \centering
@@ -125,7 +125,7 @@ Um novo modelo é proposto pretendendo melhorar a comunicação cliente-servidor
   \caption{Modelo proposto para evitar contrato de comunicação}
 \end{figure}
 
-A proposta de eliminação de contrato visa também automatizar o acesso de clientes em APIs. Através da implementação de algoritmos na ferramenta, escolhe-se o caminho de acesso de melhor custo benefício em relação aos serviços disponíveis para o cliente. O modelo proporciona, além disso, um ambiente escalável para consulta de dados através da composição de serviços, visto na figura 19.
+A proposta de eliminação de contrato visa também automatizar o acesso de clientes em APIs. Através da implementação de algoritmos na ferramenta, escolhe-se o caminho de acesso de melhor custo-benefício em relação aos serviços disponíveis para o cliente. O modelo proporciona, além disso, um ambiente escalável para consulta de dados através da composição de serviços, visto na figura 19.
 
 \begin{figure}[H]
   \centering
@@ -151,7 +151,7 @@ Visando a aceitação da ferramenta prevista pelo modelo em ambientes de desenvo
 
 Com a sucessão de estudos, a primeira escolha foi utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover seu uso, o GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso a uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
 
-A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, figura 20, é o processo de criação do intermediador, que recebe de entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, figura 21, é o processo de consulta de dados no intermediador, onde recebe de entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas à APIs, retorna estruturas de dados JSON.
+A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, ilustrado na figura 20, é o processo de criação do intermediador, que recebe de entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, mostrado na figura 21, é o processo de consulta de dados no intermediador, que recebe de entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas às APIs, retorna estruturas de dados JSON.
 
 \begin{figure}[H]
   \centering
@@ -216,19 +216,21 @@ A seguir, é realizada a análise dos dois fluxos de execução descritos na esp
   \caption{Processo de consulta de dados no intermediador}
 \end{figure}
 
+Os passos enumerados nas figuras 20 e 21 são descritos a seguir:
+
 \begin{enumerate}
   \item Constrói um esquema GraphQL para o serviço através de seus metadados. Este processo pode ser sobrescrito por adaptadores.
   \item Envolve os campos do esquema GraphQL gerado para o serviço visando facilitar a consulta e, depois, unificar com outros esquemas de maneira correta.
-  \item Realiza a união dos esquemas GraphQL gerado para cada serviço. Criando um esquema unificado para que a ferramenta possa interpretar consultas de diversos serviços em uma única operação.
+  \item Realiza a união dos esquemas GraphQL gerados para cada serviço. Cria um esquema unificado para que a ferramenta possa interpretar consultas de diversos serviços em uma única operação.
   \item Simplifica o AST gerado pela consulta no esquema unificado para facilitar o trabalho na resolução de fragmentos GraphQL.
-  \item Transforma o AST principal da consulta em um AST especifico para cada esquema de serviço. Dessa forma, separando os dados que cada serviço consegue disponibilizar para o cliente. Este processo pode ser sobrescrito por adaptadores.
+  \item Transforma o AST principal da consulta em um AST especifico para cada esquema de serviço. Dessa forma, separa os dados que cada serviço consegue disponibilizar para o cliente. Este processo pode ser sobrescrito por adaptadores.
   \item Analisa os ASTs gerados para cada serviço na etapa de transformação e, a partir de heurísticas, reduz os campos dos ASTs para otimizar consultas. A heurística envolve o número de requisições necessárias para número de dados retornados e requisições para obtê-los.
   \item Desfaz o envoltório do AST para poder realizar a requisição correta na consulta dos dados do serviço.
   \item Busca os dados a partir do AST, onde interpreta os metadados do serviço e realiza requisições para a API do serviço. Este processo pode ser sobrescrito por adaptadores.
   \item Recria o envoltório dos dados retornados para que o esquema GraphQL entenda e consiga unificar com outros dados de maneira correta.
-  \item Unifica os dados retornados pela API de cada serviço no qual foram feitas as requisições.
+  \item Unifica os dados retornados pelas APIs de cada serviço, nas quais foram feitas as requisições.
 \end{enumerate}
 
-Em resumo, o processo de criação do intermediador começa através da resolução das funções de configuração de serviços (URL, metadados, adaptador e definições de envoltório) para construir um esquema GraphQL de cada um. Logo mais, é aplicado o envoltório dos campos dos esquemas e estende-se até gerar um esquema GraphQL unificado.
+Em resumo, o processo de criação do intermediador começa através da resolução das funções de configuração de serviços (URL, metadados, adaptador e definições de envoltório) para construir um esquema GraphQL de cada um. Na sequência, é aplicado o envoltório dos campos dos esquemas, estendendo-se até gerar um esquema GraphQL unificado.
 
-Com relação ao processo de consulta de dados no intermediador, este começa através de uma chamada de consulta no esquema gerado. Primeiro utiliza-se o AST fornecido pela função de resolução de consulta GraphQL e converte-se para uma estrutura de maior facilidade de trabalho. Em seguida, transforma-se o AST já simplificado em ASTs específicos para o esquema de cada serviço. Durante esse processo, reduz-se as árvores através de um algoritmo de otimização de busca que analisa o conjunto como um todo. Por fim, para se poder realizar a consulta de dados correspondente em cada serviço, é desfeito o envoltório dos ASTs, realizadas as requisições e criado o envoltório e união dos dados JSON retornados. \\
+Com relação ao processo de consulta de dados no intermediador, este começa através de uma chamada de consulta no esquema gerado. Primeiramente utiliza-se o AST fornecido pela função de resolução de consulta GraphQL e converte-se para uma estrutura de maior facilidade de trabalho. Em seguida, transforma-se o AST já simplificado em ASTs específicos para o esquema de cada serviço. Durante esse processo, reduz-se as árvores através de um algoritmo de otimização de busca que analisa o conjunto como um todo. Por fim, para se poder realizar a consulta de dados correspondente em cada serviço, é desfeito o envoltório dos ASTs, são realizadas as requisições, é criado o envoltório e é feita a união dos dados JSON retornados. \\

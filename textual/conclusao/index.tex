@@ -1,18 +1,20 @@
 \chapter{Conclusão}
 
-Tornou-se evidente, através deste trabalho, que o acoplamento entre o código de busca e especificação de APIs Web têm dificultado serviços em oferecer uma melhor comunicação. Implementação
+Tornam-se evidentes, através deste trabalho, as dificuldades de serviços em realizar mudanças na especificação de APIs uma vez que estas já possuem clientes fazendo o seu acesso. Além disso, nota-se que é possível explorar novos modelos de comunicação a fim de manter a eficiência da comunicação cliente-servidor evitando versionamento.
 
-O esforço dedicado neste trabalho em explorar esta área resultou no desenvolvimento de um novo modelo de comunicação. Este buscou eliminar a preocupação de clientes em estar atualizando seu código de busca a cada mudança na API. Através de uma implementação oferecer uma implementação do código de busca não dependente à especificação de API,
+O esforço dedicado neste trabalho em explorar esta área culminou no desenvolvimento de um novo modelo de comunicação. Buscou-se eliminar a preocupação de clientes em estar continuamente atualizando seu código de busca a cada mudança na API e direcionar desenvolvedores de clientes à implementação de códigos de busca independentes de especificação de API.
 
-Uma das principais contribuição deste trabalho foi mostrar os benefícios da automação na execução de consultas de dados e potencial facilidade na composição de serviços que a ferramenta pode proporcionar, mesmo não sendo validada. Foi percebida a importância de se escrever um código de busca através de linguagens de consulta como GraphQL e de serviços em disponibilizar metadados de API.
+Apesar das vantagens do modelo, existe um investimento a mais com a integração da ferramenta para que clientes e serviços possam usufruir os benefícios demonstrados nos resultados dos testes de validação. Felizmente, serviços que disponibilizam descrições de metadados da sua API apresentam uma menor barreira de entrada e já podem ser consultados utilizando a ferramenta.
 
-Por fim, os benefícios do uso desse modelo será apenas sentido por serviços se estes encorajar o uso da ferramenta por seus clientes. Onde o tempo pode demorar baseado no numero de tipos de clientes ativos fazendo comunicação.
+Por fim, uma das principais contribuições deste trabalho é estampar os benefícios da automação na execução de consultas de dados e composição de serviços que o modelo e a ferramenta podem proporcionar. Basta que os desenvolvedores de clientes se preocupem em escrever um código de busca através de linguagens de consulta como o GraphQL e dos serviços em disponibilizarem uma completa descrição dos metadados de APIs.
 
 \input{textual/conclusao/trabalhos-futuros/index}
 
+Identificamos as seguintes possibilidades de continuidade e evolução deste trabalho: 
+
 \begin{itemize}
-\item Realizar mais testes de validação como a de composição de serviços, transição entre versões de API e estilos de arquitetura.
-\item Criar novos adaptadores da ferramenta para formatos de descrição de APIs. (OpenAPI, RAML, API Blueprint)
-\item Implementar a especificação da ferramenta em outras plataformas de desenvolvimento. (Android, iOS, etc)
-\item Melhorar o algoritmo de análise de consultas AST.
+\item Realização de testes de validação para a composição de serviços.
+\item Criação de novos adaptadores da ferramenta para formatos de descrição de APIs. (OpenAPI, RAML, API Blueprint)
+\item Implementação da especificação da ferramenta em outras plataformas de desenvolvimento. (Android, iOS, etc)
+\item Aprimoramento do algoritmo de análise de consultas AST.
 \end{itemize}
