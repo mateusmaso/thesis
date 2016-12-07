@@ -1,10 +1,12 @@
-\section{Implementação}
+\section{Implementação da Ferramenta}
 
 A fim de aplicar a especificação da ferramenta abordada no planejamento de projeto, foi proposta a implementação de onze funções, divididas em três categorias, para o uso de clientes na plataforma Web. Cada uma dessas funções levantadas resolve um problema com o intuito de chegar ao objetivo de representar os dois fluxos de execução.
 
 Dentro do conjunto de funções, quatro delas são responsáveis por criar o intermediador; três funções analisam as consultas através do formato AST; e as outras quatro transformam as consultas em requisições para API de serviços. Somente quatro são públicas e expostas para o cliente, sendo uma delas (composeSchema) a principal para criação do esquema de consulta, e as outras três (buildSchema, transformAST, fetchData) para serem sobrescritas por adaptadores.
 
-A seguir, são descritas brevemente essas três categorias de funções, ao lado de seu objetivo e a assinatura JavaScript de cada função. \\
+A seguir, são descritas brevemente essas três categorias de funções, ao lado de seu objetivo e a assinatura JavaScript de cada função em Flow\footnote{
+  Verificador de tipo estático para JavaScript.
+}. \\
 
 \textbf{Criação do esquema} \\
 
@@ -30,7 +32,7 @@ Consiste de quatro funções e seu principal objetivo é compor, de forma assín
     schemas: [GraphQLSchema]
   ): Promise<GraphQLSchema>
   \end{minted}
-  \caption{Assinatura das funções para criação do esquema}
+  \caption{Assinatura JS das funções para criação do esquema}
 \end{figure}
 
 \textbf{Análise de consulta} \\
@@ -56,7 +58,7 @@ Consiste de quatro funções e seu principal objetivo é compor, de forma assín
     asts: [SimplifiedAST]
   ): [SimplifiedAST]
   \end{minted}
-  \caption{Assinatura das funções para análise de consulta}
+  \caption{Assinatura JS das funções para análise de consulta}
 \end{figure}
 
 \textbf{Consulta de dados} \\
@@ -88,5 +90,5 @@ Consiste as quatro últimas funções responsáveis por converter os ASTs de cad
     data: [JSON]
   ): JSON
   \end{minted}
-  \caption{Assinatura das funções para consulta de dados}
+  \caption{Assinatura JS das funções para consulta de dados}
 \end{figure}
