@@ -1,0 +1,89 @@
+\section{Especificação da ferramenta}
+
+Visando a aceitação da ferramenta prevista pelo modelo em ambientes de desenvolvimento de clientes, foi preciso pensar em uma especificação que apresentasse uma interface de baixa curva de aprendizagem, um fluxo de execução replicável e agnóstico à plataforma, além do baixo impacto na base de código de clientes. Por conseguinte, a ferramenta proposta foi desenvolvida pensando na reutilização de tecnologias promissoras ou bem consolidadas no mercado de desenvolvimento.
+
+Com a sucessão de estudos, a primeira escolha foi utilizar a tecnologia GraphQL como principal solução para intermediação na comunicação. Além de promover seu uso, o GraphQL é a base para os demais fluxos de execução da ferramenta e possibilita que clientes escrevam um código de busca que não fique preso a uma interface de acesso. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
+
+A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, ilustrado na figura 20, é o processo de criação do intermediador, que recebe de entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, mostrado na figura 21, é o processo de consulta de dados no intermediador, que recebe de entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas às APIs, retorna estruturas de dados JSON.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \begin{pgfonlayer}{background}
+      \path[rounded corners, draw=black!50, dashed] (-5.2,0) rectangle (5.2,5);
+    \end{pgfonlayer}
+    \node (serviceDots) at (-4,2.5) {\vdots};
+    \node [circle, draw, above of=serviceDots,node distance=1.5cm,font=\footnotesize] (service1) {$Service_1$};
+    \node [circle, draw, below of=serviceDots,node distance=1.5cm,font=\footnotesize] (serviceN) {$Service_N$};
+    \node [right of=serviceDots,node distance=2cm] (schemaDots) {\vdots};
+    \node [above of=schemaDots,node distance=1.5cm] (schema1) {$Schema_1$};
+    \node [below of=schemaDots,node distance=1.5cm] (schemaN) {$Schema_N$};
+    \node [right of=schemaDots,node distance=2cm] (wrappedSchemaDots) {\vdots};
+    \node [above of=wrappedSchemaDots,node distance=1.5cm] (wrappedSchema1) {$Schema_1$};
+    \node [below of=wrappedSchemaDots,node distance=1.5cm] (wrappedSchemaN) {$Schema_N$};
+    \node [rectangle,draw,minimum width=0.6cm,font=\footnotesize,right of=wrappedSchemaDots,node distance=2cm] (deepExtendSchema) {$3$};
+    \node [circle,draw,right of=deepExtendSchema,node distance=2cm] (schema) {$Schema$};
+    \draw [->] (service1) -- (schema1) node [midway,above,font=\footnotesize] {$1$};
+    \draw [->] (serviceN) -- (schemaN) node [midway,above,font=\footnotesize] {$1$};
+    \draw [->] (schema1) -- (wrappedSchema1) node [midway,above,font=\footnotesize] {$2$};
+    \draw [->] (schemaN) -- (wrappedSchemaN) node [midway,above,font=\footnotesize] {$2$};
+    \draw [->] (wrappedSchema1) -- (deepExtendSchema);
+    \draw [->] (wrappedSchemaN) -- (deepExtendSchema);
+    \draw [->] (deepExtendSchema) -- (schema);
+  \end{tikzpicture}
+  \caption{Processo de criação do intermediador}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \begin{pgfonlayer}{background}
+      \path[rounded corners, draw=black!50, dashed] (-5.2,0) rectangle (5.2,5);
+    \end{pgfonlayer}
+    \node [circle, draw] (ast) at (-4.5,2.5) {$AST$};
+    \node [right of=ast,node distance=1.5cm] (astTransformedDots) {\vdots};
+    \node [above of=astTransformedDots,node distance=1.5cm] (astTransformed1) {$AST_1$};
+    \node [below of=astTransformedDots,node distance=1.5cm] (astTransformedN) {$AST_N$};
+    \node [rectangle,draw,minimum width=0.6cm,font=\footnotesize,right of=astTransformedDots,node distance=1.5cm] (reduceASTs) {$6$};
+    \node [right of=reduceASTs,node distance=1.5cm] (unwrappedASTDots) {\vdots};
+    \node [above of=unwrappedASTDots,node distance=1.5cm] (unwrappedAST1) {$AST_1$};
+    \node [below of=unwrappedASTDots,node distance=1.5cm] (unwrappedASTN) {$AST_N$};
+    \node [right of=unwrappedASTDots,node distance=1.5cm] (dataDots) {\vdots};
+    \node [above of=dataDots,node distance=1.5cm] (data1) {$Data_1$};
+    \node [below of=dataDots,node distance=1.5cm] (dataN) {$Data_N$};
+    \node [rectangle,draw,minimum width=0.6cm,font=\footnotesize,right of=dataDots,node distance=1.5cm] (deepExtendData) {$10$};
+    \node [circle, draw,right of=deepExtendData,node distance=1.5cm] (data) {$Data$};
+    \draw [->,min distance=3cm,font=\footnotesize] (ast) edge[loop above] node {$4$} (ast);
+    \draw [->] (ast) -- (astTransformed1) node [midway,above,font=\footnotesize] {$5$};
+    \draw [->] (ast) -- (astTransformedN) node [midway,above,font=\footnotesize] {$5$};
+    \draw [->] (astTransformed1) -- (reduceASTs);
+    \draw [->] (astTransformedN) -- (reduceASTs);
+    \draw [->] (reduceASTs) -- (unwrappedAST1) node [midway,above,font=\footnotesize] {$7$};
+    \draw [->] (reduceASTs) -- (unwrappedASTN) node [midway,above,font=\footnotesize] {$7$};
+    \draw [->] (unwrappedAST1) -- (data1) node [midway,above,font=\footnotesize] {$8$};
+    \draw [->] (unwrappedASTN) -- (dataN) node [midway,above,font=\footnotesize] {$8$};
+    \draw [->] (data1) -- (deepExtendData) node [midway,above,font=\footnotesize] {$9$};
+    \draw [->] (dataN) -- (deepExtendData) node [midway,above,font=\footnotesize] {$9$};
+    \draw [->] (deepExtendData) -- (data);
+  \end{tikzpicture}
+  \caption{Processo de consulta de dados no intermediador}
+\end{figure}
+
+Os passos enumerados nas figuras 20 e 21 são descritos a seguir:
+
+\begin{enumerate}
+  \item Constrói um esquema GraphQL para o serviço através de seus metadados. Este processo pode ser sobrescrito por adaptadores.
+  \item Envolve os campos do esquema GraphQL gerado para o serviço visando facilitar a consulta e, depois, unificar com outros esquemas de maneira correta.
+  \item Realiza a união dos esquemas GraphQL gerados para cada serviço. Cria um esquema unificado para que a ferramenta possa interpretar consultas de diversos serviços em uma única operação.
+  \item Simplifica o AST gerado pela consulta no esquema unificado para facilitar o trabalho na resolução de fragmentos GraphQL.
+  \item Transforma o AST principal da consulta em um AST especifico para cada esquema de serviço. Dessa forma, separa os dados que cada serviço consegue disponibilizar para o cliente. Este processo pode ser sobrescrito por adaptadores.
+  \item Analisa os ASTs gerados para cada serviço na etapa de transformação e, a partir de heurísticas, reduz os campos dos ASTs para otimizar consultas. A heurística envolve o número de requisições necessárias para número de dados retornados e requisições para obtê-los.
+  \item Desfaz o envoltório do AST para poder realizar a requisição correta na consulta dos dados do serviço.
+  \item Busca os dados a partir do AST, onde interpreta os metadados do serviço e realiza requisições para a API do serviço. Este processo pode ser sobrescrito por adaptadores.
+  \item Recria o envoltório dos dados retornados para que o esquema GraphQL entenda e consiga unificar com outros dados de maneira correta.
+  \item Unifica os dados retornados pelas APIs de cada serviço, nas quais foram feitas as requisições.
+\end{enumerate}
+
+Em resumo, o processo de criação do intermediador começa através da resolução das funções de configuração de serviços (URL, metadados, adaptador e definições de envoltório) para construir um esquema GraphQL de cada um. Na sequência, é aplicado o envoltório dos campos dos esquemas, estendendo-se até gerar um esquema GraphQL unificado.
+
+Com relação ao processo de consulta de dados no intermediador, este começa através de uma chamada de consulta no esquema gerado. Primeiramente utiliza-se o AST fornecido pela função de resolução de consulta GraphQL e converte-se para uma estrutura de maior facilidade de trabalho. Em seguida, transforma-se o AST já simplificado em ASTs específicos para o esquema de cada serviço. Durante esse processo, reduz-se as árvores através de um algoritmo de otimização de busca que analisa o conjunto como um todo. Por fim, para se poder realizar a consulta de dados correspondente em cada serviço, é desfeito o envoltório dos ASTs, são realizadas as requisições, é criado o envoltório e é feita a união dos dados JSON retornados.
