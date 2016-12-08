@@ -12,4 +12,4 @@ Este trabalho realiza um estudo sobre o uso da linguagem GraphQL e formatos de d
 - [x] Envio do rascunho para os avaliadores 10/24/16
 - [x] Data limite para confirmar apresentação 10/31/16
 - [x] Inicio das apresentações 11/07/16
-- [ ] Entrega final do artigo e monografia 12/12/16
+- [x] Entrega final do artigo e monografia 12/12/16
