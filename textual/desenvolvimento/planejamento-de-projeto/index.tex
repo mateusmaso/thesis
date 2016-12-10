@@ -4,7 +4,7 @@ Para que clientes possam trabalhar com dados remotos, é preciso que haja um mei
   Infraestrutura distribuída (servidores, banco de dados, etc) que respondem a pedidos de operações oriundas de clientes em forma de requisições de API.
 }.
 
-Para que se possa manter garantia na comunicação, ao passar do tempo, fez-se necessário estabelecer um contrato de acesso entre o cliente e a interface do serviço. Isso porque a atual implementação do código de busca por clientes não prevê mudanças na especificação da API. Este contrato é, portanto, representado no modelo de comunicação da figura 16 através de chamadas entre o código de busca do cliente e a API do serviço.
+Para que se possa manter garantia na comunicação, ao passar do tempo, fez-se necessário estabelecer um contrato de acesso entre o cliente e a interface do serviço. Isso porque a atual implementação do código de busca por clientes não prevê mudanças na especificação da API. Este contrato é, portanto, representado no modelo de comunicação da figura 15 através de chamadas entre o código de busca do cliente e a API do serviço.
 
 \begin{figure}[H]
   \centering
@@ -34,7 +34,7 @@ O modelo de comunicação representado pode não revelar problemas para serviço
   Fluxo de acesso por clientes para consulta de dados sobre APIs de serviços.
 } podem se tornar um desafio.
 
-Mudanças no fluxo de dados pela API são inevitáveis em aplicações distribuídas. Elas ocorrem para abraçar a constante transformação por clientes na execução de consultas de dados. Com isso, busca-se manter uma comunicação eficiente através da redução no número de chamadas executadas na API e do tamanho de dados transmitidos pela rede. Essas mudanças podem ser desde uma simples alteração no nome de um método ou número argumentos, até as mais complexas, como dados de retorno e estilo de arquitetura. A figura 17 ilustra o fluxo de dados entre um cliente e um serviço.
+Mudanças no fluxo de dados pela API são inevitáveis em aplicações distribuídas. Elas ocorrem para abraçar a constante transformação por clientes na execução de consultas de dados. Com isso, busca-se manter uma comunicação eficiente através da redução no número de chamadas executadas na API e do tamanho de dados transmitidos pela rede. Essas mudanças podem ser desde uma simples alteração no nome de um método ou número argumentos, até as mais complexas, como dados de retorno e estilo de arquitetura. A figura 16 ilustra o fluxo de dados entre um cliente e um serviço.
 
 \begin{figure}[H]
   \centering
@@ -58,7 +58,7 @@ Mudanças no fluxo de dados pela API são inevitáveis em aplicações distribu�
 
 O impacto causado em clientes por mudanças no fluxo de dados de uma API felizmente é previsível, pois afeta diretamente, em sua maioria, o código de busca. Por outro lado, mudanças como a alteração de campos nas estruturas de dados, como renomear um campo "nome" para "nome\_completo", são de um grau de complexidade maior, pois pode não ter impacto no código de busca e sim na lógica da aplicação, onde é bem mais difícil de depurar erros.
 
-Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o impacto no código de busca em clientes devido a mudanças no fluxo de dados, fez-se necessário solucionar os seguintes problemas descritos na tabela 5. \\
+Com o objetivo de viabilizar um novo modelo de comunicação a fim de evitar o impacto no código de busca em clientes devido a mudanças no fluxo de dados, fez-se necessário solucionar os seguintes problemas descritos na tabela 4. \\
 
 \begin{table}[H]
   \begin{tabularx}{\linewidth}{>{\parskip1ex}X@{\kern4\tabcolsep}>{\parskip1ex}X}

@@ -4,7 +4,7 @@ Visando a aceitação da ferramenta prevista pelo modelo em ambientes de desenvo
 
 Com a sucessão de estudos, a escolha foi em utilizar a tecnologia GraphQL como principal biblioteca para ajudar com intermediação da comunicação do modelo proposto. Ao invés da tecnologia Falcor (apontada durante o estudo), GraphQL foi o único que apresentou uma solução robusta que permitisse o acesso de APIs Web por clientes através de consultas em seu código de busca. Da mesma forma, buscou-se trabalhar com formatos abertos de descrição de metadados de APIs, como por exemplo o JSON Hyper-Schema. Através de adaptadores, a ferramenta permite acelerar a integração de serviços que já oferecem metadados em formatos suportados.
 
-A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, ilustrado na figura 20, é o processo de criação do intermediador, que recebe de entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, mostrado na figura 21, é o processo de consulta de dados no intermediador, que recebe de entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas às APIs, retorna estruturas de dados JSON.
+A seguir, é realizada a análise dos dois fluxos de execução descritos na especificação da ferramenta. O primeiro, ilustrado na figura 19, é o processo de criação do intermediador, que recebe de entrada funções de configuração de serviços e retorna um esquema GraphQL. O segundo, mostrado na figura 20, é o processo de consulta de dados no intermediador, que recebe de entrada consultas escritas na sintaxe da linguagem GraphQL e, após chamadas às APIs, retorna estruturas de dados JSON.
 
 \begin{figure}[H]
   \centering
@@ -69,7 +69,7 @@ A seguir, é realizada a análise dos dois fluxos de execução descritos na esp
   \caption{Processo de consulta de dados no intermediador}
 \end{figure}
 
-Os passos enumerados nas figuras 20 e 21 são descritos a seguir:
+Os passos enumerados nas figuras 19 e 20 são descritos a seguir:
 
 \begin{enumerate}
   \item Constrói um esquema GraphQL para o serviço através de seus metadados. Este processo pode ser sobrescrito por adaptadores.

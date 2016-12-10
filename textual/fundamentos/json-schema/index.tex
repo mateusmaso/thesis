@@ -10,7 +10,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
     {
-      "\$schema": "http://json-schema.org/draft-04/schema#",
+      "$schema": "http://json-schema.org/draft-04/schema#",
       "title": "Pessoa",
       "description": "Uma pessoa",
       "type": "object",
@@ -35,7 +35,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
     {
-      "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
+      "$schema": "http://json-schema.org/draft-04/hyper-schema#",
       ...,
       "properties": {
         ...,
@@ -58,7 +58,7 @@ Por ser uma linguagem de simples uso, para modelar um esquema basta construir um
   \caption{JSON Hyper-Schema para Figura 3}
 \end{figure}
 
-A exemplo das figuras 4 e 5, ambos os esquemas asseguram que, dada uma estrutura JSON, para que esta seja reconhecida como uma entidade “pessoa”, deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 5, além das estruturas definidas pela figura 4, é descrita uma nova propriedade "foto" do tipo multimídia, além de como navegar em busca desta informação.
+A exemplo das figuras 3 e 4, ambos os esquemas asseguram que, dada uma estrutura JSON, para que esta seja reconhecida como uma entidade “pessoa”, deve conter as propriedades "nome" e "aniversario" com valores do tipo "string". Já na figura 4, além das estruturas definidas pela figura 3, é descrita uma nova propriedade "foto" do tipo multimídia, além de como navegar em busca desta informação.
 
 Em casos onde a complexidade de um esquema começa a crescer, é comum a definição de sub-esquemas através da chave “definitions”. Desta forma, podem ser referenciadas pela chave "\$ref" permitindo o reuso de estruturas dentro de um esquema. Vale lembrar que a chave “definitions” é apenas um mecanismo útil para definir esquemas em um lugar comum, entretanto, não sugerem que estas propriedades sejam validadas em um objeto a menos que referenciadas em outras estruturas do esquema. \cite{Leach2014}
 
@@ -66,7 +66,7 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
   \centering
   \begin{minted}[frame=single,framesep=10pt,fontsize=\footnotesize]{text}
     {
-      "\$schema": "http://json-schema.org/draft-04/hyper-schema#",
+      "$schema": "http://json-schema.org/draft-04/hyper-schema#",
       ...,
       "definitions": {
         "cidade": {
@@ -81,7 +81,7 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
       "properties": {
         ...,
         "cidade": {
-          "\$ref": "#/definitions/cidade"
+          "$ref": "#/definitions/cidade"
         }
       },
       "links": [
@@ -90,7 +90,7 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
           "rel": "cidade",
           "href": "/{id}/cidade",
           "targetSchema": {
-            "\$ref": "#/definitions/cidade"
+            "$ref": "#/definitions/cidade"
           }
         }
       ]
@@ -99,7 +99,7 @@ Em casos onde a complexidade de um esquema começa a crescer, é comum a defini�
   \caption{JSON Hyper-Schema para Figura 4 usando \$ref}
 \end{figure}
 
-Como boa prática, é recomendado (mas não necessário) o uso da chave especial “\$schema” para determinar quando uma estrutura JSON está sendo representada em forma de esquema. Na tabela 3 são descritas algumas das chaves especiais usadas para descrever objetos em esquemas. \cite{Droettboom2015}
+Como boa prática, é recomendado (mas não necessário) o uso da chave especial “\$schema” para determinar quando uma estrutura JSON está sendo representada em forma de esquema. Na tabela 2 são descritas algumas das chaves especiais usadas para descrever objetos em esquemas. \cite{Droettboom2015}
 
 \begin{table}[ht!]
   \centering
